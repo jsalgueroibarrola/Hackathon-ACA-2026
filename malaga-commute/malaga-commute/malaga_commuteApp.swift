@@ -11,8 +11,11 @@ import SwiftData
 @main
 struct malaga_commuteApp: App {
     var sharedModelContainer: ModelContainer = {
+        // The two payload roots. SwiftData pulls in the rest of the graph from them:
+        // Line, Station and LineStop through TransitNetwork, and Trip through Timetable.
         let schema = Schema([
-            Item.self,
+            TransitNetwork.self,
+            Timetable.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
