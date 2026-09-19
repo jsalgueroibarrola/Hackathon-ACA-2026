@@ -1,0 +1,76 @@
+# ---------------------------------------------------------------
+# .gitignore — Hackathon ACA 2026 (proyecto Xcode / Swift)
+# Un único .gitignore en la raíz cubre todo el repo.
+# ---------------------------------------------------------------
+
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# --- Xcode: datos de usuario (nunca se comparten) ---
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+
+# --- Xcode: build y artefactos ---
+build/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.app
+*.xcarchive
+timeline.xctimeline
+playground.xcworkspace
+
+# --- Swift Package Manager ---
+# Package.resolved SÍ se commitea (fija versiones para todo el equipo).
+.build/
+.swiftpm/configuration/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/swiftpm/configuration/
+Packages/
+
+# --- Gestores de dependencias (descomentar si se usan) ---
+# Pods/
+# Carthage/Build/
+
+# --- fastlane ---
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# --- Secretos y credenciales (NUNCA commitear) ---
+.env
+.env.*
+!.env.example
+*.p12
+*.cer
+*.certSigningRequest
+*.mobileprovision
+*.provisionprofile
+Secrets.swift
+Secrets.plist
+GoogleService-Info.plist
+
+# --- Varios ---
+*.log
+*.swp
+.idea/
+.vscode/
