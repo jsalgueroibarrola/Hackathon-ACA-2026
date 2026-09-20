@@ -14,9 +14,9 @@ private let apiMalagaURL: URL = apiBaseURL.appending(path: "malaga")
 
 extension URL {
     static let network: URL =
-        apiBaseURL.appending(path: "network.json")
+        apiMalagaURL.appending(path: "network.json")
 
     static let timetable: URL =
-        apiBaseURL.appending(path: "timetable.json")
+        apiMalagaURL.appending(path: "timetable.json")
 
 }

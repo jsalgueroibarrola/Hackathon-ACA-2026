@@ -30,6 +30,11 @@ final class Line {
 }
 
 extension Line {
+    /// Sendable snapshot of the route geometry, safe to hand to ``RouteShapeCache``.
+    var routeShape: RouteShape {
+        RouteShape(lineID: id, encoded: shape)
+    }
+
     var orderedStops: [LineStop] {
         stops.sorted { $0.sequence < $1.sequence }
     }

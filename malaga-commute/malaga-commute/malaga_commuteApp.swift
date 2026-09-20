@@ -10,26 +10,13 @@ import SwiftData
 
 @main
 struct malaga_commuteApp: App {
-    var sharedModelContainer: ModelContainer = {
-        // The two payload roots. SwiftData pulls in the rest of the graph from them:
-        // Line, Station and LineStop through TransitNetwork, and Trip through Timetable.
-        let schema = Schema([
-            TransitNetwork.self,
-            Timetable.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @State private var dependencies = AppDependencies()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(dependencies.modelContainer)
+        .environment(dependencies.viewModel)
     }
 }

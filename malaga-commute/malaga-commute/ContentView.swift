@@ -10,16 +10,27 @@ import SwiftData
 
 struct ContentView: View {
     @Query(sort: \Line.id) private var lines: [Line]
+    @Environment(\.routeShapes) private var routeShapes
 
     var body: some View {
         NavigationStack {
             List(lines) { line in
-                VStack(alignment: .leading) {
-                    Text(line.id)
-                        .font(.headline)
-                    Text(line.name)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                NavigationLink {
+                    LineDetailView(line: line)
+                } label: {
+                    HStack(spacing: 12) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color(hex: line.colorHex))
+                            .frame(width: 6)
+                        VStack(alignment: .leading) {
+                            Text(line.id)
+                                .font(.headline)
+                            Text(line.name)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .frame(height: 44)
                 }
             }
             .overlay {
@@ -28,6 +39,9 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Líneas")
+        }
+        .task(id: lines.map(\.shape)) {
+            await routeShapes.warm(lines.map(\.routeShape))
         }
     }
 }

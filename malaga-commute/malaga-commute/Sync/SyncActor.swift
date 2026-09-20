@@ -1,11 +1,11 @@
 //
-//  Untitled.swift
+//  SyncActor.swift
 //  malaga-commute
 //
 //  Created by jakuru on 19/09/2026.
 //
 
 @globalActor
-actor APIActor {
-    static let shared = APIActor()
+actor SyncActor {
+    static let shared = SyncActor()
 }
