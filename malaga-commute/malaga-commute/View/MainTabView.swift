@@ -18,6 +18,10 @@ struct MainTabView: View {
             Tab("Estaciones", systemImage: "mappin.and.ellipse") {
                 StationsView()
             }
+
+            Tab("Mapa", systemImage: "map") {
+                NetworkMapView()
+            }
         }
     }
 }

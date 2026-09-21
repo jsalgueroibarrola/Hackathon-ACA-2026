@@ -11,7 +11,11 @@ struct RefreshBanner: View {
     let lastFetchedAt: Date?
 
     var body: some View {
-        Label(message, systemImage: "exclamationmark.triangle.fill")
+        Label {
+            Text(message)
+        } icon: {
+            Image(systemName: "exclamationmark.triangle.fill")
+        }
             .font(.footnote.weight(.medium))
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
@@ -19,11 +23,11 @@ struct RefreshBanner: View {
             .padding(.bottom, 8)
     }
 
-    private var message: String {
+    private var message: LocalizedStringResource {
         guard let lastFetchedAt else {
             return "No se han podido actualizar los horarios"
         }
-        return "Última actualización: \(lastFetchedAt.formatted(.relative(presentation: .named)))"
+        return "Última actualización: \(lastFetchedAt, format: .relative(presentation: .named))"
     }
 }
 

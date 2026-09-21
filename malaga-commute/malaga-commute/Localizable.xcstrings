@@ -1,0 +1,111 @@
+{
+  "sourceLanguage" : "es",
+  "strings" : {
+    "Accesibilidad" : {
+      "comment" : "Título de sección en el detalle de estación; agrupa las prestaciones de accesibilidad."
+    },
+    "Aeropuerto" : {
+      "comment" : "Tipo de conexión disponible en una estación: el aeropuerto."
+    },
+    "Ascensor" : {
+      "comment" : "Etiqueta de fila en el detalle de estación; indica si la estación tiene ascensor."
+    },
+    "Atenuado" : {
+
+    },
+    "Autobús interurbano" : {
+      "comment" : "Tipo de conexión disponible en una estación: autobús entre municipios."
+    },
+    "Autobús urbano" : {
+      "comment" : "Tipo de conexión disponible en una estación: autobús municipal."
+    },
+    "AVE" : {
+      "comment" : "Tipo de conexión disponible en una estación: tren de alta velocidad. Marca comercial de Renfe, no traducir."
+    },
+    "Cerrar" : {
+
+    },
+    "Conexiones" : {
+      "comment" : "Título de sección en el detalle de estación; lista los otros transportes con los que enlaza."
+    },
+    "Descargando horarios" : {
+      "comment" : "Título de la pantalla de carga mientras se descargan los datos de la red."
+    },
+    "Estación de autobuses" : {
+      "comment" : "Tipo de conexión disponible en una estación: estación central de autobuses."
+    },
+    "Estaciones" : {
+      "comment" : "Título de la pestaña y de la pantalla con el listado de estaciones."
+    },
+    "Estándar" : {
+
+    },
+    "Híbrido" : {
+
+    },
+    "Identificador" : {
+      "comment" : "Título de sección en el detalle de estación; muestra el código interno de la estación."
+    },
+    "Líneas" : {
+      "comment" : "Título de la pestaña y de la pantalla con el listado de líneas, y título de la sección de líneas en el detalle de estación."
+    },
+    "Mapa" : {
+
+    },
+    "Metro" : {
+      "comment" : "Tipo de conexión disponible en una estación: metro."
+    },
+    "Movilidad reducida" : {
+      "comment" : "Etiqueta de fila en el detalle de estación; indica si la estación es accesible para personas con movilidad reducida."
+    },
+    "No hay horarios disponibles" : {
+      "comment" : "Título del estado vacío cuando no se ha podido descargar ningún dato y no hay nada guardado."
+    },
+    "No se han podido actualizar los horarios" : {
+      "comment" : "Aviso del banner inferior cuando falla la actualización y no se conoce la fecha de la última descarga."
+    },
+    "Recorrido" : {
+      "comment" : "Título de sección en el detalle de línea; lista las paradas en orden de recorrido."
+    },
+    "Red" : {
+
+    },
+    "Regional" : {
+      "comment" : "Tipo de conexión disponible en una estación: tren regional."
+    },
+    "Reintentar" : {
+      "comment" : "Botón que vuelve a intentar la descarga de datos tras un fallo."
+    },
+    "Satélite" : {
+
+    },
+    "Se ha interrumpido la descarga de horarios" : {
+      "comment" : "Descripción de error mostrada cuando la sincronización inicial se cancela."
+    },
+    "Sí" : {
+      "comment" : "Valor de una fila de accesibilidad: la prestación está disponible en la estación."
+    },
+    "Sin datos" : {
+      "comment" : "Valor de una fila de accesibilidad: se desconoce si la estación tiene esa prestación."
+    },
+    "Sin datos de red" : {
+      "comment" : "Estado vacío del listado de líneas cuando no hay datos guardados."
+    },
+    "Sin estaciones" : {
+      "comment" : "Estado vacío del listado de estaciones cuando no hay datos guardados."
+    },
+    "Solo ocurre la primera vez o cuando los datos caducan." : {
+      "comment" : "Texto secundario de la pantalla de carga; explica por qué hay que esperar."
+    },
+    "Superficie" : {
+
+    },
+    "Última actualización: %@" : {
+      "comment" : "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas»."
+    },
+    "Ver detalle" : {
+
+    }
+  },
+  "version" : "1.0"
+}

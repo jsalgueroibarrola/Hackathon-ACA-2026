@@ -44,14 +44,12 @@ struct StationDetailView: View {
             }
 
             Section("Accesibilidad") {
-                LabeledContent(
-                    "Movilidad reducida",
-                    value: station.isAccessible == true ? "Sí" : "Sin datos"
-                )
-                LabeledContent(
-                    "Ascensor",
-                    value: station.hasElevator == true ? "Sí" : "Sin datos"
-                )
+                LabeledContent("Movilidad reducida") {
+                    AvailabilityText(isAvailable: station.isAccessible)
+                }
+                LabeledContent("Ascensor") {
+                    AvailabilityText(isAvailable: station.hasElevator)
+                }
             }
 
             if !station.connections.isEmpty {
@@ -73,16 +71,14 @@ struct StationDetailView: View {
     }
 }
 
-private extension StationConnection {
-    var displayName: String {
-        switch self {
-        case .airport: "Aeropuerto"
-        case .ave: "AVE"
-        case .busStation: "Estación de autobuses"
-        case .interurbanBus: "Autobús interurbano"
-        case .metro: "Metro"
-        case .regional: "Regional"
-        case .urbanBus: "Autobús urbano"
+private struct AvailabilityText: View {
+    let isAvailable: Bool?
+
+    var body: some View {
+        if isAvailable == true {
+            Text("Sí")
+        } else {
+            Text("Sin datos")
         }
     }
 }

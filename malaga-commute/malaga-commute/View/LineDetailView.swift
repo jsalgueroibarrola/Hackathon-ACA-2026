@@ -48,7 +48,8 @@ struct LineDetailView: View {
                         } label: {
                             LabeledContent(
                                 station.name,
-                                value: "\(stop.sequence + 1)"
+                                value: stop.sequence + 1,
+                                format: .number
                             )
                         }
                     }

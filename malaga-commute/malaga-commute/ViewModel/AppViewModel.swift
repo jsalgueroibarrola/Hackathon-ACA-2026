@@ -65,7 +65,12 @@ final class AppViewModel {
         } catch is CancellationError {
             guard !Task.isCancelled else { return }
             phase = blocking
-                ? .failed("Sync interrupted")
+                ? .failed(
+                    String(
+                        localized: "Se ha interrumpido la descarga de horarios",
+                        comment: "Descripción de error mostrada cuando la sincronización inicial se cancela."
+                    )
+                )
                 : .ready(.idle)
             return
         } catch {
