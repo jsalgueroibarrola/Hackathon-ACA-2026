@@ -1,0 +1,14 @@
+import SwiftUI
+
+extension Font {
+    static let bodyEmphasized: Font = .body.weight(.semibold)
+    static let bodyMedium: Font = .body.weight(.medium)
+    static let subheadlineEmphasized: Font = .subheadline.weight(.semibold)
+    static let captionEmphasized: Font = .caption.weight(.semibold)
+    static let timeDeparture: Font = .body.weight(.semibold).monospacedDigit()
+    static let timeDepartureLarge: Font = .title2.weight(.bold).monospacedDigit()
+}
+
+enum Tracking {
+    static let wide: CGFloat = 0.6
+}
