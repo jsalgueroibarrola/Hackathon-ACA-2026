@@ -5,8 +5,8 @@
 //  Created by jakuru on 20/09/2026.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 private struct SyncTrigger: Equatable {
     let isBackgrounded: Bool
@@ -86,5 +86,6 @@ private struct PreviewSyncService: SyncService {
         .environment(
             AppViewModel(syncService: PreviewSyncService(freshness: .stale))
         )
+        .environment(LocationViewModel.preview())
         .modelContainer(for: TransitNetwork.self, inMemory: true)
 }

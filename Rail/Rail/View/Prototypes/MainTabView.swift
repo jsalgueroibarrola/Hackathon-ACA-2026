@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct MainTabView: View {
+    @Environment(LocationViewModel.self) private var location
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some View {
         TabView {
             Tab("Líneas", systemImage: "tram") {
@@ -23,10 +26,15 @@ struct MainTabView: View {
                 NetworkMapView()
             }
         }
+        .task(id: scenePhase == .active) {
+            guard scenePhase == .active else { return }
+            await location.observe()
+        }
     }
 }
 
 #Preview {
     MainTabView()
+        .environment(LocationViewModel.preview())
         .modelContainer(for: TransitNetwork.self, inMemory: true)
 }

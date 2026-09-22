@@ -13,6 +13,7 @@ struct AppDependencies {
 
     let modelContainer: ModelContainer
     let viewModel: AppViewModel
+    let locationViewModel: LocationViewModel
 
     init() {
         let schema = Schema([
@@ -41,5 +42,6 @@ struct AppDependencies {
                 repository: SwiftDataRepository(modelContainer: container)
             )
         )
+        locationViewModel = LocationViewModel(service: LocationServiceImpl())
     }
 }

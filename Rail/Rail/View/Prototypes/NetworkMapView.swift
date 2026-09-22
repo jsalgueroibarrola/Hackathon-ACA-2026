@@ -8,11 +8,14 @@
 import MapKit
 import SwiftData
 import SwiftUI
+import UIKit
 
 struct NetworkMapView: View {
     @Query(sort: \Line.id) private var lines: [Line]
     @Query(sort: \Station.name) private var stations: [Station]
     @Environment(\.routeShapes) private var routeShapes
+    @Environment(LocationViewModel.self) private var location
+    @Environment(\.openURL) private var openURL
 
     @State private var routes: [String: [CLLocationCoordinate2D]] = [:]
     @State private var hiddenLineIDs: Set<String> = []
@@ -26,14 +29,18 @@ struct NetworkMapView: View {
                 lines: overlays,
                 pins: visiblePins,
                 selection: $selection,
-                surface: surface
+                surface: surface,
+                showsUserLocation: location.isTracking
             )
             .safeAreaInset(edge: .top, spacing: 0) {
                 lineFilter
             }
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 if let pin = selectedPin {
-                    StationCallout(pin: pin) {
+                    StationCallout(
+                        pin: pin,
+                        distance: location.distance(to: pin.coordinate)
+                    ) {
                         selection = nil
                     } onOpenDetail: {
                         detailStationID = pin.id
@@ -55,6 +62,10 @@ struct NetworkMapView: View {
             }
             .navigationTitle("Red")
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    nearestStationButton
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Picker("Superficie", selection: $surface) {
                         ForEach(MapSurface.allCases) { surface in
@@ -79,6 +90,38 @@ struct NetworkMapView: View {
                 }
             )
         }
+    }
+
+    private var nearestStationButton: some View {
+        Button {
+            if location.canRequestAccess {
+                location.requestAccess()
+            } else if location.isAccessBlocked {
+                guard let url = URL(string: UIApplication.openSettingsURLString)
+                else { return }
+                openURL(url)
+            } else if let nearest = nearestVisibleStation {
+                selection = nearest.id
+            }
+        } label: {
+            Label(
+                "Estación más cercana",
+                systemImage: location.isTracking
+                    ? "location.magnifyingglass"
+                    : "location"
+            )
+        }
+        .labelStyle(.iconOnly)
+        .disabled(location.isLocating)
+    }
+
+    private var nearestVisibleStation: NearbyStation? {
+        let visibleIDs = Set(visiblePins.map(\.id))
+        return location.nearest(
+            stations.filter { visibleIDs.contains($0.id) },
+            limit: 1
+        )
+        .first
     }
 
     private var lineFilter: some View {

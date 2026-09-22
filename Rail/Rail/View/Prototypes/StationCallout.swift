@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StationCallout: View {
     let pin: StationPin
+    var distance: Measurement<UnitLength>?
     var onDismiss: () -> Void
     var onOpenDetail: () -> Void
 
@@ -27,6 +28,16 @@ struct StationCallout: View {
                 .buttonStyle(.borderless)
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(.secondary)
+            }
+
+            if let distance {
+                Label(
+                    "A \(distance.distanceLabel) de ti",
+                    systemImage: "location.fill"
+                )
+                .font(.subheadline)
+                .foregroundStyle(.textSecondary)
+                .labelIconToTitleSpacing(Spacing.xs)
             }
 
             if !pin.lineIDs.isEmpty {
@@ -183,6 +194,25 @@ private struct CalloutBackdrop<Content: View>: View {
                 onOpenDetail: {}
             )
             StationCallout(pin: .calloutHub, onDismiss: {}, onOpenDetail: {})
+        }
+    }
+}
+
+#Preview("Con distancia") {
+    CalloutBackdrop {
+        VStack(spacing: Spacing.lg) {
+            StationCallout(
+                pin: .calloutPlain,
+                distance: Measurement(value: 380, unit: .meters),
+                onDismiss: {},
+                onOpenDetail: {}
+            )
+            StationCallout(
+                pin: .calloutHub,
+                distance: Measurement(value: 2_400, unit: .meters),
+                onDismiss: {},
+                onOpenDetail: {}
+            )
         }
     }
 }

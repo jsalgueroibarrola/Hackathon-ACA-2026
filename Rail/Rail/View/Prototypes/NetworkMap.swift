@@ -14,6 +14,7 @@ struct NetworkMap: View {
     @Binding var selection: String?
     var surface: MapSurface = .muted
     var showsCasing: Bool = true
+    var showsUserLocation: Bool = false
 
     @State private var camera: MapCameraPosition = .automatic
     @State private var zoom: ZoomBucket = .region
@@ -32,6 +33,10 @@ struct NetworkMap: View {
                 polyline(for: line)
             }
 
+            if showsUserLocation {
+                UserAnnotation()
+            }
+
             ForEach(pins) { pin in
                 Annotation(coordinate: pin.coordinate) {
                     BadgedStationPin(
@@ -48,6 +53,9 @@ struct NetworkMap: View {
         }
         .mapStyle(surface.mapStyle)
         .mapControls {
+            if showsUserLocation {
+                MapUserLocationButton()
+            }
             MapCompass()
             MapScaleView()
         }

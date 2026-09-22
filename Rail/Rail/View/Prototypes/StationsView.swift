@@ -13,16 +13,16 @@ struct StationsView: View {
 
     var body: some View {
         NavigationStack {
-            List(stations) { station in
-                NavigationLink {
-                    StationDetailView(station: station)
-                } label: {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(station.name)
-                            .font(.headline)
-                        Text(station.lines.map(\.id).sorted().joined(separator: " · "))
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+            List {
+                NearbyStationsSection(stations: stations)
+
+                Section("Todas las estaciones") {
+                    ForEach(stations) { station in
+                        NavigationLink {
+                            StationDetailView(station: station)
+                        } label: {
+                            StationRow(station: station)
+                        }
                     }
                 }
             }
@@ -41,5 +41,6 @@ struct StationsView: View {
 
 #Preview {
     StationsView()
+        .environment(LocationViewModel.preview())
         .modelContainer(for: TransitNetwork.self, inMemory: true)
 }

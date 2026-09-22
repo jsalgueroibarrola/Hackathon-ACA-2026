@@ -1,11 +1,42 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
+    "%@ · llegada a las %@" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · llegada a las %2$@"
+          }
+        }
+      }
+    },
+    "A %@ de ti" : {
+
+    },
+    "Abrir Ajustes" : {
+
+    },
+    "Abrir en Mapas" : {
+
+    },
     "Accesibilidad" : {
       "comment" : "Título de sección en el detalle de estación; agrupa las prestaciones de accesibilidad."
     },
+    "Activa la ubicación para saber cuánto tardas en llegar andando, en bici, en coche o en transporte público." : {
+
+    },
+    "Activa la ubicación para ver qué estaciones tienes más cerca y a qué distancia están." : {
+
+    },
     "Aeropuerto" : {
       "comment" : "Tipo de conexión disponible en una estación: el aeropuerto."
+    },
+    "Andando" : {
+
+    },
+    "Apple Maps no ofrece indicaciones paso a paso para este medio de transporte." : {
+
     },
     "Ascensor" : {
       "comment" : "Etiqueta de fila en el detalle de estación; indica si la estación tiene ascensor."
@@ -22,17 +53,50 @@
     "AVE" : {
       "comment" : "Tipo de conexión disponible en una estación: tren de alta velocidad. Marca comercial de Renfe, no traducir."
     },
+    "Buscando tu ubicación…" : {
+
+    },
+    "Calculando la ruta…" : {
+
+    },
+    "Calculando tiempos…" : {
+
+    },
+    "Cerca de ti" : {
+
+    },
     "Cerrar" : {
+
+    },
+    "Cómo llegar" : {
 
     },
     "Conexiones" : {
       "comment" : "Título de sección en el detalle de estación; lista los otros transportes con los que enlaza."
     },
+    "Demasiadas rutas seguidas. Inténtalo de nuevo en unos segundos." : {
+
+    },
     "Descargando horarios" : {
       "comment" : "Título de la pantalla de carga mientras se descargan los datos de la red."
     },
+    "Distancia desde tu ubicación" : {
+
+    },
+    "En bici" : {
+
+    },
+    "En coche" : {
+
+    },
+    "Esperando tu ubicación…" : {
+
+    },
     "Estación de autobuses" : {
       "comment" : "Tipo de conexión disponible en una estación: estación central de autobuses."
+    },
+    "Estación más cercana" : {
+
     },
     "Estaciones" : {
       "comment" : "Título de la pestaña y de la pantalla con el listado de estaciones."
@@ -40,11 +104,40 @@
     "Estándar" : {
 
     },
+    "Hacia %@" : {
+
+    },
     "Híbrido" : {
+
+    },
+    "Horarios de hoy" : {
 
     },
     "Identificador" : {
       "comment" : "Título de sección en el detalle de estación; muestra el código interno de la estación."
+    },
+    "Iniciar ruta" : {
+
+    },
+    "Línea %@ hacia %@. Próximas salidas: %@" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Línea %1$@ hacia %2$@. Próximas salidas: %3$@"
+          }
+        }
+      }
+    },
+    "Línea %@ hacia %@. Sin más trenes hoy" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Línea %1$@ hacia %2$@. Sin más trenes hoy"
+          }
+        }
+      }
     },
     "Líneas" : {
       "comment" : "Título de la pestaña y de la pantalla con el listado de líneas, y título de la sección de líneas en el detalle de estación."
@@ -52,17 +145,44 @@
     "Mapa" : {
 
     },
+    "Medio de transporte" : {
+
+    },
+    "menos de 1 min" : {
+      "comment" : "Tiempo de viaje cuando la estación está a menos de un minuto."
+    },
     "Metro" : {
       "comment" : "Tipo de conexión disponible en una estación: metro."
     },
     "Movilidad reducida" : {
       "comment" : "Etiqueta de fila en el detalle de estación; indica si la estación es accesible para personas con movilidad reducida."
     },
+    "Muestra la ruta hasta la estación" : {
+
+    },
+    "No disponible" : {
+
+    },
     "No hay horarios disponibles" : {
       "comment" : "Título del estado vacío cuando no se ha podido descargar ningún dato y no hay nada guardado."
     },
+    "No se ha podido calcular la ruta hasta la estación." : {
+
+    },
     "No se han podido actualizar los horarios" : {
       "comment" : "Aviso del banner inferior cuando falla la actualización y no se conoce la fecha de la última descarga."
+    },
+    "No se han podido calcular los tiempos de viaje" : {
+
+    },
+    "Ocultar indicaciones" : {
+
+    },
+    "Próximas salidas" : {
+
+    },
+    "Rail no tiene acceso a tu ubicación. Actívalo en Ajustes para usar esta función." : {
+
     },
     "Recorrido" : {
       "comment" : "Título de sección en el detalle de línea; lista las paradas en orden de recorrido."
@@ -75,6 +195,9 @@
     },
     "Reintentar" : {
       "comment" : "Botón que vuelve a intentar la descarga de datos tras un fallo."
+    },
+    "Sale a las %@" : {
+
     },
     "Satélite" : {
 
@@ -94,16 +217,40 @@
     "Sin estaciones" : {
       "comment" : "Estado vacío del listado de estaciones cuando no hay datos guardados."
     },
+    "Sin horarios para hoy" : {
+
+    },
+    "Sin más trenes hoy" : {
+
+    },
     "Solo ocurre la primera vez o cuando los datos caducan." : {
       "comment" : "Texto secundario de la pantalla de carga; explica por qué hay que esperar."
     },
     "Superficie" : {
 
     },
+    "Todas las estaciones" : {
+
+    },
+    "Transporte público" : {
+
+    },
+    "Tren %@" : {
+
+    },
     "Última actualización: %@" : {
       "comment" : "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas»."
     },
+    "Usar mi ubicación" : {
+
+    },
     "Ver detalle" : {
+
+    },
+    "Ver indicaciones" : {
+
+    },
+    "Ya han salido" : {
 
     }
   },
