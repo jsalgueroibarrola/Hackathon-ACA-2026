@@ -21,7 +21,7 @@ struct StationsView: View {
                         NavigationLink {
                             StationDetailView(station: station)
                         } label: {
-                            StationRow(station: station)
+                            StationSummaryRow(station: station)
                         }
                     }
                 }

@@ -1,5 +1,15 @@
 import SwiftUI
 
+struct LineMark: Identifiable {
+    let id: String
+    let color: Color
+
+    init(_ id: String, color: Color) {
+        self.id = id
+        self.color = color
+    }
+}
+
 struct LineBadge: View {
     enum Scale: CaseIterable {
         case small

@@ -2,6 +2,7 @@ import Foundation
 
 enum Size {
     static let touchMin: CGFloat = 44
+    static let rowMin: CGFloat = 44
     static let iconSm: CGFloat = 16
     static let iconMd: CGFloat = 24
     static let iconLg: CGFloat = 32

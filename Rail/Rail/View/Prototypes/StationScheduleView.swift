@@ -31,7 +31,7 @@ struct StationScheduleView: View {
                         .foregroundStyle(.textSecondary)
                 } else {
                     ForEach(upcoming) { departure in
-                        DepartureRow(departure: departure, timeFormat: timeFormat, isPast: false)
+                        ScheduleDepartureRow(departure: departure, timeFormat: timeFormat, isPast: false)
                     }
                 }
             }
@@ -39,7 +39,7 @@ struct StationScheduleView: View {
             if !past.isEmpty {
                 Section("Ya han salido", isExpanded: $showsPast) {
                     ForEach(past) { departure in
-                        DepartureRow(departure: departure, timeFormat: timeFormat, isPast: true)
+                        ScheduleDepartureRow(departure: departure, timeFormat: timeFormat, isPast: true)
                     }
                 }
             }
@@ -51,7 +51,7 @@ struct StationScheduleView: View {
     }
 }
 
-private struct DepartureRow: View {
+private struct ScheduleDepartureRow: View {
     let departure: StationDeparture
     let timeFormat: Date.FormatStyle
     let isPast: Bool

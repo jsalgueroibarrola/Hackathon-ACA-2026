@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct StationRow: View {
+struct StationSummaryRow: View {
     let station: Station
     var distance: Measurement<UnitLength>?
 
@@ -41,12 +41,12 @@ struct StationRow: View {
     )
 
     List {
-        StationRow(station: station)
-        StationRow(
+        StationSummaryRow(station: station)
+        StationSummaryRow(
             station: station,
             distance: Measurement(value: 420, unit: .meters)
         )
-        StationRow(
+        StationSummaryRow(
             station: station,
             distance: Measurement(value: 8_400, unit: .meters)
         )
@@ -62,7 +62,7 @@ struct StationRow: View {
     )
 
     List {
-        StationRow(
+        StationSummaryRow(
             station: station,
             distance: Measurement(value: 1_250, unit: .meters)
         )

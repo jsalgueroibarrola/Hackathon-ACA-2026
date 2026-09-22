@@ -72,7 +72,8 @@ Tokens de Figma (`DS · Color`, `Tipografía`, `Espaciado y radios`, `Elevación
 - Colores semánticos son color sets con Light y Dark; úsalos por su símbolo generado (`Color.bgPrimary`, `.foregroundStyle(.textSecondary)`). No hay primitivas en código y no se añaden hex sueltos en vistas nuevas. `AccentColor` es `brand/primary`.
 - El color base de cada línea viene de la API (`Line.colorHex`); `Line.tint` (`LineTint`) deriva `text` y `subtle`.
 - Espaciado, radios, tamaños y bordes: `Spacing`, `ScreenLayout`, `Radius`, `Size`, `Border`. Tipografía: estilos de sistema más `Font.bodyEmphasized`, `.timeDeparture`, etc. Sombras: `.elevation(.card / .sheet / .floating)`.
-- Botones: `Button` del sistema con `.buttonStyle(.rail(...))`, `.railGlass(...)` o `.railGlassIcon(...)` y tamaño con `.controlSize`; no se crean botones con fondos a mano (ver sección *Botones* de `DESIGN-TOKENS.md`).
+- Botones: `Button` del sistema con `.buttonStyle(.rail(...))`, `.railGlass(...)`, `.railGlassIcon(...)` o `.filterChip(isSelected:)` y tamaño con `.controlSize`; no se crean botones con fondos a mano (ver sección *Botones* de `DESIGN-TOKENS.md`). El botón de favorito es un `Toggle` con `.toggleStyle(.favorite)`, no un `Button`.
+- Incidencias: `SeverityBadge`, `AlertBanner`, `IncidentRow` e `IncidentCard` comparten el enum `IncidentSeverity` (símbolo, `tint`, `background`, `foreground`, `label`) y reciben las líneas como `[LineMark]` (ver sección *Incidencias* de `DESIGN-TOKENS.md`).
 - `TokenGallery.swift` es un preview (solo `DEBUG`) para comparar con Figma; añade ahí cualquier token nuevo.
 
 ### Map

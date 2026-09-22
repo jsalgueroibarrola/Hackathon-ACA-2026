@@ -32,7 +32,7 @@ struct NearbyStationsSection: View {
                 NavigationLink {
                     StationDetailView(station: nearby.station)
                 } label: {
-                    StationRow(
+                    StationSummaryRow(
                         station: nearby.station,
                         distance: nearby.distance
                     )

@@ -10,11 +10,19 @@ Los tokens de este directorio y los color sets de `Assets.xcassets/Colors` se ma
 | DS · Espaciado y radios | `19:309` | `spacing/*`, `radius/*`, `size/*`, `border/*`, `layout/*` (`23:2`) | `Spacing.swift`, `Radius.swift`, `Size.swift`, `Border.swift` |
 | DS · Elevación | `19:310` | Niveles de sombra (`23:152`) | `Elevation.swift` |
 | DS · Líneas | `19:311` | Badges de línea, chips de estado, cómo añadir una línea (`24:2`) | `LineTint.swift` |
-| Componentes · A2 LineBadge | `44:36` | Átomo badge de línea (`40:61`) | `View/Components/LineBadge.swift` |
-| Componentes · A3 StatusChip | `44:66` | Átomo estado del tren (`40:71`) | `View/Components/StatusChip.swift` |
-| Componentes · A4 Button | `44:96` | Botón Prominent / Bordered / Borderless (`48:314`) | `View/Components/Button/RailButtonStyle.swift` |
-| Componentes · A6 GlassButton | `51:18` | Botón Liquid Glass Clear / Tinted (`49:57`) | `View/Components/Button/RailGlassButtonStyle.swift` |
-| Componentes · A7 GlassIconButton | `51:48` | Botón de icono Liquid Glass (`49:76`) | `View/Components/Button/RailGlassIconButtonStyle.swift` |
+| Componentes · A2 LineBadge | `44:36` | Átomo badge de línea (`40:61`) | `View/Components/Atoms/LineBadge.swift` |
+| Componentes · A3 StatusChip | `44:66` | Átomo estado del tren (`40:71`) | `View/Components/Atoms/StatusChip.swift` |
+| Componentes · A4 Button | `44:96` | Botón Prominent / Bordered / Borderless (`48:314`) | `View/Components/Atoms/Button/RailButtonStyle.swift` |
+| Componentes · A6 GlassButton | `51:18` | Botón Liquid Glass Clear / Tinted (`49:57`) | `View/Components/Atoms/Button/RailGlassButtonStyle.swift` |
+| Componentes · A7 GlassIconButton | `51:48` | Botón de icono Liquid Glass (`49:76`) | `View/Components/Atoms/Button/RailGlassIconButtonStyle.swift` |
+| Componentes · A8 SeverityBadge | `102:22` | Átomo gravedad de incidencia (`102:78`) | `View/Components/Atoms/SeverityBadge.swift` |
+| Componentes · A9 FavoriteButton | `122:26` | Átomo estrella de favorito (`122:78`) | `View/Components/Atoms/FavoriteToggleStyle.swift` |
+| Componentes · A10 FilterChip | `148:794` | Átomo chip de filtro (`148:42`) | `View/Components/Atoms/FilterChipStyle.swift` |
+| Componentes · M1 DepartureRow | `56:153` | Molécula fila de salida (`54:125`) | `View/Components/Molecules/DepartureRow.swift` |
+| Componentes · M2 StationRow | `56:183` | Molécula fila de estación (`54:161`) | `View/Components/Molecules/StationRow.swift` |
+| Componentes · M7 AlertBanner | `102:220` | Molécula banda de aviso de incidencia (`103:188`) | `View/Components/Molecules/AlertBanner.swift` |
+| Componentes · M8 IncidentRow | `103:189` | Molécula fila de incidencia (`104:316`) | `View/Components/Molecules/IncidentRow.swift` |
+| Componentes · M9 IncidentCard | `104:317` | Molécula tarjeta de incidencia (`106:273`) | `View/Components/Molecules/IncidentCard.swift` |
 
 URL de cualquier nodo: `https://www.figma.com/design/WFoeo57elVOwmgKto1iwfq/?node-id=<id con guion>` (por ejemplo `node-id=30-2`).
 
@@ -28,7 +36,7 @@ URL de cualquier nodo: `https://www.figma.com/design/WFoeo57elVOwmgKto1iwfq/?nod
 | `spacing/2xs · xs · sm · … · 5xl` | `Spacing.xxs · xs · sm · … · xxxxxl` |
 | `layout/margin · gutter` | `ScreenLayout.margin · gutter` (`Layout` ya existe en SwiftUI) |
 | `radius/sm … xl` | `Radius.sm … xl`; `radius/full` se expresa con `.capsule` / `.circle`, no con el número |
-| `size/touch-min · icon-sm · line-badge …` | `Size.touchMin · iconSm · lineBadge …` |
+| `size/touch-min · row-min · icon-sm · line-badge …` | `Size.touchMin · rowMin · iconSm · lineBadge …` |
 | `border/hairline · thin · thick` | `Border.hairline · thin · thick` |
 | Estilos de texto | estilos de sistema (`.body`, `.headline`, …) o `Font.bodyEmphasized`, `.timeDeparture`, … |
 | `Elevation/Card · Sheet · Floating` | `.elevation(.card / .sheet / .floating)` |
@@ -143,6 +151,23 @@ Reglas de Figma: horas siempre con `Time/Departure`; Large Title en navegación 
 - Morado primario para botones principales, tab activo, enlaces y foco.
 - Estado del tren con `transit/*`, siempre acompañado de texto.
 - Listas y celdas sin sombra (`Elevation/None`) separadas con `interactiveSeparator` hairline; tarjetas sobre `bgSecondary` con `Elevation/Card`; si la tarjeta va sobre `bgPrimary`, sin sombra y con `bgSecondary` de relleno; bottom sheet = `Elevation/Sheet` + `Radius.xl` arriba + `bgElevated`; flotantes = `Elevation/Floating`. Nunca dos niveles en el mismo elemento ni sombra en texto o iconos.
+
+## Incidencias
+
+La propiedad `Severity` de Figma (Info · Warning · Critical · Resolved) es en el proyecto un único tipo, `IncidentSeverity`, que comparten `SeverityBadge`, `AlertBanner`, `IncidentRow` e `IncidentCard`. De ahí salen el símbolo SF y los tres tokens de cada gravedad:
+
+| Gravedad | Símbolo | `tint` (icono) | `background` (fondo) | `foreground` (texto) | `label` |
+|---|---|---|---|---|---|
+| `.info` | `info.circle.fill` | `statusInfo` | `statusInfoBg` | `statusInfoText` | Aviso |
+| `.warning` | `exclamationmark.triangle.fill` | `statusWarning` | `statusWarningBg` | `statusWarningText` | Retrasos |
+| `.critical` | `exclamationmark.circle.fill` | `statusError` | `statusErrorBg` | `statusErrorText` | Interrumpido |
+| `.resolved` | `checkmark.circle.fill` | `statusSuccess` | `statusSuccessBg` | `statusSuccessText` | Resuelto |
+
+- El icono va siempre en `tint` y el texto en `foreground`; no se mezclan.
+- `label` es la etiqueta corta por defecto: `SeverityBadge(.warning)` e `IncidentCard` la usan sin que haya que pasarla. Con `label:` se sustituye por una descripción propia y VoiceOver lee "gravedad, descripción".
+- Las líneas afectadas se pasan como `[LineMark]` (`LineMark("C-1", color:)`), el mismo tipo que usa `StationRow`. El color lo envía la API (`Line.colorHex`), nunca un hex escrito a mano.
+- `AlertBanner` deriva su interacción de los cierres: `onTap` pinta el chevron y hace tocable la banda, `onDismiss` pinta la X (con área táctil de 44 pt). No hay props `Show chevron` / `Show close`.
+- `IncidentCard` recibe la acción como contenido (`IncidentCard(...) { Button("Ver detalles") {} }`) y le aplica ella misma `.rail(.borderless)` en `.small`.
 
 ## Botones
 
