@@ -76,5 +76,5 @@ struct LineDetailView: View {
             )
         )
     }
-    .modelContainer(for: TransitNetwork.self, inMemory: true)
+    .modelContainer(for: RailSchema.models, inMemory: true)
 }

@@ -5,20 +5,32 @@
 //  Created by jakuru on 20/09/2026.
 //
 
-import SwiftUI
-import SwiftData
 import MapKit
+import SwiftData
+import SwiftUI
 
 struct StationDetailView: View {
     let station: Station
 
     @Environment(\.modelContext) private var modelContext
     @Environment(LocationViewModel.self) private var location
+    @Environment(FavoritesViewModel.self) private var favoritesModel
+    @Query private var favorites: [FavoriteStation]
     @Query private var networks: [TransitNetwork]
     @Query private var timetables: [Timetable]
     @State private var schedules: [StationLineSchedule] = []
     @State private var now: Date = .now
     @State private var routeMode: TravelMode?
+
+    init(station: Station) {
+        self.station = station
+        let stationID = station.id
+        _favorites = Query(
+            filter: #Predicate<FavoriteStation> { $0.stationID == stationID }
+        )
+    }
+
+    private var isFavorite: Bool { !favorites.isEmpty }
 
     private var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(
@@ -68,7 +80,10 @@ struct StationDetailView: View {
                 }
 
                 if location.isTracking {
-                    Button("Iniciar ruta", systemImage: "location.north.line.fill") {
+                    Button(
+                        "Iniciar ruta",
+                        systemImage: "location.north.line.fill"
+                    ) {
                         routeMode = .walking
                     }
                     .buttonStyle(.rail(.prominent))
@@ -137,6 +152,17 @@ struct StationDetailView: View {
         }
         .navigationTitle(station.name)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Toggle(
+                    isOn: favoritesModel.binding(
+                        for: station.id,
+                        isFavorite: isFavorite
+                    )
+                ) {}
+                .toggleStyle(.favorite)
+            }
+        }
         .sheet(item: $routeMode) { mode in
             RouteView(
                 destinationName: station.name,
@@ -145,15 +171,16 @@ struct StationDetailView: View {
             )
         }
         .task(id: scheduleKey) {
-            schedules = timetable.map {
-                StationScheduleBuilder.schedules(
-                    for: station,
-                    timetable: $0,
-                    day: serviceDay,
-                    calendar: calendar,
-                    context: modelContext
-                )
-            } ?? []
+            schedules =
+                timetable.map {
+                    StationScheduleBuilder.schedules(
+                        for: station,
+                        timetable: $0,
+                        day: serviceDay,
+                        calendar: calendar,
+                        context: modelContext
+                    )
+                } ?? []
         }
         .task {
             while !Task.isCancelled {
@@ -190,6 +217,7 @@ private struct AvailabilityText: View {
         StationDetailView(station: station)
     }
     .environment(LocationViewModel.preview())
+    .environment(FavoritesViewModel.preview())
     .environment(\.routeEstimates, PreviewRouteService())
-    .modelContainer(for: [TransitNetwork.self, Timetable.self], inMemory: true)
+    .modelContainer(for: RailSchema.models, inMemory: true)
 }

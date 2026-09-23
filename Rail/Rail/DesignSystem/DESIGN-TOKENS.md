@@ -23,8 +23,21 @@ Los tokens de este directorio y los color sets de `Assets.xcassets/Colors` se ma
 | Componentes · M7 AlertBanner | `102:220` | Molécula banda de aviso de incidencia (`103:188`) | `View/Components/Molecules/AlertBanner.swift` |
 | Componentes · M8 IncidentRow | `103:189` | Molécula fila de incidencia (`104:316`) | `View/Components/Molecules/IncidentRow.swift` |
 | Componentes · M9 IncidentCard | `104:317` | Molécula tarjeta de incidencia (`106:273`) | `View/Components/Molecules/IncidentCard.swift` |
+| Mockups · 01 Inicio | `2:53` | Pantalla Home (`2:54`) y una pantalla por estado de la tarjeta de próximos trenes | `View/HomeView.swift`, `View/Components/NextTrainsSection.swift` |
+| Mockups · 01 Inicio · Card | `2:53` | Organismo tarjeta de próximos trenes (`59:1450` y seis estados más, ver *Tarjeta de próximos trenes*) | `View/Components/Organisms/NextTrainsCard.swift` |
+| Mockups · 01 Inicio · Station Container | `2:53` | Molécula nombre de estación y proximidad (`59:1452`) | `View/Components/Molecules/StationHeader.swift` |
+| Mockups · 01 Inicio · Section Header | `2:53` | Molécula cabecera de sección con icono (`59:1455`) | `View/Components/Molecules/CardSectionHeader.swift` |
+| Mockups · 01 Inicio · Permiso / Sin trenes | `2:53` | Molécula mensaje de tarjeta, regular (`220:1974`) y compacta (`220:3269`) | `View/Components/Molecules/CardMessage.swift` |
+| Mockups · 01 Inicio · trenecito | `2:53` | Ilustración del tren (`60:3377`); en código se usa el SVG entregado por el usuario, no el de Figma | `View/Components/Atoms/TrainIllustration.swift` |
+| Mockups · 01 Inicio · Favorite Stations Container | `2:53` | Organismo sección de estaciones favoritas (`59:1518`); estado vacío en la pantalla *Home sin favoritas* (`220:3329`) | `View/Components/Organisms/FavoriteStationsContainer.swift`, `View/Components/FavoriteStationsSection.swift` |
+| Mockups · 01 Inicio · tarjeta de favorita | `2:53` | Molécula tarjeta de estación favorita (`60:2215`) | `View/Components/Molecules/FavoriteStationCard.swift` |
+| Mockups · 01 Inicio · Favoritos vacíos | `2:53` | Molécula de estado vacío (`220:3525`) | `View/Components/Molecules/EmptyStateCard.swift` |
+| Mockups · 01 Inicio · Imagen de fondo | `2:53` | Foto de cabecera (`60:3294`), 393×262 con relleno *Fill*; el original mide 786×442 | `Assets.xcassets/Photos/HomeHero.imageset`, `View/Components/Atoms/HomeHeroImage.swift` |
+| Mockups · 01 Inicio · Logo | `2:53` | Logo de la barra superior (`143:5493`), 44×44 | `Assets.xcassets/Illustrations/RailLogo.imageset`, `View/Components/Atoms/RailLogo.swift` |
 
 URL de cualquier nodo: `https://www.figma.com/design/WFoeo57elVOwmgKto1iwfq/?node-id=<id con guion>` (por ejemplo `node-id=30-2`).
+
+Las filas de *Mockups* no son componentes de Figma: son frames de maqueta, sin variantes ni frame `Doc/`. Sus medidas se leen de los propios frames y hay que descartar las capas ocultas (`visible: false`).
 
 ## Convención de nombres
 
@@ -119,7 +132,7 @@ SF Pro en toda la app, escala Dynamic Type (tamaño Large por defecto). Se usan 
 |---|---|---|
 | Large Title | 34/41 · Bold | `.largeTitle` |
 | Title 1 | 28/34 · Bold | `.title` |
-| Title 2 | 22/28 · Bold | `.title2` |
+| Title 2 | 22/28 · Bold | `.title2Emphasized` (el `.title2` del sistema es Regular) |
 | Title 3 | 20/25 · Semibold | `.title3` |
 | Headline | 17/22 · Semibold | `.headline` |
 | Body | 17/22 · Regular | `.body` |
@@ -185,3 +198,70 @@ Los tres componentes de botón de Figma son `ButtonStyle` sobre un `Button` norm
 - Las alturas crecen con Dynamic Type (`@ScaledMetric`). Button y GlassButton amplían el área táctil hasta `Size.touchMin` (44).
 - En toolbars no hace falta estilo: iOS 26 ya aplica cristal a los botones de `.toolbar`.
 
+## Ilustraciones
+
+- Van en `Assets.xcassets/Illustrations/` como imageset con un SVG y *Preserve Vector Data* (`preserves-vector-representation`). La carpeta no lleva *Provides Namespace*, igual que `Colors/`.
+- No llevan *Render As Template* ni se convierten en SF Symbol: son multicolor y el color forma parte del dibujo.
+- El SVG se normaliza antes de añadirlo. `width` y `height` pasan a ser numéricos, iguales al `viewBox`, y los estilos CSS (`style="fill:…"`) pasan a atributos (`fill="…"`). CoreSVG los interpreta mejor y el dibujo no cambia.
+- Cada ilustración tiene un átomo que la envuelve y la oculta a VoiceOver. El alto lo decide quien la usa: `TrainIllustration().frame(height: 53)`.
+- Pendiente de diseño: el tren es claro también en modo oscuro y destaca mucho sobre `bgPrimary` oscuro. Una versión oscura se añadiría como apariencia *Dark* del mismo imageset.
+- **Logo (`RailLogo`).** Figma lo exporta con un PNG enmascarado de 508×508 como fondo, así que el SVG del proyecto es una composición: una tesela de 44×44 con radio 11 y el degradado casi blanco de ese PNG (`#FCFCFC` → `#EFEFEF` en diagonal) más el glifo de `AppIcon.icon/Assets/Logo tren app.svg`, escalado y colocado donde lo pone Figma. Es igual en claro y en oscuro, como en la maqueta.
+- **Fotos.** Van en `Assets.xcassets/Photos/` (sin *Provides Namespace*) como JPEG. `HomeHero` se registra a 2x (786×442 px = 393×221 pt) y `HomeHeroImage` la pinta con `scaledToFill` recortada al marco que decide quien la usa. Pendiente de diseño: en iPad y Pro Max se verá blanda; hace falta una versión de más resolución.
+
+## Inicio
+
+`HomeView(onShowMap:onShowStations:)` compone `NextTrainsSection` y `FavoriteStationsSection` dentro de `NavigationStack(path: [HomeRoute])` > `ScrollView`, sobre `bgSecondary`. Maquetas: con favoritas (`2:54`) y sin favoritas (`220:3329`).
+
+- **Foto a sangre** (`HomeHeroImage`). Va en el `.background(alignment: .top)` del contenido, con alto `topInset + 80 + 76` y desplazada `-topInset`. Así cubre la barra de estado y la de navegación y termina 76 pt dentro de la tarjeta de próximos trenes, que empieza a `topInset + 80`: en un iPhone 16 Pro, 262 y 186, como en Figma. `topInset` es `ScrollGeometry.contentInsets.top`. Al tirar hacia abajo se estira con `.visualEffect` (escala anclada abajo según `frame(in: .global).minY`; con `.scrollView` no crece). La capa *Blur* de Figma (`60:3460`) es el efecto de borde de scroll del sistema: no se imita.
+- **Alto visible** (`.fitsScrollViewport()`, en `ViewportFit.swift`). El contenido va dentro de un `Layout` de un solo hijo que le **propone** el alto visible pero reporta el alto **natural** que devuelva. Así Inicio ocupa exactamente una pantalla cuando cabe (sin scroll) y, cuando ni el mínimo de 3 favoritas cabe (ventana baja en iPad, iPhone en horizontal, tamaños de accesibilidad), el contenido crece y el `ScrollView` vuelve a desplazarse. Acotar con `.containerRelativeFrame(.vertical)` a secas no sirve: reporta siempre el alto del contenedor, así que el sobrante quedaba recortado e inalcanzable. El alto visible lo mide el propio modificador con una sonda `Color.clear.containerRelativeFrame(.vertical)` en el `background` (ya descuenta la barra de navegación y la de pestañas, y al ir en un `background` no afecta al layout); `ScrollGeometry.containerSize.height` da el mismo número. De `ScrollGeometry` solo se lee `contentInsets.top`, para la foto; nunca `contentOffset`, para no recalcular en cada frame.
+- **Barra superior.** A la izquierda, `RailLogo` de 44 pt con `.sharedBackgroundVisibility(.hidden)` (sin cristal); VoiceOver lo lee como la cabecera «Inicio», porque dentro de la barra la imagen no respeta `accessibilityHidden` y se leía «RailLogo». A la derecha, un `ToolbarItemGroup` con «Avisos» (`bell.fill`) y «Ajustes» (`gearshape.fill`), sin estilo: iOS 26 los agrupa en una cápsula de cristal. Todavía no hacen nada. El título «Inicio» se declara con `.navigationTitle` (lo usa el botón atrás) y se oculta con `.toolbarTitleDisplayMode(.inline)` más `.toolbar(removing: .title)`; sin el modo inline, el título grande sigue apareciendo.
+- **Ancho.** El contenido va centrado con un máximo de 640 pt (iPad, iPhone en horizontal); la foto sigue a sangre.
+- **Navegación** por `HomeRoute`: `.favorites` abre `FavoriteStationsView` (borrar deslizando, `EditButton` para reordenar, `ContentUnavailableView` si no hay ninguna) y `.station(id:)` abre `StationDestination`, que busca la estación con `@Query` y muestra «Estación no disponible» si una reimportación la ha borrado.
+- **«Ver estaciones»**, en el estado vacío de favoritas, no navega dentro de Inicio: `MainTabView` cambia a la pestaña Estaciones.
+- **Estrellas.** Donde el usuario marca favoritas (filas de «Todas las estaciones» y barra del detalle de estación) se usa `Toggle(isOn: favoritesModel.binding(for:isFavorite:))` con `.toggleStyle(.favorite)`. Dentro de una fila con `NavigationLink`, el botón `.plain` del estilo basta para que tocar la estrella no navegue.
+
+## Estaciones favoritas
+
+`FavoriteStationsContainer(items, onAction:)` no lee datos: pinta `[StationRowItem]` y avisa con un `FavoriteStationsAction` (`.open(id)`, `.showAll`, `.remove(id)`, `.browseStations`). `FavoriteStationsSection` lo conecta con `@Query` (`FavoriteStation.order` y `Station`), la ubicación de `LocationViewModel` y `FavoritesViewModel`.
+
+- **Piezas.** Cabecera `CardSectionHeader("Estaciones favoritas")` sin icono; cada favorita es un `FavoriteStationCard` (un `StationRow` sin separador con padding `Spacing.sm` sobre `bgPrimary`) dentro de un `Button(.plain)`; sin favoritas, un `EmptyStateCard` con `star` en `interactiveFavorite` y el botón «Ver estaciones» en `.rail(.bordered)` `.regular`. Separación de 8 entre cabecera y contenido, 12 entre tarjetas y padding 16 alrededor.
+- **Adaptadores.** `StationRow(item, isFavorite:showsSeparator:)` y `FavoriteStationCard(item)` convierten `StationRowItem` en vista; `LineMark(tag)` pasa el `colorHex` de la API a `Color`.
+- **Subtítulo** (`StationRowItemBuilder.subtitle`): «A 1,2 km» si hay ubicación; si no, las conexiones («Metro · Autobús urbano»); si tampoco hay, ninguno.
+- **«Ver más»** (footnote, `brandPrimary`, `chevron.right`, separación 4) solo aparece si hay al menos una favorita. Es un `Button` `.borderless` con área táctil de 44 pt y VoiceOver lee «Ver todas las estaciones favoritas». Al no depender del número de filas visibles, la cabecera tiene siempre el mismo alto.
+- **Capacidad.** Se muestran tantas tarjetas como quepan sin hacer scroll, entre 3 y 12 (`FavoritesCapacity.minimumVisible` y `.maximumVisible`). No hay cuentas ni geometría medida: un `ViewThatFits(in: .vertical)` recibe como candidatos los `VStack` de `n`, `n−1`, … , 3 tarjetas (`FavoritesCapacity.candidateCounts(total:)`) y el propio layout elige el primero que cabe, con los altos reales de cada tarjeta (subtítulo, nombre en dos líneas, Dynamic Type). Los cambios de la lista se animan con `.smooth`. Quien pinte la sección tiene que darle dos cosas:
+  - `.fitsScrollViewport()` al contenido de su `ScrollView`, para que la propuesta de alto sea finita (ver *Inicio*).
+  - `.layoutPriority(-1)` a la sección, para que el resto del contenido tome su alto natural y favoritas se quede con lo que sobra. Sin esa prioridad el `VStack` reparte el alto entre los dos y comprime la tarjeta de arriba (el texto de `NextTrainsCard` se truncaba) en vez de quitar una tarjeta.
+- **Menú contextual.** Cada tarjeta tiene «Quitar de favoritos» (`star.slash`, destructivo) con el mismo texto que `FavoriteToggleStyle.removeLabel` y una previsualización con la forma de la tarjeta.
+- **Radio 12.** Las tarjetas y el estado vacío usan radio 12, que no es un token (está entre `Radius.md` 10 y `Radius.lg` 14). Va como constante privada hasta que la diseñadora decida si es un token nuevo o se ajusta a uno existente.
+- **Sin sombra**: los frames de Figma no tienen efectos.
+- **Escrituras.** Quitar, añadir y reordenar pasan por `FavoritesViewModel`, que llama de forma síncrona a `UserStationsRepository` sobre `mainContext`; la lectura es siempre `@Query`. Por eso la tarjeta desaparece en la misma transacción que el gesto, sin `Task` ni estado optimista. Para la estrella, `favoritesModel.binding(for: id, isFavorite:)` devuelve un `Binding<Bool>` cuyo setter llama a `setFavorite`.
+
+## Tarjeta de próximos trenes
+
+`NextTrainsCard(state, onAction:)` no lee datos: pinta un `NextTrainsCardState` y avisa de lo que pulsa el usuario con un `NextTrainsCardAction`. `NextTrainsSection` la conecta con la ubicación, SwiftData y MapKit a través de las funciones puras de `NextTrainsCardStateBuilder`.
+
+| Estado | Maqueta (pantalla) | Qué pinta | Acciones |
+|---|---|---|---|
+| `.station`, proximidad `.walking` | `59:1450` (Home `2:54`) | Nombre, «A N minutos a pie», tren, «Próximos trenes» y dos `DepartureRow` | ninguna |
+| `.station`, proximidad `.distance` | `220:1589` (Modo sin conexión `220:1560`) | Lo mismo con «A 1,2 km» | ninguna |
+| `.station`, proximidad `.saved` | sin maqueta | Lo mismo con «Tu estación habitual» y «Cambiar» en la cabecera de sección | Cambiar → `.chooseStation` |
+| `.station`, salidas `.finished` | `220:3121` (Sin trenes hoy `220:3092`) | «No quedan trenes hoy» y la primera salida de mañana, con `CardMessage` compacto | ninguna |
+| `.station`, salidas `.loading` | sin maqueta | Dos filas con `.redacted(reason: .placeholder)` | ninguna |
+| `.permissionNeeded` | `220:1838` (Sin permiso `220:1809`) | Solo `CardMessage`, sin cabecera ni tren | Permitir ubicación · Elegir estación |
+| `.permissionDenied` | `220:2074` (Ubicación denegada `220:2045`) | Solo `CardMessage` | Elegir estación · Abrir Ajustes |
+| `.locationUnavailable` | `220:2252` (No te ubicamos `220:2223`) | Solo `CardMessage` | Reintentar · Elegir estación |
+| `.noStationNearby` | `220:2430` (Fuera de zona `220:2401`) | Solo `CardMessage`, con la estación más próxima en kilómetros enteros | Ver en el mapa · Elegir estación |
+| `.locating` | sin maqueta | Indicador de progreso y «Buscando tu ubicación…» | Elegir estación |
+
+- **Qué estación se muestra** (`NextTrainsCardStateBuilder.target`), en este orden:
+  1. la más cercana a la ubicación del dispositivo, si está a 10 km o menos;
+  2. la estación guardada (`SavedStation`, leída con `@Query(SavedStation.current)` y escrita por `LocationViewModel` a través de `UserStationsRepository`), resuelta por id de estación o, si ese id ya no existe, por sus coordenadas;
+  3. «sin estación cerca», si hay ubicación pero ninguna estación a 10 km;
+  4. el mensaje que corresponda al permiso de ubicación.
+- **Proximidad:** tiempo andando de MapKit si es menor de una hora, redondeado hacia arriba y como mínimo 1 minuto. Si no hay tiempo andando, la distancia (`distanceLabel`). La estación guardada no pide tiempo andando.
+- **Salidas:** las dos siguientes de hoy entre todas las líneas y sentidos, en la zona horaria de la red. El identificador de línea se pinta tal como llega de la API. Sin más salidas hoy, se muestra la primera de mañana si mañana entra en el horario descargado.
+- **Plural:** «A 1 minuto a pie» sale de una variación de plural en `Localizable.xcstrings` (clave `A %lld minutos a pie`). `inflect: true` no funciona en este proyecto.
+- **Sombra:** la tarjeta va sobre `bgSecondary` sin sombra, porque la sombra de la maqueta está desactivada. Es una excepción a la regla general de tarjetas con `Elevation/Card`.
+- **«Cambiar» va en la cabecera de sección**, no junto al nombre, porque el tren ocupa la esquina superior derecha.
+- **Cabecera «Próximos trenes · programados»:** `CardSectionHeader(detail:)` la soporta, pero solo aparece en la maqueta *Modo sin conexión*. La app aún no detecta la falta de conexión, así que la tarjeta no la usa.
+- **GlassButton dentro de la tarjeta:** se usa porque así lo dibujan las maquetas, aunque la documentación del componente lo desaconseja en tarjetas opacas.

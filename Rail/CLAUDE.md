@@ -27,6 +27,7 @@ There is no test target and no linter yet. When a test target is added, use Swif
 - **Declarative programming.** Prefer expressions, value types and transformations (`map`, `filter`, `compactMap`, `switch`/`if` expressions) over imperative mutation and control flow. In SwiftUI, derive state instead of syncing it, and drive async work with `.task(id:)` rather than `onAppear` plus manual bookkeeping.
 - **Always use the most modern Swift and SwiftUI APIs available for iOS 26**, reaching for iOS 27 ones behind availability checks when they are clearly better. In practice: `@Observable` instead of `ObservableObject`, `@Entry` for environment values, `async`/`await` and structured concurrency instead of GCD, Combine or completion handlers, `Mutex` from `Synchronization` for shared mutable state, typed throws, `@concurrent` to leave the caller's actor, `NavigationStack` with value-based destinations, the `Tab` API, Liquid Glass styles (`.buttonStyle(.glass)`, `glassEffect`), `ContentUnavailableView`, SwiftData macros (`#Unique`, `#Index`), Swift Testing instead of XCTest.
 - User-facing text is Spanish. `Localizable.xcstrings` has `es` as source language and `STRING_CATALOG_GENERATE_SYMBOLS` enabled. Use `LocalizedStringResource` / `String(localized:comment:)`; the `comment:` argument is a translator note, not a code comment, and should be written in Spanish.
+- For counts, add a plural variation to `Localizable.xcstrings` by hand: automatic grammar agreement (`inflect: true`) does not work in this project, and `xcodebuild` does not add new strings to the catalog.
 
 ## Commits
 
@@ -40,17 +41,20 @@ The target sets `SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated` and `SWIFT_APPROAC
 
 - UI-facing types must be marked `@MainActor` explicitly (`AppViewModel`, `AppDependencies`).
 - Work that must leave the main actor is marked `@concurrent` (`NetworkInteractor.getJSON`, `SyncServiceImpl.performSync`, `RouteShapeCache.warm`).
-- Sync state is isolated to the `@SyncActor` global actor; SwiftData writes happen on the `@ModelActor` `SwiftDataRepository`.
+- Sync state is isolated to the `@SyncActor` global actor; bulk SwiftData writes happen on the `@ModelActor` `SwiftDataTransitRepository`.
 
 ### Layers and data flow
 
-`RailApp` → `AppDependencies` builds the `ModelContainer` (schema roots `TransitNetwork` and `Timetable`) and wires `AppViewModel(SyncServiceImpl(APIServiceImpl, SwiftDataRepository))`. The container goes in via `.modelContainer`, the view model via `.environment`.
+`RailApp` → `AppDependencies` builds the `ModelContainer` from `RailSchema.models` (every `@Model` type; previews use it too) and wires `AppViewModel(SyncServiceImpl(APIServiceImpl, SwiftDataTransitRepository))` plus the two view models that write user data through `SwiftDataUserStationsRepository`. The container goes in via `.modelContainer`, the view models via `.environment`.
 
 - **Network** (`Network/`): `NetworkInteractor.getJSON` does GET + decode with `throws(NetworkError)` and returns `ETagged<T>`. `APIResponse<T>.call { }` folds errors into `.success` / `.notModified` / `.failure`, and `payload()` turns `.notModified` into `nil`. Endpoints are `static` members on `URL` (`URL+Endpoints.swift`), and requests send `If-None-Match` with the stored ETag.
 - **Service** (`Service/`): services are `Sendable` protocols with an `…Impl` concrete type so previews can inject fakes (see `PreviewSyncService` in `RootView.swift`). `SyncServiceImpl.sync` deduplicates concurrent calls through a single in-flight `Task`, fetches both endpoints with `async let`, and only imports payloads that changed.
 - **DTOs** (`Service/DTO/`): `Decodable & Sendable` structs mirroring the API, with the payload contract documented on each field. They map to models through `convenience init(dto:)` extensions in `DTOMapping.swift`. Unknown enum values from the server are dropped leniently instead of failing decoding.
-- **Repository** (`Repository/`): imports are full replacements (delete everything, insert fresh). Trips are inserted in batches of 500 with cancellation checks, and a failed timetable import discards the partial timetable.
-- **ViewModel**: `AppViewModel` only owns the sync lifecycle (`AppPhase`: `checking` → `loading` | `ready(RefreshState)` | `failed`). It never holds network data.
+- **Repository** (`Repository/`): split by who observes the data, because only writes to `mainContext` reach `@Query` inside the same SwiftUI transaction.
+  - `TransitRepository` / `SwiftDataTransitRepository` (`@ModelActor`, `async`): the catalog and timetable, owned by sync. Imports are full replacements (delete everything, insert fresh). Trips are inserted in batches of 500 with cancellation checks, and a failed timetable import discards the partial timetable. Never call it from a view.
+  - `UserStationsRepository` / `SwiftDataUserStationsRepository` (`@MainActor`, **not** `async`): `FavoriteStation` and `SavedStation`, written on `container.mainContext`. Keeping these calls synchronous is what stops a delete from bouncing (row disappears, reappears, disappears) — an `async` hop puts a frame between the tap and the state change. Add new user-facing, `@Query`-observed writes here, not on the actor.
+  - `ModelContext.commit { }` (`PersistenceSupport.swift`) wraps changes in `save()` plus `rollback()` on failure; both repositories use it.
+- **ViewModel**: `AppViewModel` only owns the sync lifecycle (`AppPhase`: `checking` → `loading` | `ready(RefreshState)` | `failed`). It never holds network data. `LocationViewModel` owns authorization and the current reading, and writes the station the user picked (`SavedStation`) through `UserStationsRepository`; that station stands in for the device location when there is no usable fix. `FavoritesViewModel` does the same for favorites. Both swallow and log repository errors via a private `attempt`.
 - **Views**: read SwiftData directly with `@Query`. `RootView` switches on `AppPhase` and re-runs `synchronize()` via `.task(id:)` whenever the scene returns from background or the user retries.
 
 ### Freshness policy
@@ -72,8 +76,11 @@ Tokens de Figma (`DS · Color`, `Tipografía`, `Espaciado y radios`, `Elevación
 - Colores semánticos son color sets con Light y Dark; úsalos por su símbolo generado (`Color.bgPrimary`, `.foregroundStyle(.textSecondary)`). No hay primitivas en código y no se añaden hex sueltos en vistas nuevas. `AccentColor` es `brand/primary`.
 - El color base de cada línea viene de la API (`Line.colorHex`); `Line.tint` (`LineTint`) deriva `text` y `subtle`.
 - Espaciado, radios, tamaños y bordes: `Spacing`, `ScreenLayout`, `Radius`, `Size`, `Border`. Tipografía: estilos de sistema más `Font.bodyEmphasized`, `.timeDeparture`, etc. Sombras: `.elevation(.card / .sheet / .floating)`.
-- Botones: `Button` del sistema con `.buttonStyle(.rail(...))`, `.railGlass(...)`, `.railGlassIcon(...)` o `.filterChip(isSelected:)` y tamaño con `.controlSize`; no se crean botones con fondos a mano (ver sección *Botones* de `DESIGN-TOKENS.md`). El botón de favorito es un `Toggle` con `.toggleStyle(.favorite)`, no un `Button`.
+- Botones: `Button` del sistema con `.buttonStyle(.rail(...))`, `.railGlass(...)`, `.railGlassIcon(...)` o `.filterChip(isSelected:)` y tamaño con `.controlSize`; no se crean botones con fondos a mano (ver sección *Botones* de `DESIGN-TOKENS.md`). El botón de favorito es un `Toggle` con `.toggleStyle(.favorite)`, no un `Button`, y su `isOn` es siempre `favoritesModel.binding(for:isFavorite:)`.
 - Incidencias: `SeverityBadge`, `AlertBanner`, `IncidentRow` e `IncidentCard` comparten el enum `IncidentSeverity` (símbolo, `tint`, `background`, `foreground`, `label`) y reciben las líneas como `[LineMark]` (ver sección *Incidencias* de `DESIGN-TOKENS.md`).
+- Ilustraciones multicolor: imageset con *Preserve Vector Data* en `Assets.xcassets/Illustrations/`, envuelto en un átomo decorativo como `TrainIllustration` (ver sección *Ilustraciones* de `DESIGN-TOKENS.md`).
+- Tarjeta de inicio: `NextTrainsCard` solo pinta un `NextTrainsCardState`; la lógica es pura en `NextTrainsCardStateBuilder` y `NextTrainsSection` la conecta con los datos (ver sección *Tarjeta de próximos trenes* de `DESIGN-TOKENS.md`).
+- Inicio: `HomeView` compone `NextTrainsSection` y `FavoriteStationsSection` en un `NavigationStack` cuyo camino es `[HomeRoute]` (`.favorites` → `FavoriteStationsView`, `.station(id:)` → `StationDestination`); ver sección *Inicio* de `DESIGN-TOKENS.md`.
 - `TokenGallery.swift` es un preview (solo `DEBUG`) para comparar con Figma; añade ahí cualquier token nuevo.
 
 ### Map

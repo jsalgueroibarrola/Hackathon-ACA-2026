@@ -19,5 +19,6 @@ struct RailApp: App {
         .modelContainer(dependencies.modelContainer)
         .environment(dependencies.viewModel)
         .environment(dependencies.locationViewModel)
+        .environment(dependencies.favoritesViewModel)
     }
 }

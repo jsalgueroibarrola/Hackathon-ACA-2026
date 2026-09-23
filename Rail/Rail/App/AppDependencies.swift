@@ -14,12 +14,10 @@ struct AppDependencies {
     let modelContainer: ModelContainer
     let viewModel: AppViewModel
     let locationViewModel: LocationViewModel
+    let favoritesViewModel: FavoritesViewModel
 
     init() {
-        let schema = Schema([
-            TransitNetwork.self,
-            Timetable.self,
-        ])
+        let schema = Schema(RailSchema.models)
         let configuration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: false
@@ -35,13 +33,22 @@ struct AppDependencies {
             fatalError("Could not create ModelContainer: \(error)")
         }
 
+        let transit = SwiftDataTransitRepository(modelContainer: container)
+        let userStations = SwiftDataUserStationsRepository(
+            modelContainer: container
+        )
+
         modelContainer = container
         viewModel = AppViewModel(
             syncService: SyncServiceImpl(
                 api: APIServiceImpl(),
-                repository: SwiftDataRepository(modelContainer: container)
+                repository: transit
             )
         )
-        locationViewModel = LocationViewModel(service: LocationServiceImpl())
+        locationViewModel = LocationViewModel(
+            service: LocationServiceImpl(),
+            repository: userStations
+        )
+        favoritesViewModel = FavoritesViewModel(repository: userStations)
     }
 }

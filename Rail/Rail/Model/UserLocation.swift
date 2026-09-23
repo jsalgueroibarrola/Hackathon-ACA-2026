@@ -77,6 +77,7 @@ enum LocationAuthorization: Sendable, Hashable {
 enum LocationEvent: Sendable, Hashable {
     case authorization(LocationAuthorization)
     case reading(UserLocation)
+    case unavailable
 }
 
 extension Measurement<UnitLength> {

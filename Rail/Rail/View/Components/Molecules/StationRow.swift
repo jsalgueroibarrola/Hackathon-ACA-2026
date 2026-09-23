@@ -2,7 +2,7 @@ import SwiftUI
 
 struct StationRow: View {
     private let name: String
-    private let subtitle: String
+    private let subtitle: String?
     private let lines: [LineMark]
     private let distance: String?
     private let isFavorite: Binding<Bool>?
@@ -14,7 +14,7 @@ struct StationRow: View {
 
     init(
         name: String,
-        subtitle: String,
+        subtitle: String?,
         lines: [LineMark],
         distance: String? = nil,
         isFavorite: Binding<Bool>? = nil,
@@ -70,9 +70,11 @@ struct StationRow: View {
             Text(verbatim: name)
                 .font(.headline)
                 .foregroundStyle(.textPrimary)
-            Text(verbatim: subtitle)
-                .font(.footnote)
-                .foregroundStyle(.textSecondary)
+            if let subtitle {
+                Text(verbatim: subtitle)
+                    .font(.footnote)
+                    .foregroundStyle(.textSecondary)
+            }
         }
         .lineLimit(1)
         .truncationMode(.tail)
@@ -146,6 +148,17 @@ struct StationRow: View {
     VStack(spacing: 0) {
         StationRow(name: "Universidad de Málaga – Andalucía Tech", subtitle: "Teatinos · Zona A", lines: [.init("C-1", color: c1)])
         StationRow(name: "Aeropuerto de Málaga Costa del Sol", subtitle: "Churriana · Zona B", lines: [.init("C-1", color: c1)], distance: "~1,2 km", showsSeparator: false)
+    }
+    .background(.bgPrimary)
+}
+
+#Preview("Sin subtítulo") {
+    let c1 = Color(hex: "DA291C")
+    let c2 = Color(hex: "0057A8")
+
+    VStack(spacing: 0) {
+        StationRow(name: "Victoria Kent", subtitle: nil, lines: [.init("C-1", color: c1), .init("C-2", color: c2)])
+        StationRow(name: "Benalmádena-Arroyo de la Miel", subtitle: nil, lines: [.init("C-1", color: c1)], distance: "~18 km", showsSeparator: false)
     }
     .background(.bgPrimary)
 }

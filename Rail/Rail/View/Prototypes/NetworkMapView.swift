@@ -19,7 +19,7 @@ struct NetworkMapView: View {
 
     @State private var routes: [String: [CLLocationCoordinate2D]] = [:]
     @State private var hiddenLineIDs: Set<String> = []
-    @State private var selection: String?
+    @Binding var selection: String?
     @State private var detailStationID: String?
     @State private var surface: MapSurface = .muted
 

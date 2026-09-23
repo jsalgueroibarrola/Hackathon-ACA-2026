@@ -1,6 +1,7 @@
 import CoreLocation
 import Foundation
 import Observation
+import OSLog
 
 @MainActor
 @Observable
@@ -8,11 +9,18 @@ final class LocationViewModel {
 
     private(set) var authorization: LocationAuthorization
     private(set) var location: UserLocation?
+    private(set) var isLocationUnavailable = false
+    private(set) var retryAttempt = 0
 
     private let service: any LocationService
+    private let repository: any UserStationsRepository
 
-    init(service: any LocationService) {
+    init(
+        service: any LocationService,
+        repository: any UserStationsRepository
+    ) {
         self.service = service
+        self.repository = repository
         self.authorization = service.authorization
     }
 
@@ -24,8 +32,25 @@ final class LocationViewModel {
 
     var isLocating: Bool { isTracking && location == nil }
 
+    var hasLocationFailed: Bool {
+        isTracking && location == nil && isLocationUnavailable
+    }
+
     func requestAccess() {
         service.requestAuthorization()
+    }
+
+    func retry() {
+        isLocationUnavailable = false
+        retryAttempt += 1
+    }
+
+    func saveLocation(_ location: SavedLocation) {
+        attempt { try repository.saveStation(location) }
+    }
+
+    func clearSavedLocation() {
+        attempt { try repository.clearSavedStation() }
     }
 
     func observe() async {
@@ -36,6 +61,9 @@ final class LocationViewModel {
                 location = value == .authorized ? location : nil
             case .reading(let reading):
                 location = reading
+                isLocationUnavailable = false
+            case .unavailable:
+                isLocationUnavailable = true
             }
         }
     }
@@ -48,6 +76,16 @@ final class LocationViewModel {
         location.map {
             NearbyStation.closest(to: $0, among: stations, limit: limit)
         } ?? []
+    }
+
+    private func attempt(_ operation: () throws -> Void) {
+        do {
+            try operation()
+        } catch {
+            Logger.userStations.error(
+                "Saved station update failed: \(String(describing: error), privacy: .public)"
+            )
+        }
     }
 }
 
@@ -75,12 +113,16 @@ extension UserLocation {
 extension LocationViewModel {
     static func preview(
         authorization: LocationAuthorization = .authorized,
-        location: UserLocation? = .alameda
+        location: UserLocation? = .alameda,
+        isLocationUnavailable: Bool = false,
+        repository: any UserStationsRepository = PreviewUserStationsRepository()
     ) -> LocationViewModel {
         let model = LocationViewModel(
-            service: PreviewLocationService(authorization: authorization)
+            service: PreviewLocationService(authorization: authorization),
+            repository: repository
         )
         model.location = authorization == .authorized ? location : nil
+        model.isLocationUnavailable = isLocationUnavailable
         return model
     }
 }

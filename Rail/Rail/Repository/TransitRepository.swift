@@ -1,13 +1,6 @@
-//
-//  Repository.swift
-//  Rail
-//
-//  Created by jakuru on 19/09/2026.
-//
-
 import Foundation
 
-protocol Repository: Sendable {
+protocol TransitRepository: Sendable {
     func localState() async throws -> LocalDataState
     func importNetwork(
         _ dto: NetworkResponseDTO,

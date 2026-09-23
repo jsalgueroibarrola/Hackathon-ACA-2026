@@ -1,6 +1,7 @@
 import SwiftUI
 
 extension Font {
+    static let title2Emphasized: Font = .title2.weight(.bold)
     static let bodyEmphasized: Font = .body.weight(.semibold)
     static let bodyMedium: Font = .body.weight(.medium)
     static let subheadlineEmphasized: Font = .subheadline.weight(.semibold)

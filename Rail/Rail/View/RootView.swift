@@ -87,5 +87,6 @@ private struct PreviewSyncService: SyncService {
             AppViewModel(syncService: PreviewSyncService(freshness: .stale))
         )
         .environment(LocationViewModel.preview())
-        .modelContainer(for: TransitNetwork.self, inMemory: true)
+        .environment(FavoritesViewModel.preview())
+        .modelContainer(for: RailSchema.models, inMemory: true)
 }

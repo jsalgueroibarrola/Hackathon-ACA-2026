@@ -9,7 +9,14 @@ import SwiftUI
 import SwiftData
 
 struct StationsView: View {
+    @Environment(LocationViewModel.self) private var location
+    @Environment(FavoritesViewModel.self) private var favoritesModel
     @Query(sort: \Station.name) private var stations: [Station]
+    @Query private var favorites: [FavoriteStation]
+
+    private var favoriteIDs: Set<String> {
+        Set(favorites.map(\.stationID))
+    }
 
     var body: some View {
         NavigationStack {
@@ -21,8 +28,20 @@ struct StationsView: View {
                         NavigationLink {
                             StationDetailView(station: station)
                         } label: {
-                            StationSummaryRow(station: station)
+                            StationRow(
+                                StationRowItemBuilder.item(
+                                    for: station,
+                                    location: location.location
+                                ),
+                                isFavorite: favoritesModel.binding(
+                                    for: station.id,
+                                    isFavorite: favoriteIDs.contains(station.id)
+                                ),
+                                showsSeparator: false
+                            )
                         }
+                        .navigationLinkIndicatorVisibility(.hidden)
+                        .listRowInsets(EdgeInsets())
                     }
                 }
             }
@@ -39,8 +58,9 @@ struct StationsView: View {
     }
 }
 
-#Preview {
+#if DEBUG
+#Preview(traits: .favoriteStationsSampleData) {
     StationsView()
         .environment(LocationViewModel.preview())
-        .modelContainer(for: TransitNetwork.self, inMemory: true)
 }
+#endif

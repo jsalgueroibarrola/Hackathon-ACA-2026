@@ -1,13 +1,6 @@
-//
-//  RepositoryError.swift
-//  Rail
-//
-//  Created by jakuru on 19/09/2026.
-//
-
 import Foundation
 
-enum RepositoryError: LocalizedError {
+enum TransitRepositoryError: LocalizedError {
     case missingNetwork
     case invalidDay(String)
 

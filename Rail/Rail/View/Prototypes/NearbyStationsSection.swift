@@ -76,7 +76,8 @@ extension Station {
         }
     }
     .environment(LocationViewModel.preview())
-    .modelContainer(for: [TransitNetwork.self, Timetable.self], inMemory: true)
+    .environment(FavoritesViewModel.preview())
+    .modelContainer(for: RailSchema.models, inMemory: true)
 }
 
 #Preview("Sin permiso") {
@@ -86,7 +87,8 @@ extension Station {
         }
     }
     .environment(LocationViewModel.preview(authorization: .notDetermined))
-    .modelContainer(for: [TransitNetwork.self, Timetable.self], inMemory: true)
+    .environment(FavoritesViewModel.preview())
+    .modelContainer(for: RailSchema.models, inMemory: true)
 }
 
 #Preview("Permiso denegado") {
@@ -96,7 +98,8 @@ extension Station {
         }
     }
     .environment(LocationViewModel.preview(authorization: .denied))
-    .modelContainer(for: [TransitNetwork.self, Timetable.self], inMemory: true)
+    .environment(FavoritesViewModel.preview())
+    .modelContainer(for: RailSchema.models, inMemory: true)
 }
 
 #Preview("Buscando") {
@@ -106,5 +109,6 @@ extension Station {
         }
     }
     .environment(LocationViewModel.preview(location: nil))
-    .modelContainer(for: [TransitNetwork.self, Timetable.self], inMemory: true)
+    .environment(FavoritesViewModel.preview())
+    .modelContainer(for: RailSchema.models, inMemory: true)
 }

@@ -34,13 +34,13 @@ struct FavoriteToggleStyle: ToggleStyle {
         Metrics(controlSize)
     }
 
-    private static let addLabel = LocalizedStringResource(
+    static let addLabel = LocalizedStringResource(
         "Añadir a favoritos",
         comment:
             "Acción del botón de favorito cuando la estación todavía no lo es"
     )
 
-    private static let removeLabel = LocalizedStringResource(
+    static let removeLabel = LocalizedStringResource(
         "Quitar de favoritos",
         comment:
             "Acción del botón de favorito cuando la estación ya es favorita"

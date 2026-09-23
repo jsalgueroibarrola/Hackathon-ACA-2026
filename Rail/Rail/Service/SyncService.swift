@@ -28,13 +28,13 @@ protocol SyncService: Sendable {
 final class SyncServiceImpl: SyncService {
 
     private let api: any APIService
-    private let repository: any Repository
+    private let repository: any TransitRepository
     private let policy: DataFreshnessPolicy
     private var inFlight: Task<SyncOutcome, any Error>?
 
     nonisolated init(
         api: any APIService,
-        repository: any Repository,
+        repository: any TransitRepository,
         policy: DataFreshnessPolicy = .standard
     ) {
         self.api = api
@@ -89,7 +89,7 @@ final class SyncServiceImpl: SyncService {
     @concurrent
     private nonisolated static func performSync(
         api: any APIService,
-        repository: any Repository,
+        repository: any TransitRepository,
         now: Date
     ) async throws -> SyncOutcome {
         let state = try await repository.localState()

@@ -22,6 +22,16 @@ extension ModelContext {
     func insertAll(_ models: [any PersistentModel]) {
         models.forEach { insert($0) }
     }
+
+    func commit(_ changes: () throws -> Void) throws {
+        do {
+            try changes()
+            try save()
+        } catch {
+            rollback()
+            throw error
+        }
+    }
 }
 
 extension Collection where Index == Int {

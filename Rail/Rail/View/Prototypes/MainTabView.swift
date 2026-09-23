@@ -8,33 +8,64 @@
 import SwiftUI
 import SwiftData
 
+private struct TrackingTrigger: Equatable {
+    let isActive: Bool
+    let attempt: Int
+}
+
+private enum AppTab: Hashable {
+    case home, lines, stations, map
+}
+
 struct MainTabView: View {
     @Environment(LocationViewModel.self) private var location
     @Environment(\.scenePhase) private var scenePhase
 
+    @State private var selectedTab: AppTab = .home
+    @State private var mapSelection: String?
+
     var body: some View {
-        TabView {
-            Tab("Líneas", systemImage: "tram") {
+        TabView(selection: $selectedTab) {
+            Tab("Inicio", systemImage: "house", value: .home) {
+                HomeView(onShowMap: showOnMap, onShowStations: showStations)
+            }
+
+            Tab("Líneas", systemImage: "tram", value: .lines) {
                 ContentView()
             }
 
-            Tab("Estaciones", systemImage: "mappin.and.ellipse") {
+            Tab("Estaciones", systemImage: "mappin.and.ellipse", value: .stations) {
                 StationsView()
             }
 
-            Tab("Mapa", systemImage: "map") {
-                NetworkMapView()
+            Tab("Mapa", systemImage: "map", value: .map) {
+                NetworkMapView(selection: $mapSelection)
             }
         }
-        .task(id: scenePhase == .active) {
+        .task(
+            id: TrackingTrigger(
+                isActive: scenePhase == .active,
+                attempt: location.retryAttempt
+            )
+        ) {
             guard scenePhase == .active else { return }
             await location.observe()
         }
     }
+
+    private func showOnMap(_ stationID: String) {
+        mapSelection = stationID
+        selectedTab = .map
+    }
+
+    private func showStations() {
+        selectedTab = .stations
+    }
 }
 
-#Preview {
+#if DEBUG
+#Preview(traits: .favoriteStationsSampleData) {
     MainTabView()
         .environment(LocationViewModel.preview())
-        .modelContainer(for: TransitNetwork.self, inMemory: true)
 }
+#endif

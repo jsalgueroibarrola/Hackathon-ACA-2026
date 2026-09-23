@@ -1,5 +1,6 @@
 import CoreLocation
 import Foundation
+import MapKit
 
 extension Station {
     var coordinate: CLLocationCoordinate2D {
@@ -7,7 +8,7 @@ extension Station {
     }
 }
 
-struct NearbyStation: Identifiable {
+struct NearbyStation: Identifiable, Equatable {
     let station: Station
     let distance: Measurement<UnitLength>
 
@@ -20,12 +21,24 @@ extension NearbyStation {
         among stations: [Station],
         limit: Int
     ) -> [NearbyStation] {
-        Array(
+        closest(to: location.coordinate, among: stations, limit: limit)
+    }
+
+    static func closest(
+        to coordinate: CLLocationCoordinate2D,
+        among stations: [Station],
+        limit: Int
+    ) -> [NearbyStation] {
+        let origin = MKMapPoint(coordinate)
+        return Array(
             stations
                 .map {
                     NearbyStation(
                         station: $0,
-                        distance: location.distance(to: $0.coordinate)
+                        distance: Measurement(
+                            value: origin.distance(to: MKMapPoint($0.coordinate)),
+                            unit: .meters
+                        )
                     )
                 }
                 .sorted { $0.distance < $1.distance }

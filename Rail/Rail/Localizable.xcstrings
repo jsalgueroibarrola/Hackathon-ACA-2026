@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
+    "%@ · %@" : {
+      "comment" : "Cabecera de sección de una tarjeta: título seguido de un detalle, por ejemplo «Próximos trenes · programados».",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "%@ · llegada a las %@" : {
       "localizations" : {
         "es" : {
@@ -11,17 +22,77 @@
         }
       }
     },
+    "%@, %@" : {
+      "comment" : "Lectura de VoiceOver de un SeverityBadge: gravedad seguida de la descripción de la incidencia",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
+    "%@, %@, %@, %@" : {
+      "comment" : "Lectura de VoiceOver de una fila de incidencia: gravedad, título, detalle y líneas afectadas",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@, %3$@, %4$@"
+          }
+        }
+      }
+    },
+    "A %@" : {
+      "comment" : "Distancia desde la ubicación del usuario hasta una estación, por ejemplo «A 1,2 km». Se usa en la tarjeta de próximos trenes y en las filas de estaciones."
+    },
     "A %@ de ti" : {
 
     },
-    "Abrir Ajustes" : {
+    "A %lld minutos a pie" : {
+      "comment" : "Tarjeta de próximos trenes: tiempo andando hasta la estación, por ejemplo «A 15 minutos a pie».",
+      "localizations" : {
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "A %lld minuto a pie"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "A %lld minutos a pie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "A 1,2 km" : {
 
+    },
+    "A 15 minutos a pie" : {
+
+    },
+    "AVE" : {
+      "comment" : "Tipo de conexión disponible en una estación: tren de alta velocidad. Marca comercial de Renfe, no traducir."
+    },
+    "Abrir Ajustes" : {
+      "comment" : "Tarjeta de próximos trenes: botón que abre los ajustes de la app para conceder la ubicación."
     },
     "Abrir en Mapas" : {
 
     },
     "Accesibilidad" : {
       "comment" : "Título de sección en el detalle de estación; agrupa las prestaciones de accesibilidad."
+    },
+    "Activa la ubicación" : {
+      "comment" : "Tarjeta de próximos trenes: título cuando aún no se ha pedido permiso de ubicación."
     },
     "Activa la ubicación para saber cuánto tardas en llegar andando, en bici, en coche o en transporte público." : {
 
@@ -31,6 +102,9 @@
     },
     "Aeropuerto" : {
       "comment" : "Tipo de conexión disponible en una estación: el aeropuerto."
+    },
+    "Ajustes" : {
+      "comment" : "Inicio: botón de la barra superior que abrirá los ajustes; VoiceOver lo lee."
     },
     "Andando" : {
 
@@ -50,10 +124,19 @@
     "Autobús urbano" : {
       "comment" : "Tipo de conexión disponible en una estación: autobús municipal."
     },
-    "AVE" : {
-      "comment" : "Tipo de conexión disponible en una estación: tren de alta velocidad. Marca comercial de Renfe, no traducir."
+    "Aviso" : {
+      "comment" : "Gravedad de una incidencia: aviso informativo"
+    },
+    "Avisos" : {
+      "comment" : "Inicio: botón de la barra superior que abrirá los avisos; VoiceOver lo lee."
+    },
+    "Añadir a favoritos" : {
+      "comment" : "Acción del botón de favorito cuando la estación todavía no lo es"
     },
     "Buscando tu ubicación…" : {
+      "comment" : "Tarjeta de próximos trenes: título mientras se obtiene la ubicación del usuario."
+    },
+    "Buscar estación" : {
 
     },
     "Calculando la ruta…" : {
@@ -62,17 +145,23 @@
     "Calculando tiempos…" : {
 
     },
+    "Cambiar" : {
+      "comment" : "Tarjeta de próximos trenes: botón para cambiar la estación habitual guardada."
+    },
+    "Cargando próximos trenes" : {
+      "comment" : "Tarjeta de próximos trenes: descripción para VoiceOver mientras se calculan las salidas."
+    },
     "Cerca de ti" : {
 
     },
     "Cerrar" : {
 
     },
-    "Cómo llegar" : {
-
-    },
     "Conexiones" : {
       "comment" : "Título de sección en el detalle de estación; lista los otros transportes con los que enlaza."
+    },
+    "Cómo llegar" : {
+
     },
     "Demasiadas rutas seguidas. Inténtalo de nuevo en unos segundos." : {
 
@@ -80,8 +169,17 @@
     "Descargando horarios" : {
       "comment" : "Título de la pantalla de carga mientras se descargan los datos de la red."
     },
+    "Descartar aviso" : {
+      "comment" : "Acción del botón que cierra una banda de aviso de incidencia"
+    },
     "Distancia desde tu ubicación" : {
 
+    },
+    "Elegir estación" : {
+      "comment" : "Tarjeta de próximos trenes: botón que abre el selector de estación habitual."
+    },
+    "Elige tu estación habitual" : {
+      "comment" : "Tarjeta de próximos trenes: título cuando el usuario ha denegado el permiso de ubicación."
     },
     "En bici" : {
 
@@ -92,14 +190,20 @@
     "Esperando tu ubicación…" : {
 
     },
+    "Estaciones" : {
+      "comment" : "Título de la pestaña y de la pantalla con el listado de estaciones."
+    },
+    "Estaciones favoritas" : {
+      "comment" : "Cabecera de la sección de favoritas en Inicio y título de la pantalla con todas las favoritas."
+    },
     "Estación de autobuses" : {
       "comment" : "Tipo de conexión disponible en una estación: estación central de autobuses."
     },
     "Estación más cercana" : {
 
     },
-    "Estaciones" : {
-      "comment" : "Título de la pestaña y de la pantalla con el listado de estaciones."
+    "Estación no disponible" : {
+      "comment" : "Detalle de estación: la estación ya no está en los datos descargados."
     },
     "Estándar" : {
 
@@ -107,16 +211,36 @@
     "Hacia %@" : {
 
     },
-    "Híbrido" : {
+    "Horarios de hoy" : {
 
     },
-    "Horarios de hoy" : {
+    "Híbrido" : {
 
     },
     "Identificador" : {
       "comment" : "Título de sección en el detalle de estación; muestra el código interno de la estación."
     },
     "Iniciar ruta" : {
+
+    },
+    "Inicio" : {
+      "comment" : "Título de la pestaña y de la pantalla de inicio."
+    },
+    "Interrumpido" : {
+      "comment" : "Gravedad de una incidencia: servicio interrumpido"
+    },
+    "La más próxima, %@, está a %@. Puedes verla en el mapa o elegir tu estación habitual." : {
+      "comment" : "Tarjeta de próximos trenes: el primer valor es el nombre de la estación más próxima y el segundo, la distancia, por ejemplo «38 km».",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "La más próxima, %1$@, está a %2$@. Puedes verla en el mapa o elegir tu estación habitual."
+          }
+        }
+      }
+    },
+    "La más próxima, Álora, está a 38 km. Puedes verla en el mapa o elegir tu estación habitual." : {
 
     },
     "Línea %@ hacia %@. Próximas salidas: %@" : {
@@ -145,11 +269,11 @@
     "Mapa" : {
 
     },
+    "Marca tus estaciones habituales" : {
+      "comment" : "Inicio: título de la sección de favoritas cuando todavía no hay ninguna."
+    },
     "Medio de transporte" : {
 
-    },
-    "menos de 1 min" : {
-      "comment" : "Tiempo de viaje cuando la estación está a menos de un minuto."
     },
     "Metro" : {
       "comment" : "Tipo de conexión disponible en una estación: metro."
@@ -163,8 +287,17 @@
     "No disponible" : {
 
     },
+    "No hay estaciones de Cercanías cerca" : {
+      "comment" : "Tarjeta de próximos trenes: título cuando no hay ninguna estación cerca del usuario."
+    },
     "No hay horarios disponibles" : {
       "comment" : "Título del estado vacío cuando no se ha podido descargar ningún dato y no hay nada guardado."
+    },
+    "No hemos podido ubicarte" : {
+      "comment" : "Tarjeta de próximos trenes: título cuando el dispositivo no consigue una ubicación."
+    },
+    "No quedan trenes hoy" : {
+      "comment" : "Tarjeta de próximos trenes: título cuando ya no hay más salidas en el día."
     },
     "No se ha podido calcular la ruta hasta la estación." : {
 
@@ -175,11 +308,32 @@
     "No se han podido calcular los tiempos de viaje" : {
 
     },
+    "No tenemos permiso para usar tu ubicación. Elige la estación que más usas y la tendrás siempre aquí." : {
+      "comment" : "Tarjeta de próximos trenes: mensaje cuando el permiso de ubicación está denegado."
+    },
     "Ocultar indicaciones" : {
+
+    },
+    "Permitir ubicación" : {
+      "comment" : "Tarjeta de próximos trenes: botón que pide el permiso de ubicación."
+    },
+    "Primera salida mañana a las %@" : {
+      "comment" : "Tarjeta de próximos trenes: hora de la primera salida del día siguiente, por ejemplo «05:40»."
+    },
+    "Primera salida mañana a las 05:40" : {
 
     },
     "Próximas salidas" : {
 
+    },
+    "Próximos trenes" : {
+      "comment" : "Tarjeta de próximos trenes: cabecera de la lista de salidas de la estación."
+    },
+    "Puede pasar bajo tierra o en interiores. Inténtalo otra vez o elige tu estación." : {
+      "comment" : "Tarjeta de próximos trenes: mensaje cuando el dispositivo no consigue una ubicación."
+    },
+    "Quitar de favoritos" : {
+      "comment" : "Acción del botón de favorito cuando la estación ya es favorita"
     },
     "Rail no tiene acceso a tu ubicación. Actívalo en Ajustes para usar esta función." : {
 
@@ -194,7 +348,13 @@
       "comment" : "Tipo de conexión disponible en una estación: tren regional."
     },
     "Reintentar" : {
-      "comment" : "Botón que vuelve a intentar la descarga de datos tras un fallo."
+      "comment" : "Tarjeta de próximos trenes: botón para volver a buscar la ubicación."
+    },
+    "Resuelto" : {
+      "comment" : "Gravedad de una incidencia: incidencia cerrada"
+    },
+    "Retrasos" : {
+      "comment" : "Gravedad de una incidencia: hay demoras en el servicio"
     },
     "Sale a las %@" : {
 
@@ -205,9 +365,6 @@
     "Se ha interrumpido la descarga de horarios" : {
       "comment" : "Descripción de error mostrada cuando la sincronización inicial se cancela."
     },
-    "Sí" : {
-      "comment" : "Valor de una fila de accesibilidad: la prestación está disponible en la estación."
-    },
     "Sin datos" : {
       "comment" : "Valor de una fila de accesibilidad: se desconoce si la estación tiene esa prestación."
     },
@@ -216,6 +373,9 @@
     },
     "Sin estaciones" : {
       "comment" : "Estado vacío del listado de estaciones cuando no hay datos guardados."
+    },
+    "Sin estaciones favoritas" : {
+      "comment" : "Pantalla de favoritas: título cuando no queda ninguna estación favorita."
     },
     "Sin horarios para hoy" : {
 
@@ -229,6 +389,15 @@
     "Superficie" : {
 
     },
+    "Sí" : {
+      "comment" : "Valor de una fila de accesibilidad: la prestación está disponible en la estación."
+    },
+    "Toca la estrella de cualquier estación para añadirla aquí." : {
+      "comment" : "Pantalla de favoritas: explica cómo añadir estaciones cuando la lista está vacía."
+    },
+    "Toca la estrella de cualquier estación y la tendrás siempre aquí." : {
+      "comment" : "Inicio: explica cómo añadir estaciones favoritas cuando todavía no hay ninguna."
+    },
     "Todas las estaciones" : {
 
     },
@@ -238,8 +407,8 @@
     "Tren %@" : {
 
     },
-    "Última actualización: %@" : {
-      "comment" : "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas»."
+    "Tu estación habitual" : {
+      "comment" : "Tarjeta de próximos trenes: subtítulo cuando la estación es la que el usuario ha guardado."
     },
     "Usar mi ubicación" : {
 
@@ -247,11 +416,35 @@
     "Ver detalle" : {
 
     },
+    "Ver en el mapa" : {
+      "comment" : "Tarjeta de próximos trenes: botón que muestra en el mapa la estación más próxima."
+    },
+    "Ver estaciones" : {
+      "comment" : "Inicio: botón del estado vacío de favoritas que abre la lista de estaciones."
+    },
     "Ver indicaciones" : {
 
     },
+    "Ver más" : {
+      "comment" : "Inicio: enlace de la cabecera de favoritas que abre la lista completa."
+    },
+    "Ver todas las estaciones favoritas" : {
+      "comment" : "Inicio: etiqueta de VoiceOver del enlace «Ver más» de la sección de favoritas."
+    },
+    "Verás tu estación más cercana y sus próximos trenes nada más abrir Rail." : {
+      "comment" : "Tarjeta de próximos trenes: explica para qué se pide el permiso de ubicación."
+    },
     "Ya han salido" : {
 
+    },
+    "menos de 1 min" : {
+      "comment" : "Tiempo de viaje cuando la estación está a menos de un minuto."
+    },
+    "programados" : {
+
+    },
+    "Última actualización: %@" : {
+      "comment" : "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas»."
     }
   },
   "version" : "1.0"

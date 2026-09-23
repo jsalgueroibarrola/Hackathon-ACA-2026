@@ -119,6 +119,7 @@
 
         private let fonts: [(String, Font)] = [
             ("largeTitle", .largeTitle), ("title", .title), ("title2", .title2),
+            ("title2Emphasized", .title2Emphasized),
             ("title3", .title3),
             ("headline", .headline), ("body", .body),
             ("bodyEmphasized", .bodyEmphasized),
@@ -267,6 +268,29 @@
                                 cornerRadius: Radius.lg,
                                 style: .continuous
                             )
+                        )
+                    }
+                    section("Ilustraciones") {
+                        TrainIllustration()
+                            .frame(height: 53)
+                            .padding(Spacing.md)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .background(
+                                .bgSecondary,
+                                in: .rect(
+                                    cornerRadius: Radius.lg,
+                                    style: .continuous
+                                )
+                            )
+                        ZStack(alignment: .topLeading) {
+                            HomeHeroImage()
+                            RailLogo()
+                                .frame(height: Size.touchMin)
+                                .padding(Spacing.md)
+                        }
+                        .frame(height: 160)
+                        .clipShape(
+                            .rect(cornerRadius: Radius.lg, style: .continuous)
                         )
                     }
                 }

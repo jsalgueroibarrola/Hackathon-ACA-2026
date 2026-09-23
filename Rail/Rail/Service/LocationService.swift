@@ -65,13 +65,19 @@ final class LocationServiceImpl: LocationService {
         updates = Task {
             defer { continuation.finish() }
             var reported = authorization
+            var isAvailable = true
             for try await update in CLLocationUpdate.liveUpdates() {
                 let current = update.authorization ?? authorization
                 if current != reported {
                     reported = current
                     continuation.yield(.authorization(current))
                 }
+                if update.locationUnavailable, isAvailable {
+                    isAvailable = false
+                    continuation.yield(.unavailable)
+                }
                 if let location = update.location {
+                    isAvailable = true
                     continuation.yield(.reading(UserLocation(location)))
                 }
             }

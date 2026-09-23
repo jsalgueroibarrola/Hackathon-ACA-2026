@@ -48,5 +48,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: TransitNetwork.self, inMemory: true)
+        .modelContainer(for: RailSchema.models, inMemory: true)
 }

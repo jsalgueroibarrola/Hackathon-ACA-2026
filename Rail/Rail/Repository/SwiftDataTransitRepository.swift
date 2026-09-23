@@ -1,15 +1,8 @@
-//
-//  SwiftDataRepository.swift
-//  Rail
-//
-//  Created by jakuru on 19/09/2026.
-//
-
 import Foundation
 import SwiftData
 
 @ModelActor
-actor SwiftDataRepository: Repository {
+actor SwiftDataTransitRepository: TransitRepository {
 
     private static let tripBatchSize = 500
 
@@ -76,16 +69,16 @@ actor SwiftDataRepository: Repository {
         fetchedAt: Date
     ) async throws {
         guard let network = try modelContext.first(TransitNetwork.self) else {
-            throw RepositoryError.missingNetwork
+            throw TransitRepositoryError.missingNetwork
         }
 
         let calendar = network.calendar
 
         guard let startDay = calendar.serviceDay(from: dto.from) else {
-            throw RepositoryError.invalidDay(dto.from)
+            throw TransitRepositoryError.invalidDay(dto.from)
         }
         guard let endDay = calendar.serviceDay(from: dto.to) else {
-            throw RepositoryError.invalidDay(dto.to)
+            throw TransitRepositoryError.invalidDay(dto.to)
         }
 
         try discardTimetable()
