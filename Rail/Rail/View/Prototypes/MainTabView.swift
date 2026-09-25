@@ -23,11 +23,16 @@ struct MainTabView: View {
 
     @State private var selectedTab: AppTab = .home
     @State private var mapSelection: String?
+    @State private var homePath: [HomeRoute] = []
 
     var body: some View {
         TabView(selection: $selectedTab) {
             Tab("Inicio", systemImage: "house", value: .home) {
-                HomeView(onShowMap: showOnMap, onShowStations: showStations)
+                HomeView(
+                    path: $homePath,
+                    onShowMap: showOnMap,
+                    onShowStations: showStations
+                )
             }
 
             Tab("Líneas", systemImage: "tram", value: .lines) {
@@ -51,6 +56,16 @@ struct MainTabView: View {
             guard scenePhase == .active else { return }
             await location.observe()
         }
+        .onOpenURL { url in
+            if let stationID = RailWidgetLink.stationID(from: url) {
+                showStation(stationID)
+            }
+        }
+    }
+
+    private func showStation(_ stationID: String) {
+        selectedTab = .home
+        homePath = [.station(id: stationID)]
     }
 
     private func showOnMap(_ stationID: String) {

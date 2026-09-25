@@ -6,14 +6,104 @@
 	objectVersion = 110;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		43CCC9D93064F14200F09637 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CCC9D83064F14200F09637 /* WidgetKit.framework */; };
+		43CCC9DB3064F14200F09637 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CCC9DA3064F14200F09637 /* SwiftUI.framework */; };
+		43CCC9E83064F14300F09637 /* RailWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 43CCC9D63064F14200F09637 /* RailWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		43CCC9E63064F14300F09637 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43A0FC71305EE86100EB7FD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43CCC9D53064F14200F09637;
+			remoteInfo = RailWidgetsExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		43CCC9ED3064F14300F09637 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "";
+			dstSubfolder = PlugIns;
+			files = (
+				43CCC9E83064F14300F09637 /* RailWidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		43A0FC79305EE86200EB7FD9 /* Rail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rail.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		43CCC9D63064F14200F09637 /* RailWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RailWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		43CCC9D83064F14200F09637 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		43CCC9DA3064F14200F09637 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		43CCC9EE3064F18300F09637 /* RailWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RailWidgetsExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		43CCC9E93064F14300F09637 /* Exceptions for "RailWidgets" folder in "RailWidgetsExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 43CCC9D53064F14200F09637 /* RailWidgetsExtension */;
+		};
+		43CCC9F03064F1E000F09637 /* Exceptions for "Rail" folder in "RailWidgetsExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/RailSchema.swift,
+				App/RailStore.swift,
+				App/RailWidgetLink.swift,
+				Assets.xcassets,
+				DesignSystem/Border.swift,
+				DesignSystem/Elevation.swift,
+				DesignSystem/LineTint.swift,
+				DesignSystem/Radius.swift,
+				DesignSystem/Size.swift,
+				DesignSystem/Spacing.swift,
+				DesignSystem/Typography.swift,
+				Localizable.xcstrings,
+				"Model/Calendar+ServiceDay.swift",
+				Model/EncodedPolyline.swift,
+				Model/FavoriteStation.swift,
+				Model/Line.swift,
+				Model/LineStop.swift,
+				Model/LocalDataState.swift,
+				Model/RouteShapeCache.swift,
+				Model/SavedLocation.swift,
+				Model/SavedStation.swift,
+				Model/Station.swift,
+				Model/Timetable.swift,
+				Model/TransitNetwork.swift,
+				Model/TravelEstimate.swift,
+				Model/TravelRoute.swift,
+				Model/Trip.swift,
+				Model/UserLocation.swift,
+				View/Components/Atoms/LineBadge.swift,
+				"View/Components/Color+Hex.swift",
+				View/Presentation/StationSchedule.swift,
+			);
+			target = 43CCC9D53064F14200F09637 /* RailWidgetsExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		43A0FC7B305EE86200EB7FD9 /* Rail */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				43CCC9F03064F1E000F09637 /* Exceptions for "Rail" folder in "RailWidgetsExtension" target */,
+			);
 			path = Rail;
+			sourceTree = "<group>";
+		};
+		43CCC9DC3064F14200F09637 /* RailWidgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				43CCC9E93064F14300F09637 /* Exceptions for "RailWidgets" folder in "RailWidgetsExtension" target */,
+			);
+			path = RailWidgets;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -24,13 +114,23 @@
 			files = (
 			);
 		};
+		43CCC9D33064F14200F09637 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				43CCC9DB3064F14200F09637 /* SwiftUI.framework in Frameworks */,
+				43CCC9D93064F14200F09637 /* WidgetKit.framework in Frameworks */,
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		43A0FC70305EE86100EB7FD9 = {
 			isa = PBXGroup;
 			children = (
+				43CCC9EE3064F18300F09637 /* RailWidgetsExtension.entitlements */,
 				43A0FC7B305EE86200EB7FD9 /* Rail */,
+				43CCC9DC3064F14200F09637 /* RailWidgets */,
+				43CCC9D73064F14200F09637 /* Frameworks */,
 				43A0FC7A305EE86200EB7FD9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,8 +139,18 @@
 			isa = PBXGroup;
 			children = (
 				43A0FC79305EE86200EB7FD9 /* Rail.app */,
+				43CCC9D63064F14200F09637 /* RailWidgetsExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		43CCC9D73064F14200F09637 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43CCC9D83064F14200F09637 /* WidgetKit.framework */,
+				43CCC9DA3064F14200F09637 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -53,8 +163,12 @@
 				43A0FC75305EE86200EB7FD9 /* Sources */,
 				43A0FC76305EE86200EB7FD9 /* Frameworks */,
 				43A0FC77305EE86200EB7FD9 /* Resources */,
+				43CCC9ED3064F14300F09637 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
+			);
+			dependencies = (
+				43CCC9E73064F14300F09637 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				43A0FC7B305EE86200EB7FD9 /* Rail */,
@@ -63,6 +177,24 @@
 			productName = Rail;
 			productReference = 43A0FC79305EE86200EB7FD9 /* Rail.app */;
 			productType = "com.apple.product-type.application";
+		};
+		43CCC9D53064F14200F09637 /* RailWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43CCC9EA3064F14300F09637 /* Build configuration list for PBXNativeTarget "RailWidgetsExtension" */;
+			buildPhases = (
+				43CCC9D23064F14200F09637 /* Sources */,
+				43CCC9D33064F14200F09637 /* Frameworks */,
+				43CCC9D43064F14200F09637 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				43CCC9DC3064F14200F09637 /* RailWidgets */,
+			);
+			name = RailWidgetsExtension;
+			productName = RailWidgetsExtension;
+			productReference = 43CCC9D63064F14200F09637 /* RailWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -75,6 +207,9 @@
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					43A0FC78305EE86200EB7FD9 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					43CCC9D53064F14200F09637 = {
 						CreatedOnToolsVersion = 27.0;
 					};
 				};
@@ -94,12 +229,18 @@
 			projectRoot = "";
 			targets = (
 				43A0FC78305EE86200EB7FD9 /* Rail */,
+				43CCC9D53064F14200F09637 /* RailWidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		43A0FC77305EE86200EB7FD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		43CCC9D43064F14200F09637 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -112,7 +253,20 @@
 			files = (
 			);
 		};
+		43CCC9D23064F14200F09637 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		43CCC9E73064F14300F09637 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43CCC9D53064F14200F09637 /* RailWidgetsExtension */;
+			targetProxy = 43CCC9E63064F14300F09637 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		43A0FC84305EE86200EB7FD9 /* Debug configuration for PBXProject "Rail" */ = {
@@ -241,6 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rail/Rail.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2TV9M762BP;
@@ -261,6 +416,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JadeHorizonStudio.Rail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
@@ -276,6 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rail/Rail.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2TV9M762BP;
@@ -296,9 +453,74 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JadeHorizonStudio.Rail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		43CCC9EB3064F14300F09637 /* Debug configuration for PBXNativeTarget "RailWidgetsExtension" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RailWidgetsExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2TV9M762BP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RailWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RailWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadeHorizonStudio.Rail.RailWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		43CCC9EC3064F14300F09637 /* Release configuration for PBXNativeTarget "RailWidgetsExtension" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RailWidgetsExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2TV9M762BP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RailWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RailWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadeHorizonStudio.Rail.RailWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
@@ -322,6 +544,14 @@
 			buildConfigurations = (
 				43A0FC87305EE86200EB7FD9 /* Debug configuration for PBXNativeTarget "Rail" */,
 				43A0FC88305EE86200EB7FD9 /* Release configuration for PBXNativeTarget "Rail" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		43CCC9EA3064F14300F09637 /* Build configuration list for PBXNativeTarget "RailWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43CCC9EB3064F14300F09637 /* Debug configuration for PBXNativeTarget "RailWidgetsExtension" */,
+				43CCC9EC3064F14300F09637 /* Release configuration for PBXNativeTarget "RailWidgetsExtension" */,
 			);
 			defaultConfigurationName = Release;
 		};

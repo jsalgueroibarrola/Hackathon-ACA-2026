@@ -32,6 +32,7 @@ final class FavoritesViewModel {
     private func attempt(_ operation: () throws -> Void) {
         do {
             try operation()
+            WidgetReloader.reloadNextTrains()
         } catch {
             Logger.userStations.error(
                 "Favorites update failed: \(String(describing: error), privacy: .public)"

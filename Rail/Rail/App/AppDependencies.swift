@@ -17,16 +17,12 @@ struct AppDependencies {
     let favoritesViewModel: FavoritesViewModel
 
     init() {
-        let schema = Schema(RailSchema.models)
-        let configuration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false
-        )
+        let configuration = RailStore.configuration()
 
         let container: ModelContainer
         do {
             container = try ModelContainer(
-                for: schema,
+                for: RailStore.schema,
                 configurations: [configuration]
             )
         } catch {

@@ -61,7 +61,9 @@ final class AppViewModel {
         phase = blocking ? .loading : .ready(.refreshing)
 
         do {
-            try await syncService.sync(now: now)
+            if try await syncService.sync(now: now) == .updated {
+                WidgetReloader.reloadNextTrains()
+            }
         } catch is CancellationError {
             guard !Task.isCancelled else { return }
             phase = blocking

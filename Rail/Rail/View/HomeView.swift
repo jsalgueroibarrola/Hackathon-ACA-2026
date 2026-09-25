@@ -2,10 +2,10 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
+    @Binding var path: [HomeRoute]
     let onShowMap: (String) -> Void
     let onShowStations: () -> Void
 
-    @State private var path: [HomeRoute] = []
     @State private var topInset: CGFloat = 0
 
     private static let heroClearance: CGFloat = 80
@@ -106,28 +106,33 @@ struct HomeView: View {
 
 #if DEBUG
     #Preview("Con favoritas", traits: .favoriteStationsSampleData) {
-        HomeView(onShowMap: { _ in }, onShowStations: {})
+        @Previewable @State var path: [HomeRoute] = []
+        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
             .environment(LocationViewModel.preview())
     }
 
     #Preview("Sin favoritas", traits: .nextTrainsSampleData) {
-        HomeView(onShowMap: { _ in }, onShowStations: {})
+        @Previewable @State var path: [HomeRoute] = []
+        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
             .environment(LocationViewModel.preview())
     }
 
     #Preview("Estación guardada", traits: .savedStationSampleData) {
-        HomeView(onShowMap: { _ in }, onShowStations: {})
+        @Previewable @State var path: [HomeRoute] = []
+        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
             .environment(LocationViewModel.preview(authorization: .denied))
     }
 
     #Preview("Modo oscuro", traits: .favoriteStationsSampleData) {
-        HomeView(onShowMap: { _ in }, onShowStations: {})
+        @Previewable @State var path: [HomeRoute] = []
+        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
             .environment(LocationViewModel.preview())
             .preferredColorScheme(.dark)
     }
 
     #Preview("Dynamic Type", traits: .favoriteStationsSampleData) {
-        HomeView(onShowMap: { _ in }, onShowStations: {})
+        @Previewable @State var path: [HomeRoute] = []
+        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
             .environment(LocationViewModel.preview())
             .dynamicTypeSize(.accessibility2)
     }
