@@ -15,6 +15,7 @@ struct AppDependencies {
     let viewModel: AppViewModel
     let locationViewModel: LocationViewModel
     let favoritesViewModel: FavoritesViewModel
+    let liveFeedService: any LiveFeedService
 
     init() {
         let configuration = RailStore.configuration()
@@ -34,10 +35,12 @@ struct AppDependencies {
             modelContainer: container
         )
 
+        let api = APIServiceImpl()
+
         modelContainer = container
         viewModel = AppViewModel(
             syncService: SyncServiceImpl(
-                api: APIServiceImpl(),
+                api: api,
                 repository: transit
             )
         )
@@ -46,5 +49,9 @@ struct AppDependencies {
             repository: userStations
         )
         favoritesViewModel = FavoritesViewModel(repository: userStations)
+        liveFeedService = LiveFeedServiceImpl(
+            api: api,
+            repository: SwiftDataLiveFeedRepository(modelContainer: container)
+        )
     }
 }

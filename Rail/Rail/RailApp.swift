@@ -20,5 +20,6 @@ struct RailApp: App {
         .environment(dependencies.viewModel)
         .environment(dependencies.locationViewModel)
         .environment(dependencies.favoritesViewModel)
+        .environment(\.liveFeeds, dependencies.liveFeedService)
     }
 }

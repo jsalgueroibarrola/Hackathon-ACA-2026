@@ -13,6 +13,12 @@ protocol APIService: Sendable {
     func getTimetable(etag: String?) async -> APIResponse<
         ETagged<TimetableResponseDTO>
     >
+    func getAlerts(etag: String?) async -> APIResponse<
+        ETagged<AlertsResponseDTO>
+    >
+    func getRealtime(etag: String?) async -> APIResponse<
+        ETagged<RealtimeResponseDTO>
+    >
 }
 
 struct APIServiceImpl: APIService, NetworkInteractor {
@@ -20,27 +26,35 @@ struct APIServiceImpl: APIService, NetworkInteractor {
     func getNetwork(etag: String?) async -> APIResponse<
         ETagged<NetworkResponseDTO>
     > {
-        await .call {
-            let request = URLRequest.request(url: .network, etag: etag)
-            return try await getJSON(
-                request: request,
-                type: NetworkResponseDTO.self
-            )
-        }
+        await get(.network, etag: etag)
     }
 
     func getTimetable(etag: String?) async -> APIResponse<
         ETagged<TimetableResponseDTO>
     > {
+        await get(.timetable, etag: etag)
+    }
+
+    func getAlerts(etag: String?) async -> APIResponse<
+        ETagged<AlertsResponseDTO>
+    > {
+        await get(.alerts, etag: etag)
+    }
+
+    func getRealtime(etag: String?) async -> APIResponse<
+        ETagged<RealtimeResponseDTO>
+    > {
+        await get(.realtime, etag: etag)
+    }
+
+    private func get<JSON: Decodable & Sendable>(
+        _ url: URL,
+        etag: String?
+    ) async -> APIResponse<ETagged<JSON>> {
         await .call {
-            let request = URLRequest.request(
-                url: .timetable,
-                etag: etag,
-                timeout: 60
-            )
-            return try await getJSON(
-                request: request,
-                type: TimetableResponseDTO.self
+            try await getJSON(
+                request: .request(url: url, etag: etag),
+                type: JSON.self
             )
         }
     }

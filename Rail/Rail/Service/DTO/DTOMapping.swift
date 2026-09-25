@@ -77,3 +77,78 @@ extension Trip {
         )
     }
 }
+
+extension ServiceAlertFeed {
+    convenience init(
+        dto: AlertsResponseDTO,
+        etag: String?,
+        freshness: CacheFreshness,
+        fetchedAt: Date,
+        fallbackInterval: Duration
+    ) {
+        self.init(
+            etag: etag,
+            feedTimestamp: dto.ts.map(Date.init(unixSeconds:)),
+            fetchedAt: fetchedAt,
+            expiresAt: freshness.expiry(from: fetchedAt, fallback: fallbackInterval),
+            isStale: freshness.isStale
+        )
+    }
+}
+
+extension ServiceAlert {
+    convenience init(dto: ServiceAlertDTO, position: Int) {
+        self.init(
+            id: dto.id,
+            kind: AlertKind(rawValue: dto.kind.rawValue) ?? .other,
+            lineIDs: dto.lines,
+            since: dto.since.map(Date.init(unixSeconds:)),
+            until: dto.until.map(Date.init(unixSeconds:)),
+            text: dto.text,
+            position: position
+        )
+    }
+}
+
+extension RealtimeFeed {
+    convenience init(
+        dto: RealtimeResponseDTO,
+        etag: String?,
+        freshness: CacheFreshness,
+        fetchedAt: Date,
+        fallbackInterval: Duration
+    ) {
+        self.init(
+            etag: etag,
+            feedTimestamp: dto.ts.map(Date.init(unixSeconds:)),
+            isPartial: dto.partial ?? false,
+            fetchedAt: fetchedAt,
+            expiresAt: freshness.expiry(from: fetchedAt, fallback: fallbackInterval),
+            isStale: freshness.isStale
+        )
+    }
+}
+
+extension LiveTrain {
+    convenience init(dto: LiveTrainDTO, calendar: Calendar) {
+        self.init(
+            lineID: dto.line,
+            train: dto.train,
+            serviceDay: dto.serviceDay.flatMap(calendar.serviceDay(from:)),
+            delaySeconds: dto.delay,
+            status: LiveStatus(rawValue: dto.status.rawValue) ?? .unknown,
+            stopID: dto.stop,
+            nextStopID: dto.next,
+            latitude: dto.lat,
+            longitude: dto.lon,
+            platform: dto.platform,
+            sampledAt: dto.at.map(Date.init(unixSeconds:))
+        )
+    }
+}
+
+private extension Date {
+    init(unixSeconds: Int) {
+        self.init(timeIntervalSince1970: TimeInterval(unixSeconds))
+    }
+}

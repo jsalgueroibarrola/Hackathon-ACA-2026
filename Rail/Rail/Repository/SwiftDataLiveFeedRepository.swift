@@ -1,0 +1,99 @@
+import Foundation
+import SwiftData
+
+@ModelActor
+actor SwiftDataLiveFeedRepository: LiveFeedRepository {
+
+    func state(of feed: LiveFeed) async throws -> LiveFeedState {
+        switch feed {
+        case .alerts:
+            try modelContext.first(ServiceAlertFeed.self)
+                .map { LiveFeedState(etag: $0.etag, expiresAt: $0.expiresAt) }
+                ?? .empty
+        case .realtime:
+            try modelContext.first(RealtimeFeed.self)
+                .map { LiveFeedState(etag: $0.etag, expiresAt: $0.expiresAt) }
+                ?? .empty
+        }
+    }
+
+    func replaceAlerts(
+        _ response: ETagged<AlertsResponseDTO>,
+        fetchedAt: Date
+    ) async throws {
+        try modelContext.commit {
+            try modelContext.deleteAll(ServiceAlert.self)
+            try modelContext.deleteAll(ServiceAlertFeed.self)
+
+            let feed = ServiceAlertFeed(
+                dto: response.value,
+                etag: response.etag,
+                freshness: response.freshness,
+                fetchedAt: fetchedAt,
+                fallbackInterval: LiveFeed.alerts.fallbackInterval
+            )
+            modelContext.insert(feed)
+
+            let alerts = response.value.alerts.enumerated().map { position, dto in
+                ServiceAlert(dto: dto, position: position)
+            }
+            alerts.forEach { $0.feed = feed }
+            modelContext.insertAll(alerts)
+        }
+    }
+
+    func replaceRealtime(
+        _ response: ETagged<RealtimeResponseDTO>,
+        fetchedAt: Date
+    ) async throws {
+        guard let network = try modelContext.first(TransitNetwork.self) else {
+            throw TransitRepositoryError.missingNetwork
+        }
+        let calendar = network.calendar
+
+        try modelContext.commit {
+            try modelContext.deleteAll(LiveTrain.self)
+            try modelContext.deleteAll(RealtimeFeed.self)
+
+            let feed = RealtimeFeed(
+                dto: response.value,
+                etag: response.etag,
+                freshness: response.freshness,
+                fetchedAt: fetchedAt,
+                fallbackInterval: LiveFeed.realtime.fallbackInterval
+            )
+            modelContext.insert(feed)
+
+            let trains = response.value.trains.map {
+                LiveTrain(dto: $0, calendar: calendar)
+            }
+            trains.forEach { $0.feed = feed }
+            modelContext.insertAll(trains)
+        }
+    }
+
+    func markRevalidated(
+        _ feed: LiveFeed,
+        freshness: CacheFreshness,
+        at date: Date
+    ) async throws {
+        let expiresAt = freshness.expiry(from: date, fallback: feed.fallbackInterval)
+
+        try modelContext.commit {
+            switch feed {
+            case .alerts:
+                if let stored = try modelContext.first(ServiceAlertFeed.self) {
+                    stored.fetchedAt = date
+                    stored.expiresAt = expiresAt
+                    stored.isStale = freshness.isStale
+                }
+            case .realtime:
+                if let stored = try modelContext.first(RealtimeFeed.self) {
+                    stored.fetchedAt = date
+                    stored.expiresAt = expiresAt
+                    stored.isStale = freshness.isStale
+                }
+            }
+        }
+    }
+}

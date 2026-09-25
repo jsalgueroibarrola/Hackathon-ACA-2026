@@ -129,6 +129,14 @@ final class SyncServiceImpl: SyncService {
             )
         }
 
+        if network == nil || timetable == nil {
+            try await repository.markRevalidated(
+                network: network == nil,
+                timetable: timetable == nil,
+                fetchedAt: now
+            )
+        }
+
         return network == nil && timetable == nil ? .unchanged : .updated
     }
 }

@@ -7,6 +7,7 @@ struct HomeView: View {
     let onShowStations: () -> Void
 
     @State private var topInset: CGFloat = 0
+    @State private var isShowingAlerts = false
 
     private static let heroClearance: CGFloat = 80
     private static let heroOverlap: CGFloat = 76
@@ -32,6 +33,9 @@ struct HomeView: View {
                 for: HomeRoute.self,
                 destination: destination
             )
+            .sheet(isPresented: $isShowingAlerts) {
+                ServiceAlertsSheet()
+            }
         }
     }
 
@@ -71,7 +75,9 @@ struct HomeView: View {
         .sharedBackgroundVisibility(.hidden)
 
         ToolbarItemGroup(placement: .topBarTrailing) {
-            Button(Self.alertsLabel, systemImage: "bell.fill") {}
+            Button(ServiceAlertsSheet.title, systemImage: "bell.fill") {
+                isShowingAlerts = true
+            }
             Button(Self.settingsLabel, systemImage: "gearshape.fill") {}
         }
     }
@@ -89,12 +95,6 @@ struct HomeView: View {
     private static let title = LocalizedStringResource(
         "Inicio",
         comment: "Título de la pestaña y de la pantalla de inicio."
-    )
-
-    private static let alertsLabel = LocalizedStringResource(
-        "Avisos",
-        comment:
-            "Inicio: botón de la barra superior que abrirá los avisos; VoiceOver lo lee."
     )
 
     private static let settingsLabel = LocalizedStringResource(

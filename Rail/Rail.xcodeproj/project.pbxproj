@@ -70,10 +70,14 @@
 				Model/FavoriteStation.swift,
 				Model/Line.swift,
 				Model/LineStop.swift,
+				Model/LiveTrain.swift,
 				Model/LocalDataState.swift,
+				Model/RealtimeFeed.swift,
 				Model/RouteShapeCache.swift,
 				Model/SavedLocation.swift,
 				Model/SavedStation.swift,
+				Model/ServiceAlert.swift,
+				Model/ServiceAlertFeed.swift,
 				Model/Station.swift,
 				Model/Timetable.swift,
 				Model/TransitNetwork.swift,
@@ -401,6 +405,7 @@
 				DEVELOPMENT_TEAM = 2TV9M762BP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Rail-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Rail;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Rail usa tu ubicación para situarte en el mapa, mostrarte las estaciones más cercanas y calcular a qué distancia estás de cada una.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -416,6 +421,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JadeHorizonStudio.Rail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RAIL_API_BASE_URL = "https://dz49cmp4ihid8.cloudfront.net";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -438,6 +444,7 @@
 				DEVELOPMENT_TEAM = 2TV9M762BP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Rail-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Rail;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Rail usa tu ubicación para situarte en el mapa, mostrarte las estaciones más cercanas y calcular a qué distancia estás de cada una.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -453,6 +460,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JadeHorizonStudio.Rail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RAIL_API_BASE_URL = "https://dz49cmp4ihid8.cloudfront.net";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;

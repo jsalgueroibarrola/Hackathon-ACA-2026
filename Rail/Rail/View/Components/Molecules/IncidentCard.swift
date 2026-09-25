@@ -2,9 +2,10 @@ import SwiftUI
 
 struct IncidentCard<Action: View>: View {
     private let severity: IncidentSeverity
+    private let label: LocalizedStringResource?
     private let title: String
     private let description: String?
-    private let time: String
+    private let time: String?
     private let lines: [LineMark]
     private let action: Action
 
@@ -12,13 +13,15 @@ struct IncidentCard<Action: View>: View {
 
     init(
         _ severity: IncidentSeverity,
+        label: LocalizedStringResource? = nil,
         title: String,
         description: String? = nil,
-        time: String,
+        time: String?,
         lines: [LineMark],
         @ViewBuilder action: () -> Action = { EmptyView() }
     ) {
         self.severity = severity
+        self.label = label
         self.title = title
         self.description = description
         self.time = time
@@ -45,25 +48,28 @@ struct IncidentCard<Action: View>: View {
     private var header: some View {
         if dynamicTypeSize.isAccessibilitySize {
             VStack(alignment: .leading, spacing: Spacing.xs) {
-                SeverityBadge(severity)
+                SeverityBadge(severity, label: label)
                 timeText
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         } else {
             HStack(spacing: Spacing.sm) {
-                SeverityBadge(severity)
+                SeverityBadge(severity, label: label)
                 Spacer(minLength: Spacing.sm)
                 timeText
             }
         }
     }
 
+    @ViewBuilder
     private var timeText: some View {
-        Text(verbatim: time)
-            .font(.caption)
-            .foregroundStyle(.textTertiary)
-            .lineLimit(1)
-            .fixedSize()
+        if let time {
+            Text(verbatim: time)
+                .font(.caption)
+                .foregroundStyle(.textTertiary)
+                .lineLimit(1)
+                .fixedSize()
+        }
     }
 
     private var texts: some View {

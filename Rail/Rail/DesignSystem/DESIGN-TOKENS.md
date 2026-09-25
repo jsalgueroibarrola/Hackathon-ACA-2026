@@ -34,6 +34,7 @@ Los tokens de este directorio y los color sets de `Assets.xcassets/Colors` se ma
 | Mockups · 01 Inicio · Favoritos vacíos | `2:53` | Molécula de estado vacío (`220:3525`) | `View/Components/Molecules/EmptyStateCard.swift` |
 | Mockups · 01 Inicio · Imagen de fondo | `2:53` | Foto de cabecera (`60:3294`), 393×262 con relleno *Fill*; el original mide 786×442 | `Assets.xcassets/Photos/HomeHero.imageset`, `View/Components/Atoms/HomeHeroImage.swift` |
 | Mockups · 01 Inicio · Logo | `2:53` | Logo de la barra superior (`143:5493`), 44×44 | `Assets.xcassets/Illustrations/RailLogo.imageset`, `View/Components/Atoms/RailLogo.swift` |
+| Mockups · Notificaciones | — | Hoja de avisos en español (`389:4606`) y para otros idiomas, con banda de idioma y «Traducir» (`207:11115`) | `View/ServiceAlertsSheet.swift`, `View/Components/Organisms/ServiceAlertsList.swift` |
 
 URL de cualquier nodo: `https://www.figma.com/design/WFoeo57elVOwmgKto1iwfq/?node-id=<id con guion>` (por ejemplo `node-id=30-2`).
 
@@ -177,10 +178,27 @@ La propiedad `Severity` de Figma (Info · Warning · Critical · Resolved) es en
 | `.resolved` | `checkmark.circle.fill` | `statusSuccess` | `statusSuccessBg` | `statusSuccessText` | Resuelto |
 
 - El icono va siempre en `tint` y el texto en `foreground`; no se mezclan.
-- `label` es la etiqueta corta por defecto: `SeverityBadge(.warning)` e `IncidentCard` la usan sin que haya que pasarla. Con `label:` se sustituye por una descripción propia y VoiceOver lee "gravedad, descripción".
+- `label` es la etiqueta corta por defecto: `SeverityBadge(.warning)` e `IncidentCard` la usan sin que haya que pasarla. Con `label:` se sustituye por una etiqueta propia y VoiceOver lee esa etiqueta, lo mismo que se ve. `IncidentCard(_:label:…)` la pasa al badge.
 - Las líneas afectadas se pasan como `[LineMark]` (`LineMark("C-1", color:)`), el mismo tipo que usa `StationRow`. El color lo envía la API (`Line.colorHex`), nunca un hex escrito a mano.
 - `AlertBanner` deriva su interacción de los cierres: `onTap` pinta el chevron y hace tocable la banda, `onDismiss` pinta la X (con área táctil de 44 pt). No hay props `Show chevron` / `Show close`.
 - `IncidentCard` recibe la acción como contenido (`IncidentCard(...) { Button("Ver detalles") {} }`) y le aplica ella misma `.rail(.borderless)` en `.small`.
+
+## Avisos
+
+La campana de Inicio abre `ServiceAlertsSheet`, una hoja *Large* con «Notificaciones» y el botón de cerrar del sistema (`Button(role: .close)`). Maquetas: en español (`389:4606`) y para otros idiomas (`207:11115`).
+
+- **Contenedor y contenido.** `ServiceAlertsSheet` lee `@Query` (`ServiceAlert`, `ServiceAlertFeed`, `Line` y `TransitNetwork`), sondea `liveFeeds.poll(.alerts)` mientras la hoja está abierta y la app en primer plano, y lleva la traducción. `ServiceAlertsList` solo pinta una `ServiceAlertsPhase` (`loading`, `unavailable`, `empty`, `content`). La fase, los items (`ServiceAlertItemBuilder`), la hora (`AlertTimestamp`) y la traducción (`AlertTranslation`) son lógica pura en `View/Presentation/`.
+- **La API no trae título.** El título de la tarjeta sale del tipo y el `text` de Renfe va entero como descripción:
+
+  | `kind` | Gravedad | Badge | Título |
+  |---|---|---|---|
+  | `notice` | `.warning` | Aviso | Aviso en la red |
+  | `info`, `other` | `.info` | Info | Información de la red |
+- **Hora.** Menos de 1 min, «Ahora»; menos de 24 h, relativa de Foundation («Hace 12 min», «Hace 3 h»); después, «Desde 21/09», con «/2025» si es de otro año. Día y mes siguen el orden del primer idioma preferido del dispositivo (`Locale.preferredLanguages[0]`, porque la app solo tiene `es.lproj`), siempre a dos cifras, y en la zona horaria de la red. El español de CLDR da «24/9» sin año; por eso el patrón sale de la plantilla del locale y se fuerza a dos cifras (`AlertTimestamp.twoDigitPattern`). Se recalcula cada minuto con `TimelineView(.everyMinute)`.
+- **Otros idiomas.** Renfe solo publica en español y la interfaz sigue en español. Si el primer idioma preferido no es español y Translation admite el par es→idioma (`AlertTranslationSupport.resolve()`), aparecen una `AlertBanner(.info)` sin chevron ni cierre y, en cada tarjeta, «Traducir» (`sparkles`) en `.rail(.borderless)` `.small`. Al tocarlo pasa a «Traduciendo…» (desactivado) y luego a «Ver original» (`arrow.uturn.backward`), con el texto traducido en la descripción. El título y el badge no se traducen, porque son textos de la interfaz.
+- **Traducción.** Se hace con `.translationTask(configuration)`. Cada ejecución traduce de una vez todos los avisos activos que faltan, con `clientIdentifier` = `ServiceAlert.id`, y guarda cada traducción junto a su texto de origen: si Renfe edita el aviso, la traducción deja de valer. Si falla (en el simulador, Translation dice `unsupported`), la tarjeta vuelve al original. La sesión no se guarda nunca, y el fichero importa `@preconcurrency import Translation` porque `TranslationSession` no es `Sendable`.
+- **Fondo `bgSecondary`**, no el blanco del *template* de hoja de Figma: las tarjetas llevan `Elevation/Card` y la regla las pone sobre `bgSecondary`.
+- Los badges de línea muestran el id de la API («C1») con el color de la API, como en el resto de la app.
 
 ## Botones
 
@@ -214,7 +232,7 @@ Los tres componentes de botón de Figma son `ButtonStyle` sobre un `Button` norm
 
 - **Foto a sangre** (`HomeHeroImage`). Va en el `.background(alignment: .top)` del contenido, con alto `topInset + 80 + 76` y desplazada `-topInset`. Así cubre la barra de estado y la de navegación y termina 76 pt dentro de la tarjeta de próximos trenes, que empieza a `topInset + 80`: en un iPhone 16 Pro, 262 y 186, como en Figma. `topInset` es `ScrollGeometry.contentInsets.top`. Al tirar hacia abajo se estira con `.visualEffect` (escala anclada abajo según `frame(in: .global).minY`; con `.scrollView` no crece). La capa *Blur* de Figma (`60:3460`) es el efecto de borde de scroll del sistema: no se imita.
 - **Alto visible** (`.fitsScrollViewport()`, en `ViewportFit.swift`). El contenido va dentro de un `Layout` de un solo hijo que le **propone** el alto visible pero reporta el alto **natural** que devuelva. Así Inicio ocupa exactamente una pantalla cuando cabe (sin scroll) y, cuando ni el mínimo de 3 favoritas cabe (ventana baja en iPad, iPhone en horizontal, tamaños de accesibilidad), el contenido crece y el `ScrollView` vuelve a desplazarse. Acotar con `.containerRelativeFrame(.vertical)` a secas no sirve: reporta siempre el alto del contenedor, así que el sobrante quedaba recortado e inalcanzable. El alto visible lo mide el propio modificador con una sonda `Color.clear.containerRelativeFrame(.vertical)` en el `background` (ya descuenta la barra de navegación y la de pestañas, y al ir en un `background` no afecta al layout); `ScrollGeometry.containerSize.height` da el mismo número. De `ScrollGeometry` solo se lee `contentInsets.top`, para la foto; nunca `contentOffset`, para no recalcular en cada frame.
-- **Barra superior.** A la izquierda, `RailLogo` de 44 pt con `.sharedBackgroundVisibility(.hidden)` (sin cristal); VoiceOver lo lee como la cabecera «Inicio», porque dentro de la barra la imagen no respeta `accessibilityHidden` y se leía «RailLogo». A la derecha, un `ToolbarItemGroup` con «Avisos» (`bell.fill`) y «Ajustes» (`gearshape.fill`), sin estilo: iOS 26 los agrupa en una cápsula de cristal. Todavía no hacen nada. El título «Inicio» se declara con `.navigationTitle` (lo usa el botón atrás) y se oculta con `.toolbarTitleDisplayMode(.inline)` más `.toolbar(removing: .title)`; sin el modo inline, el título grande sigue apareciendo.
+- **Barra superior.** A la izquierda, `RailLogo` de 44 pt con `.sharedBackgroundVisibility(.hidden)` (sin cristal); VoiceOver lo lee como la cabecera «Inicio», porque dentro de la barra la imagen no respeta `accessibilityHidden` y se leía «RailLogo». A la derecha, un `ToolbarItemGroup` con «Notificaciones» (`bell.fill`), que abre `ServiceAlertsSheet` en una hoja (ver *Avisos*), y «Ajustes» (`gearshape.fill`), que todavía no hace nada. Van sin estilo: iOS 26 los agrupa en una cápsula de cristal. El título «Inicio» se declara con `.navigationTitle` (lo usa el botón atrás) y se oculta con `.toolbarTitleDisplayMode(.inline)` más `.toolbar(removing: .title)`; sin el modo inline, el título grande sigue apareciendo.
 - **Ancho.** El contenido va centrado con un máximo de 640 pt (iPad, iPhone en horizontal); la foto sigue a sangre.
 - **Navegación** por `HomeRoute`: `.favorites` abre `FavoriteStationsView` (borrar deslizando, `EditButton` para reordenar, `ContentUnavailableView` si no hay ninguna) y `.station(id:)` abre `StationDestination`, que busca la estación con `@Query` y muestra «Estación no disponible» si una reimportación la ha borrado.
 - **«Ver estaciones»**, en el estado vacío de favoritas, no navega dentro de Inicio: `MainTabView` cambia a la pestaña Estaciones.

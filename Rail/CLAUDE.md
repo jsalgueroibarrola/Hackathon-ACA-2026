@@ -81,6 +81,7 @@ Tokens de Figma (`DS · Color`, `Tipografía`, `Espaciado y radios`, `Elevación
 - Ilustraciones multicolor: imageset con *Preserve Vector Data* en `Assets.xcassets/Illustrations/`, envuelto en un átomo decorativo como `TrainIllustration` (ver sección *Ilustraciones* de `DESIGN-TOKENS.md`).
 - Tarjeta de inicio: `NextTrainsCard` solo pinta un `NextTrainsCardState`; la lógica es pura en `NextTrainsCardStateBuilder` y `NextTrainsSection` la conecta con los datos (ver sección *Tarjeta de próximos trenes* de `DESIGN-TOKENS.md`).
 - Inicio: `HomeView` compone `NextTrainsSection` y `FavoriteStationsSection` en un `NavigationStack` cuyo camino es `[HomeRoute]` (`.favorites` → `FavoriteStationsView`, `.station(id:)` → `StationDestination`); ver sección *Inicio* de `DESIGN-TOKENS.md`.
+- Avisos: la campana de Inicio abre `ServiceAlertsSheet` (contenedor: `@Query`, sondeo de `.alerts` mientras está abierta, Translation) y `ServiceAlertsList` solo pinta; la lógica es pura en `ServiceAlertItemBuilder`, `AlertTimestamp` y `AlertTranslation` (ver sección *Avisos* de `DESIGN-TOKENS.md`).
 - `TokenGallery.swift` es un preview (solo `DEBUG`) para comparar con Figma; añade ahí cualquier token nuevo.
 
 ### Map

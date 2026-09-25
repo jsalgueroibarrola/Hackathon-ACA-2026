@@ -1,6 +1,7 @@
 #if DEBUG
 import SwiftData
 import SwiftUI
+import Translation
 
 enum SampleData {
     static let favoriteStationIDs = [
@@ -197,6 +198,108 @@ enum SavedStationScenario: SampleDataScenario {
     }
 }
 
+enum ServiceAlertsScenario: SampleDataScenario {
+    static func populate(_ context: ModelContext) {
+        let feed = ServiceAlertFeed(
+            etag: nil,
+            feedTimestamp: .now,
+            fetchedAt: .now,
+            expiresAt: .now.addingTimeInterval(3_600),
+            isStale: false
+        )
+        context.insert(feed)
+        let alerts = SampleData.alerts()
+        alerts.forEach { $0.feed = feed }
+        context.insertAll(alerts)
+    }
+}
+
+enum EmptyServiceAlertsScenario: SampleDataScenario {
+    static func populate(_ context: ModelContext) {
+        context.insert(
+            ServiceAlertFeed(
+                etag: nil,
+                feedTimestamp: .now,
+                fetchedAt: .now,
+                expiresAt: .now.addingTimeInterval(3_600),
+                isStale: false
+            )
+        )
+    }
+}
+
+extension SampleData {
+    static func alerts(now: Date = .now) -> [ServiceAlert] {
+        [
+            ServiceAlert(
+                id: "AVISO_514711",
+                kind: .notice,
+                lineIDs: ["C1", "C2"],
+                since: now.addingTimeInterval(-12 * 60),
+                until: nil,
+                text:
+                    "Renfe Cercanías Málaga informa que la estación de Victoria kent no es accesible temporalmente para PMR por avería del ascensor. Rogamos disculpen las molestias.",
+                position: 0
+            ),
+            ServiceAlert(
+                id: "INFO_465103",
+                kind: .info,
+                lineIDs: ["C1"],
+                since: now.addingTimeInterval(-3 * 86_400),
+                until: nil,
+                text:
+                    "Renfe Cercanías Málaga informa que la estación de Plaza Mayor no es accesible temporalmente para PMR. Rogamos disculpen las molestias",
+                position: 1
+            ),
+            ServiceAlert(
+                id: "INFO_465080",
+                kind: .info,
+                lineIDs: ["C1", "C2"],
+                since: Calendar.current.date(byAdding: .year, value: -1, to: now),
+                until: nil,
+                text:
+                    "Renfe Cercanías Málaga informa que andén 2 dirección Málaga, de la estación de Los Álamos, no es accesible temporalmente para PMR. Rogamos disculpen las molestias.",
+                position: 2
+            ),
+        ]
+    }
+}
+
+extension ServiceAlertItem {
+    static let samples = ServiceAlertItemBuilder.items(
+        alerts: SampleData.alerts(),
+        lines: LineSample.all.map {
+            Line(id: $0.id, name: $0.name, colorHex: $0.colorHex, shape: $0.shape)
+        },
+        now: .now,
+        calendar: .autoupdatingCurrent,
+        locale: .autoupdatingCurrent,
+        dateLocale: .autoupdatingCurrent
+    )
+}
+
+extension AlertTranslation {
+    static var preview: Self {
+        let items = ServiceAlertItem.samples
+        var translation = AlertTranslation()
+        items.prefix(2).forEach { translation.toggle($0.id) }
+        translation.store(
+            items.prefix(1).map {
+                TranslationSession.Response(
+                    sourceLanguage: AlertTranslationSupport.source,
+                    targetLanguage: Locale.Language(identifier: "en"),
+                    sourceText: $0.text,
+                    targetText:
+                        "Renfe Cercanías Málaga reports that Victoria Kent station is temporarily not accessible for people with reduced mobility due to a lift breakdown. We apologise for any inconvenience.",
+                    clientIdentifier: $0.id
+                )
+            },
+            for: items
+        )
+        return translation
+    }
+}
+
 struct SampleDataContext {
     let container: ModelContainer
     let favorites: FavoritesViewModel
@@ -240,6 +343,14 @@ extension PreviewTrait where T == Preview.ViewTraits {
 
     static var savedStationSampleData: Self {
         .modifier(SampleDataPreview<SavedStationScenario>())
+    }
+
+    static var serviceAlertsSampleData: Self {
+        .modifier(SampleDataPreview<ServiceAlertsScenario>())
+    }
+
+    static var noServiceAlertsSampleData: Self {
+        .modifier(SampleDataPreview<EmptyServiceAlertsScenario>())
     }
 }
 #endif

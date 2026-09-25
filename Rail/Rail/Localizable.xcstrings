@@ -25,17 +25,6 @@
         }
       }
     },
-    "%@, %@" : {
-      "comment" : "Lectura de VoiceOver de un SeverityBadge: gravedad seguida de la descripción de la incidencia",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@, %2$@"
-          }
-        }
-      }
-    },
     "%@, %@, %@, %@" : {
       "comment" : "Lectura de VoiceOver de una fila de incidencia: gravedad, título, detalle y líneas afectadas",
       "localizations" : {
@@ -109,6 +98,9 @@
     "Aeropuerto" : {
       "comment" : "Tipo de conexión disponible en una estación: el aeropuerto."
     },
+    "Ahora" : {
+      "comment" : "Notificaciones: hora de un aviso publicado hace menos de un minuto. Va en la esquina de la tarjeta, donde en otros avisos pone «Hace 12 min»."
+    },
     "Ajustes" : {
       "comment" : "Inicio: botón de la barra superior que abrirá los ajustes; VoiceOver lo lee."
     },
@@ -139,8 +131,8 @@
     "Aviso" : {
       "comment" : "Gravedad de una incidencia: aviso informativo"
     },
-    "Avisos" : {
-      "comment" : "Inicio: botón de la barra superior que abrirá los avisos; VoiceOver lo lee."
+    "Aviso en la red" : {
+      "comment" : "Notificaciones: título de la tarjeta de un aviso de Renfe sobre una incidencia en curso. Debajo va el texto del aviso."
     },
     "Buscando tu ubicación…" : {
       "comment" : "Tarjeta de próximos trenes: título mientras se obtiene la ubicación del usuario."
@@ -169,6 +161,9 @@
     "Cómo llegar" : {
 
     },
+    "Comprueba la conexión y vuelve a intentarlo." : {
+      "comment" : "Notificaciones: descripción del estado de error cuando no se han podido descargar los avisos."
+    },
     "Conexiones" : {
       "comment" : "Título de sección en el detalle de estación; lista los otros transportes con los que enlaza."
     },
@@ -180,6 +175,9 @@
     },
     "Descartar aviso" : {
       "comment" : "Acción del botón que cierra una banda de aviso de incidencia"
+    },
+    "Desde %@" : {
+      "comment" : "Notificaciones: fecha de un aviso publicado hace más de un día, por ejemplo «Desde 21/09». La variable es el día y el mes, y el año si no es el actual."
     },
     "Distancia desde tu ubicación" : {
 
@@ -235,6 +233,12 @@
     "Identificador" : {
       "comment" : "Título de sección en el detalle de estación; muestra el código interno de la estación."
     },
+    "Info" : {
+      "comment" : "Notificaciones: etiqueta del badge de un aviso informativo de Renfe. Abreviatura de «Información»."
+    },
+    "Información de la red" : {
+      "comment" : "Notificaciones: título de la tarjeta de un aviso informativo de Renfe. Debajo va el texto del aviso."
+    },
     "Iniciar ruta" : {
 
     },
@@ -281,6 +285,9 @@
     "Líneas" : {
       "comment" : "Título de la pestaña y de la pantalla con el listado de líneas, y título de la sección de líneas en el detalle de estación."
     },
+    "Los avisos se publican en español" : {
+      "comment" : "Notificaciones: título de la banda que aparece cuando el idioma del dispositivo no es el español."
+    },
     "Los próximos trenes en una de tus estaciones favoritas." : {
       "comment" : "Descripción del widget en la galería de widgets."
     },
@@ -320,6 +327,9 @@
     "No hay horarios disponibles" : {
       "comment" : "Título del estado vacío cuando no se ha podido descargar ningún dato y no hay nada guardado."
     },
+    "No hay incidencias en la red de Cercanías." : {
+      "comment" : "Notificaciones: descripción del estado vacío cuando Renfe no tiene avisos activos."
+    },
     "No hemos podido ubicarte" : {
       "comment" : "Tarjeta de próximos trenes: título cuando el dispositivo no consigue una ubicación."
     },
@@ -335,8 +345,14 @@
     "No se han podido calcular los tiempos de viaje" : {
 
     },
+    "No se han podido cargar los avisos" : {
+      "comment" : "Notificaciones: título del estado de error cuando no hay avisos guardados y la descarga ha fallado."
+    },
     "No tenemos permiso para usar tu ubicación. Elige la estación que más usas y la tendrás siempre aquí." : {
       "comment" : "Tarjeta de próximos trenes: mensaje cuando el permiso de ubicación está denegado."
+    },
+    "Notificaciones" : {
+      "comment" : "Título de la hoja de avisos de Renfe que se abre desde la campana de Inicio, y etiqueta de esa campana para VoiceOver."
     },
     "Ocultar indicaciones" : {
 
@@ -384,7 +400,10 @@
       "comment" : "Tipo de conexión disponible en una estación: tren regional."
     },
     "Reintentar" : {
-      "comment" : "Tarjeta de próximos trenes: botón para volver a buscar la ubicación."
+      "comment" : "Botón para volver a intentar una descarga que ha fallado.\nTarjeta de próximos trenes: botón para volver a buscar la ubicación."
+    },
+    "Renfe solo ofrece esta información en español. Pulsa Traducir en un aviso para leerlo en %@." : {
+      "comment" : "Notificaciones: texto de la banda de idioma. La variable es el nombre del idioma del dispositivo en minúscula, por ejemplo «inglés». «Traducir» es el botón de cada tarjeta."
     },
     "Resuelto" : {
       "comment" : "Gravedad de una incidencia: incidencia cerrada"
@@ -403,6 +422,9 @@
     },
     "Sí" : {
       "comment" : "Valor de una fila de accesibilidad: la prestación está disponible en la estación."
+    },
+    "Sin avisos" : {
+      "comment" : "Notificaciones: título del estado vacío cuando Renfe no tiene avisos activos."
     },
     "Sin datos" : {
       "comment" : "Valor de una fila de accesibilidad: se desconoce si la estación tiene esa prestación."
@@ -440,6 +462,12 @@
     "Todas las estaciones" : {
 
     },
+    "Traduciendo…" : {
+      "comment" : "Notificaciones: botón desactivado de una tarjeta mientras se traduce el aviso."
+    },
+    "Traducir" : {
+      "comment" : "Notificaciones: botón de una tarjeta que traduce el aviso de Renfe al idioma del dispositivo."
+    },
     "Transporte público" : {
 
     },
@@ -469,6 +497,9 @@
     },
     "Ver más" : {
       "comment" : "Inicio: enlace de la cabecera de favoritas que abre la lista completa."
+    },
+    "Ver original" : {
+      "comment" : "Notificaciones: botón de una tarjeta traducida que vuelve a mostrar el aviso en español."
     },
     "Ver todas las estaciones favoritas" : {
       "comment" : "Inicio: etiqueta de VoiceOver del enlace «Ver más» de la sección de favoritas."

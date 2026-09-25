@@ -12,4 +12,9 @@ protocol TransitRepository: Sendable {
         etag: String?,
         fetchedAt: Date
     ) async throws
+    func markRevalidated(
+        network: Bool,
+        timetable: Bool,
+        fetchedAt: Date
+    ) async throws
 }

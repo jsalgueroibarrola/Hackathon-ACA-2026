@@ -110,9 +110,26 @@ actor SwiftDataTransitRepository: TransitRepository {
         }
     }
 
+    func markRevalidated(
+        network: Bool,
+        timetable: Bool,
+        fetchedAt: Date
+    ) async throws {
+        try modelContext.commit {
+            if network, let stored = try modelContext.first(TransitNetwork.self) {
+                stored.lastFetchedAt = fetchedAt
+            }
+            if timetable, let stored = try modelContext.first(Timetable.self) {
+                stored.lastFetchedAt = fetchedAt
+            }
+        }
+    }
+
     private func discardTimetable() throws {
-        try modelContext.delete(model: Trip.self)
-        try modelContext.deleteAll(Timetable.self)
+        try modelContext.commit {
+            try modelContext.deleteAll(Timetable.self)
+        }
+        try modelContext.delete(model: Trip.self, where: #Predicate { $0.timetable == nil })
         try modelContext.save()
     }
 }

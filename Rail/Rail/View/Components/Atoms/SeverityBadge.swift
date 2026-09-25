@@ -34,18 +34,9 @@ struct SeverityBadge: View {
         .background(severity.background, in: .capsule)
         .fixedSize()
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(accessibilityLabel)
+        .accessibilityLabel(label ?? severity.label)
     }
 
-    private var accessibilityLabel: LocalizedStringResource {
-        label.map {
-            LocalizedStringResource(
-                "\(severity.label), \($0)",
-                comment:
-                    "Lectura de VoiceOver de un SeverityBadge: gravedad seguida de la descripción de la incidencia"
-            )
-        } ?? severity.label
-    }
 }
 
 #Preview("Variantes Figma") {

@@ -14,7 +14,8 @@ enum NetworkError: LocalizedError {
     case dataNotValid
     case nonHTTP
     case json(Error)
-    case notModified
+    case notModified(CacheFreshness)
+    case serviceUnavailable(retryAfter: Duration?)
     case cancelled
 
     var errorDescription: String? {
@@ -27,6 +28,7 @@ enum NetworkError: LocalizedError {
         case .nonHTTP: "Not an HTTP connection"
         case .json(let error): "JSON error: \(error)"
         case .notModified: "Resource not modified"
+        case .serviceUnavailable: "Service temporarily unavailable"
         case .cancelled: "Request cancelled"
         }
     }

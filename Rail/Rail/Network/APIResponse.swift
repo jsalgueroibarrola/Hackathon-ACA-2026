@@ -8,7 +8,7 @@ import Foundation
 
 enum APIResponse<T: Sendable>: Sendable {
     case success(T)
-    case notModified
+    case notModified(CacheFreshness)
     case failure(NetworkError)
 }
 
@@ -20,8 +20,8 @@ extension APIResponse {
         do {
             let value = try await block()
             return .success(value)
-        } catch NetworkError.notModified {
-            return .notModified
+        } catch NetworkError.notModified(let freshness) {
+            return .notModified(freshness)
         } catch let error as NetworkError {
             return .failure(error)
         } catch is CancellationError {
