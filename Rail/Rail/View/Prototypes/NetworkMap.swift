@@ -8,6 +8,11 @@
 import MapKit
 import SwiftUI
 
+private struct TrainClock: Equatable {
+    let isRunning: Bool
+    let reduceMotion: Bool
+}
+
 struct NetworkMap: View {
     let lines: [LineOverlay]
     let pins: [StationPin]
@@ -15,9 +20,13 @@ struct NetworkMap: View {
     var surface: MapSurface = .muted
     var showsCasing: Bool = true
     var showsUserLocation: Bool = false
+    var trains: [TrainTrack] = []
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var camera: MapCameraPosition = .automatic
     @State private var zoom: ZoomBucket = .region
+    @State private var heading: CLLocationDirection = 0
+    @State private var now = Date.now
     @State private var hasFramed = false
 
     var body: some View {
@@ -35,6 +44,21 @@ struct NetworkMap: View {
 
             if showsUserLocation {
                 UserAnnotation()
+            }
+
+            ForEach(liveTrains) { train in
+                let position = train.position(at: now)
+                Annotation(coordinate: position.coordinate) {
+                    TrainMarker(
+                        tint: LineTint(base: Color(hex: train.colorHex)),
+                        rotation: .degrees(position.bearing - heading),
+                        isStale: train.isStale(at: now)
+                    )
+                    .accessibilityLabel(train.accessibilityLabel)
+                } label: {
+                    Text(verbatim: train.train)
+                }
+                .annotationTitles(.hidden)
             }
 
             ForEach(pins) { pin in
@@ -62,6 +86,22 @@ struct NetworkMap: View {
         .onMapCameraChange(frequency: .continuous) { context in
             let bucket = zoom.updated(for: context.camera.distance)
             if bucket != zoom { zoom = bucket }
+            if context.camera.heading != heading { heading = context.camera.heading }
+        }
+        .task(id: TrainClock(isRunning: !trains.isEmpty, reduceMotion: reduceMotion)) {
+            guard !trains.isEmpty else { return }
+            let step: Duration = reduceMotion ? .seconds(5) : .seconds(1)
+            now = .now
+            while !Task.isCancelled {
+                do {
+                    try await Task.sleep(for: step)
+                } catch {
+                    return
+                }
+                withAnimation(reduceMotion ? nil : .linear(duration: 1)) {
+                    now = .now
+                }
+            }
         }
         .task(id: pins.count) {
             guard !hasFramed, let boundingRect else { return }
@@ -100,6 +140,10 @@ struct NetworkMap: View {
                 )
                 .mapOverlayLevel(level: .aboveLabels)
         }
+    }
+
+    private var liveTrains: [TrainTrack] {
+        trains.filter { !$0.isExpired(at: now) }
     }
 
     private var boundingRect: MKMapRect? {
@@ -234,6 +278,50 @@ extension StationPin {
         pins: StationPin.red,
         selection: $selection,
         showsCasing: false
+    )
+}
+
+extension TrainTrack {
+    fileprivate static func sample(
+        _ train: String,
+        on line: LineOverlay,
+        direction: TripDirection,
+        from start: Double,
+        to end: Double,
+        status: LiveStatus = .left
+    ) -> TrainTrack {
+        let path = PolylinePath(line.coordinates)
+        return TrainTrack(
+            id: "\(line.id)-\(train)",
+            lineID: line.id,
+            colorHex: line.colorHex,
+            train: train,
+            direction: direction,
+            headsign: nil,
+            delaySeconds: nil,
+            status: status,
+            sampledAt: .now,
+            path: path,
+            startDistance: path.length * start,
+            endDistance: path.length * end
+        )
+    }
+
+    fileprivate static let red: [TrainTrack] = [
+        .sample("23501", on: .l1, direction: .outbound, from: 0.1, to: 0.45),
+        .sample("23506", on: .l1, direction: .inbound, from: 0.8, to: 0.55),
+        .sample("26003", on: .l2, direction: .outbound, from: 0.5, to: 0.5, status: .at),
+    ]
+}
+
+#Preview("Trenes en tiempo real") {
+    @Previewable @State var selection: String?
+
+    NetworkMap(
+        lines: [.l1, .l2],
+        pins: StationPin.red,
+        selection: $selection,
+        trains: TrainTrack.red
     )
 }
 

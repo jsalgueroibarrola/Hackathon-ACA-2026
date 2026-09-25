@@ -42,7 +42,7 @@ actor SwiftDataLiveFeedRepository: LiveFeedRepository {
         }
     }
 
-    func replaceRealtime(
+    func mergeRealtime(
         _ response: ETagged<RealtimeResponseDTO>,
         fetchedAt: Date
     ) async throws {
@@ -50,6 +50,20 @@ actor SwiftDataLiveFeedRepository: LiveFeedRepository {
             throw TransitRepositoryError.missingNetwork
         }
         let calendar = network.calendar
+        let directions = try scheduledDirections(for: response.value.trains)
+        let previous = try modelContext.fetch(FetchDescriptor<LiveTrain>()).map(\.record)
+        let incoming = response.value.trains.map {
+            LiveTrainRecord(
+                dto: $0,
+                calendar: calendar,
+                direction: directions["\($0.line)-\($0.train)"]
+            )
+        }
+        let merged = RealtimeMerge.merge(
+            previous: previous,
+            incoming: incoming,
+            now: fetchedAt
+        )
 
         try modelContext.commit {
             try modelContext.deleteAll(LiveTrain.self)
@@ -64,12 +78,23 @@ actor SwiftDataLiveFeedRepository: LiveFeedRepository {
             )
             modelContext.insert(feed)
 
-            let trains = response.value.trains.map {
-                LiveTrain(dto: $0, calendar: calendar)
-            }
+            let trains = merged.map(LiveTrain.init(record:))
             trains.forEach { $0.feed = feed }
             modelContext.insertAll(trains)
         }
+    }
+
+    private func scheduledDirections(
+        for trains: [LiveTrainDTO]
+    ) throws -> [String: TripDirection] {
+        let numbers = Array(Set(trains.map(\.train)))
+        let trips = try modelContext.fetch(
+            FetchDescriptor<Trip>(predicate: #Predicate { numbers.contains($0.train) })
+        )
+        return Dictionary(
+            trips.map { ("\($0.lineID)-\($0.train)", $0.direction) },
+            uniquingKeysWith: { first, _ in first }
+        )
     }
 
     func markRevalidated(

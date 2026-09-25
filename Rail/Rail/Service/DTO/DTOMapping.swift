@@ -129,8 +129,8 @@ extension RealtimeFeed {
     }
 }
 
-extension LiveTrain {
-    convenience init(dto: LiveTrainDTO, calendar: Calendar) {
+extension LiveTrainRecord {
+    init(dto: LiveTrainDTO, calendar: Calendar, direction: TripDirection?) {
         self.init(
             lineID: dto.line,
             train: dto.train,
@@ -141,8 +141,10 @@ extension LiveTrain {
             nextStopID: dto.next,
             latitude: dto.lat,
             longitude: dto.lon,
+            positionSampledAt: nil,
             platform: dto.platform,
-            sampledAt: dto.at.map(Date.init(unixSeconds:))
+            sampledAt: dto.at.map(Date.init(unixSeconds:)),
+            direction: direction
         )
     }
 }

@@ -228,7 +228,68 @@ enum EmptyServiceAlertsScenario: SampleDataScenario {
     }
 }
 
+enum LiveTrainsScenario: SampleDataScenario {
+    static func populate(_ context: ModelContext) {
+        let feed = RealtimeFeed(
+            etag: nil,
+            feedTimestamp: .now,
+            isPartial: false,
+            fetchedAt: .now,
+            expiresAt: .now.addingTimeInterval(3_600),
+            isStale: false
+        )
+        context.insert(feed)
+        let trains = SampleData.liveTrains()
+        trains.forEach { $0.feed = feed }
+        context.insertAll(trains)
+    }
+}
+
 extension SampleData {
+    static func liveTrains(now: Date = .now) -> [LiveTrain] {
+        [
+            LiveTrain(
+                lineID: "C1",
+                train: "23501",
+                serviceDay: nil,
+                delaySeconds: 180,
+                status: .left,
+                stopID: "54404",
+                nextStopID: "54405",
+                latitude: nil,
+                longitude: nil,
+                platform: nil,
+                sampledAt: now
+            ),
+            LiveTrain(
+                lineID: "C1",
+                train: "23510",
+                serviceDay: nil,
+                delaySeconds: 0,
+                status: .left,
+                stopID: "54100",
+                nextStopID: "54408",
+                latitude: nil,
+                longitude: nil,
+                platform: nil,
+                sampledAt: now
+            ),
+            LiveTrain(
+                lineID: "C2",
+                train: "26003",
+                serviceDay: nil,
+                delaySeconds: nil,
+                status: .at,
+                stopID: "54501",
+                nextStopID: "54502",
+                latitude: nil,
+                longitude: nil,
+                platform: "1",
+                sampledAt: now
+            ),
+        ]
+    }
+
     static func alerts(now: Date = .now) -> [ServiceAlert] {
         [
             ServiceAlert(
@@ -351,6 +412,10 @@ extension PreviewTrait where T == Preview.ViewTraits {
 
     static var noServiceAlertsSampleData: Self {
         .modifier(SampleDataPreview<EmptyServiceAlertsScenario>())
+    }
+
+    static var liveTrainsSampleData: Self {
+        .modifier(SampleDataPreview<LiveTrainsScenario>())
     }
 }
 #endif

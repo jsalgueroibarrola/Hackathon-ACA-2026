@@ -13,11 +13,16 @@ import UIKit
 struct NetworkMapView: View {
     @Query(sort: \Line.id) private var lines: [Line]
     @Query(sort: \Station.name) private var stations: [Station]
+    @Query private var liveTrains: [LiveTrain]
+    @Query private var realtimeFeeds: [RealtimeFeed]
     @Environment(\.routeShapes) private var routeShapes
+    @Environment(\.liveFeeds) private var liveFeeds
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(LocationViewModel.self) private var location
     @Environment(\.openURL) private var openURL
 
     @State private var routes: [String: [CLLocationCoordinate2D]] = [:]
+    @State private var paths: [String: PolylinePath] = [:]
     @State private var hiddenLineIDs: Set<String> = []
     @Binding var selection: String?
     @State private var detailStationID: String?
@@ -30,7 +35,8 @@ struct NetworkMapView: View {
                 pins: visiblePins,
                 selection: $selection,
                 surface: surface,
-                showsUserLocation: location.isTracking
+                showsUserLocation: location.isTracking,
+                trains: trainTracks
             )
             .safeAreaInset(edge: .top, spacing: 0) {
                 lineFilter
@@ -89,7 +95,22 @@ struct NetworkMapView: View {
                     ($0.lineID, routeShapes.coordinates(for: $0))
                 }
             )
+            paths = routes.mapValues(PolylinePath.init)
         }
+        .task(id: scenePhase == .active) {
+            guard scenePhase == .active else { return }
+            await liveFeeds.poll(.realtime)
+        }
+    }
+
+    private var trainTracks: [TrainTrack] {
+        guard let feed = realtimeFeeds.first else { return [] }
+        return TrainTrackBuilder.tracks(
+            trains: liveTrains.filter { !hiddenLineIDs.contains($0.lineID) },
+            lines: lines,
+            paths: paths,
+            fetchedAt: feed.feedTimestamp ?? feed.fetchedAt
+        )
     }
 
     private var nearestStationButton: some View {
@@ -175,3 +196,12 @@ struct NetworkMapView: View {
         return visiblePins.first { $0.id == selection }
     }
 }
+
+#if DEBUG
+#Preview("Trenes en tiempo real", traits: .liveTrainsSampleData) {
+    @Previewable @State var selection: String?
+
+    NetworkMapView(selection: $selection)
+        .environment(LocationViewModel.preview())
+}
+#endif

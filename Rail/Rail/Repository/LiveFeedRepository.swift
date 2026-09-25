@@ -13,7 +13,7 @@ protocol LiveFeedRepository: Sendable {
         _ response: ETagged<AlertsResponseDTO>,
         fetchedAt: Date
     ) async throws
-    func replaceRealtime(
+    func mergeRealtime(
         _ response: ETagged<RealtimeResponseDTO>,
         fetchedAt: Date
     ) async throws

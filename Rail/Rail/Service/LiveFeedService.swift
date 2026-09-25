@@ -26,7 +26,8 @@ struct LiveFeedRefresh: Sendable, Equatable {
 }
 
 protocol LiveFeedService: Sendable {
-    func refresh(_ feed: LiveFeed, now: Date, force: Bool) async -> LiveFeedRefresh
+    func refresh(_ feed: LiveFeed, now: Date, force: Bool) async
+        -> LiveFeedRefresh
 }
 
 extension LiveFeedService {
@@ -56,7 +57,9 @@ struct LiveFeedServiceImpl: LiveFeedService {
     let repository: any LiveFeedRepository
     var schedule: PollSchedule = .standard
 
-    func refresh(_ feed: LiveFeed, now: Date, force: Bool) async -> LiveFeedRefresh {
+    func refresh(_ feed: LiveFeed, now: Date, force: Bool) async
+        -> LiveFeedRefresh
+    {
         do {
             let state = try await repository.state(of: feed)
 
@@ -70,7 +73,11 @@ struct LiveFeedServiceImpl: LiveFeedService {
                 )
             }
 
-            let (outcome, freshness) = try await download(feed, etag: state.etag, now: now)
+            let (outcome, freshness) = try await download(
+                feed,
+                etag: state.etag,
+                now: now
+            )
             return LiveFeedRefresh(
                 outcome: outcome,
                 nextDelay: schedule.delay(
@@ -79,20 +86,36 @@ struct LiveFeedServiceImpl: LiveFeedService {
                 )
             )
         } catch NetworkError.serviceUnavailable(let retryAfter) {
-            Logger.liveFeeds.notice("\(String(describing: feed)) unavailable, retrying later")
+            Logger.liveFeeds.notice(
+                "\(String(describing: feed)) unavailable, retrying later"
+            )
             return LiveFeedRefresh(
                 outcome: .failed,
-                nextDelay: schedule.delay(retryAfter: retryAfter, fallback: feed.fallbackInterval)
+                nextDelay: schedule.delay(
+                    retryAfter: retryAfter,
+                    fallback: feed.fallbackInterval
+                )
             )
         } catch NetworkError.cancelled {
-            return LiveFeedRefresh(outcome: .failed, nextDelay: feed.fallbackInterval)
-        } catch is CancellationError {
-            return LiveFeedRefresh(outcome: .failed, nextDelay: feed.fallbackInterval)
-        } catch {
-            Logger.liveFeeds.error("\(String(describing: feed)) refresh failed: \(error.localizedDescription)")
             return LiveFeedRefresh(
                 outcome: .failed,
-                nextDelay: schedule.delay(retryAfter: nil, fallback: feed.fallbackInterval)
+                nextDelay: feed.fallbackInterval
+            )
+        } catch is CancellationError {
+            return LiveFeedRefresh(
+                outcome: .failed,
+                nextDelay: feed.fallbackInterval
+            )
+        } catch {
+            Logger.liveFeeds.error(
+                "\(String(describing: feed)) refresh failed: \(error.localizedDescription)"
+            )
+            return LiveFeedRefresh(
+                outcome: .failed,
+                nextDelay: schedule.delay(
+                    retryAfter: nil,
+                    fallback: feed.fallbackInterval
+                )
             )
         }
     }
@@ -104,12 +127,20 @@ struct LiveFeedServiceImpl: LiveFeedService {
     ) async throws -> (LiveFeedOutcome, CacheFreshness) {
         switch feed {
         case .alerts:
-            try await store(await api.getAlerts(etag: etag), feed: feed, now: now) {
+            try await store(
+                await api.getAlerts(etag: etag),
+                feed: feed,
+                now: now
+            ) {
                 try await repository.replaceAlerts($0, fetchedAt: now)
             }
         case .realtime:
-            try await store(await api.getRealtime(etag: etag), feed: feed, now: now) {
-                try await repository.replaceRealtime($0, fetchedAt: now)
+            try await store(
+                await api.getRealtime(etag: etag),
+                feed: feed,
+                now: now
+            ) {
+                try await repository.mergeRealtime($0, fetchedAt: now)
             }
         }
     }
@@ -125,7 +156,11 @@ struct LiveFeedServiceImpl: LiveFeedService {
             try await replace(payload)
             return (.updated, payload.freshness)
         case .notModified(let freshness):
-            try await repository.markRevalidated(feed, freshness: freshness, at: now)
+            try await repository.markRevalidated(
+                feed,
+                freshness: freshness,
+                at: now
+            )
             return (.unchanged, freshness)
         case .failure(let error):
             throw error
@@ -134,7 +169,9 @@ struct LiveFeedServiceImpl: LiveFeedService {
 }
 
 struct DisabledLiveFeedService: LiveFeedService {
-    func refresh(_ feed: LiveFeed, now: Date, force: Bool) async -> LiveFeedRefresh {
+    func refresh(_ feed: LiveFeed, now: Date, force: Bool) async
+        -> LiveFeedRefresh
+    {
         LiveFeedRefresh(outcome: .skipped, nextDelay: feed.fallbackInterval)
     }
 }

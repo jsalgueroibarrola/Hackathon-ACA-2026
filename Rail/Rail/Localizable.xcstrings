@@ -158,6 +158,29 @@
     "Cerrar" : {
 
     },
+    "con %lld minutos de retraso" : {
+      "comment" : "Mapa: retraso de un tren en tiempo real, leído por VoiceOver tras su descripción y una coma, por ejemplo «con 3 minutos de retraso».",
+      "localizations" : {
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "con %lld minuto de retraso"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "con %lld minutos de retraso"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "Cómo llegar" : {
 
     },
@@ -473,6 +496,28 @@
     },
     "Tren %@" : {
 
+    },
+    "Tren %@ de la línea %@" : {
+      "comment" : "Mapa: descripción para VoiceOver de un tren en tiempo real cuyo destino se desconoce.",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tren %1$@ de la línea %2$@"
+          }
+        }
+      }
+    },
+    "Tren %@ de la línea %@ hacia %@" : {
+      "comment" : "Mapa: descripción para VoiceOver de un tren en tiempo real, con su número, su línea y su destino.",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tren %1$@ de la línea %2$@ hacia %3$@"
+          }
+        }
+      }
     },
     "Tu estación habitual" : {
       "comment" : "Tarjeta de próximos trenes: subtítulo cuando la estación es la que el usuario ha guardado."
