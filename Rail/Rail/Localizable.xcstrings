@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
+    "¡Vaya! Parece que aún no tienes estaciones favoritas…" : {
+      "comment" : "Favoritos: título cuando todavía no hay ninguna estación favorita."
+    },
     "%@" : {
 
     },
@@ -35,6 +38,34 @@
           }
         }
       }
+    },
+    "%@, línea %@ hacia %@" : {
+      "comment" : "Horarios: lectura de VoiceOver de una salida; hora, línea y destino.",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, línea %2$@ hacia %3$@"
+          }
+        }
+      }
+    },
+    "%@, línea %@ hacia %@. Sale en %lld min" : {
+      "comment" : "Horarios: lectura de VoiceOver de una salida próxima; hora, línea, destino y minutos que faltan."
+    },
+    "%@, línea %@ hacia %@. Ya ha salido" : {
+      "comment" : "Horarios: lectura de VoiceOver de una salida que ya ha pasado; hora, línea y destino.",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, línea %2$@ hacia %3$@. Ya ha salido"
+          }
+        }
+      }
+    },
+    "%lld min" : {
+      "comment" : "Horarios: minutos que faltan para la salida, por ejemplo «5 min»."
     },
     "A %@" : {
       "comment" : "Distancia desde la ubicación del usuario hasta una estación, por ejemplo «A 1,2 km». Se usa en la tarjeta de próximos trenes y en las filas de estaciones."
@@ -71,6 +102,9 @@
     "A 15 minutos a pie" : {
 
     },
+    "Abre la ruta en Mapas" : {
+      "comment" : "Detalle de estación: pista de VoiceOver de cada medio de transporte en «Cómo llegar».\nDetalle de estación: pista de VoiceOver del botón «Cómo llegar»."
+    },
     "Abre Rail para actualizar los horarios." : {
       "comment" : "Widget de próximos trenes: no hay datos del día siguiente y hay que sincronizar."
     },
@@ -81,40 +115,40 @@
       "comment" : "Tarjeta de próximos trenes: botón que abre los ajustes de la app para conceder la ubicación."
     },
     "Abrir en Mapas" : {
-
+      "comment" : "Detalle de estación: botón que abre la ruta hasta la estación en Apple Maps."
     },
     "Accesibilidad" : {
-      "comment" : "Título de sección en el detalle de estación; agrupa las prestaciones de accesibilidad."
+      "comment" : "Detalle de estación: cabecera de la tarjeta con las prestaciones de accesibilidad."
     },
     "Activa la ubicación" : {
-      "comment" : "Tarjeta de próximos trenes: título cuando aún no se ha pedido permiso de ubicación."
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando aún no se ha pedido permiso de ubicación.\nEstaciones: título de la sección «Cerca de ti» cuando aún no se ha pedido permiso de ubicación.\nTarjeta de próximos trenes: título cuando aún no se ha pedido permiso de ubicación."
     },
-    "Activa la ubicación para saber cuánto tardas en llegar andando, en bici, en coche o en transporte público." : {
-
-    },
-    "Activa la ubicación para ver qué estaciones tienes más cerca y a qué distancia están." : {
-
+    "Adaptada para movilidad reducida" : {
+      "comment" : "Detalle de estación: la estación es accesible para personas con movilidad reducida."
     },
     "Aeropuerto" : {
       "comment" : "Tipo de conexión disponible en una estación: el aeropuerto."
     },
     "Ahora" : {
-      "comment" : "Notificaciones: hora de un aviso publicado hace menos de un minuto. Va en la esquina de la tarjeta, donde en otros avisos pone «Hace 12 min»."
+      "comment" : "Horarios: el tren sale en menos de un minuto.\nNotificaciones: hora de un aviso publicado hace menos de un minuto. Va en la esquina de la tarjeta, donde en otros avisos pone «Hace 12 min»."
     },
     "Ajustes" : {
       "comment" : "Inicio: botón de la barra superior que abrirá los ajustes; VoiceOver lo lee."
     },
+    "Añade una estación" : {
+      "comment" : "Favoritos: botón del estado vacío que abre el selector de estación.\nInicio: botón del estado vacío de favoritas que abre el selector de estación."
+    },
     "Añadir a favoritos" : {
       "comment" : "Acción del botón de favorito cuando la estación todavía no lo es"
+    },
+    "Añadir estación favorita" : {
+      "comment" : "Favoritos: botón «+» de la barra superior que abre el selector de estación; VoiceOver lo lee."
     },
     "Andando" : {
 
     },
     "Apple Maps no ofrece indicaciones paso a paso para este medio de transporte." : {
 
-    },
-    "Ascensor" : {
-      "comment" : "Etiqueta de fila en el detalle de estación; indica si la estación tiene ascensor."
     },
     "Atenuado" : {
 
@@ -134,17 +168,20 @@
     "Aviso en la red" : {
       "comment" : "Notificaciones: título de la tarjeta de un aviso de Renfe sobre una incidencia en curso. Debajo va el texto del aviso."
     },
+    "Bajar" : {
+      "comment" : "Favoritos: acción de VoiceOver que baja una estación favorita un puesto en la lista."
+    },
     "Buscando tu ubicación…" : {
-      "comment" : "Tarjeta de próximos trenes: título mientras se obtiene la ubicación del usuario."
+      "comment" : "Estaciones: título de la sección «Cerca de ti» mientras se obtiene la ubicación.\nTarjeta de próximos trenes: título mientras se obtiene la ubicación del usuario."
     },
     "Buscar estación" : {
-
+      "comment" : "Estaciones: texto de ayuda del campo de búsqueda.\nSelector de estación: texto de ayuda del campo de búsqueda."
     },
     "Calculando la ruta…" : {
 
     },
     "Calculando tiempos…" : {
-
+      "comment" : "Detalle de estación: VoiceOver mientras se calculan los tiempos de viaje."
     },
     "Cambiar" : {
       "comment" : "Tarjeta de próximos trenes: botón para cambiar la estación habitual guardada."
@@ -153,10 +190,16 @@
       "comment" : "Tarjeta de próximos trenes: descripción para VoiceOver mientras se calculan las salidas."
     },
     "Cerca de ti" : {
-
+      "comment" : "Estaciones: cabecera de la sección con las tres estaciones más cercanas a la ubicación del usuario."
     },
     "Cerrar" : {
 
+    },
+    "Cómo llegar" : {
+      "comment" : "Detalle de estación: cabecera de la tarjeta con los tiempos de viaje hasta la estación."
+    },
+    "Comprueba la conexión y vuelve a intentarlo." : {
+      "comment" : "Notificaciones: descripción del estado de error cuando no se han podido descargar los avisos."
     },
     "con %lld minutos de retraso" : {
       "comment" : "Mapa: retraso de un tren en tiempo real, leído por VoiceOver tras su descripción y una coma, por ejemplo «con 3 minutos de retraso».",
@@ -181,14 +224,14 @@
         }
       }
     },
-    "Cómo llegar" : {
-
-    },
-    "Comprueba la conexión y vuelve a intentarlo." : {
-      "comment" : "Notificaciones: descripción del estado de error cuando no se han podido descargar los avisos."
+    "Con ascensor" : {
+      "comment" : "Detalle de estación: la estación tiene ascensor."
     },
     "Conexiones" : {
-      "comment" : "Título de sección en el detalle de estación; lista los otros transportes con los que enlaza."
+      "comment" : "Detalle de estación: cabecera de la tarjeta con los otros transportes con los que enlaza."
+    },
+    "Cuando te acerques a Málaga, aquí verás las estaciones que tengas más cerca. Mientras tanto, puedes buscar cualquier estación." : {
+      "comment" : "Estaciones: mensaje de la sección «Cerca de ti» cuando el usuario está lejos de la red."
     },
     "Demasiadas rutas seguidas. Inténtalo de nuevo en unos segundos." : {
 
@@ -202,11 +245,14 @@
     "Desde %@" : {
       "comment" : "Notificaciones: fecha de un aviso publicado hace más de un día, por ejemplo «Desde 21/09». La variable es el día y el mes, y el año si no es el actual."
     },
-    "Distancia desde tu ubicación" : {
-
+    "Destino" : {
+      "comment" : "Horarios: título del menú para filtrar las salidas por línea y destino."
+    },
+    "Día" : {
+      "comment" : "Horarios: título del menú para elegir el día del horario."
     },
     "Elegir estación" : {
-      "comment" : "Tarjeta de próximos trenes: botón que abre el selector de estación habitual."
+      "comment" : "Selector de estación: título de la hoja para añadir una favorita o elegir la estación habitual.\nTarjeta de próximos trenes: botón que abre el selector de estación habitual."
     },
     "Elige tu estación habitual" : {
       "comment" : "Tarjeta de próximos trenes: título cuando el usuario ha denegado el permiso de ubicación."
@@ -239,22 +285,34 @@
       "comment" : "Título de la pestaña y de la pantalla con el listado de estaciones."
     },
     "Estaciones favoritas" : {
-      "comment" : "Cabecera de la sección de favoritas en Inicio y título de la pantalla con todas las favoritas."
+      "comment" : "Cabecera de la sección de favoritas en Inicio."
     },
     "Estándar" : {
 
     },
-    "Hacia %@" : {
-
+    "Estás a %@ en línea recta. Cuando estés más cerca te diremos cuánto tardas; mientras, Mapas puede guiarte." : {
+      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando el usuario está lejos. El argumento es la distancia en línea recta hasta la estación."
+    },
+    "Estás lejos de Cercanías Málaga" : {
+      "comment" : "Estaciones: título de la sección «Cerca de ti» cuando ninguna estación está a menos de 10 km del usuario."
+    },
+    "Estás lejos de la estación" : {
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando la ubicación del usuario está demasiado lejos para calcular tiempos."
+    },
+    "Favoritos" : {
+      "comment" : "Título de la pantalla con todas las estaciones favoritas."
     },
     "Híbrido" : {
 
     },
-    "Horarios de hoy" : {
-
+    "Horarios" : {
+      "comment" : "Horarios: título de la hoja con todas las salidas de una estación; también etiqueta del botón que la abre."
     },
-    "Identificador" : {
-      "comment" : "Título de sección en el detalle de estación; muestra el código interno de la estación."
+    "Hoy" : {
+      "comment" : "Horarios: chip del día de hoy."
+    },
+    "Hoy, %@" : {
+      "comment" : "Horarios: opción del menú de días para hoy; por ejemplo «Hoy, jueves 25»."
     },
     "Info" : {
       "comment" : "Notificaciones: etiqueta del badge de un aviso informativo de Renfe. Abreviatura de «Información»."
@@ -263,7 +321,7 @@
       "comment" : "Notificaciones: título de la tarjeta de un aviso informativo de Renfe. Debajo va el texto del aviso."
     },
     "Iniciar ruta" : {
-
+      "comment" : "Detalle de estación: botón principal que abre la ruta hasta la estación en Apple Maps."
     },
     "Inicio" : {
       "comment" : "Título de la pestaña y de la pantalla de inicio."
@@ -285,28 +343,8 @@
     "La más próxima, Álora, está a 38 km. Puedes verla en el mapa o elegir tu estación habitual." : {
 
     },
-    "Línea %@ hacia %@. Próximas salidas: %@" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Línea %1$@ hacia %2$@. Próximas salidas: %3$@"
-          }
-        }
-      }
-    },
-    "Línea %@ hacia %@. Sin más trenes hoy" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Línea %1$@ hacia %2$@. Sin más trenes hoy"
-          }
-        }
-      }
-    },
-    "Líneas" : {
-      "comment" : "Título de la pestaña y de la pantalla con el listado de líneas, y título de la sección de líneas en el detalle de estación."
+    "Línea %@" : {
+      "comment" : "Selector de estación y pantalla Estaciones: cabecera de la sección con las estaciones de una línea, por ejemplo «Línea C1»."
     },
     "Los avisos se publican en español" : {
       "comment" : "Notificaciones: título de la banda que aparece cuando el idioma del dispositivo no es el español."
@@ -314,11 +352,23 @@
     "Los próximos trenes en una de tus estaciones favoritas." : {
       "comment" : "Descripción del widget en la galería de widgets."
     },
+    "Madrugada del %@" : {
+      "comment" : "Horarios: cabecera de los trenes de después de medianoche, que cuentan como parte del día elegido; por ejemplo «Madrugada del sábado 27»."
+    },
+    "Mañana" : {
+      "comment" : "Horarios: chip del día de mañana."
+    },
+    "Mañana, %@" : {
+      "comment" : "Horarios: opción del menú de días para mañana; por ejemplo «Mañana, viernes 26»."
+    },
     "Mantén pulsado y toca «Editar widget»." : {
       "comment" : "Widget de próximos trenes: cómo elegir la estación desde la pantalla de inicio."
     },
     "Mapa" : {
 
+    },
+    "Mapas te lleva hasta aquí" : {
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando no hay ubicación del dispositivo."
     },
     "Marca tus estaciones habituales" : {
       "comment" : "Inicio: título de la sección de favoritas cuando todavía no hay ninguna."
@@ -332,17 +382,11 @@
     "Metro" : {
       "comment" : "Tipo de conexión disponible en una estación: metro."
     },
-    "Movilidad reducida" : {
-      "comment" : "Etiqueta de fila en el detalle de estación; indica si la estación es accesible para personas con movilidad reducida."
-    },
-    "Muestra la ruta hasta la estación" : {
-
-    },
     "Muestra los próximos trenes de una de tus estaciones favoritas." : {
       "comment" : "Descripción del intent de configuración del widget"
     },
     "No disponible" : {
-
+      "comment" : "Detalle de estación: tiempo de un medio de transporte que Mapas no ha podido calcular."
     },
     "No hay estaciones de Cercanías cerca" : {
       "comment" : "Tarjeta de próximos trenes: título cuando no hay ninguna estación cerca del usuario."
@@ -352,6 +396,12 @@
     },
     "No hay incidencias en la red de Cercanías." : {
       "comment" : "Notificaciones: descripción del estado vacío cuando Renfe no tiene avisos activos."
+    },
+    "No hay trenes este día" : {
+      "comment" : "Horarios: título cuando la estación no tiene salidas el día elegido."
+    },
+    "No hemos podido calcular los tiempos" : {
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando Mapas no devuelve ningún tiempo de viaje."
     },
     "No hemos podido ubicarte" : {
       "comment" : "Tarjeta de próximos trenes: título cuando el dispositivo no consigue una ubicación."
@@ -365,9 +415,6 @@
     "No se han podido actualizar los horarios" : {
       "comment" : "Aviso del banner inferior cuando falla la actualización y no se conoce la fecha de la última descarga."
     },
-    "No se han podido calcular los tiempos de viaje" : {
-
-    },
     "No se han podido cargar los avisos" : {
       "comment" : "Notificaciones: título del estado de error cuando no hay avisos guardados y la descarga ha fallado."
     },
@@ -380,11 +427,25 @@
     "Ocultar indicaciones" : {
 
     },
+    "Ocultar salidas anteriores" : {
+      "comment" : "Horarios: botón que oculta los trenes que ya han salido hoy."
+    },
     "Permitir ubicación" : {
-      "comment" : "Tarjeta de próximos trenes: botón que pide el permiso de ubicación."
+      "comment" : "Detalle de estación: botón de «Cómo llegar» que pide el permiso de ubicación.\nEstaciones: botón de la sección «Cerca de ti» que pide el permiso de ubicación.\nTarjeta de próximos trenes: botón que pide el permiso de ubicación."
     },
     "Personaliza la pantalla de bloqueo y toca el widget." : {
       "comment" : "Widget de próximos trenes: cómo elegir la estación desde la pantalla de bloqueo."
+    },
+    "Posición %lld de %lld" : {
+      "comment" : "Favoritos: VoiceOver lo anuncia tras subir o bajar una favorita, por ejemplo «Posición 2 de 5».",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Posición %1$lld de %2$lld"
+          }
+        }
+      }
     },
     "Primera salida mañana a las %@" : {
       "comment" : "Tarjeta de próximos trenes: hora de la primera salida del día siguiente, por ejemplo «05:40».\nWidget de próximos trenes: hora de la primera salida del día siguiente, por ejemplo «05:40»."
@@ -395,26 +456,23 @@
     "programados" : {
 
     },
-    "Próximas salidas" : {
-
-    },
     "Próximos trenes" : {
-      "comment" : "Nombre del widget en la galería de widgets.\nTarjeta de próximos trenes: cabecera de la lista de salidas de la estación."
+      "comment" : "Detalle de estación: cabecera de la tarjeta con las próximas salidas.\nNombre del widget en la galería de widgets.\nTarjeta de próximos trenes: cabecera de la lista de salidas de la estación."
     },
     "Próximos trenes en ${station}" : {
 
     },
+    "Prueba con otro día o con otro destino." : {
+      "comment" : "Horarios: sugerencia cuando no hay salidas el día elegido."
+    },
     "Puede pasar bajo tierra o en interiores. Inténtalo otra vez o elige tu estación." : {
       "comment" : "Tarjeta de próximos trenes: mensaje cuando el dispositivo no consigue una ubicación."
     },
+    "Puede ser la conexión. Inténtalo otra vez o abre la ruta directamente en Mapas." : {
+      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando falla el cálculo de tiempos."
+    },
     "Quitar de favoritos" : {
       "comment" : "Acción del botón de favorito cuando la estación ya es favorita"
-    },
-    "Rail no tiene acceso a tu ubicación. Actívalo en Ajustes para usar esta función." : {
-
-    },
-    "Recorrido" : {
-      "comment" : "Título de sección en el detalle de línea; lista las paradas en orden de recorrido."
     },
     "Red" : {
 
@@ -423,7 +481,10 @@
       "comment" : "Tipo de conexión disponible en una estación: tren regional."
     },
     "Reintentar" : {
-      "comment" : "Botón para volver a intentar una descarga que ha fallado.\nTarjeta de próximos trenes: botón para volver a buscar la ubicación."
+      "comment" : "Botón para volver a intentar una descarga que ha fallado.\nDetalle de estación: botón para volver a calcular los tiempos de viaje.\nTarjeta de próximos trenes: botón para volver a buscar la ubicación."
+    },
+    "Renfe no informa de la accesibilidad de esta estación" : {
+      "comment" : "Detalle de estación: no hay datos de accesibilidad para la estación."
     },
     "Renfe solo ofrece esta información en español. Pulsa Traducir en un aviso para leerlo en %@." : {
       "comment" : "Notificaciones: texto de la banda de idioma. La variable es el nombre del idioma del dispositivo en minúscula, por ejemplo «inglés». «Traducir» es el botón de cada tarjeta."
@@ -434,6 +495,12 @@
     "Retrasos" : {
       "comment" : "Gravedad de una incidencia: hay demoras en el servicio"
     },
+    "Revisa la ortografía o busca por línea." : {
+      "comment" : "Selector de estación y pantalla Estaciones: sugerencia cuando la búsqueda no encuentra ninguna estación."
+    },
+    "Sabrás cuánto tardas en llegar andando, en bici, en coche o en transporte público." : {
+      "comment" : "Detalle de estación: explica para qué se pide la ubicación en «Cómo llegar»."
+    },
     "Sale a las %@" : {
 
     },
@@ -443,47 +510,47 @@
     "Se ha interrumpido la descarga de horarios" : {
       "comment" : "Descripción de error mostrada cuando la sincronización inicial se cancela."
     },
-    "Sí" : {
-      "comment" : "Valor de una fila de accesibilidad: la prestación está disponible en la estación."
-    },
     "Sin avisos" : {
       "comment" : "Notificaciones: título del estado vacío cuando Renfe no tiene avisos activos."
-    },
-    "Sin datos" : {
-      "comment" : "Valor de una fila de accesibilidad: se desconoce si la estación tiene esa prestación."
     },
     "Sin datos de red" : {
       "comment" : "Estado vacío del listado de líneas cuando no hay datos guardados."
     },
-    "Sin estaciones" : {
-      "comment" : "Estado vacío del listado de estaciones cuando no hay datos guardados."
-    },
-    "Sin estaciones favoritas" : {
-      "comment" : "Pantalla de favoritas: título cuando no queda ninguna estación favorita."
-    },
     "Sin horarios" : {
       "comment" : "Widget de próximos trenes: título cuando no hay datos descargados."
     },
-    "Sin horarios para hoy" : {
+    "Sin resultados para «%@»" : {
+      "comment" : "Selector de estación y pantalla Estaciones: título cuando la búsqueda no encuentra ninguna estación; incluye el texto buscado."
+    },
+    "Sin resultados para «Sevilla»" : {
 
     },
-    "Sin más trenes hoy" : {
-
+    "Sin tu ubicación no podemos estimar los tiempos, pero Mapas puede guiarte desde donde estés." : {
+      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando no hay permiso o no se consigue la ubicación."
     },
     "Solo ocurre la primera vez o cuando los datos caducan." : {
       "comment" : "Texto secundario de la pantalla de carga; explica por qué hay que esperar."
     },
+    "Subir" : {
+      "comment" : "Favoritos: acción de VoiceOver que sube una estación favorita un puesto en la lista."
+    },
     "Superficie" : {
 
     },
-    "Toca la estrella de cualquier estación para añadirla aquí." : {
-      "comment" : "Pantalla de favoritas: explica cómo añadir estaciones cuando la lista está vacía."
+    "Toca la estrella de cualquier estación y la tendrás siempre a mano." : {
+      "comment" : "Favoritos: explica cómo añadir estaciones cuando todavía no hay ninguna favorita."
     },
     "Toca la estrella de cualquier estación y la tendrás siempre aquí." : {
       "comment" : "Inicio: explica cómo añadir estaciones favoritas cuando todavía no hay ninguna."
     },
-    "Todas las estaciones" : {
+    "Toca la estrella de cualquier estación y las tendrás siempre a mano." : {
 
+    },
+    "Todas" : {
+      "comment" : "Selector de estación y pantalla Estaciones: filtro que muestra las estaciones de todas las líneas."
+    },
+    "Todos los destinos" : {
+      "comment" : "Horarios: filtro que muestra las salidas hacia todos los destinos."
     },
     "Traduciendo…" : {
       "comment" : "Notificaciones: botón desactivado de una tarjeta mientras se traduce el aviso."
@@ -495,7 +562,7 @@
 
     },
     "Tren %@" : {
-
+      "comment" : "Horarios: número de tren de Renfe, por ejemplo «Tren 23104»."
     },
     "Tren %@ de la línea %@" : {
       "comment" : "Mapa: descripción para VoiceOver de un tren en tiempo real cuyo destino se desconoce.",
@@ -522,11 +589,37 @@
     "Tu estación habitual" : {
       "comment" : "Tarjeta de próximos trenes: subtítulo cuando la estación es la que el usuario ha guardado."
     },
+    "Tus primeras favoritas aparecen en Inicio. Mantén pulsada una para cambiar el orden." : {
+      "comment" : "Favoritos: nota al pie de la lista que explica dónde se usan las favoritas y cómo reordenarlas."
+    },
     "Última actualización: %@" : {
       "comment" : "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas»."
     },
     "Usar mi ubicación" : {
-
+      "comment" : "Selector de estación habitual: fila que borra la estación guardada y vuelve a usar la ubicación del dispositivo."
+    },
+    "Ver %lld salidas anteriores" : {
+      "comment" : "Horarios: botón que muestra los trenes que ya han salido hoy; el número es cuántos.",
+      "localizations" : {
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Ver %lld salida anterior"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Ver %lld salidas anteriores"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "Ver detalle" : {
 
@@ -535,7 +628,10 @@
       "comment" : "Tarjeta de próximos trenes: botón que muestra en el mapa la estación más próxima."
     },
     "Ver estaciones" : {
-      "comment" : "Inicio: botón del estado vacío de favoritas que abre la lista de estaciones."
+
+    },
+    "Ver horarios" : {
+      "comment" : "Detalle de estación: botón de la tarjeta de próximos trenes que abre la hoja de horarios."
     },
     "Ver indicaciones" : {
 
@@ -549,11 +645,11 @@
     "Ver todas las estaciones favoritas" : {
       "comment" : "Inicio: etiqueta de VoiceOver del enlace «Ver más» de la sección de favoritas."
     },
+    "Verás qué estaciones tienes más cerca y a qué distancia están." : {
+      "comment" : "Estaciones: explica para qué se pide el permiso de ubicación en la sección «Cerca de ti»."
+    },
     "Verás tu estación más cercana y sus próximos trenes nada más abrir Rail." : {
       "comment" : "Tarjeta de próximos trenes: explica para qué se pide el permiso de ubicación."
-    },
-    "Ya han salido" : {
-
     }
   },
   "version" : "1.0"

@@ -4,7 +4,6 @@ import SwiftUI
 struct HomeView: View {
     @Binding var path: [HomeRoute]
     let onShowMap: (String) -> Void
-    let onShowStations: () -> Void
 
     @State private var topInset: CGFloat = 0
     @State private var isShowingAlerts = false
@@ -44,11 +43,8 @@ struct HomeView: View {
             NextTrainsSection(onShowMap: onShowMap)
                 .padding(.horizontal, ScreenLayout.margin)
                 .padding(.top, Self.heroClearance)
-            FavoriteStationsSection(
-                onNavigate: { path.append($0) },
-                onBrowseStations: onShowStations
-            )
-            .layoutPriority(-1)
+            FavoriteStationsSection(onNavigate: { path.append($0) })
+                .layoutPriority(-1)
         }
         .fitsScrollViewport()
         .frame(maxWidth: Self.maxContentWidth)
@@ -107,32 +103,32 @@ struct HomeView: View {
 #if DEBUG
     #Preview("Con favoritas", traits: .favoriteStationsSampleData) {
         @Previewable @State var path: [HomeRoute] = []
-        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
+        HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
     }
 
     #Preview("Sin favoritas", traits: .nextTrainsSampleData) {
         @Previewable @State var path: [HomeRoute] = []
-        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
+        HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
     }
 
     #Preview("Estación guardada", traits: .savedStationSampleData) {
         @Previewable @State var path: [HomeRoute] = []
-        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
+        HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview(authorization: .denied))
     }
 
     #Preview("Modo oscuro", traits: .favoriteStationsSampleData) {
         @Previewable @State var path: [HomeRoute] = []
-        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
+        HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
             .preferredColorScheme(.dark)
     }
 
     #Preview("Dynamic Type", traits: .favoriteStationsSampleData) {
         @Previewable @State var path: [HomeRoute] = []
-        HomeView(path: $path, onShowMap: { _ in }, onShowStations: {})
+        HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
             .dynamicTypeSize(.accessibility2)
     }

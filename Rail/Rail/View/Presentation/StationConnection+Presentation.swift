@@ -24,7 +24,7 @@ extension StationConnection {
         switch self {
         case .airport: "airplane"
         case .ave: "train.side.front.car"
-        case .busStation: "bus.doubledecker"
+        case .busStation: "bus.doubledecker.fill"
         case .interurbanBus: "bus.fill"
         case .metro: "tram.fill.tunnel"
         case .regional: "train.side.rear.car"

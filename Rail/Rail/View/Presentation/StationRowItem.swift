@@ -9,6 +9,7 @@ struct StationRowItem: Identifiable, Hashable, Sendable {
     let id: String
     let name: String
     let subtitle: String?
+    let distance: String?
     let lines: [LineTag]
 }
 
@@ -31,16 +32,11 @@ enum StationRowItemBuilder {
         StationRowItem(
             id: station.id,
             name: station.name,
-            subtitle: subtitle(for: station, location: location),
+            subtitle: connectionsSummary(station.connections),
+            distance: location.map { $0.distance(to: station.coordinate).distanceLabel },
             lines: Set(station.lines.map { LineTag(id: $0.id, colorHex: $0.colorHex) })
                 .sorted { $0.id.localizedStandardCompare($1.id) == .orderedAscending }
         )
-    }
-
-    static func subtitle(for station: Station, location: UserLocation?) -> String? {
-        location.map {
-            String(localized: .distanceAway($0.distance(to: station.coordinate).distanceLabel))
-        } ?? connectionsSummary(station.connections)
     }
 
     private static func connectionsSummary(_ connections: [StationConnection]) -> String? {

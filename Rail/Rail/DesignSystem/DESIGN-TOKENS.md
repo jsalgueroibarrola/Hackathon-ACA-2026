@@ -1,140 +1,142 @@
-# Design tokens · sincronización con Figma
+# Design tokens · syncing with Figma
 
-Fuente de verdad: archivo de Figma **Diseño UX/UI ACA hackathon** (`WFoeo57elVOwmgKto1iwfq`).
-Los tokens de este directorio y los color sets de `Assets.xcassets/Colors` se mantienen **a mano** a partir de esas páginas. Cuando la diseñadora cambie algo, se edita aquí; no hay script ni JSON intermedio.
+Source of truth: the Figma file **Diseño UX/UI ACA hackathon** (`WFoeo57elVOwmgKto1iwfq`).
+The tokens in this directory and the color sets in `Assets.xcassets/Colors` are maintained **by hand** from those pages. When the designer changes something, it is edited here; there is no script or intermediate JSON.
 
-| Página Figma | node-id | Qué define | Dónde vive en el proyecto |
+| Figma page | node-id | What it defines | Where it lives in the project |
 |---|---|---|---|
-| DS · Color | `19:307` | Primitivas (`29:2`), semánticos Light/Dark (`30:2`, grid `30:8`), reglas de uso (`32:2`) | `Assets.xcassets/Colors/*` y `AccentColor` |
-| DS · Tipografía | `19:308` | Escala SF Pro + equivalente SwiftUI (`22:6`) | `Typography.swift` |
+| DS · Color | `19:307` | Primitives (`29:2`), Light/Dark semantic colors (`30:2`, grid `30:8`), usage rules (`32:2`) | `Assets.xcassets/Colors/*` and `AccentColor` |
+| DS · Tipografía | `19:308` | SF Pro scale + SwiftUI equivalent (`22:6`) | `Typography.swift` |
 | DS · Espaciado y radios | `19:309` | `spacing/*`, `radius/*`, `size/*`, `border/*`, `layout/*` (`23:2`) | `Spacing.swift`, `Radius.swift`, `Size.swift`, `Border.swift` |
-| DS · Elevación | `19:310` | Niveles de sombra (`23:152`) | `Elevation.swift` |
-| DS · Líneas | `19:311` | Badges de línea, chips de estado, cómo añadir una línea (`24:2`) | `LineTint.swift` |
-| Componentes · A2 LineBadge | `44:36` | Átomo badge de línea (`40:61`) | `View/Components/Atoms/LineBadge.swift` |
-| Componentes · A3 StatusChip | `44:66` | Átomo estado del tren (`40:71`) | `View/Components/Atoms/StatusChip.swift` |
-| Componentes · A4 Button | `44:96` | Botón Prominent / Bordered / Borderless (`48:314`) | `View/Components/Atoms/Button/RailButtonStyle.swift` |
-| Componentes · A6 GlassButton | `51:18` | Botón Liquid Glass Clear / Tinted (`49:57`) | `View/Components/Atoms/Button/RailGlassButtonStyle.swift` |
-| Componentes · A7 GlassIconButton | `51:48` | Botón de icono Liquid Glass (`49:76`) | `View/Components/Atoms/Button/RailGlassIconButtonStyle.swift` |
-| Componentes · A8 SeverityBadge | `102:22` | Átomo gravedad de incidencia (`102:78`) | `View/Components/Atoms/SeverityBadge.swift` |
-| Componentes · A9 FavoriteButton | `122:26` | Átomo estrella de favorito (`122:78`) | `View/Components/Atoms/FavoriteToggleStyle.swift` |
-| Componentes · A10 FilterChip | `148:794` | Átomo chip de filtro (`148:42`) | `View/Components/Atoms/FilterChipStyle.swift` |
-| Componentes · M1 DepartureRow | `56:153` | Molécula fila de salida (`54:125`) | `View/Components/Molecules/DepartureRow.swift` |
-| Componentes · M2 StationRow | `56:183` | Molécula fila de estación (`54:161`) | `View/Components/Molecules/StationRow.swift` |
-| Componentes · M7 AlertBanner | `102:220` | Molécula banda de aviso de incidencia (`103:188`) | `View/Components/Molecules/AlertBanner.swift` |
-| Componentes · M8 IncidentRow | `103:189` | Molécula fila de incidencia (`104:316`) | `View/Components/Molecules/IncidentRow.swift` |
-| Componentes · M9 IncidentCard | `104:317` | Molécula tarjeta de incidencia (`106:273`) | `View/Components/Molecules/IncidentCard.swift` |
-| Mockups · 01 Inicio | `2:53` | Pantalla Home (`2:54`) y una pantalla por estado de la tarjeta de próximos trenes | `View/HomeView.swift`, `View/Components/NextTrainsSection.swift` |
-| Mockups · 01 Inicio · Card | `2:53` | Organismo tarjeta de próximos trenes (`59:1450` y seis estados más, ver *Tarjeta de próximos trenes*) | `View/Components/Organisms/NextTrainsCard.swift` |
-| Mockups · 01 Inicio · Station Container | `2:53` | Molécula nombre de estación y proximidad (`59:1452`) | `View/Components/Molecules/StationHeader.swift` |
-| Mockups · 01 Inicio · Section Header | `2:53` | Molécula cabecera de sección con icono (`59:1455`) | `View/Components/Molecules/CardSectionHeader.swift` |
-| Mockups · 01 Inicio · Permiso / Sin trenes | `2:53` | Molécula mensaje de tarjeta, regular (`220:1974`) y compacta (`220:3269`) | `View/Components/Molecules/CardMessage.swift` |
-| Mockups · 01 Inicio · trenecito | `2:53` | Ilustración del tren (`60:3377`); en código se usa el SVG entregado por el usuario, no el de Figma | `View/Components/Atoms/TrainIllustration.swift` |
-| Mockups · 01 Inicio · Favorite Stations Container | `2:53` | Organismo sección de estaciones favoritas (`59:1518`); estado vacío en la pantalla *Home sin favoritas* (`220:3329`) | `View/Components/Organisms/FavoriteStationsContainer.swift`, `View/Components/FavoriteStationsSection.swift` |
-| Mockups · 01 Inicio · tarjeta de favorita | `2:53` | Molécula tarjeta de estación favorita (`60:2215`) | `View/Components/Molecules/FavoriteStationCard.swift` |
-| Mockups · 01 Inicio · Favoritos vacíos | `2:53` | Molécula de estado vacío (`220:3525`) | `View/Components/Molecules/EmptyStateCard.swift` |
-| Mockups · 01 Inicio · Imagen de fondo | `2:53` | Foto de cabecera (`60:3294`), 393×262 con relleno *Fill*; el original mide 786×442 | `Assets.xcassets/Photos/HomeHero.imageset`, `View/Components/Atoms/HomeHeroImage.swift` |
-| Mockups · 01 Inicio · Logo | `2:53` | Logo de la barra superior (`143:5493`), 44×44 | `Assets.xcassets/Illustrations/RailLogo.imageset`, `View/Components/Atoms/RailLogo.swift` |
-| Mockups · Notificaciones | — | Hoja de avisos en español (`389:4606`) y para otros idiomas, con banda de idioma y «Traducir» (`207:11115`) | `View/ServiceAlertsSheet.swift`, `View/Components/Organisms/ServiceAlertsList.swift` |
+| DS · Elevación | `19:310` | Shadow levels (`23:152`) | `Elevation.swift` |
+| DS · Líneas | `19:311` | Line badges, status chips, how to add a line (`24:2`) | `LineTint.swift` |
+| Componentes · A2 LineBadge | `44:36` | Line badge atom (`40:61`) | `View/Components/Atoms/LineBadge.swift` |
+| Componentes · A3 StatusChip | `44:66` | Train status atom (`40:71`) | `View/Components/Atoms/StatusChip.swift` |
+| Componentes · A4 Button | `44:96` | Prominent / Bordered / Borderless button (`48:314`) | `View/Components/Atoms/Button/RailButtonStyle.swift` |
+| Componentes · A6 GlassButton | `51:18` | Liquid Glass Clear / Tinted button (`49:57`) | `View/Components/Atoms/Button/RailGlassButtonStyle.swift` |
+| Componentes · A7 GlassIconButton | `51:48` | Liquid Glass icon button (`49:76`) | `View/Components/Atoms/Button/RailGlassIconButtonStyle.swift` |
+| Componentes · A8 SeverityBadge | `102:22` | Incident severity atom (`102:78`) | `View/Components/Atoms/SeverityBadge.swift` |
+| Componentes · A9 FavoriteButton | `122:26` | Favorite star atom (`122:78`) | `View/Components/Atoms/FavoriteToggleStyle.swift` |
+| Componentes · A10 FilterChip | `148:794` | Filter chip atom (`148:42`) | `View/Components/Atoms/FilterChipStyle.swift` |
+| Componentes · M1 DepartureRow | `56:153` | Departure row molecule (`54:125`) | `View/Components/Molecules/DepartureRow.swift` |
+| Componentes · M2 StationRow | `56:183` | Station row molecule (`54:161`) | `View/Components/Molecules/StationRow.swift` |
+| Componentes · M7 AlertBanner | `102:220` | Incident alert banner molecule (`103:188`) | `View/Components/Molecules/AlertBanner.swift` |
+| Componentes · M8 IncidentRow | `103:189` | Incident row molecule (`104:316`) | `View/Components/Molecules/IncidentRow.swift` |
+| Componentes · M9 IncidentCard | `104:317` | Incident card molecule (`106:273`) | `View/Components/Molecules/IncidentCard.swift` |
+| Mockups · 01 Inicio | `2:53` | Home screen (`2:54`) and one screen per state of the next trains card | `View/HomeView.swift`, `View/Components/NextTrainsSection.swift` |
+| Mockups · 01 Inicio · Card | `2:53` | Next trains card organism (`59:1450` and six more states, see *Next trains card*) | `View/Components/Organisms/NextTrainsCard.swift` |
+| Mockups · 01 Inicio · Station Container | `2:53` | Station name and proximity molecule (`59:1452`) | `View/Components/Molecules/StationHeader.swift` |
+| Mockups · 01 Inicio · Section Header | `2:53` | Section header with icon molecule (`59:1455`) | `View/Components/Molecules/CardSectionHeader.swift` |
+| Mockups · 01 Inicio · Permiso / Sin trenes | `2:53` | Card message molecule, regular (`220:1974`) and compact (`220:3269`) | `View/Components/Molecules/CardMessage.swift` |
+| Mockups · 01 Inicio · trenecito | `2:53` | Train illustration (`60:3377`); the code uses the SVG supplied by the user, not the one from Figma | `View/Components/Atoms/TrainIllustration.swift` |
+| Mockups · 01 Inicio · Favorite Stations Container | `2:53` | Favorite stations section organism (`59:1518`); empty state on the *Home sin favoritas* screen (`220:3329`) | `View/Components/Organisms/FavoriteStationsContainer.swift`, `View/Components/FavoriteStationsSection.swift` |
+| Mockups · 01 Inicio · tarjeta de favorita | `2:53` | Favorite station card molecule (`60:2215`) | `View/Components/Molecules/FavoriteStationCard.swift` |
+| Mockups · 01 Inicio · Favoritos vacíos | `2:53` | Empty state molecule (`220:3525`) | `View/Components/Molecules/EmptyStateCard.swift` |
+| Mockups · 01 Inicio · Imagen de fondo | `2:53` | Header photo (`60:3294`), 393×262 with a *Fill* fill; the original is 786×442 | `Assets.xcassets/Photos/HomeHero.imageset`, `View/Components/Atoms/HomeHeroImage.swift` |
+| Mockups · 01 Inicio · Logo | `2:53` | Top bar logo (`143:5493`), 44×44 | `Assets.xcassets/Illustrations/RailLogo.imageset`, `View/Components/Atoms/RailLogo.swift` |
+| Mockups · Notificaciones | — | Alerts sheet in Spanish (`389:4606`) and for other languages, with a language banner and «Traducir» (`207:11115`) | `View/ServiceAlertsSheet.swift`, `View/Components/Organisms/ServiceAlertsList.swift` |
+| Mockups · Favoritos | — | Screen with favorites (`464:8277`) and empty (`464:8524`) | `View/FavoriteStationsView.swift`, `View/Components/Molecules/IllustratedMessage.swift` |
+| Mockups · Elegir estación | — | Station picker sheet (`389:5385`) and no results (`389:5417`) | `View/StationPickerSheet.swift`, `View/Presentation/StationPickerSection.swift` |
 
-URL de cualquier nodo: `https://www.figma.com/design/WFoeo57elVOwmgKto1iwfq/?node-id=<id con guion>` (por ejemplo `node-id=30-2`).
+URL of any node: `https://www.figma.com/design/WFoeo57elVOwmgKto1iwfq/?node-id=<id with a hyphen>` (for example `node-id=30-2`).
 
-Las filas de *Mockups* no son componentes de Figma: son frames de maqueta, sin variantes ni frame `Doc/`. Sus medidas se leen de los propios frames y hay que descartar las capas ocultas (`visible: false`).
+The *Mockups* rows are not Figma components: they are mockup frames, with no variants and no `Doc/` frame. Their measurements are read from the frames themselves, and hidden layers (`visible: false`) must be discarded.
 
-## Convención de nombres
+## Naming convention
 
-| Figma | Proyecto |
+| Figma | Project |
 |---|---|
-| `color/<grupo>/<nombre-kebab>` | color set `<grupo><NombreCamel>` en `Assets.xcassets/Colors/<Grupo>/` → `Color.<grupo><NombreCamel>` (símbolo generado por Xcode) |
+| `color/<group>/<kebab-name>` | color set `<group><CamelName>` in `Assets.xcassets/Colors/<Group>/` → `Color.<group><CamelName>` (symbol generated by Xcode) |
 | `color/bg/primary` | `bgPrimary` → `Color.bgPrimary`, `.foregroundStyle(.bgPrimary)` |
 | `color/status/success-bg` | `statusSuccessBg` |
 | `spacing/2xs · xs · sm · … · 5xl` | `Spacing.xxs · xs · sm · … · xxxxxl` |
-| `layout/margin · gutter` | `ScreenLayout.margin · gutter` (`Layout` ya existe en SwiftUI) |
-| `radius/sm … xl` | `Radius.sm … xl`; `radius/full` se expresa con `.capsule` / `.circle`, no con el número |
+| `layout/margin · gutter` | `ScreenLayout.margin · gutter` (`Layout` already exists in SwiftUI) |
+| `radius/sm … xl` | `Radius.sm … xl`; `radius/full` is expressed with `.capsule` / `.circle`, not with the number |
 | `size/touch-min · row-min · icon-sm · line-badge …` | `Size.touchMin · rowMin · iconSm · lineBadge …` |
 | `border/hairline · thin · thick` | `Border.hairline · thin · thick` |
-| Estilos de texto | estilos de sistema (`.body`, `.headline`, …) o `Font.bodyEmphasized`, `.timeDeparture`, … |
+| Text styles | system styles (`.body`, `.headline`, …) or `Font.bodyEmphasized`, `.timeDeparture`, … |
 | `Elevation/Card · Sheet · Floating` | `.elevation(.card / .sheet / .floating)` |
 
-Las carpetas de `Assets.xcassets/Colors` **no** llevan *Provides Namespace*: solo organizan; el nombre del color set es el nombre del símbolo. El nombre SwiftUI de cada color aparece en la columna "SwiftUI" de la página de semánticos, y el de spacing/radius/size en su página: copiar tal cual.
+The folders in `Assets.xcassets/Colors` do **not** have *Provides Namespace*: they only organize; the color set name is the symbol name. The SwiftUI name of each color appears in the "SwiftUI" column of the semantic colors page, and that of spacing/radius/size on their own page: copy it verbatim.
 
-## Cómo actualizar
+## How to update
 
-### Cambiar el valor de un color existente
-1. En Figma, página *DS · Color* → sección *02 Color · Semánticos* → fila del token. Las muestras **Light** y **Dark** son frames con modo explícito.
-2. En Xcode, `Assets.xcassets/Colors/<Grupo>/<nombre>.colorset` → editar *Any Appearance* (Light) y *Dark*. Los valores son sRGB hex; `bg/scrim` y `interactive/pressed-overlay` llevan alpha.
-3. Con Claude y el MCP de Figma: `get_variable_defs` sobre el frame **Light** de la fila devuelve el valor claro y sobre el frame **Dark** el oscuro (por ejemplo `30:26` y `30:29` para `bg/primary`). `get_design_context` sobre el grid `30:8` devuelve todas las filas de una vez, con el hex de cada modo como fallback de `var(--color/...)`.
+### Change the value of an existing color
+1. In Figma, page *DS · Color* → section *02 Color · Semánticos* → the token's row. The **Light** and **Dark** swatches are frames with an explicit mode.
+2. In Xcode, `Assets.xcassets/Colors/<Group>/<name>.colorset` → edit *Any Appearance* (Light) and *Dark*. Values are sRGB hex; `bg/scrim` and `interactive/pressed-overlay` carry alpha.
+3. With Claude and the Figma MCP: `get_variable_defs` on the row's **Light** frame returns the light value, and on the **Dark** frame the dark one (for example `30:26` and `30:29` for `bg/primary`). `get_design_context` on the grid `30:8` returns every row at once, with each mode's hex as the fallback of `var(--color/...)`.
 
-### Añadir un color nuevo
-1. Crear el color set en la carpeta del grupo con el nombre de la columna SwiftUI de Figma (o derivarlo con la convención de arriba).
-2. Añadir Any/Light y Dark. Xcode genera `Color.<nombre>` al compilar.
-3. Añadirlo a la lista correspondiente en `TokenGallery.swift` para poder revisarlo en el preview.
+### Add a new color
+1. Create the color set in the group's folder with the name from Figma's SwiftUI column (or derive it with the convention above).
+2. Add Any/Light and Dark. Xcode generates `Color.<name>` when building.
+3. Add it to the matching list in `TokenGallery.swift` so it can be reviewed in the preview.
 
-### Cambiar spacing, radios, tamaños, bordes o tipografía
-Editar la constante en el fichero Swift correspondiente. Si la diseñadora añade un paso nuevo (por ejemplo `spacing/6xl`), añadirlo con el nombre que indique su columna SwiftUI y reflejarlo en `TokenGallery.swift`.
+### Change spacing, radii, sizes, borders or typography
+Edit the constant in the matching Swift file. If the designer adds a new step (for example `spacing/6xl`), add it with the name given in its SwiftUI column and reflect it in `TokenGallery.swift`.
 
-### Cambiar una sombra
-`Elevation.swift`. Figma expresa el desenfoque como *blur*; en SwiftUI `radius ≈ blur / 2`. Colores `black/alpha-8 · 12 · 16` = `.black.opacity(0.08 · 0.12 · 0.16)`.
+### Change a shadow
+`Elevation.swift`. Figma expresses the spread as *blur*; in SwiftUI `radius ≈ blur / 2`. Colors `black/alpha-8 · 12 · 16` = `.black.opacity(0.08 · 0.12 · 0.16)`.
 
-| Nivel | Figma | SwiftUI |
+| Level | Figma | SwiftUI |
 |---|---|---|
-| None | sin sombra | `.elevation(.none)` |
+| None | no shadow | `.elevation(.none)` |
 | Card | 0 1 3 · black/alpha-8 | `shadow(0.08, radius 1.5, y 1)` |
 | Sheet | 0 −2 12 · black/alpha-12 | `shadow(0.12, radius 6, y −2)` |
-| Floating | 0 4 16 · alpha-16 + 0 1 3 · alpha-8 | dos `shadow` encadenados |
+| Floating | 0 4 16 · alpha-16 + 0 1 3 · alpha-8 | two chained `shadow`s |
 
-### Añadir una línea nueva (C3, …)
-El color base de cada línea **lo envía la API** (`Line.colorHex`), así que no hay color sets `line/c1`, `line/c2`. `LineTint` deriva del color base lo que Figma define como tokens de línea:
+### Add a new line (C3, …)
+The base color of each line **is sent by the API** (`Line.colorHex`), so there are no `line/c1`, `line/c2` color sets. `LineTint` derives from the base color what Figma defines as line tokens:
 
-| Token Figma | Valor Figma (C1) | En el proyecto |
+| Figma token | Figma value (C1) | In the project |
 |---|---|---|
 | `color/line/c1` | #DA291C / #DA291C | `line.tint.base` (API) |
 | `color/line/c1-text` | #FFFFFF | `line.tint.text` |
-| `color/line/c1-subtle` | #FDF3F2 (50) / #62100A (900) | `line.tint.subtle` (mezcla con blanco 92 % / negro 55 %) |
+| `color/line/c1-subtle` | #FDF3F2 (50) / #62100A (900) | `line.tint.subtle` (mixed with white 92 % / black 55 %) |
 
-Si la diseñadora añade `color/line/c3*` en Figma, en el proyecto no hay que hacer nada más que comprobar en `TokenGallery` que la derivación se parece a sus valores; si se alejan, ajustar los factores de mezcla en `LineTint.swift`. Tamaños y radios del badge: `Size.lineBadgeSm` (20) / `Size.lineBadge` (28) con `Radius.sm` / `Radius.md`.
+If the designer adds `color/line/c3*` in Figma, the project needs nothing more than a check in `TokenGallery` that the derivation looks like their values; if they drift apart, adjust the mix factors in `LineTint.swift`. Badge sizes and radii: `Size.lineBadgeSm` (20) / `Size.lineBadge` (28) with `Radius.sm` / `Radius.md`.
 
-## Semánticos (referencia rápida)
+## Semantic colors (quick reference)
 
-Valores completos en los propios color sets. Grupos y uso, según Figma:
+Full values live in the color sets themselves. Groups and usage, according to Figma:
 
-- **bg** · superficies y capas: `primary → secondary → elevated`; `scrim` para fondos de modal (negro 40 %).
-- **text** · jerarquía: `primary` contenido, `secondary` apoyo, `tertiary` metadatos; `onBrand` sobre morado; `link`; `disabled`.
-- **border** · `default` campos y tarjetas, `subtle` separadores, `strong`, `focus`.
-- **brand** · `primary` (+ `hover`, `pressed`, `subtle`, `onPrimary`) y `cercanias` (rojo de marca, solo referencia).
-- **status** · `success · warning · error · info`, cada uno con `-bg` y `-text`.
-- **transit** · alias de `status` para el estado del tren: `onTime · delayed · cancelled` (+ `-bg`, `-text`). Usar siempre estos, no `status/*`, para el estado del tren.
+- **bg** · surfaces and layers: `primary → secondary → elevated`; `scrim` for modal backdrops (black 40 %).
+- **text** · hierarchy: `primary` content, `secondary` supporting, `tertiary` metadata; `onBrand` on purple; `link`; `disabled`.
+- **border** · `default` fields and cards, `subtle` separators, `strong`, `focus`.
+- **brand** · `primary` (+ `hover`, `pressed`, `subtle`, `onPrimary`) and `cercanias` (brand red, reference only).
+- **status** · `success · warning · error · info`, each with `-bg` and `-text`.
+- **transit** · alias of `status` for train status: `onTime · delayed · cancelled` (+ `-bg`, `-text`). Always use these, not `status/*`, for train status.
 - **interactive** · `tabbarActive/Inactive`, `separator`, `icon`, `iconSubtle`, `pressedOverlay` (8 % alpha), `favorite` (+ `-bg`, `-text`, `-pressed`).
-- **brand/tint-fill** · `brandTintFill`, primario al 14 % (Dark: purple/400 al 18 %): fondo del botón Bordered.
-- **fill** · `fillTertiary` (gray/500 al 12 %, igual en Light y Dark): fondo de controles deshabilitados.
-- **glass** · `glassFillTinted` (tinte del cristal Tinted) y `glassText` (texto sobre cristal Clear). `glass/fill` no tiene color set: es la aproximación de Figma al cristal y en código lo sustituye `glassEffect(.regular)`.
+- **brand/tint-fill** · `brandTintFill`, primary at 14 % (Dark: purple/400 at 18 %): background of the Bordered button.
+- **fill** · `fillTertiary` (gray/500 at 12 %, same in Light and Dark): background of disabled controls.
+- **glass** · `glassFillTinted` (tint of the Tinted glass) and `glassText` (text on Clear glass). `glass/fill` has no color set: it is Figma's approximation of glass, and in code `glassEffect(.regular)` replaces it.
 
-`AccentColor` = `brand/primary` (#7A1E78 / Dark #B45FB0): los controles del sistema lo heredan sin tinte explícito.
+`AccentColor` = `brand/primary` (#7A1E78 / Dark #B45FB0): system controls inherit it without an explicit tint.
 
-## Primitivas (solo referencia)
+## Primitives (reference only)
 
-Las primitivas no existen en el proyecto como API: las vistas usan siempre semánticos. Esta tabla sirve para entender de qué primitiva sale cada semántico cuando la diseñadora habla de "subir a purple/400 en Dark".
+Primitives do not exist in the project as an API: views always use semantic colors. This table explains which primitive each semantic color comes from when the designer talks about "moving up to purple/400 in Dark".
 
-| Rampa | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 |
+| Ramp | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| purple (primario, inspirado en Renfe) | FBF2FA | F3DEF2 | E6BEE4 | D08FCD | B45FB0 | 983A95 | **7A1E78** | 631561 | 4C0F4A | 340A33 |
+| purple (primary, inspired by Renfe) | FBF2FA | F3DEF2 | E6BEE4 | D08FCD | B45FB0 | 983A95 | **7A1E78** | 631561 | 4C0F4A | 340A33 |
 | red (Cercanías · C-1) | FDF3F2 | FBE0DD | F7C1BC | F09489 | E8655A | E23F30 | **DA291C** | B51F14 | 8C170F | 62100A |
 | blue (C-2) | EEF5FC | D6E6F8 | ADCDF1 | 7AACE6 | 4A8BD8 | 206EC3 | **0057A8** | 004689 | 003567 | 002446 |
-| gray (neutros cálidos) | F9F9F8 | F2F2F0 | E5E5E2 | D2D2CE | A8A8A3 | 7C7C77 | **5C5C58** | 44443F | 2C2C29 | 1C1C1A |
-| green (éxito · puntual) | EDF9F0 | D3F0DC | A8E1BA | 74CC91 | 43B46B | 249A4F | **1B7F40** | 166534 | 124F2A | 0C3A1F |
-| amber (aviso · retraso) | FFF8E6 | FFEDBF | FFDD85 | FFC94A | F7B31C | E39A00 | **C07F00** | 986300 | 714900 | 4D3100 |
+| gray (warm neutrals) | F9F9F8 | F2F2F0 | E5E5E2 | D2D2CE | A8A8A3 | 7C7C77 | **5C5C58** | 44443F | 2C2C29 | 1C1C1A |
+| green (success · on time) | EDF9F0 | D3F0DC | A8E1BA | 74CC91 | 43B46B | 249A4F | **1B7F40** | 166534 | 124F2A | 0C3A1F |
+| amber (warning · delay) | FFF8E6 | FFEDBF | FFDD85 | FFC94A | F7B31C | E39A00 | **C07F00** | 986300 | 714900 | 4D3100 |
 
-Otros: `white` FFFFFF · `black` 000000 · `gray/950` 121211 · `ios/systemRed` FF3B30 · `ios/systemGreen` 34C759 · `ios/systemOrange` FF9500 · `ios/systemBlue` 007AFF · `ios/systemYellow` FFCC00 · `black/alpha-8 · 16 · 40` · `white/alpha-16`.
+Others: `white` FFFFFF · `black` 000000 · `gray/950` 121211 · `ios/systemRed` FF3B30 · `ios/systemGreen` 34C759 · `ios/systemOrange` FF9500 · `ios/systemBlue` 007AFF · `ios/systemYellow` FFCC00 · `black/alpha-8 · 16 · 40` · `white/alpha-16`.
 
-## Tipografía
+## Typography
 
-SF Pro en toda la app, escala Dynamic Type (tamaño Large por defecto). Se usan los estilos del sistema; solo los compuestos tienen constante propia.
+SF Pro throughout the app, Dynamic Type scale (Large size by default). System styles are used; only the composite ones have their own constant.
 
-| Figma | Tamaño/interlineado · peso | SwiftUI |
+| Figma | Size/line height · weight | SwiftUI |
 |---|---|---|
 | Large Title | 34/41 · Bold | `.largeTitle` |
 | Title 1 | 28/34 · Bold | `.title` |
-| Title 2 | 22/28 · Bold | `.title2Emphasized` (el `.title2` del sistema es Regular) |
-| Title 3 | 20/25 · Semibold | `.title3` |
+| Title 2 | 22/28 · Bold | `.title2Emphasized` (the system `.title2` is Regular) |
+| Title 3 | 20/25 · Semibold | `.title3Emphasized` (the system `.title3` is Regular) |
 | Headline | 17/22 · Semibold | `.headline` |
 | Body | 17/22 · Regular | `.body` |
 | Body Emphasized | 17/22 · Semibold | `.bodyEmphasized` |
@@ -144,153 +146,206 @@ SF Pro en toda la app, escala Dynamic Type (tamaño Large por defecto). Se usan 
 | Subheadline Emphasized | 15/20 · Semibold | `.subheadlineEmphasized` |
 | Footnote | 13/18 · Regular | `.footnote` |
 | Caption 1 | 12/16 · Regular | `.caption` |
-| Caption 1 Emphasized | 12/16 · Semibold · tracking 0.6 | `.captionEmphasized` (+ `.tracking(Tracking.wide)` en etiquetas en mayúsculas) |
+| Caption 1 Emphasized | 12/16 · Semibold · tracking 0.6 | `.captionEmphasized` (+ `.tracking(Tracking.wide)` on uppercase labels) |
 | Caption 2 | 11/13 · Regular | `.caption2` |
-| Time/Departure | 17/22 · Semibold · cifras tabulares | `.timeDeparture` |
-| Time/Departure Large | 22/28 · Bold · cifras tabulares | `.timeDepartureLarge` |
+| Time/Departure | 17/22 · Semibold · tabular figures | `.timeDeparture` |
+| Time/Departure Large | 22/28 · Bold · tabular figures | `.timeDepartureLarge` |
 
-Reglas de Figma: horas siempre con `Time/Departure`; Large Title en navegación grande y Title 2 para nombres de estación en tarjetas; etiquetas de sección en `Caption 1 Emphasized` mayúsculas con `textSecondary`; no bajar de Caption 2; jerarquía dentro de una línea por peso, no por color.
+Figma rules: times always with `Time/Departure`; Large Title in large navigation and Title 2 for station names in cards; section labels in uppercase `Caption 1 Emphasized` with `textSecondary`; never go below Caption 2; hierarchy within a line through weight, not color.
 
-## Espaciado, radios, tamaños
+## Spacing, radii, sizes
 
-- Escala base 4 pt: `spacing/0 2xs xs sm md lg xl 2xl 3xl 4xl 5xl` = 0 2 4 8 12 16 20 24 32 40 48.
-- `layout/margin` 16 (margen lateral de pantalla) · `layout/gutter` 12 (entre tarjetas).
-- Radios continuos: `sm` 6 badges pequeños · `md` 10 badges grandes y celdas · `lg` 14 tarjetas · `xl` 20 bottom sheets · `full` botones, chips, búsqueda y controles Liquid Glass (cápsula).
-- Tamaños: `touch-min` 44 · `icon-sm/md/lg` 16/24/32 · `line-badge` 28 (`line-badge-sm` 20, del componente LineBadge) · `chip` 24 (StatusChip) · `button-sm/md/lg` 28/34/50 · `glass-control` 48 (`glass-control-lg` 62) · `navbar` 44 · `tabbar` 49.
-- Bordes: `hairline` 0.5 separadores de lista · `thin` 1 campos y tarjetas · `thick` 2 foco.
+- 4 pt base scale: `spacing/0 2xs xs sm md lg xl 2xl 3xl 4xl 5xl` = 0 2 4 8 12 16 20 24 32 40 48.
+- `layout/margin` 16 (screen side margin) · `layout/gutter` 12 (between cards).
+- Continuous radii: `sm` 6 small badges · `md` 10 large badges and cells · `lg` 14 cards · `xl` 20 bottom sheets · `full` buttons, chips, search and Liquid Glass controls (capsule).
+- Sizes: `touch-min` 44 · `icon-sm/md/lg` 16/24/32 · `line-badge` 28 (`line-badge-sm` 20, from the LineBadge component) · `chip` 24 (StatusChip) · `button-sm/md/lg` 28/34/50 · `glass-control` 48 (`glass-control-lg` 62) · `navbar` 44 · `tabbar` 49.
+- Borders: `hairline` 0.5 list separators · `thin` 1 fields and cards · `thick` 2 focus.
 
-## Reglas de uso (Figma)
+## Usage rules (Figma)
 
-- Rojo solo para el badge C-1, `brand/cercanias` y errores. Nunca como primario.
-- Morado primario para botones principales, tab activo, enlaces y foco.
-- Estado del tren con `transit/*`, siempre acompañado de texto.
-- Listas y celdas sin sombra (`Elevation/None`) separadas con `interactiveSeparator` hairline; tarjetas sobre `bgSecondary` con `Elevation/Card`; si la tarjeta va sobre `bgPrimary`, sin sombra y con `bgSecondary` de relleno; bottom sheet = `Elevation/Sheet` + `Radius.xl` arriba + `bgElevated`; flotantes = `Elevation/Floating`. Nunca dos niveles en el mismo elemento ni sombra en texto o iconos.
+- Red only for the C-1 badge, `brand/cercanias` and errors. Never as the primary color.
+- Primary purple for main buttons, the active tab, links and focus.
+- Train status with `transit/*`, always accompanied by text.
+- Lists and cells without shadow (`Elevation/None`), separated with a hairline `interactiveSeparator`; cards on `bgSecondary` with `Elevation/Card`; if the card sits on `bgPrimary`, no shadow and a `bgSecondary` fill; bottom sheet = `Elevation/Sheet` + `Radius.xl` at the top + `bgElevated`; floating elements = `Elevation/Floating`. Never two levels on the same element, and never a shadow on text or icons.
 
-## Incidencias
+## Incidents
 
-La propiedad `Severity` de Figma (Info · Warning · Critical · Resolved) es en el proyecto un único tipo, `IncidentSeverity`, que comparten `SeverityBadge`, `AlertBanner`, `IncidentRow` e `IncidentCard`. De ahí salen el símbolo SF y los tres tokens de cada gravedad:
+Figma's `Severity` property (Info · Warning · Critical · Resolved) is a single type in the project, `IncidentSeverity`, shared by `SeverityBadge`, `AlertBanner`, `IncidentRow` and `IncidentCard`. It provides the SF Symbol and the three tokens of each severity:
 
-| Gravedad | Símbolo | `tint` (icono) | `background` (fondo) | `foreground` (texto) | `label` |
+| Severity | Symbol | `tint` (icon) | `background` | `foreground` (text) | `label` |
 |---|---|---|---|---|---|
 | `.info` | `info.circle.fill` | `statusInfo` | `statusInfoBg` | `statusInfoText` | Aviso |
 | `.warning` | `exclamationmark.triangle.fill` | `statusWarning` | `statusWarningBg` | `statusWarningText` | Retrasos |
 | `.critical` | `exclamationmark.circle.fill` | `statusError` | `statusErrorBg` | `statusErrorText` | Interrumpido |
 | `.resolved` | `checkmark.circle.fill` | `statusSuccess` | `statusSuccessBg` | `statusSuccessText` | Resuelto |
 
-- El icono va siempre en `tint` y el texto en `foreground`; no se mezclan.
-- `label` es la etiqueta corta por defecto: `SeverityBadge(.warning)` e `IncidentCard` la usan sin que haya que pasarla. Con `label:` se sustituye por una etiqueta propia y VoiceOver lee esa etiqueta, lo mismo que se ve. `IncidentCard(_:label:…)` la pasa al badge.
-- Las líneas afectadas se pasan como `[LineMark]` (`LineMark("C-1", color:)`), el mismo tipo que usa `StationRow`. El color lo envía la API (`Line.colorHex`), nunca un hex escrito a mano.
-- `AlertBanner` deriva su interacción de los cierres: `onTap` pinta el chevron y hace tocable la banda, `onDismiss` pinta la X (con área táctil de 44 pt). No hay props `Show chevron` / `Show close`.
-- `IncidentCard` recibe la acción como contenido (`IncidentCard(...) { Button("Ver detalles") {} }`) y le aplica ella misma `.rail(.borderless)` en `.small`.
+- The icon always uses `tint` and the text `foreground`; they are never mixed.
+- `label` is the default short label: `SeverityBadge(.warning)` and `IncidentCard` use it without it being passed. `label:` replaces it with a custom label, and VoiceOver reads that label, the same one that is shown. `IncidentCard(_:label:…)` passes it on to the badge.
+- Affected lines are passed as `[LineMark]` (`LineMark("C-1", color:)`), the same type `StationRow` uses. The color is sent by the API (`Line.colorHex`), never a hand-written hex.
+- `AlertBanner` derives its interaction from the closures: `onTap` draws the chevron and makes the banner tappable, `onDismiss` draws the X (with a 44 pt touch area). There are no `Show chevron` / `Show close` props.
+- `IncidentCard` takes the action as content (`IncidentCard(...) { Button("Ver detalles") {} }`) and applies `.rail(.borderless)` at `.small` to it itself.
 
-## Avisos
+## Service alerts
 
-La campana de Inicio abre `ServiceAlertsSheet`, una hoja *Large* con «Notificaciones» y el botón de cerrar del sistema (`Button(role: .close)`). Maquetas: en español (`389:4606`) y para otros idiomas (`207:11115`).
+The Home bell opens `ServiceAlertsSheet`, a *Large* sheet titled «Notificaciones» with the system close button (`Button(role: .close)`). Mockups: in Spanish (`389:4606`) and for other languages (`207:11115`).
 
-- **Contenedor y contenido.** `ServiceAlertsSheet` lee `@Query` (`ServiceAlert`, `ServiceAlertFeed`, `Line` y `TransitNetwork`), sondea `liveFeeds.poll(.alerts)` mientras la hoja está abierta y la app en primer plano, y lleva la traducción. `ServiceAlertsList` solo pinta una `ServiceAlertsPhase` (`loading`, `unavailable`, `empty`, `content`). La fase, los items (`ServiceAlertItemBuilder`), la hora (`AlertTimestamp`) y la traducción (`AlertTranslation`) son lógica pura en `View/Presentation/`.
-- **La API no trae título.** El título de la tarjeta sale del tipo y el `text` de Renfe va entero como descripción:
+- **Container and content.** `ServiceAlertsSheet` reads `@Query` (`ServiceAlert`, `ServiceAlertFeed`, `Line` and `TransitNetwork`), polls `liveFeeds.poll(.alerts)` while the sheet is open and the app is in the foreground, and handles translation. `ServiceAlertsList` only draws a `ServiceAlertsPhase` (`loading`, `unavailable`, `empty`, `content`). The phase, the items (`ServiceAlertItemBuilder`), the time (`AlertTimestamp`) and the translation (`AlertTranslation`) are pure logic in `View/Presentation/`.
+- **The API sends no title.** The card title comes from the kind, and Renfe's `text` goes in full as the description:
 
-  | `kind` | Gravedad | Badge | Título |
+  | `kind` | Severity | Badge | Title |
   |---|---|---|---|
   | `notice` | `.warning` | Aviso | Aviso en la red |
   | `info`, `other` | `.info` | Info | Información de la red |
-- **Hora.** Menos de 1 min, «Ahora»; menos de 24 h, relativa de Foundation («Hace 12 min», «Hace 3 h»); después, «Desde 21/09», con «/2025» si es de otro año. Día y mes siguen el orden del primer idioma preferido del dispositivo (`Locale.preferredLanguages[0]`, porque la app solo tiene `es.lproj`), siempre a dos cifras, y en la zona horaria de la red. El español de CLDR da «24/9» sin año; por eso el patrón sale de la plantilla del locale y se fuerza a dos cifras (`AlertTimestamp.twoDigitPattern`). Se recalcula cada minuto con `TimelineView(.everyMinute)`.
-- **Otros idiomas.** Renfe solo publica en español y la interfaz sigue en español. Si el primer idioma preferido no es español y Translation admite el par es→idioma (`AlertTranslationSupport.resolve()`), aparecen una `AlertBanner(.info)` sin chevron ni cierre y, en cada tarjeta, «Traducir» (`sparkles`) en `.rail(.borderless)` `.small`. Al tocarlo pasa a «Traduciendo…» (desactivado) y luego a «Ver original» (`arrow.uturn.backward`), con el texto traducido en la descripción. El título y el badge no se traducen, porque son textos de la interfaz.
-- **Traducción.** Se hace con `.translationTask(configuration)`. Cada ejecución traduce de una vez todos los avisos activos que faltan, con `clientIdentifier` = `ServiceAlert.id`, y guarda cada traducción junto a su texto de origen: si Renfe edita el aviso, la traducción deja de valer. Si falla (en el simulador, Translation dice `unsupported`), la tarjeta vuelve al original. La sesión no se guarda nunca, y el fichero importa `@preconcurrency import Translation` porque `TranslationSession` no es `Sendable`.
-- **Fondo `bgSecondary`**, no el blanco del *template* de hoja de Figma: las tarjetas llevan `Elevation/Card` y la regla las pone sobre `bgSecondary`.
-- Los badges de línea muestran el id de la API («C1») con el color de la API, como en el resto de la app.
+- **Time.** Under 1 min, «Ahora»; under 24 h, Foundation's relative format («Hace 12 min», «Hace 3 h»); after that, «Desde 21/09», with «/2025» if it is from another year. Day and month follow the order of the device's first preferred language (`Locale.preferredLanguages[0]`, because the app only has `es.lproj`), always with two digits, and in the network time zone. CLDR Spanish gives «24/9» with no year; that is why the pattern comes from the locale's template and is forced to two digits (`AlertTimestamp.twoDigitPattern`). It is recomputed every minute with `TimelineView(.everyMinute)`.
+- **Other languages.** Renfe only publishes in Spanish and the interface stays in Spanish. If the first preferred language is not Spanish and Translation supports the es→language pair (`AlertTranslationSupport.resolve()`), an `AlertBanner(.info)` with no chevron or close button appears and, on each card, «Traducir» (`sparkles`) in `.rail(.borderless)` `.small`. Tapping it switches to «Traduciendo…» (disabled) and then to «Ver original» (`arrow.uturn.backward`), with the translated text in the description. The title and the badge are not translated, because they are interface text.
+- **Translation.** Done with `.translationTask(configuration)`. Each run translates all the missing active alerts in one go, with `clientIdentifier` = `ServiceAlert.id`, and stores each translation next to its source text: if Renfe edits the alert, the translation is no longer valid. If it fails (in the simulator, Translation reports `unsupported`), the card falls back to the original. The session is never stored, and the file uses `@preconcurrency import Translation` because `TranslationSession` is not `Sendable`.
+- **`bgSecondary` background**, not the white of Figma's sheet *template*: the cards use `Elevation/Card`, and the rule puts them on `bgSecondary`.
+- Line badges show the API id («C1») with the API color, as in the rest of the app.
 
-## Botones
+## Buttons
 
-Los tres componentes de botón de Figma son `ButtonStyle` sobre un `Button` normal. Las propiedades de Figma se traducen así:
+The three Figma button components are `ButtonStyle`s on a plain `Button`. Figma properties translate like this:
 
 | Figma | SwiftUI |
 |---|---|
-| `Style` | variante del estilo: `.buttonStyle(.rail(.prominent / .bordered / .borderless))`, `.railGlass(.clear / .tinted)`, `.railGlassIcon(.clear / .tinted)` |
+| `Style` | style variant: `.buttonStyle(.rail(.prominent / .bordered / .borderless))`, `.railGlass(.clear / .tinted)`, `.railGlassIcon(.clear / .tinted)` |
 | `Size` | `.controlSize(_:)`: Button `.small` 28 · `.regular` 34 · `.large` 50; GlassButton `.small` 34 · `.regular` 48; GlassIconButton `.regular` 48 · `.large` 62 |
-| `State = Pressed` | automático (`configuration.isPressed`; en cristal, `glassEffect(….interactive())`) |
+| `State = Pressed` | automatic (`configuration.isPressed`; on glass, `glassEffect(….interactive())`) |
 | `State = Disabled` | `.disabled(true)` |
-| `Label` / `Show icon` / `Icon` | la etiqueta del botón: `Button("Ver horarios") {}` o `Button("Ver horarios", systemImage: "clock") {}` |
+| `Label` / `Show icon` / `Icon` | the button's label: `Button("Ver horarios") {}` or `Button("Ver horarios", systemImage: "clock") {}` |
 
-- GlassIconButton usa `Button("Mi ubicación", systemImage: "location.fill")`: solo pinta el icono, pero VoiceOver lee el título.
-- Las alturas crecen con Dynamic Type (`@ScaledMetric`). Button y GlassButton amplían el área táctil hasta `Size.touchMin` (44).
-- En toolbars no hace falta estilo: iOS 26 ya aplica cristal a los botones de `.toolbar`.
+- GlassIconButton uses `Button("Mi ubicación", systemImage: "location.fill")`: it only draws the icon, but VoiceOver reads the title.
+- Heights grow with Dynamic Type (`@ScaledMetric`). Button and GlassButton extend the touch area to `Size.touchMin` (44).
+- Toolbars need no style: iOS 26 already applies glass to `.toolbar` buttons.
 
-## Ilustraciones
+## Illustrations
 
-- Van en `Assets.xcassets/Illustrations/` como imageset con un SVG y *Preserve Vector Data* (`preserves-vector-representation`). La carpeta no lleva *Provides Namespace*, igual que `Colors/`.
-- No llevan *Render As Template* ni se convierten en SF Symbol: son multicolor y el color forma parte del dibujo.
-- El SVG se normaliza antes de añadirlo. `width` y `height` pasan a ser numéricos, iguales al `viewBox`, y los estilos CSS (`style="fill:…"`) pasan a atributos (`fill="…"`). CoreSVG los interpreta mejor y el dibujo no cambia.
-- Cada ilustración tiene un átomo que la envuelve y la oculta a VoiceOver. El alto lo decide quien la usa: `TrainIllustration().frame(height: 53)`.
-- Pendiente de diseño: el tren es claro también en modo oscuro y destaca mucho sobre `bgPrimary` oscuro. Una versión oscura se añadiría como apariencia *Dark* del mismo imageset.
-- **Logo (`RailLogo`).** Figma lo exporta con un PNG enmascarado de 508×508 como fondo, así que el SVG del proyecto es una composición: una tesela de 44×44 con radio 11 y el degradado casi blanco de ese PNG (`#FCFCFC` → `#EFEFEF` en diagonal) más el glifo de `AppIcon.icon/Assets/Logo tren app.svg`, escalado y colocado donde lo pone Figma. Es igual en claro y en oscuro, como en la maqueta.
-- **Fotos.** Van en `Assets.xcassets/Photos/` (sin *Provides Namespace*) como JPEG. `HomeHero` se registra a 2x (786×442 px = 393×221 pt) y `HomeHeroImage` la pinta con `scaledToFill` recortada al marco que decide quien la usa. Pendiente de diseño: en iPad y Pro Max se verá blanda; hace falta una versión de más resolución.
+- They go in `Assets.xcassets/Illustrations/` as an imageset with an SVG and *Preserve Vector Data* (`preserves-vector-representation`). The folder has no *Provides Namespace*, same as `Colors/`.
+- They don't use *Render As Template* and aren't turned into SF Symbols: they are multicolor and the color is part of the drawing.
+- The SVG is normalized before adding it. `width` and `height` become numeric, equal to the `viewBox`, and CSS styles (`style="fill:…"`) become attributes (`fill="…"`). CoreSVG interprets them better and the drawing doesn't change.
+- Each illustration has an atom that wraps it and hides it from VoiceOver. The caller decides the height: `TrainIllustration().frame(height: 53)`.
+- Pending design: the train is light in dark mode too and stands out a lot on a dark `bgPrimary`. A dark version would be added as the *Dark* appearance of the same imageset.
+- **Logo (`RailLogo`).** Figma exports it with a masked 508×508 PNG as background, so the project's SVG is a composition: a 44×44 tile with radius 11 and that PNG's near-white gradient (`#FCFCFC` → `#EFEFEF` diagonally), plus the glyph from `AppIcon.icon/Assets/Logo tren app.svg`, scaled and placed where Figma puts it. It is the same in light and dark mode, as in the mockup.
+- **Empty states** (`EmptyStateIllustration(.noFavorites / .noResults)`). `PosteFavoritos` and `SenalSinResultados` are 3x PNGs with a transparent background, cropped from the sprite Figma uses as an image fill (`464:8639` and `458:8230`); they work the same in light and dark mode. The sign is cropped with 38 pt of empty space on the right, the mockup's `pr-[38px]`, so the post ends up centered. The design height is in `Kind.height` (196 and 164). `IllustratedMessage` draws them.
+- **Photos.** They go in `Assets.xcassets/Photos/` (no *Provides Namespace*) as JPEG. `HomeHero` is registered at 2x (786×442 px = 393×221 pt) and `HomeHeroImage` draws it with `scaledToFill`, cropped to whatever frame the caller chooses. Pending design: it will look soft on iPad and Pro Max; a higher-resolution version is needed.
 
-## Inicio
+## Home
 
-`HomeView(onShowMap:onShowStations:)` compone `NextTrainsSection` y `FavoriteStationsSection` dentro de `NavigationStack(path: [HomeRoute])` > `ScrollView`, sobre `bgSecondary`. Maquetas: con favoritas (`2:54`) y sin favoritas (`220:3329`).
+`HomeView(path:onShowMap:)` composes `NextTrainsSection` and `FavoriteStationsSection` inside `NavigationStack(path: [HomeRoute])` > `ScrollView`, on `bgSecondary`. Mockups: with favorites (`2:54`) and without favorites (`220:3329`).
 
-- **Foto a sangre** (`HomeHeroImage`). Va en el `.background(alignment: .top)` del contenido, con alto `topInset + 80 + 76` y desplazada `-topInset`. Así cubre la barra de estado y la de navegación y termina 76 pt dentro de la tarjeta de próximos trenes, que empieza a `topInset + 80`: en un iPhone 16 Pro, 262 y 186, como en Figma. `topInset` es `ScrollGeometry.contentInsets.top`. Al tirar hacia abajo se estira con `.visualEffect` (escala anclada abajo según `frame(in: .global).minY`; con `.scrollView` no crece). La capa *Blur* de Figma (`60:3460`) es el efecto de borde de scroll del sistema: no se imita.
-- **Alto visible** (`.fitsScrollViewport()`, en `ViewportFit.swift`). El contenido va dentro de un `Layout` de un solo hijo que le **propone** el alto visible pero reporta el alto **natural** que devuelva. Así Inicio ocupa exactamente una pantalla cuando cabe (sin scroll) y, cuando ni el mínimo de 3 favoritas cabe (ventana baja en iPad, iPhone en horizontal, tamaños de accesibilidad), el contenido crece y el `ScrollView` vuelve a desplazarse. Acotar con `.containerRelativeFrame(.vertical)` a secas no sirve: reporta siempre el alto del contenedor, así que el sobrante quedaba recortado e inalcanzable. El alto visible lo mide el propio modificador con una sonda `Color.clear.containerRelativeFrame(.vertical)` en el `background` (ya descuenta la barra de navegación y la de pestañas, y al ir en un `background` no afecta al layout); `ScrollGeometry.containerSize.height` da el mismo número. De `ScrollGeometry` solo se lee `contentInsets.top`, para la foto; nunca `contentOffset`, para no recalcular en cada frame.
-- **Barra superior.** A la izquierda, `RailLogo` de 44 pt con `.sharedBackgroundVisibility(.hidden)` (sin cristal); VoiceOver lo lee como la cabecera «Inicio», porque dentro de la barra la imagen no respeta `accessibilityHidden` y se leía «RailLogo». A la derecha, un `ToolbarItemGroup` con «Notificaciones» (`bell.fill`), que abre `ServiceAlertsSheet` en una hoja (ver *Avisos*), y «Ajustes» (`gearshape.fill`), que todavía no hace nada. Van sin estilo: iOS 26 los agrupa en una cápsula de cristal. El título «Inicio» se declara con `.navigationTitle` (lo usa el botón atrás) y se oculta con `.toolbarTitleDisplayMode(.inline)` más `.toolbar(removing: .title)`; sin el modo inline, el título grande sigue apareciendo.
-- **Ancho.** El contenido va centrado con un máximo de 640 pt (iPad, iPhone en horizontal); la foto sigue a sangre.
-- **Navegación** por `HomeRoute`: `.favorites` abre `FavoriteStationsView` (borrar deslizando, `EditButton` para reordenar, `ContentUnavailableView` si no hay ninguna) y `.station(id:)` abre `StationDestination`, que busca la estación con `@Query` y muestra «Estación no disponible» si una reimportación la ha borrado.
-- **«Ver estaciones»**, en el estado vacío de favoritas, no navega dentro de Inicio: `MainTabView` cambia a la pestaña Estaciones.
-- **Estrellas.** Donde el usuario marca favoritas (filas de «Todas las estaciones» y barra del detalle de estación) se usa `Toggle(isOn: favoritesModel.binding(for:isFavorite:))` con `.toggleStyle(.favorite)`. Dentro de una fila con `NavigationLink`, el botón `.plain` del estilo basta para que tocar la estrella no navegue.
+- **Full-bleed photo** (`HomeHeroImage`). It goes in the content's `.background(alignment: .top)`, with height `topInset + 80 + 76` and offset by `-topInset`. That way it covers the status bar and the navigation bar and ends 76 pt inside the next trains card, which starts at `topInset + 80`: on an iPhone 16 Pro, 262 and 186, as in Figma. `topInset` is `ScrollGeometry.contentInsets.top`. When pulled down it stretches with `.visualEffect` (scale anchored at the bottom based on `frame(in: .global).minY`; with `.scrollView` it doesn't grow). Figma's *Blur* layer (`60:3460`) is the system scroll edge effect: it is not imitated.
+- **Visible height** (`.fitsScrollViewport()`, in `ViewportFit.swift`). The content goes inside a single-child `Layout` that **proposes** the visible height to it but reports the **natural** height it returns. That way Home takes exactly one screen when it fits (no scrolling) and, when not even the minimum of 3 favorites fits (short window on iPad, iPhone in landscape, accessibility sizes), the content grows and the `ScrollView` scrolls again. Bounding it with a bare `.containerRelativeFrame(.vertical)` doesn't work: it always reports the container's height, so the overflow was clipped and unreachable. The modifier measures the visible height itself with a `Color.clear.containerRelativeFrame(.vertical)` probe in the `background` (it already subtracts the navigation bar and the tab bar, and being in a `background` it doesn't affect layout); `ScrollGeometry.containerSize.height` gives the same number. Only `contentInsets.top` is read from `ScrollGeometry`, for the photo; never `contentOffset`, to avoid recomputing on every frame.
+- **Top bar.** On the left, a 44 pt `RailLogo` with `.sharedBackgroundVisibility(.hidden)` (no glass); VoiceOver reads it as the «Inicio» header, because inside the bar the image ignores `accessibilityHidden` and was read as «RailLogo». On the right, a `ToolbarItemGroup` with «Notificaciones» (`bell.fill`), which opens `ServiceAlertsSheet` in a sheet (see *Service alerts*), and «Ajustes» (`gearshape.fill`), which does nothing yet. They have no style: iOS 26 groups them in a glass capsule. The «Inicio» title is declared with `.navigationTitle` (the back button uses it) and hidden with `.toolbarTitleDisplayMode(.inline)` plus `.toolbar(removing: .title)`; without the inline mode, the large title still shows.
+- **Width.** The content is centered with a maximum of 640 pt (iPad, iPhone in landscape); the photo stays full-bleed.
+- **Navigation** through `HomeRoute`: `.favorites` opens `FavoriteStationsView` (see *Favorites*) and `.station(id:)` opens `StationDestination`, which looks up the station with `@Query` and shows «Estación no disponible» if a reimport deleted it.
+- **«Añade una estación»**, in the favorites empty state, opens `StationPickerSheet` from `FavoriteStationsSection`, like the «+» in Favorites.
+- **Stars.** Wherever the user marks favorites (rows in «Todas las estaciones» and the station detail bar), `Toggle(isOn: favoritesModel.binding(for:isFavorite:))` with `.toggleStyle(.favorite)` is used. Inside a row with a `NavigationLink`, the style's `.plain` button is enough for a tap on the star not to navigate.
 
-## Estaciones favoritas
+## Favorite stations
 
-`FavoriteStationsContainer(items, onAction:)` no lee datos: pinta `[StationRowItem]` y avisa con un `FavoriteStationsAction` (`.open(id)`, `.showAll`, `.remove(id)`, `.browseStations`). `FavoriteStationsSection` lo conecta con `@Query` (`FavoriteStation.order` y `Station`), la ubicación de `LocationViewModel` y `FavoritesViewModel`.
+`FavoriteStationsContainer(items, onAction:)` reads no data: it draws `[StationRowItem]` and reports through a `FavoriteStationsAction` (`.open(id)`, `.showAll`, `.remove(id)`, `.addStation`). `FavoriteStationsSection` connects it to `@Query` (`FavoriteStation.order` and `Station`), the location from `LocationViewModel`, and `FavoritesViewModel`.
 
-- **Piezas.** Cabecera `CardSectionHeader("Estaciones favoritas")` sin icono; cada favorita es un `FavoriteStationCard` (un `StationRow` sin separador con padding `Spacing.sm` sobre `bgPrimary`) dentro de un `Button(.plain)`; sin favoritas, un `EmptyStateCard` con `star` en `interactiveFavorite` y el botón «Ver estaciones» en `.rail(.bordered)` `.regular`. Separación de 8 entre cabecera y contenido, 12 entre tarjetas y padding 16 alrededor.
-- **Adaptadores.** `StationRow(item, isFavorite:showsSeparator:)` y `FavoriteStationCard(item)` convierten `StationRowItem` en vista; `LineMark(tag)` pasa el `colorHex` de la API a `Color`.
-- **Subtítulo** (`StationRowItemBuilder.subtitle`): «A 1,2 km» si hay ubicación; si no, las conexiones («Metro · Autobús urbano»); si tampoco hay, ninguno.
-- **«Ver más»** (footnote, `brandPrimary`, `chevron.right`, separación 4) solo aparece si hay al menos una favorita. Es un `Button` `.borderless` con área táctil de 44 pt y VoiceOver lee «Ver todas las estaciones favoritas». Al no depender del número de filas visibles, la cabecera tiene siempre el mismo alto.
-- **Capacidad.** Se muestran tantas tarjetas como quepan sin hacer scroll, entre 3 y 12 (`FavoritesCapacity.minimumVisible` y `.maximumVisible`). No hay cuentas ni geometría medida: un `ViewThatFits(in: .vertical)` recibe como candidatos los `VStack` de `n`, `n−1`, … , 3 tarjetas (`FavoritesCapacity.candidateCounts(total:)`) y el propio layout elige el primero que cabe, con los altos reales de cada tarjeta (subtítulo, nombre en dos líneas, Dynamic Type). Los cambios de la lista se animan con `.smooth`. Quien pinte la sección tiene que darle dos cosas:
-  - `.fitsScrollViewport()` al contenido de su `ScrollView`, para que la propuesta de alto sea finita (ver *Inicio*).
-  - `.layoutPriority(-1)` a la sección, para que el resto del contenido tome su alto natural y favoritas se quede con lo que sobra. Sin esa prioridad el `VStack` reparte el alto entre los dos y comprime la tarjeta de arriba (el texto de `NextTrainsCard` se truncaba) en vez de quitar una tarjeta.
-- **Menú contextual.** Cada tarjeta tiene «Quitar de favoritos» (`star.slash`, destructivo) con el mismo texto que `FavoriteToggleStyle.removeLabel` y una previsualización con la forma de la tarjeta.
-- **Radio 12.** Las tarjetas y el estado vacío usan radio 12, que no es un token (está entre `Radius.md` 10 y `Radius.lg` 14). Va como constante privada hasta que la diseñadora decida si es un token nuevo o se ajusta a uno existente.
-- **Sin sombra**: los frames de Figma no tienen efectos.
-- **Escrituras.** Quitar, añadir y reordenar pasan por `FavoritesViewModel`, que llama de forma síncrona a `UserStationsRepository` sobre `mainContext`; la lectura es siempre `@Query`. Por eso la tarjeta desaparece en la misma transacción que el gesto, sin `Task` ni estado optimista. Para la estrella, `favoritesModel.binding(for: id, isFavorite:)` devuelve un `Binding<Bool>` cuyo setter llama a `setFavorite`.
+- **Pieces.** A `CardSectionHeader("Estaciones favoritas")` header without an icon; each favorite is a `FavoriteStationCard` (a `StationRow` without separator, with `Spacing.sm` padding on `bgPrimary`; with `isFavorite:` it draws the star on the left, as in Favorites) inside a `Button(.plain)`; with no favorites, an `EmptyStateCard` with `star` in `interactiveFavorite` and the «Añade una estación» button in `.rail(.bordered)` `.regular`. 8 of spacing between header and content, 12 between cards, and 16 of padding around.
+- **Adapters.** `StationRow(item, isFavorite:favoriteEdge:accessory:showsSeparator:)` and `FavoriteStationCard(item, isFavorite:)` turn a `StationRowItem` into a view; `LineMark(tag)` converts the API `colorHex` into a `Color`.
+- **Row** (`StationRow`, component `54:161`). Name in `headline` and below it a metadata line: badges, subtitle (truncates) and distance on the right, 6 apart. At accessibility sizes the metadata stacks and nothing truncates. Minimum height 60 with 8 of vertical padding: the text is 44 tall and Figma lets it overflow onto its 12 padding. Accessory `.chevron` (default), `.checkmark` or `.hidden`; the star goes on the right, as in the component, or on the left with `favoriteEdge: .leading`.
+- **Subtitle and distance** (`StationRowItemBuilder.item`): the subtitle is the connections («Metro · Autobús urbano») or nothing; the distance («1,2 km», `distanceLabel`) is separate and only shown when there is a location.
+- **«Ver más»** (footnote, `brandPrimary`, `chevron.right`, spacing 4) only appears if there is at least one favorite. It is a `.borderless` `Button` with a 44 pt touch area, and VoiceOver reads «Ver todas las estaciones favoritas». Since it doesn't depend on the number of visible rows, the header always has the same height.
+- **Capacity.** As many cards are shown as fit without scrolling, between 3 and 12 (`FavoritesCapacity.minimumVisible` and `.maximumVisible`). There is no arithmetic or measured geometry: a `ViewThatFits(in: .vertical)` receives as candidates the `VStack`s of `n`, `n−1`, … , 3 cards (`FavoritesCapacity.candidateCounts(total:)`), and the layout itself picks the first one that fits, with each card's real height (subtitle, two-line name, Dynamic Type). List changes animate with `.smooth`. Whoever draws the section has to give it two things:
+  - `.fitsScrollViewport()` on the content of its `ScrollView`, so the height proposal is finite (see *Home*).
+  - `.layoutPriority(-1)` on the section, so the rest of the content takes its natural height and the favorites get what is left. Without that priority the `VStack` splits the height between the two and compresses the card above (the `NextTrainsCard` text got truncated) instead of dropping a card.
+- **Context menu.** Each card has «Quitar de favoritos» (`star.slash`, destructive) with the same text as `FavoriteToggleStyle.removeLabel`, and a preview shaped like the card.
+- **Radius 12.** The cards and the empty state use radius 12, which is not a token (it sits between `Radius.md` 10 and `Radius.lg` 14). It stays a private constant until the designer decides whether it becomes a new token or snaps to an existing one.
+- **No shadow**: the Figma frames have no effects.
+- **Writes.** Removing, adding and reordering go through `FavoritesViewModel`, which calls `UserStationsRepository` synchronously on `mainContext`; reads are always `@Query`. That is why the card disappears in the same transaction as the gesture, with no `Task` or optimistic state. For the star, `favoritesModel.binding(for: id, isFavorite:)` returns a `Binding<Bool>` whose setter calls `setFavorite`.
 
-## Tarjeta de próximos trenes
+## Favorites
 
-`NextTrainsCard(state, onAction:)` no lee datos: pinta un `NextTrainsCardState` y avisa de lo que pulsa el usuario con un `NextTrainsCardAction`. `NextTrainsSection` la conecta con la ubicación, SwiftData y MapKit a través de las funciones puras de `NextTrainsCardStateBuilder`.
+`FavoriteStationsView` opens from «Ver más» on Home (`HomeRoute.favorites`). It hides the tab bar with `.toolbarVisibility(.hidden, for: .tabBar)`; the tab bar comes back on returning to Home. Mockups: with favorites (`464:8277`) and empty (`464:8524`).
 
-| Estado | Maqueta (pantalla) | Qué pinta | Acciones |
+- **List.** `List(.plain)` on `bgSecondary`. Each favorite is a `FavoriteStationCard(item, isFavorite:)` inside a `NavigationLink(value: .station(id:))`, with a transparent row background, no separator, and insets of 6 top and bottom, which leaves 12 (`ScreenLayout.gutter`) between cards. The first card sits 24 below the bar, as in Figma.
+- **Remove.** With the star (the style's `.plain` button keeps it from navigating) or by swiping: `swipeActions` with «Quitar de favoritos» (`star.slash`, destructive), which VoiceOver offers as an action.
+- **Reorder.** `onMove` without edit mode: in iOS 26, long-pressing a card and dragging it is enough. That is why there is no `EditButton`, and the footer note explains it. With VoiceOver, each card offers the «Subir» and «Bajar» actions (`accessibilityActions`, only the ones that apply for its position), which call `FavoritesViewModel.move` and announce «Posición 2 de 5» with `AccessibilityNotification.Announcement`.
+- **Footer note.** Figma says «…en Inicio y en el mapa», but the map doesn't use favorites: «y en el mapa» was removed and an explanation of how to reorder was added.
+- **Add.** The «+» in the bar (`ToolbarItem(.primaryAction)` with `.buttonStyle(.glassProminent)`, which picks up `AccentColor`) and «Añade una estación» in the empty state (`.railGlass(.tinted)` `.small`) open `StationPickerSheet` with the favorites checked.
+- **Empty.** `IllustratedMessage(…, illustration: .noFavorites)`, centered with `.fitsScrollViewport()` inside a `ScrollView` so it can scroll with large Dynamic Type. Title `bodyEmphasized`, text `footnote`.
+
+## Station picker
+
+`StationPickerSheet(selection:onPick:header:)` is the «Elegir estación» sheet (`389:5385`; no results, `389:5417`). Favorites and the Home empty state use it to add stations, and the next trains card uses it for the usual station, with «Usar mi ubicación» as `header` if one is already saved. On pick it calls `onPick(id)` and dismisses; the stations in `selection` get a `checkmark` and the `.isSelected` trait.
+
+- **No location section.** The mockup's «Sin acceso a tu ubicación…» text and «Activar ubicación» chip are not implemented: the user's decision.
+- **System search.** `.searchable` without a placement: in iOS 26 the field sits at the bottom and moves up with the keyboard, not under the title as in the mockup. Also the user's decision.
+- **Filters.** «Todas» and one chip per line (API id) with `.filterChip(isSelected:)` inside a `GlassEffectContainer`, pinned under the bar with `safeAreaBar(edge: .top)`.
+- **Sections** (`StationPickerSectionBuilder`, pure). One section per line, in line order; interchange stations appear under every line that serves them. The mockup's «Sugeridas» section was removed: the user's decision. With a line filter on, only that line is shown. Search filters by name (`localizedStandardContains`) or by line: «c2», «C-2» and «C2» are equivalent.
+- **Headers.** Uppercase `captionEmphasized` with `Tracking.wide`, height 32 and 12 down to the first row, with `listSectionSpacing(Spacing.md)`.
+- **Rows.** `StationRow(item, accessory: .checkmark / .hidden)`, without a chevron because picking doesn't navigate. In Figma the rows are 12 apart (a 72 pitch); here they are contiguous (60), like a system list, with the separator aligned to the text.
+- **No results.** `IllustratedMessage(…, illustration: .noResults, prominence: .large)` in an `overlay` when search finds nothing: title `title3Emphasized` («Sin resultados para «Sevilla»») and text `subheadline`.
+
+## Stations
+
+`StationsView` is the Stations tab (after Map). It follows the same structure as `StationPickerSheet` and shares with it the molecules `LineFilterBar`, `StationSectionHeader` and `StationSearchNoResults`, plus `StationRow.listRowInsets`.
+
+- **Structure.** `List(.plain)` with `LineFilterBar` pinned in `safeAreaBar(edge: .top)`, `.searchable` and an inline title. The per-line sections come from `StationPickerSectionBuilder`, as in the picker.
+- **Nearby («Cerca de ti»).** Only when there is no search or filter. With a location, the three nearest stations (`LocationViewModel.nearest`). If permission hasn't been requested yet, a `CardMessage(.compact)` «Activa la ubicación» with «Permitir ubicación»; while locating, `CardMessage(.progress)`. With permission denied the section doesn't appear: the prompt to go to Settings is already on the Home card. If no station is within `NextTrainsCardStateBuilder.nearbyRadius` (10 km, the same radius as the Home card), the section shows «Estás lejos de Cercanías Málaga» (`map.fill` in `textTertiary`) and the line rows stop showing distance.
+- **Rows.** `StationRow(item, isFavorite:, favoriteEdge: .leading)` with the star on the left, as in Favorites, and a chevron, inside a `NavigationLink(value: StationsRoute.station(id:))` that opens `StationDestination`. The system indicator is hidden with `.navigationLinkIndicatorVisibility(.hidden)`.
+
+## Station detail
+
+`StationDetailView` opens from Home, Favorites, Stations and the map (through `StationDestination`). It hides the tab bar with `.toolbarVisibility(.hidden, for: .tabBar)`. It is a `ScrollView` on `bgSecondary` with `.cardSurface()` cards (padding `Spacing.md`, `bgPrimary`, `Radius.md`) separated by `ScreenLayout.gutter`, with a maximum width of 640.
+
+- **Bar.** A `ToolbarItemGroup` with «Horarios» (`calendar`, opens `StationScheduleSheet`) and the star (`Toggle` with `.favorite`).
+- **Header.** A 160 pt non-interactive map with a `tram.fill` `Marker` in `brandPrimary`, `StationHeader` with the distance (only if the station is within `NextTrainsCardStateBuilder.nearbyRadius`), one row per line (`LineBadge` + name) and «Iniciar ruta» (`.railGlass(.tinted)`), which opens Apple Maps with `Station.openDirections()`.
+- **Next trains.** `CardSectionHeader` with «Ver horarios» and `DepartureList`, the same molecule the Home card draws, with 4 departures from `NextTrainsCardStateBuilder.departures`.
+- **Getting there** («Cómo llegar», `StationTravelCard`). With travel times, a grid (`Grid`, 2 columns; 1 at accessibility sizes) of `TravelModeTile`s; each one opens Maps in its transport mode. While computing, the same grid `redacted`. If permission hasn't been requested yet, `CardMessage(.compact)` with «Permitir ubicación» and «Abrir en Mapas»; with permission denied or no fix, «Mapas te lleva hasta aquí» with «Abrir en Mapas»; if Maps returns nothing, «No hemos podido calcular los tiempos» with «Abrir en Mapas» and «Reintentar».
+- **Accessibility and connections.** `StationFeatureRow`: the icon in a `brandPrimarySubtle` circle with the symbol in `brandPrimary` (`StationAccessibilitySymbol`, `StationConnection.symbolName`). With no accessibility data, a dimmed row (`fillTertiary` / `textTertiary`). The connections card only appears if there are any.
+
+## Timetable
+
+`StationScheduleSheet(station:)` is the «Horarios» sheet, with the station name as subtitle. The logic is pure in `StationTimetableBuilder`.
+
+- **Pickers.** A single row in the top bar with two `Menu`s (`.railGlass(.clear)`, `.controlSize(.small)`) that contain an inline `Picker`: «Hoy ⌃⌄» (the days in the downloaded timetable, from today to `Timetable.endDay`; in the menu, «Hoy, jueves 25») and, if the station has more than one direction, «Todos los destinos» / «C1 · Fuengirola».
+- **List.** `TimetableRow`: time in `timeDeparture`, `LineBadge`, destination with the train number below it and, if it departs in under `StationTimetableBuilder.countdownLimit` minutes, a «5 min» / «Ahora» capsule. The builder computes the status (`StationTimetableRow.Status`): `.departed` is drawn in `textTertiary` with a desaturated `LineBadge`; `.next` (every departure at the first upcoming time) sits on `brandPrimarySubtle` with a `brandPrimary` bar on the left and a filled capsule.
+- **Earlier departures.** Today's departures that have already left (`StationTimetable.departed`) collapse behind a «Ver N salidas anteriores» row (plural in the catalog), so the list always starts at the next train. If no departures are left, they are shown expanded.
+- **After midnight.** Trips with minutes ≥ 1440 belong to the same service day: they go at the end, under the «Madrugada del sábado 27» header.
+- **Empty.** `CardMessage` «No hay trenes este día».
+
+## Next trains card
+
+`NextTrainsCard(state, onAction:)` reads no data: it draws a `NextTrainsCardState` and reports what the user taps through a `NextTrainsCardAction`. `NextTrainsSection` connects it to location, SwiftData and MapKit through the pure functions of `NextTrainsCardStateBuilder`.
+
+| State | Mockup (screen) | What it draws | Actions |
 |---|---|---|---|
-| `.station`, proximidad `.walking` | `59:1450` (Home `2:54`) | Nombre, «A N minutos a pie», tren, «Próximos trenes» y dos `DepartureRow` | ninguna |
-| `.station`, proximidad `.distance` | `220:1589` (Modo sin conexión `220:1560`) | Lo mismo con «A 1,2 km» | ninguna |
-| `.station`, proximidad `.saved` | sin maqueta | Lo mismo con «Tu estación habitual» y «Cambiar» en la cabecera de sección | Cambiar → `.chooseStation` |
-| `.station`, salidas `.finished` | `220:3121` (Sin trenes hoy `220:3092`) | «No quedan trenes hoy» y la primera salida de mañana, con `CardMessage` compacto | ninguna |
-| `.station`, salidas `.loading` | sin maqueta | Dos filas con `.redacted(reason: .placeholder)` | ninguna |
-| `.permissionNeeded` | `220:1838` (Sin permiso `220:1809`) | Solo `CardMessage`, sin cabecera ni tren | Permitir ubicación · Elegir estación |
-| `.permissionDenied` | `220:2074` (Ubicación denegada `220:2045`) | Solo `CardMessage` | Elegir estación · Abrir Ajustes |
-| `.locationUnavailable` | `220:2252` (No te ubicamos `220:2223`) | Solo `CardMessage` | Reintentar · Elegir estación |
-| `.noStationNearby` | `220:2430` (Fuera de zona `220:2401`) | Solo `CardMessage`, con la estación más próxima en kilómetros enteros | Ver en el mapa · Elegir estación |
-| `.locating` | sin maqueta | Indicador de progreso y «Buscando tu ubicación…» | Elegir estación |
+| `.station`, proximity `.walking` | `59:1450` (Home `2:54`) | Name, «A N minutos a pie», train, «Próximos trenes» and two `DepartureRow`s | none |
+| `.station`, proximity `.distance` | `220:1589` (Modo sin conexión `220:1560`) | The same with «A 1,2 km» | none |
+| `.station`, proximity `.saved` | no mockup | The same with «Tu estación habitual» and «Cambiar» in the section header | Cambiar → `.chooseStation` |
+| `.station`, departures `.finished` | `220:3121` (Sin trenes hoy `220:3092`) | «No quedan trenes hoy» and tomorrow's first departure, with a compact `CardMessage` | none |
+| `.station`, departures `.loading` | no mockup | Two rows with `.redacted(reason: .placeholder)` | none |
+| `.permissionNeeded` | `220:1838` (Sin permiso `220:1809`) | Only `CardMessage`, with no header or train | Permitir ubicación · Elegir estación |
+| `.permissionDenied` | `220:2074` (Ubicación denegada `220:2045`) | Only `CardMessage` | Elegir estación · Abrir Ajustes |
+| `.locationUnavailable` | `220:2252` (No te ubicamos `220:2223`) | Only `CardMessage` | Reintentar · Elegir estación |
+| `.noStationNearby` | `220:2430` (Fuera de zona `220:2401`) | Only `CardMessage`, with the nearest station in whole kilometers | Ver en el mapa · Elegir estación |
+| `.locating` | no mockup | Progress indicator and «Buscando tu ubicación…» | Elegir estación |
 
-- **Qué estación se muestra** (`NextTrainsCardStateBuilder.target`), en este orden:
-  1. la más cercana a la ubicación del dispositivo, si está a 10 km o menos;
-  2. la estación guardada (`SavedStation`, leída con `@Query(SavedStation.current)` y escrita por `LocationViewModel` a través de `UserStationsRepository`), resuelta por id de estación o, si ese id ya no existe, por sus coordenadas;
-  3. «sin estación cerca», si hay ubicación pero ninguna estación a 10 km;
-  4. el mensaje que corresponda al permiso de ubicación.
-- **Proximidad:** tiempo andando de MapKit si es menor de una hora, redondeado hacia arriba y como mínimo 1 minuto. Si no hay tiempo andando, la distancia (`distanceLabel`). La estación guardada no pide tiempo andando.
-- **Salidas:** las dos siguientes de hoy entre todas las líneas y sentidos, en la zona horaria de la red. El identificador de línea se pinta tal como llega de la API. Sin más salidas hoy, se muestra la primera de mañana si mañana entra en el horario descargado.
-- **Plural:** «A 1 minuto a pie» sale de una variación de plural en `Localizable.xcstrings` (clave `A %lld minutos a pie`). `inflect: true` no funciona en este proyecto.
-- **Sombra:** la tarjeta va sobre `bgSecondary` sin sombra, porque la sombra de la maqueta está desactivada. Es una excepción a la regla general de tarjetas con `Elevation/Card`.
-- **«Cambiar» va en la cabecera de sección**, no junto al nombre, porque el tren ocupa la esquina superior derecha.
-- **Cabecera «Próximos trenes · programados»:** `CardSectionHeader(detail:)` la soporta, pero solo aparece en la maqueta *Modo sin conexión*. La app aún no detecta la falta de conexión, así que la tarjeta no la usa.
-- **GlassButton dentro de la tarjeta:** se usa porque así lo dibujan las maquetas, aunque la documentación del componente lo desaconseja en tarjetas opacas.
+- **Which station is shown** (`NextTrainsCardStateBuilder.target`), in this order:
+  1. the one nearest to the device location, if it is 10 km away or less;
+  2. the saved station (`SavedStation`, read with `@Query(SavedStation.current)` and written by `LocationViewModel` through `UserStationsRepository`), resolved by station id or, if that id no longer exists, by its coordinates;
+  3. "no station nearby", if there is a location but no station within 10 km;
+  4. the message that matches the location permission.
+- **Proximity:** MapKit walking time if it is under an hour, rounded up and at least 1 minute. Without a walking time, the distance (`distanceLabel`). The saved station doesn't request a walking time.
+- **Departures:** the next two today across all lines and directions, in the network time zone. The line identifier is drawn exactly as it comes from the API. With no more departures today, tomorrow's first one is shown if tomorrow falls within the downloaded timetable.
+- **Plural:** «A 1 minuto a pie» comes from a plural variation in `Localizable.xcstrings` (key `A %lld minutos a pie`). `inflect: true` doesn't work in this project.
+- **Shadow:** the card sits on `bgSecondary` without a shadow, because the mockup's shadow is disabled. It is an exception to the general rule of cards with `Elevation/Card`.
+- **«Cambiar» goes in the section header**, not next to the name, because the train takes the top-right corner.
+- **«Próximos trenes · programados» header:** `CardSectionHeader(detail:)` supports it, but it only appears in the *Modo sin conexión* mockup. The app doesn't detect being offline yet, so the card doesn't use it.
+- **GlassButton inside the card:** used because the mockups draw it that way, even though the component's documentation advises against it on opaque cards.
 
-## Trenes en tiempo real
+## Live trains
 
-La pestaña Mapa pinta los trenes del feed `/realtime` sobre sus líneas. No hay maqueta en Figma: el marcador es provisional.
+The Map tab draws the trains from the `/realtime` feed on their lines. There is no Figma mockup: the marker is provisional.
 
-- **Contenedor y contenido.** `NetworkMapView` lee `@Query` (`LiveTrain`, `RealtimeFeed`), sondea `liveFeeds.poll(.realtime)` mientras la pestaña está en pantalla y la app en primer plano, y construye los `TrainTrack` con `TrainTrackBuilder`, lógica pura en `View/Presentation/TrainTrack.swift`. `NetworkMap` solo pinta y anima.
-- **Dirección.** El feed no trae rumbo. `SwiftDataLiveFeedRepository` la toma del `Trip` del horario con el mismo `lineID` y número de tren y la guarda en `LiveTrain.directionRaw`; si no hay `Trip`, `TrainTrackBuilder` la deduce del `sequence` de `stopID` → `nextStopID`. No se deduce de las cabeceras: un tren `approaching` a la última estación puede estar llegando o esperando para salir en sentido contrario. La flecha sigue el rumbo del trazado (`PolylinePath.bearing`) menos el rumbo de la cámara.
-- **El feed no es continuo.** Cada tren repite `at` → `left` → `approaching` en cada estación, y en `approaching` llega con `stop == next` y sin `lat/lon`. Además, la API omite trenes durante una o varias muestras. Por eso `mergeRealtime` no reemplaza: `RealtimeMerge` (pura, en `Sync/`) conserva la dirección y la última posición conocida (`positionSampledAt`) mientras el tren siga en el mismo tramo, y retiene hasta 120 s un tren ausente que no ha terminado (`nextStopID != nil`). Sin posición previa, un `approaching` empieza 400 m antes de la siguiente estación.
-- **Movimiento entre refrescos.** Desde `positionSampledAt` (o `sampledAt`), y como mucho hasta 90 s después de la última muestra, el tren avanza por el trazado hacia la siguiente estación a `TrainTrack.nominalSpeed` (50 km/h), sin pasarla; con `status == .at` no se mueve. `NetworkMap` actualiza la hora cada segundo con `withAnimation(.linear(duration: 1))`, o cada 5 s sin animación con *Reducir movimiento*. Cuando llega una muestra nueva, el tren salta a su posición real.
-- **Antigüedad.** Pasados 90 s sin muestra nueva el marcador se atenúa; pasados 5 min desaparece.
-- **Marcador.** `TrainMarker`: círculo `Size.iconMd` escalable con el color de la línea (`LineTint`), `tram.fill` en `tint.text`, borde `Border.thick` del fondo, `Elevation/Floating`, y un triángulo con contorno del fondo para que se vea sobre la propia línea. VoiceOver lee «Tren 23501 de la línea C1 hacia Fuengirola, con 3 minutos de retraso»; el retraso es una variación de plural en `Localizable.xcstrings` (clave `con %lld minutos de retraso`).
+- **Container and content.** `NetworkMapView` reads `@Query` (`LiveTrain`, `RealtimeFeed`), polls `liveFeeds.poll(.realtime)` while the tab is on screen and the app is in the foreground, and builds the `TrainTrack`s with `TrainTrackBuilder`, pure logic in `View/Presentation/TrainTrack.swift`. `NetworkMap` only draws and animates.
+- **Direction.** The feed has no heading. `SwiftDataLiveFeedRepository` takes the direction from the timetable `Trip` with the same `lineID` and train number and stores it in `LiveTrain.directionRaw`; if there is no `Trip`, `TrainTrackBuilder` infers it from the `sequence` of `stopID` → `nextStopID`. It is not inferred from the terminal stations: a train `approaching` the last station may be arriving or waiting to depart in the opposite direction. The arrow follows the route's bearing (`PolylinePath.bearing`) minus the camera heading.
+- **The feed is not continuous.** Each train repeats `at` → `left` → `approaching` at every station, and in `approaching` it arrives with `stop == next` and no `lat/lon`. On top of that, the API drops trains for one or more samples. That is why `mergeRealtime` doesn't replace: `RealtimeMerge` (pure, in `Sync/`) keeps the direction and the last known position (`positionSampledAt`) while the train stays on the same segment, and holds on for up to 120 s to a missing train that hasn't finished its trip (`nextStopID != nil`). Without a previous position, an `approaching` train starts 400 m before the next station.
+- **Movement between refreshes.** From `positionSampledAt` (or `sampledAt`), and at most until 90 s after the last sample, the train advances along the route toward the next station at `TrainTrack.nominalSpeed` (50 km/h), without passing it; with `status == .at` it doesn't move. `NetworkMap` updates the clock every second with `withAnimation(.linear(duration: 1))`, or every 5 s without animation when *Reduce Motion* is on. When a new sample arrives, the train jumps to its real position.
+- **Age.** After 90 s without a new sample the marker dims; after 5 min it disappears.
+- **Marker.** `TrainMarker`: a scalable `Size.iconMd` circle in the line color (`LineTint`), `tram.fill` in `tint.text`, a `Border.thick` border in the background color, `Elevation/Floating`, and a triangle outlined in the background color so it stands out on top of the line itself. VoiceOver reads «Tren 23501 de la línea C1 hacia Fuengirola, con 3 minutos de retraso»; the delay is a plural variation in `Localizable.xcstrings` (key `con %lld minutos de retraso`).

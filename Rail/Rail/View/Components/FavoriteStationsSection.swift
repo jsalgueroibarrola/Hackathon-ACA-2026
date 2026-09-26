@@ -3,12 +3,12 @@ import SwiftUI
 
 struct FavoriteStationsSection: View {
     let onNavigate: (HomeRoute) -> Void
-    let onBrowseStations: () -> Void
 
     @Environment(LocationViewModel.self) private var location
     @Environment(FavoritesViewModel.self) private var favoritesModel
     @Query(sort: FavoriteStation.order) private var favorites: [FavoriteStation]
     @Query(sort: \Station.name) private var stations: [Station]
+    @State private var isAddingStation = false
 
     private var items: [StationRowItem] {
         StationRowItemBuilder.items(
@@ -20,6 +20,11 @@ struct FavoriteStationsSection: View {
 
     var body: some View {
         FavoriteStationsContainer(items, onAction: handle)
+            .sheet(isPresented: $isAddingStation) {
+                StationPickerSheet(selection: Set(favorites.map(\.stationID))) { stationID in
+                    favoritesModel.setFavorite(true, stationID: stationID)
+                }
+            }
     }
 
     private func handle(_ action: FavoriteStationsAction) {
@@ -30,8 +35,8 @@ struct FavoriteStationsSection: View {
             onNavigate(.favorites)
         case .remove(let stationID):
             favoritesModel.remove([stationID])
-        case .browseStations:
-            onBrowseStations()
+        case .addStation:
+            isAddingStation = true
         }
     }
 }
@@ -40,11 +45,8 @@ struct FavoriteStationsSection: View {
 private struct FavoriteStationsSectionPreview: View {
     var body: some View {
         ScrollView {
-            FavoriteStationsSection(
-                onNavigate: { _ in },
-                onBrowseStations: {}
-            )
-            .fitsScrollViewport()
+            FavoriteStationsSection(onNavigate: { _ in })
+                .fitsScrollViewport()
         }
         .background(.bgSecondary)
     }

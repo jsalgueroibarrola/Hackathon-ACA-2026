@@ -57,8 +57,33 @@ struct NextTrainsSection: View {
                 .task(id: request) { loadSchedules(request) }
         }
         .task(id: walkingRequest) { await loadWalking(walkingRequest) }
-        .sheet(isPresented: $isChoosingStation) { StationPickerSheet() }
+        .sheet(isPresented: $isChoosingStation) { stationPicker }
     }
+
+    private var stationPicker: some View {
+        StationPickerSheet(
+            selection: Set(savedStations.map(\.stationID)),
+            onPick: saveStation
+        ) {
+            if !savedStations.isEmpty {
+                Button(Self.useLocationLabel, systemImage: "location") {
+                    location.clearSavedLocation()
+                    isChoosingStation = false
+                }
+            }
+        }
+    }
+
+    private func saveStation(_ stationID: String) {
+        if let station = stations.first(where: { $0.id == stationID }) {
+            location.saveLocation(SavedLocation(station: station))
+        }
+    }
+
+    private static let useLocationLabel = LocalizedStringResource(
+        "Usar mi ubicación",
+        comment: "Selector de estación habitual: fila que borra la estación guardada y vuelve a usar la ubicación del dispositivo."
+    )
 
     private func state(at date: Date) -> NextTrainsCardState {
         NextTrainsCardStateBuilder.state(

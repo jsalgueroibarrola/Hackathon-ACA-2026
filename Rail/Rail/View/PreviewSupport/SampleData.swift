@@ -192,6 +192,41 @@ enum FavoriteStationsScenario: SampleDataScenario {
     }
 }
 
+enum StationTimetableScenario: SampleDataScenario {
+    static func populate(_ context: ModelContext) {
+        FavoriteStationsScenario.populate(context)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Europe/Madrid") ?? .gmt
+        let today = calendar.startOfDay(for: .now)
+        let start = calendar.date(byAdding: .day, value: -1, to: today) ?? today
+        let end = calendar.date(byAdding: .day, value: 6, to: today) ?? today
+        let timetable = Timetable(
+            networkID: "malaga",
+            version: "preview",
+            startDay: start,
+            endDay: end,
+            lastFetchedAt: .now
+        )
+        context.insert(timetable)
+        let trips = LineSample.all.flatMap { line in
+            TripDirection.allCases.flatMap { direction in
+                stride(from: 340, through: 1460, by: 20).map { first in
+                    let trip = Trip(
+                        lineID: line.id,
+                        direction: direction,
+                        train: "\(line.id == "C1" ? 23 : 36)\(first)",
+                        serviceDays: "11111111",
+                        times: line.stationIDs.indices.map { first + $0 * 4 }
+                    )
+                    trip.timetable = timetable
+                    return trip
+                }
+            }
+        }
+        context.insertAll(trips)
+    }
+}
+
 enum SavedStationScenario: SampleDataScenario {
     static func populate(_ context: ModelContext) {
         context.insert(SavedStation(.fuengirola))
@@ -400,6 +435,10 @@ extension PreviewTrait where T == Preview.ViewTraits {
 
     static var favoriteStationsSampleData: Self {
         .modifier(SampleDataPreview<FavoriteStationsScenario>())
+    }
+
+    static var stationTimetableSampleData: Self {
+        .modifier(SampleDataPreview<StationTimetableScenario>())
     }
 
     static var savedStationSampleData: Self {

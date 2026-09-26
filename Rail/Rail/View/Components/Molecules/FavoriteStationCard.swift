@@ -8,11 +8,21 @@ struct FavoriteStationCard: View {
     private let name: String
     private let subtitle: String?
     private let lines: [LineMark]
+    private let distance: String?
+    private let isFavorite: Binding<Bool>?
 
-    init(name: String, subtitle: String?, lines: [LineMark]) {
+    init(
+        name: String,
+        subtitle: String?,
+        lines: [LineMark],
+        distance: String? = nil,
+        isFavorite: Binding<Bool>? = nil
+    ) {
         self.name = name
         self.subtitle = subtitle
         self.lines = lines
+        self.distance = distance
+        self.isFavorite = isFavorite
     }
 
     var body: some View {
@@ -20,6 +30,9 @@ struct FavoriteStationCard: View {
             name: name,
             subtitle: subtitle,
             lines: lines,
+            distance: distance,
+            isFavorite: isFavorite,
+            favoriteEdge: .leading,
             showsSeparator: false
         )
         .padding(Spacing.sm)
@@ -28,25 +41,32 @@ struct FavoriteStationCard: View {
 }
 
 private struct FavoriteStationCardSamples: View {
+    @State private var isFavorite = true
+
     private let c1 = Color(hex: "DA291C")
     private let c2 = Color(hex: "0057A8")
 
     var body: some View {
         VStack(spacing: Spacing.md) {
             FavoriteStationCard(
-                name: "Málaga C. Alameda",
+                name: "Málaga Centro-Alameda",
                 subtitle: "Centro · Zona A",
-                lines: [.init("C-1", color: c1), .init("C-2", color: c2)]
+                lines: [.init("C-1", color: c1), .init("C-2", color: c2)],
+                distance: "350 m"
             )
             FavoriteStationCard(
-                name: "Málaga M. Zambrano",
+                name: "Málaga María Zambrano",
                 subtitle: "Centro · Zona A",
-                lines: [.init("C-1", color: c1), .init("C-2", color: c2)]
+                lines: [.init("C-1", color: c1), .init("C-2", color: c2)],
+                distance: "1,2 km",
+                isFavorite: $isFavorite
             )
             FavoriteStationCard(
                 name: "La Colina",
-                subtitle: "Centro · Zona B",
-                lines: [.init("C-1", color: c1)]
+                subtitle: "Carranque · Zona B",
+                lines: [.init("C-1", color: c1)],
+                distance: "2,4 km",
+                isFavorite: $isFavorite
             )
             FavoriteStationCard(
                 name: "Victoria Kent",

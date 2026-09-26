@@ -14,7 +14,7 @@ private struct TrackingTrigger: Equatable {
 }
 
 private enum AppTab: Hashable {
-    case home, lines, stations, map
+    case home, map, stations
 }
 
 struct MainTabView: View {
@@ -28,23 +28,15 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             Tab("Inicio", systemImage: "house", value: .home) {
-                HomeView(
-                    path: $homePath,
-                    onShowMap: showOnMap,
-                    onShowStations: showStations
-                )
-            }
-
-            Tab("Líneas", systemImage: "tram", value: .lines) {
-                ContentView()
-            }
-
-            Tab("Estaciones", systemImage: "mappin.and.ellipse", value: .stations) {
-                StationsView()
+                HomeView(path: $homePath, onShowMap: showOnMap)
             }
 
             Tab("Mapa", systemImage: "map", value: .map) {
                 NetworkMapView(selection: $mapSelection)
+            }
+
+            Tab("Estaciones", systemImage: "mappin.and.ellipse", value: .stations) {
+                StationsView()
             }
         }
         .task(
@@ -71,10 +63,6 @@ struct MainTabView: View {
     private func showOnMap(_ stationID: String) {
         mapSelection = stationID
         selectedTab = .map
-    }
-
-    private func showStations() {
-        selectedTab = .stations
     }
 }
 

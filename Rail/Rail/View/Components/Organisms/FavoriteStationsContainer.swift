@@ -4,7 +4,7 @@ enum FavoriteStationsAction: Hashable, Sendable {
     case open(String)
     case showAll
     case remove(String)
-    case browseStations
+    case addStation
 }
 
 struct FavoriteStationsContainer: View {
@@ -33,7 +33,7 @@ struct FavoriteStationsContainer: View {
             LocalizedStringResource(
                 "Estaciones favoritas",
                 comment:
-                    "Cabecera de la sección de favoritas en Inicio y título de la pantalla con todas las favoritas."
+                    "Cabecera de la sección de favoritas en Inicio."
             )
         ) {
             if !items.isEmpty {
@@ -133,12 +133,12 @@ struct FavoriteStationsContainer: View {
         ) {
             Button(
                 LocalizedStringResource(
-                    "Ver estaciones",
+                    "Añade una estación",
                     comment:
-                        "Inicio: botón del estado vacío de favoritas que abre la lista de estaciones."
+                        "Inicio: botón del estado vacío de favoritas que abre el selector de estación."
                 )
             ) {
-                onAction(.browseStations)
+                onAction(.addStation)
             }
         }
     }
@@ -151,20 +151,23 @@ private enum FavoriteStationsSamples {
     static let figma = [
         StationRowItem(
             id: "54413",
-            name: "Málaga C. Alameda",
+            name: "Málaga Centro-Alameda",
             subtitle: "Centro · Zona A",
+            distance: "350 m",
             lines: [c1, c2]
         ),
         StationRowItem(
             id: "54404",
-            name: "Málaga M. Zambrano",
+            name: "Málaga María Zambrano",
             subtitle: "Centro · Zona A",
+            distance: "1,2 km",
             lines: [c1, c2]
         ),
         StationRowItem(
             id: "54412",
             name: "La Colina",
-            subtitle: "Centro · Zona B",
+            subtitle: "Carranque · Zona B",
+            distance: "2,4 km",
             lines: [c1]
         ),
     ]
@@ -174,43 +177,50 @@ private enum FavoriteStationsSamples {
             StationRowItem(
                 id: "54405",
                 name: "Victoria Kent",
-                subtitle: "A 1,2 km",
+                subtitle: nil,
+                distance: "3 km",
                 lines: [c1, c2]
             ),
             StationRowItem(
                 id: "54406",
                 name: "Aeropuerto",
                 subtitle: "Aeropuerto",
+                distance: nil,
                 lines: [c1]
             ),
             StationRowItem(
                 id: "54407",
                 name: "Torremolinos",
                 subtitle: "Autobús urbano",
+                distance: nil,
                 lines: [c1]
             ),
             StationRowItem(
                 id: "54408",
                 name: "Benalmádena-Arroyo de la Miel",
                 subtitle: nil,
+                distance: nil,
                 lines: [c1]
             ),
             StationRowItem(
                 id: "54100",
                 name: "Fuengirola",
                 subtitle: "Autobús interurbano · Autobús urbano",
+                distance: nil,
                 lines: [c1]
             ),
             StationRowItem(
                 id: "54502",
                 name: "Cártama",
                 subtitle: nil,
+                distance: nil,
                 lines: [c2]
             ),
             StationRowItem(
                 id: "54503",
                 name: "Álora",
                 subtitle: "Regional",
+                distance: nil,
                 lines: [c2]
             ),
         ]

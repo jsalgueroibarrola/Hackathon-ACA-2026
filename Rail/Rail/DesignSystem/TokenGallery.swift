@@ -121,6 +121,7 @@
             ("largeTitle", .largeTitle), ("title", .title), ("title2", .title2),
             ("title2Emphasized", .title2Emphasized),
             ("title3", .title3),
+            ("title3Emphasized", .title3Emphasized),
             ("headline", .headline), ("body", .body),
             ("bodyEmphasized", .bodyEmphasized),
             ("bodyMedium", .bodyMedium),
@@ -271,6 +272,21 @@
                         )
                     }
                     section("Ilustraciones") {
+                        HStack(alignment: .bottom, spacing: Spacing.xl) {
+                            ForEach(EmptyStateIllustration.Kind.allCases, id: \.self) { kind in
+                                EmptyStateIllustration(kind)
+                                    .frame(height: kind.height / 2)
+                            }
+                        }
+                        .padding(Spacing.md)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            .bgSecondary,
+                            in: .rect(
+                                cornerRadius: Radius.lg,
+                                style: .continuous
+                            )
+                        )
                         TrainIllustration()
                             .frame(height: 53)
                             .padding(Spacing.md)
