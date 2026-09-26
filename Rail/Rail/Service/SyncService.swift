@@ -1,10 +1,3 @@
-//
-//  SyncService.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import Foundation
 
 enum SyncOutcome: Sendable, Equatable {

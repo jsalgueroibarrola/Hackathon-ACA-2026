@@ -31,6 +31,7 @@ struct StationFeatureRow: View {
     }
 }
 
+#if DEBUG
 #Preview {
     VStack(spacing: Spacing.xs) {
         StationFeatureRow("Adaptada para movilidad reducida", systemImage: "figure.roll")
@@ -41,3 +42,4 @@ struct StationFeatureRow: View {
     .padding(ScreenLayout.margin)
     .background(.bgSecondary)
 }
+#endif

@@ -53,6 +53,7 @@ struct TravelModeTile: View {
     )
 }
 
+#if DEBUG
 #Preview {
     Grid(horizontalSpacing: Spacing.sm, verticalSpacing: Spacing.sm) {
         GridRow {
@@ -68,3 +69,4 @@ struct TravelModeTile: View {
     .padding(ScreenLayout.margin)
     .background(.bgSecondary)
 }
+#endif

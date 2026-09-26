@@ -399,6 +399,7 @@ extension AlertTranslation {
 struct SampleDataContext {
     let container: ModelContainer
     let favorites: FavoritesViewModel
+    let schedules: SwiftDataScheduleRepository
 }
 
 struct SampleDataPreview<Scenario: SampleDataScenario>: PreviewModifier {
@@ -416,7 +417,8 @@ struct SampleDataPreview<Scenario: SampleDataScenario>: PreviewModifier {
                 repository: SwiftDataUserStationsRepository(
                     modelContainer: container
                 )
-            )
+            ),
+            schedules: SwiftDataScheduleRepository(modelContainer: container)
         )
     }
 
@@ -424,6 +426,7 @@ struct SampleDataPreview<Scenario: SampleDataScenario>: PreviewModifier {
         content
             .modelContainer(context.container)
             .environment(\.routeEstimates, PreviewRouteService())
+            .environment(\.schedules, context.schedules)
             .environment(context.favorites)
     }
 }

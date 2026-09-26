@@ -1,10 +1,3 @@
-//
-//  RefreshBanner.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import SwiftUI
 
 struct RefreshBanner: View {
@@ -15,22 +8,32 @@ struct RefreshBanner: View {
             Text(message)
         } icon: {
             Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundStyle(.statusWarning)
         }
-            .font(.footnote.weight(.medium))
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
-            .glassEffect(.regular.tint(.orange.opacity(0.3)), in: .capsule)
-            .padding(.bottom, 8)
+        .font(.footnote.weight(.medium))
+        .foregroundStyle(.statusWarningText)
+        .padding(.horizontal, Spacing.md)
+        .padding(.vertical, Spacing.sm)
+        .glassEffect(.regular.tint(.statusWarningBg), in: .capsule)
+        .padding(.bottom, Spacing.sm)
     }
 
     private var message: LocalizedStringResource {
-        guard let lastFetchedAt else {
-            return "No se han podido actualizar los horarios"
+        lastFetchedAt.map {
+            LocalizedStringResource(
+                "Última actualización: \($0, format: .relative(presentation: .named))",
+                comment: "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas»."
+            )
         }
-        return "Última actualización: \(lastFetchedAt, format: .relative(presentation: .named))"
+            ?? LocalizedStringResource(
+                "No se han podido actualizar los horarios",
+                comment: "Aviso del banner inferior cuando falla la actualización y no se conoce la fecha de la última descarga."
+            )
     }
 }
 
+#if DEBUG
 #Preview {
     RefreshBanner(lastFetchedAt: .now.addingTimeInterval(-90_000))
 }
+#endif

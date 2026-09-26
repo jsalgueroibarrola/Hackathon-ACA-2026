@@ -30,9 +30,3 @@ final class RealtimeFeed {
         self.trains = []
     }
 }
-
-extension RealtimeFeed {
-    func isExpired(at date: Date) -> Bool {
-        date >= expiresAt
-    }
-}

@@ -5,7 +5,6 @@ import SwiftUI
 struct StationDetailView: View {
     let station: Station
 
-    @Environment(\.modelContext) private var modelContext
     @Environment(LocationViewModel.self) private var location
     @Environment(FavoritesViewModel.self) private var favoritesModel
     @Query private var favorites: [FavoriteStation]
@@ -16,13 +15,7 @@ struct StationDetailView: View {
 
     private static let mapHeight: CGFloat = 160
     private static let mapSpan: CLLocationDistance = 700
-    private static let maxContentWidth: CGFloat = 640
     private static let visibleDepartures = 4
-
-    private struct ScheduleRequest: Equatable {
-        let timetableKey: String
-        let serviceDay: Date
-    }
 
     init(station: Station) {
         self.station = station
@@ -31,10 +24,6 @@ struct StationDetailView: View {
     }
 
     private var timetable: Timetable? { timetables.first }
-
-    private var calendar: Calendar { networks.first?.calendar ?? .autoupdatingCurrent }
-
-    private var timeZone: TimeZone { networks.first?.timeZone ?? .autoupdatingCurrent }
 
     private var lines: [Line] {
         station.lines.sorted { $0.id.localizedStandardCompare($1.id) == .orderedAscending }
@@ -57,7 +46,7 @@ struct StationDetailView: View {
             }
             .padding(.horizontal, ScreenLayout.margin)
             .padding(.vertical, Spacing.lg)
-            .frame(maxWidth: Self.maxContentWidth)
+            .frame(maxWidth: ScreenLayout.maxContentWidth)
             .frame(maxWidth: .infinity)
         }
         .background(.bgSecondary)
@@ -131,7 +120,6 @@ struct StationDetailView: View {
 
     private var nextTrains: some View {
         TimelineView(.everyMinute) { context in
-            let request = scheduleRequest(at: context.date)
             VStack(alignment: .leading, spacing: Spacing.xs) {
                 CardSectionHeader(Self.nextTrainsTitle, systemImage: "clock") {
                     Button(Self.fullScheduleTitle) {
@@ -143,7 +131,9 @@ struct StationDetailView: View {
                 DepartureList(departures(at: context.date))
             }
             .cardSurface()
-            .task(id: request) { loadSchedules(request) }
+            .loadSchedules(scheduleRequest(at: context.date), into: $schedules) {
+                try await $0.nextTrains(for: $1)
+            }
         }
     }
 
@@ -187,29 +177,17 @@ struct StationDetailView: View {
             NextTrainsCardStateBuilder.departures(
                 from: $0,
                 now: date,
-                timeZone: timeZone,
                 limit: Self.visibleDepartures
             )
         } ?? .loading
     }
 
     private func scheduleRequest(at date: Date) -> ScheduleRequest? {
-        timetable.map {
-            ScheduleRequest(
-                timetableKey: $0.etag ?? $0.version,
-                serviceDay: calendar.startOfDay(for: date)
-            )
-        }
-    }
-
-    private func loadSchedules(_ request: ScheduleRequest?) {
-        guard let request, let timetable else { return }
-        schedules = NextTrainsScheduleBuilder.schedules(
-            for: station,
+        ScheduleRequest(
+            stationID: station.id,
             timetable: timetable,
-            day: request.serviceDay,
-            calendar: calendar,
-            context: modelContext
+            network: networks.first,
+            at: date
         )
     }
 

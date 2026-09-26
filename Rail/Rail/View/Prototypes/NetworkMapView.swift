@@ -1,10 +1,3 @@
-//
-//  NetworkMapView.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import MapKit
 import SwiftData
 import SwiftUI
@@ -51,8 +44,8 @@ struct NetworkMapView: View {
                     } onOpenDetail: {
                         detailStationID = pin.id
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 8)
+                    .padding(.horizontal, ScreenLayout.margin)
+                    .padding(.bottom, Spacing.sm)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
@@ -60,20 +53,34 @@ struct NetworkMapView: View {
             .overlay {
                 if lines.isEmpty {
                     ContentUnavailableView(
-                        "Sin datos de red",
+                        LocalizedStringResource(
+                            "Sin datos de red",
+                            comment: "Mapa: estado vacío cuando no hay líneas guardadas."
+                        ),
                         systemImage: "map"
                     )
                     .background(.background)
                 }
             }
-            .navigationTitle("Red")
+            .navigationTitle(
+                LocalizedStringResource(
+                    "Red",
+                    comment: "Mapa: título de la pantalla con el mapa de la red de Cercanías."
+                )
+            )
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     nearestStationButton
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Picker("Superficie", selection: $surface) {
+                    Picker(
+                        LocalizedStringResource(
+                            "Superficie",
+                            comment: "Mapa: menú para elegir el estilo del mapa (estándar, atenuado, híbrido o satélite)."
+                        ),
+                        selection: $surface
+                    ) {
                         ForEach(MapSurface.allCases) { surface in
                             Text(surface.title).tag(surface)
                         }
@@ -89,10 +96,11 @@ struct NetworkMapView: View {
         }
         .task(id: lines.map(\.shape)) {
             let shapes = lines.map(\.routeShape)
-            await routeShapes.warm(shapes)
+            let cache = routeShapes ?? RouteShapeCache()
+            await cache.warm(shapes)
             routes = Dictionary(
                 uniqueKeysWithValues: shapes.map {
-                    ($0.lineID, routeShapes.coordinates(for: $0))
+                    ($0.lineID, cache.coordinates(for: $0))
                 }
             )
             paths = routes.mapValues(PolylinePath.init)
@@ -126,7 +134,10 @@ struct NetworkMapView: View {
             }
         } label: {
             Label(
-                "Estación más cercana",
+                LocalizedStringResource(
+                    "Estación más cercana",
+                    comment: "Mapa: botón que selecciona la estación más cercana al usuario, o pide permiso de ubicación."
+                ),
                 systemImage: location.isTracking
                     ? "location.magnifyingglass"
                     : "location"
@@ -147,34 +158,33 @@ struct NetworkMapView: View {
 
     private var lineFilter: some View {
         ScrollView(.horizontal) {
-            HStack(spacing: 8) {
+            HStack(spacing: Spacing.sm) {
                 ForEach(lines) { line in
                     let isHidden = hiddenLineIDs.contains(line.id)
                     Button {
-                        if isHidden {
-                            hiddenLineIDs.remove(line.id)
-                        } else {
-                            hiddenLineIDs.insert(line.id)
-                        }
+                        hiddenLineIDs.formSymmetricDifference([line.id])
                     } label: {
-                        HStack(spacing: 5) {
+                        HStack(spacing: Spacing.xs) {
                             Circle()
                                 .fill(Color(hex: line.colorHex))
-                                .frame(width: 8, height: 8)
+                                .frame(width: Self.lineDotSize, height: Self.lineDotSize)
                             Text(line.id)
                                 .font(.footnote.weight(.semibold))
                         }
                     }
                     .buttonStyle(.glass)
-                    .opacity(isHidden ? 0.45 : 1)
+                    .opacity(isHidden ? Self.hiddenLineOpacity : 1)
                 }
             }
-            .padding(.horizontal)
-            .padding(.vertical, 8)
+            .padding(.horizontal, ScreenLayout.margin)
+            .padding(.vertical, Spacing.sm)
         }
         .scrollIndicators(.hidden)
         .scrollClipDisabled()
     }
+
+    private static let hiddenLineOpacity = 0.45
+    private static let lineDotSize: CGFloat = 8
 
     private var overlays: [LineOverlay] {
         lines

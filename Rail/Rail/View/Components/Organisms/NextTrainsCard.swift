@@ -216,6 +216,7 @@ extension NextTrainsCardAction {
     }
 }
 
+#if DEBUG
 extension NextTrainsCardState {
     fileprivate static func sampleStation(
         _ proximity: NextTrainsProximity,
@@ -325,3 +326,4 @@ private struct NextTrainsCardSamples: View {
     NextTrainsCardSamples(states: [.walking, .permissionNeeded])
         .dynamicTypeSize(.accessibility2)
 }
+#endif

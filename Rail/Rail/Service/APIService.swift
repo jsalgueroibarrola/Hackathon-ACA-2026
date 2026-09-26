@@ -1,9 +1,3 @@
-//
-//  APIService.swift
-//  Rail
-//
-//  Created by jakuru on 19/09/2026.
-//
 import Foundation
 
 protocol APIService: Sendable {

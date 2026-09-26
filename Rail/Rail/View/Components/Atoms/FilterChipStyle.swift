@@ -34,6 +34,7 @@ extension ButtonStyle where Self == FilterChipStyle {
     }
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     HStack(spacing: Spacing.md) {
         Button("Todas") {}
@@ -102,3 +103,4 @@ extension ButtonStyle where Self == FilterChipStyle {
     .background(.bgSecondary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

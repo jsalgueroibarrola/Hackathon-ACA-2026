@@ -1,10 +1,3 @@
-//
-//  StationCallout.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import SwiftUI
 
 struct StationCallout: View {
@@ -13,8 +6,10 @@ struct StationCallout: View {
     var onDismiss: () -> Void
     var onOpenDetail: () -> Void
 
+    private static let badgeDiameter: CGFloat = 22
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: Spacing.md) {
             HStack(alignment: .firstTextBaseline) {
                 Text(pin.name)
                     .font(.headline)
@@ -22,17 +17,26 @@ struct StationCallout: View {
                 Spacer()
 
                 Button(action: onDismiss) {
-                    Label("Cerrar", systemImage: "xmark")
+                    Label(
+                        LocalizedStringResource(
+                            "Cerrar",
+                            comment: "Mapa: botón que cierra la ficha de la estación seleccionada."
+                        ),
+                        systemImage: "xmark"
+                    )
                 }
                 .labelStyle(.iconOnly)
                 .buttonStyle(.borderless)
                 .font(.footnote.weight(.semibold))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.textSecondary)
             }
 
             if let distance {
                 Label(
-                    "A \(distance.distanceLabel) de ti",
+                    LocalizedStringResource(
+                        "A \(distance.distanceLabel) de ti",
+                        comment: "Mapa: distancia desde el usuario hasta la estación seleccionada, por ejemplo «A 1,2 km de ti»."
+                    ),
                     systemImage: "location.fill"
                 )
                 .font(.subheadline)
@@ -41,55 +45,53 @@ struct StationCallout: View {
             }
 
             if !pin.lineIDs.isEmpty {
-                HStack(spacing: 6) {
-                    ForEach(Array(zip(pin.lineIDs, pin.colorHexes)), id: \.0) {
-                        id,
-                        hex in
-                        Text(id)
-                            .font(.caption2.weight(.bold))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 3)
-                            .background(Color(hex: hex), in: .capsule)
+                HStack(spacing: Spacing.sm) {
+                    ForEach(Array(zip(pin.lineIDs, pin.colorHexes)), id: \.0) { id, hex in
+                        LineBadge(id, color: Color(hex: hex))
                     }
                 }
             }
 
-            HStack(spacing: 6) {
+            HStack(spacing: Spacing.sm) {
                 if pin.isAccessible {
                     BadgeIcon(
                         systemName: StationAccessibilitySymbol.reducedMobility,
-                        tint: .blue,
-                        diameter: 22
+                        tint: StationPin.accessibleTint,
+                        diameter: Self.badgeDiameter
                     )
                 }
                 if pin.hasElevator {
                     BadgeIcon(
                         systemName: StationAccessibilitySymbol.elevator,
-                        tint: .gray,
-                        diameter: 22
+                        tint: StationPin.elevatorTint,
+                        diameter: Self.badgeDiameter
                     )
                 }
                 ForEach(pin.connections, id: \.self) { connection in
                     BadgeIcon(
                         systemName: connection.symbolName,
                         tint: connection.tint,
-                        diameter: 22
+                        diameter: Self.badgeDiameter
                     )
                 }
             }
 
-            Button("Ver detalle", action: onOpenDetail)
-                .font(.subheadline.weight(.semibold))
+            Button(
+                LocalizedStringResource(
+                    "Ver detalle",
+                    comment: "Mapa: botón de la ficha de la estación seleccionada que abre su pantalla de detalle."
+                ),
+                action: onOpenDetail
+            )
+            .font(.subheadline.weight(.semibold))
         }
-        .padding(14)
+        .padding(Spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .glassEffect(in: .rect(cornerRadius: 18))
+        .glassEffect(in: .rect(cornerRadius: Radius.xl))
     }
 }
 
-// MARK: - Previews
-
+#if DEBUG
 extension StationPin {
     fileprivate static let calloutPlain = StationPin(
         id: "principe-asturias",
@@ -259,3 +261,4 @@ private struct CalloutBackdrop<Content: View>: View {
     }
     .preferredColorScheme(.dark)
 }
+#endif

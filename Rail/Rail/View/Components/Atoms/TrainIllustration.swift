@@ -9,6 +9,7 @@ struct TrainIllustration: View {
     }
 }
 
+#if DEBUG
 private struct TrainIllustrationSamples: View {
     var body: some View {
         VStack(spacing: Spacing.xxl) {
@@ -38,3 +39,4 @@ private struct TrainIllustrationSamples: View {
     TrainIllustrationSamples()
         .preferredColorScheme(.dark)
 }
+#endif

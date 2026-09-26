@@ -45,12 +45,10 @@ final class TransitNetwork {
 
 extension TransitNetwork {
     var timeZone: TimeZone {
-        TimeZone(identifier: timeZoneIdentifier) ?? .gmt
+        TimeZone(networkIdentifier: timeZoneIdentifier)
     }
 
     var calendar: Calendar {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = timeZone
-        return calendar
+        .network(in: timeZone)
     }
 }

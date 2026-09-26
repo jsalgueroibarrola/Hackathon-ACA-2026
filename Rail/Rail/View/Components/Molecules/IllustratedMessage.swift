@@ -84,6 +84,7 @@ extension IllustratedMessage.Prominence {
     }
 }
 
+#if DEBUG
 private struct IllustratedMessageSamples: View {
     var body: some View {
         VStack(spacing: Spacing.xxl) {
@@ -130,3 +131,4 @@ private struct IllustratedMessageSamples: View {
     .background(.bgSecondary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

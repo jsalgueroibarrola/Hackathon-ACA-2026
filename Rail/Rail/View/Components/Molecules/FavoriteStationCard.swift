@@ -40,6 +40,7 @@ struct FavoriteStationCard: View {
     }
 }
 
+#if DEBUG
 private struct FavoriteStationCardSamples: View {
     @State private var isFavorite = true
 
@@ -96,3 +97,4 @@ private struct FavoriteStationCardSamples: View {
     .background(.bgSecondary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

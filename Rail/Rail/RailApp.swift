@@ -1,10 +1,3 @@
-//
-//  RailApp.swift
-//  Rail
-//
-//  Created by jakuru on 19/09/2026.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -21,5 +14,8 @@ struct RailApp: App {
         .environment(dependencies.locationViewModel)
         .environment(dependencies.favoritesViewModel)
         .environment(\.liveFeeds, dependencies.liveFeedService)
+        .environment(\.schedules, dependencies.scheduleRepository)
+        .environment(\.routeEstimates, dependencies.routeService)
+        .environment(\.routeShapes, dependencies.routeShapes)
     }
 }

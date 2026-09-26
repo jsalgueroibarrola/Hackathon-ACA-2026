@@ -159,6 +159,7 @@ struct StationRow: View {
     }
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     let c1 = Color(hex: "DA291C")
     let c2 = Color(hex: "0057A8")
@@ -326,3 +327,4 @@ struct StationRow: View {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

@@ -108,12 +108,11 @@
             ("sm", Spacing.sm),
             ("md", Spacing.md), ("lg", Spacing.lg), ("xl", Spacing.xl),
             ("xxl", Spacing.xxl),
-            ("xxxl", Spacing.xxxl), ("xxxxl", Spacing.xxxxl),
-            ("xxxxxl", Spacing.xxxxxl),
+            ("xxxxl", Spacing.xxxxl),
         ]
 
         private let radii: [(String, CGFloat)] = [
-            ("none", Radius.none), ("sm", Radius.sm), ("md", Radius.md),
+            ("sm", Radius.sm), ("md", Radius.md),
             ("lg", Radius.lg), ("xl", Radius.xl),
         ]
 
@@ -161,7 +160,7 @@
                                         .fill(swatch.1)
                                         .stroke(
                                             .borderSubtle,
-                                            lineWidth: Border.thin
+                                            lineWidth: Border.hairline
                                         )
                                         .frame(height: 40)
                                         Text(swatch.0).font(.caption2)
@@ -222,7 +221,7 @@
                                     .fill(.brandPrimarySubtle)
                                     .stroke(
                                         .brandPrimary,
-                                        lineWidth: Border.thin
+                                        lineWidth: Border.hairline
                                     )
                                     .frame(width: 56, height: 40)
                                     Text(item.0).font(.caption2)
@@ -231,7 +230,7 @@
                             VStack(spacing: Spacing.xs) {
                                 Capsule().fill(.brandPrimarySubtle).stroke(
                                     .brandPrimary,
-                                    lineWidth: Border.thin
+                                    lineWidth: Border.hairline
                                 ).frame(width: 56, height: 40)
                                 Text("full").font(.caption2)
                             }

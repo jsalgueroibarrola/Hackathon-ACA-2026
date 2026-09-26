@@ -56,6 +56,7 @@ struct CardSectionHeader<Accessory: View>: View {
     }
 }
 
+#if DEBUG
 private struct CardSectionHeaderSamples: View {
     var body: some View {
         VStack(spacing: Spacing.xxl) {
@@ -87,3 +88,4 @@ private struct CardSectionHeaderSamples: View {
     CardSectionHeaderSamples()
         .dynamicTypeSize(.accessibility2)
 }
+#endif

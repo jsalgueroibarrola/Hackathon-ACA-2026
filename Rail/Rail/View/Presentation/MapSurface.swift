@@ -1,10 +1,3 @@
-//
-//  MapSurface.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import MapKit
 import SwiftUI
 
@@ -18,10 +11,14 @@ enum MapSurface: String, CaseIterable, Identifiable {
 
     var title: LocalizedStringResource {
         switch self {
-        case .standard: "Estándar"
-        case .muted: "Atenuado"
-        case .hybrid: "Híbrido"
-        case .imagery: "Satélite"
+        case .standard:
+            LocalizedStringResource("Estándar", comment: "Mapa: estilo de mapa estándar.")
+        case .muted:
+            LocalizedStringResource("Atenuado", comment: "Mapa: estilo de mapa con colores apagados y sin puntos de interés.")
+        case .hybrid:
+            LocalizedStringResource("Híbrido", comment: "Mapa: estilo de mapa con satélite y calles.")
+        case .imagery:
+            LocalizedStringResource("Satélite", comment: "Mapa: estilo de mapa con imágenes de satélite.")
         }
     }
 

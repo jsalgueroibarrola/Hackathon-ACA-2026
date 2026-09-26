@@ -74,8 +74,7 @@ enum NextTrainsTimelineBuilder {
                 ? .atEnd
                 : .after(
                     max(
-                        station.firstTomorrow
-                            ?? nextMidnight(after: now, in: station.timeZone),
+                        nextMidnight(after: now, in: station.timeZone),
                         entries.last?.date ?? now
                     )
                 )

@@ -26,7 +26,7 @@ final class Trip {
     var timetable: Timetable?
 
     init(lineID: String, direction: TripDirection, train: String, serviceDays: String, times: [Int]) {
-        self.id = "\(lineID)-\(direction.rawValue)-\(train)-\(times.first ?? -1)"
+        self.id = "\(lineID)-\(direction.rawValue)-\(train)-\(times.first ?? -1)-\(serviceDays)"
         self.lineID = lineID
         self.directionRaw = direction.rawValue
         self.train = train

@@ -1,10 +1,3 @@
-//
-//  AppDependencies.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import Foundation
 import SwiftData
 
@@ -16,6 +9,9 @@ struct AppDependencies {
     let locationViewModel: LocationViewModel
     let favoritesViewModel: FavoritesViewModel
     let liveFeedService: any LiveFeedService
+    let scheduleRepository: any ScheduleRepository
+    let routeService: any RouteService
+    let routeShapes: RouteShapeCache
 
     init() {
         let configuration = RailStore.configuration()
@@ -53,5 +49,8 @@ struct AppDependencies {
             api: api,
             repository: SwiftDataLiveFeedRepository(modelContainer: container)
         )
+        scheduleRepository = SwiftDataScheduleRepository(modelContainer: container)
+        routeService = RouteServiceImpl()
+        routeShapes = RouteShapeCache()
     }
 }

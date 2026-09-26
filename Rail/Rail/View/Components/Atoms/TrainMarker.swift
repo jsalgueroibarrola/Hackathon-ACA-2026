@@ -36,6 +36,7 @@ struct TrainMarker: View {
     }
 }
 
+#if DEBUG
 #Preview("Direcciones") {
     HStack(spacing: Spacing.xxl) {
         ForEach([0.0, 90, 200, 315], id: \.self) { degrees in
@@ -70,3 +71,4 @@ struct TrainMarker: View {
         .background(.bgPrimary)
         .dynamicTypeSize(.accessibility2)
 }
+#endif

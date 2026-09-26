@@ -1,10 +1,3 @@
-//
-//  Color+Hex.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import SwiftUI
 
 extension Color {

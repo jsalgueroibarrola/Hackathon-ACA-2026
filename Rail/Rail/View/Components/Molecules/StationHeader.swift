@@ -26,6 +26,7 @@ struct StationHeader: View {
     }
 }
 
+#if DEBUG
 private struct StationHeaderSamples: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.xxl) {
@@ -60,3 +61,4 @@ private struct StationHeaderSamples: View {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

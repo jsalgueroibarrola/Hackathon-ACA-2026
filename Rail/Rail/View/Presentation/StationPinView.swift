@@ -1,10 +1,3 @@
-//
-//  StationPinView.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import MapKit
 import SwiftUI
 
@@ -58,12 +51,16 @@ struct StationPin: Identifiable, Hashable {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 
-    static let interchangeColor = Color.red
+    static let interchangeColor = Color.textPrimary
+    static let accessibleTint = Color.statusInfo
+    static let elevatorTint = Color.interactiveIconSubtle
 
     var color: Color {
-        if isInterchange { return Self.interchangeColor }
-        guard let hex = colorHexes.first else { return .gray }
-        return Color(hex: hex)
+        switch (isInterchange, colorHexes.first) {
+        case (true, _): Self.interchangeColor
+        case (false, let hex?): Color(hex: hex)
+        case (false, nil): .interactiveIconSubtle
+        }
     }
 
     var isInterchange: Bool { lineIDs.count > 1 }
@@ -115,13 +112,10 @@ enum ZoomBucket: Comparable, CaseIterable {
         for distance: CLLocationDistance,
         margin: Double = 0.12
     ) -> ZoomBucket {
-        if distance > upperBound * (1 + margin) {
-            return ZoomBucket(distance: distance)
+        switch distance {
+        case lowerBound * (1 - margin)...upperBound * (1 + margin): self
+        default: ZoomBucket(distance: distance)
         }
-        if distance < lowerBound * (1 - margin) {
-            return ZoomBucket(distance: distance)
-        }
-        return self
     }
 
     var showsAccessibility: Bool { self >= .region }

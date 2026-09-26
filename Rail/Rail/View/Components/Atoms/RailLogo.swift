@@ -9,6 +9,7 @@ struct RailLogo: View {
     }
 }
 
+#if DEBUG
 private struct RailLogoSamples: View {
     var body: some View {
         VStack(spacing: Spacing.xxl) {
@@ -43,3 +44,4 @@ private struct RailLogoSamples: View {
     RailLogoSamples()
         .preferredColorScheme(.dark)
 }
+#endif

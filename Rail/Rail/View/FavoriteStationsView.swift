@@ -83,7 +83,7 @@ struct FavoriteStationsView: View {
         at index: Int,
         of items: [StationRowItem]
     ) -> some View {
-        NavigationLink(value: HomeRoute.station(id: item.id)) {
+        NavigationLink(value: AppRoute.station(id: item.id)) {
             FavoriteStationCard(
                 item,
                 isFavorite: favoritesModel.binding(

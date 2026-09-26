@@ -1,10 +1,3 @@
-//
-//  BadgeIcon.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import SwiftUI
 
 struct BadgeIcon: View {
@@ -25,8 +18,7 @@ struct BadgeIcon: View {
     }
 }
 
-// MARK: - Previews
-
+#if DEBUG
 private struct BadgeIconRow: View {
     let title: String
     let systemName: String
@@ -50,12 +42,12 @@ private struct BadgeIconRow: View {
         BadgeIconRow(
             title: "Movilidad reducida",
             systemName: StationAccessibilitySymbol.reducedMobility,
-            tint: .blue
+            tint: StationPin.accessibleTint
         )
         BadgeIconRow(
             title: "Ascensor",
             systemName: StationAccessibilitySymbol.elevator,
-            tint: .gray
+            tint: StationPin.elevatorTint
         )
         BadgeIconRow(title: "Aeropuerto", systemName: "airplane", tint: .indigo)
         BadgeIconRow(title: "AVE", systemName: "train.side.front.car", tint: .purple)
@@ -71,7 +63,7 @@ private struct BadgeIconRow: View {
             BadgeIconRow(
                 title: "\(Int(diameter)) pt",
                 systemName: StationAccessibilitySymbol.reducedMobility,
-                tint: .blue,
+                tint: StationPin.accessibleTint,
                 diameter: diameter
             )
         }
@@ -86,7 +78,7 @@ private struct BadgeIconRow: View {
                 .overlay(alignment: .topTrailing) {
                     BadgeIcon(
                         systemName: StationAccessibilitySymbol.reducedMobility,
-                        tint: .blue,
+                        tint: StationPin.accessibleTint,
                         diameter: zoom.dotSize * 0.62
                     )
                     .offset(x: zoom.dotSize * 0.3, y: -zoom.dotSize * 0.3)
@@ -105,12 +97,12 @@ private struct BadgeIconRow: View {
             HStack(spacing: 20) {
                 BadgeIcon(
                     systemName: StationAccessibilitySymbol.reducedMobility,
-                    tint: .blue,
+                    tint: StationPin.accessibleTint,
                     diameter: 26
                 )
                 BadgeIcon(
                     systemName: StationAccessibilitySymbol.elevator,
-                    tint: .gray,
+                    tint: StationPin.elevatorTint,
                     diameter: 26
                 )
                 BadgeIcon(systemName: "airplane", tint: .indigo, diameter: 26)
@@ -127,7 +119,7 @@ private struct BadgeIconRow: View {
         BadgeIconRow(
             title: "Movilidad reducida",
             systemName: StationAccessibilitySymbol.reducedMobility,
-            tint: .blue
+            tint: StationPin.accessibleTint
         )
         BadgeIconRow(title: "AVE", systemName: "train.side.front.car", tint: .purple)
         BadgeIconRow(title: "Grande", systemName: "airplane", tint: .indigo, diameter: 48)
@@ -135,3 +127,4 @@ private struct BadgeIconRow: View {
     .padding(32)
     .preferredColorScheme(.dark)
 }
+#endif

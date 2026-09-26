@@ -53,26 +53,25 @@ enum RailWidgetStore {
                 return .unknownStation
             }
 
-            let calendar = network.calendar
-            let schedules = { (day: Date) in
-                StationScheduleBuilder.schedules(
+            guard
+                let source = try? context.scheduleSource(
                     for: station,
                     timetable: timetable,
-                    day: day,
-                    calendar: calendar,
-                    context: context
+                    calendar: network.calendar
                 )
-            }
-            let tomorrow = calendar.date(byAdding: .day, value: 1, to: now)
+            else { return .unavailable }
+
+            let tomorrow = source.calendar.date(byAdding: .day, value: 1, to: now)
+            let today = StationScheduleBuilder.departures(from: source, on: now)
 
             return .station(
                 NextTrainsWidgetStation(
                     id: station.id,
                     name: station.name,
                     timeZone: network.timeZone,
-                    today: rows(from: schedules(now), since: now),
+                    today: rows(from: today, since: now),
                     firstTomorrow: tomorrow
-                        .map(schedules)?
+                        .map { StationScheduleBuilder.schedules(from: source, day: $0) }?
                         .flatMap(\.departures)
                         .map(\.date)
                         .min()

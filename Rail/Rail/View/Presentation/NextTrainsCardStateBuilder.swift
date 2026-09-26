@@ -44,10 +44,9 @@ enum NextTrainsCardStateBuilder {
     static func departures(
         from schedules: NextTrainsSchedules,
         now: Date,
-        timeZone: TimeZone,
         limit: Int = visibleDepartures
     ) -> NextTrainsDepartures {
-        let format = Date.FormatStyle.departureTime(in: timeZone)
+        let format = Date.FormatStyle.departureTime(in: schedules.timeZone)
         let rows = schedules.today
             .flatMap { line in
                 line.upcoming(from: now).map { (line: line, departure: $0) }
@@ -98,8 +97,7 @@ enum NextTrainsCardStateBuilder {
         target: NextTrainsTarget,
         schedules: NextTrainsSchedules?,
         walking: WalkingResult?,
-        now: Date,
-        timeZone: TimeZone
+        now: Date
     ) -> NextTrainsCardState {
         switch target {
         case .locating:
@@ -128,7 +126,7 @@ enum NextTrainsCardStateBuilder {
                     ),
                     departures: schedules.flatMap {
                         $0.stationID == station.id
-                            ? departures(from: $0, now: now, timeZone: timeZone)
+                            ? departures(from: $0, now: now)
                             : nil
                     } ?? .loading
                 )

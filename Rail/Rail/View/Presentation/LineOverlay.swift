@@ -1,10 +1,3 @@
-//
-//  LineOverlay.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import MapKit
 import SwiftUI
 

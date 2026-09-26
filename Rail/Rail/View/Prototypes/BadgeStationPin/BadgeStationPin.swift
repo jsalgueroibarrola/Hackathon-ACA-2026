@@ -1,10 +1,3 @@
-//
-//  BadgeStationPin.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import Foundation
 import SwiftUI
 
@@ -12,6 +5,9 @@ struct BadgedStationPin: View {
     let pin: StationPin
     let zoom: ZoomBucket
     var isSelected: Bool = false
+
+    private static let chipIconSize: CGFloat = 10
+    private static let chipInsets = EdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 6)
 
     private var dotSize: CGFloat {
         zoom.dotSize * (isSelected ? 1.35 : 1)
@@ -33,7 +29,7 @@ struct BadgedStationPin: View {
                 if !showsChip, zoom.showsAccessibility, pin.isAccessible {
                     BadgeIcon(
                         systemName: StationAccessibilitySymbol.reducedMobility,
-                        tint: .blue,
+                        tint: StationPin.accessibleTint,
                         diameter: dotSize * 0.62
                     )
                     .offset(x: dotSize * 0.3, y: -dotSize * 0.3)
@@ -43,8 +39,8 @@ struct BadgedStationPin: View {
             .overlay {
                 if isSelected, !showsChip {
                     Circle()
-                        .strokeBorder(.tint, lineWidth: 2)
-                        .padding(-4)
+                        .strokeBorder(.tint, lineWidth: Border.thick)
+                        .padding(-Spacing.xs)
                 }
             }
             .animation(.snappy(duration: 0.24), value: zoom)
@@ -55,20 +51,20 @@ struct BadgedStationPin: View {
     }
 
     private var chip: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: Spacing.xs) {
             Color.clear
                 .frame(width: dotSize, height: dotSize)
 
             if pin.isAccessible {
                 Image(systemName: StationAccessibilitySymbol.reducedMobility)
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(StationPin.accessibleTint)
             }
 
             if zoom.showsConnections {
                 Group {
                     if pin.hasElevator {
                         Image(systemName: StationAccessibilitySymbol.elevator)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(StationPin.elevatorTint)
                     }
                     ForEach(pin.connections, id: \.self) { connection in
                         Image(systemName: connection.symbolName)
@@ -80,46 +76,51 @@ struct BadgedStationPin: View {
                 )
             }
         }
-        .font(.system(size: 10, weight: .semibold))
-        .padding(.leading, 3)
-        .padding(.trailing, 6)
-        .padding(.vertical, 3)
+        .font(.system(size: Self.chipIconSize, weight: .semibold))
+        .padding(Self.chipInsets)
         .background(.background, in: .capsule)
         .overlay {
             if isSelected {
-                Capsule().strokeBorder(.tint, lineWidth: 2)
+                Capsule().strokeBorder(.tint, lineWidth: Border.thick)
             } else {
-                Capsule().strokeBorder(.quaternary, lineWidth: 0.5)
+                Capsule().strokeBorder(.borderSubtle, lineWidth: Border.hairline)
             }
         }
         .shadow(color: .black.opacity(0.22), radius: 2, y: 1)
         .fixedSize()
-        .offset(x: -3)
+        .offset(x: -Self.chipInsets.leading)
         .transition(
             .scale(scale: 0.3, anchor: .leading).combined(with: .opacity)
         )
     }
 
     private var accessibilityValue: String {
-        var parts: [String] = []
-        if !pin.lineIDs.isEmpty {
-            parts.append("Líneas \(pin.lineIDs.joined(separator: ", "))")
-        }
-        if pin.isAccessible {
-            parts.append("Accesible")
-        }
-        if !pin.connections.isEmpty {
-            let names = pin.connections.map {
-                String(localized: $0.displayName)
-            }
-            parts.append("Conexiones: \(names.joined(separator: ", "))")
-        }
-        return parts.joined(separator: ". ")
+        [
+            pin.lineIDs.isEmpty
+                ? nil
+                : String(
+                    localized: "Líneas \(pin.lineIDs.formatted(.list(type: .and)))",
+                    comment: "VoiceOver, pin de estación en el mapa: líneas que paran en ella, por ejemplo «Líneas C1 y C2»."
+                ),
+            pin.isAccessible
+                ? String(
+                    localized: "Accesible",
+                    comment: "VoiceOver, pin de estación en el mapa: la estación es accesible para movilidad reducida."
+                )
+                : nil,
+            pin.connections.isEmpty
+                ? nil
+                : String(
+                    localized: "Conexiones: \(pin.connections.map { String(localized: $0.displayName) }.formatted(.list(type: .and)))",
+                    comment: "VoiceOver, pin de estación en el mapa: otros transportes que conectan con ella, por ejemplo «Conexiones: Metro y Autobús urbano»."
+                ),
+        ]
+        .compactMap(\.self)
+        .joined(separator: ". ")
     }
 }
 
-// MARK: - Previews
-
+#if DEBUG
 extension StationPin {
     fileprivate static let plain = StationPin(
         id: "portada-alta",
@@ -140,7 +141,7 @@ extension StationPin {
         colorHexes: ["E1251B"]
     )
 
-    /// Intercambiador: el punto va en el rojo fijo de ``StationPin/interchangeColor``.
+    /// Intercambiador: el punto va en el color fijo de ``StationPin/interchangeColor``.
     fileprivate static let interchange = StationPin(
         id: "guadalmedina",
         name: "Guadalmedina",
@@ -264,3 +265,4 @@ private struct PinRow: View {
     .padding(32)
     .preferredColorScheme(.dark)
 }
+#endif

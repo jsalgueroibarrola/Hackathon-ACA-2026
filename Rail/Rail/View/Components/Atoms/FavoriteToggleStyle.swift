@@ -89,6 +89,7 @@ extension ToggleStyle where Self == FavoriteToggleStyle {
     }
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     Grid(horizontalSpacing: Spacing.xxl, verticalSpacing: Spacing.lg) {
         GridRow {
@@ -152,3 +153,4 @@ extension ToggleStyle where Self == FavoriteToggleStyle {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

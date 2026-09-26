@@ -58,6 +58,7 @@ struct EmptyStateCard<Action: View>: View {
     }
 }
 
+#if DEBUG
 private struct EmptyStateCardSamples: View {
     var body: some View {
         EmptyStateCard(
@@ -90,3 +91,4 @@ private struct EmptyStateCardSamples: View {
     .background(.bgSecondary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

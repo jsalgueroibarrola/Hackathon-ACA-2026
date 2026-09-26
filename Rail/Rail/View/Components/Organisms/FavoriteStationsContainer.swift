@@ -144,6 +144,7 @@ struct FavoriteStationsContainer: View {
     }
 }
 
+#if DEBUG
 private enum FavoriteStationsSamples {
     static let c1 = LineTag(id: "C-1", colorHex: "DA291C")
     static let c2 = LineTag(id: "C-2", colorHex: "0057A8")
@@ -267,3 +268,4 @@ private struct FavoriteStationsContainerPreview: View {
     FavoriteStationsContainerPreview(items: FavoriteStationsSamples.many)
         .dynamicTypeSize(.accessibility2)
 }
+#endif

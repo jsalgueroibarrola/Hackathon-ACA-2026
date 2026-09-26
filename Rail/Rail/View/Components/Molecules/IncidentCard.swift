@@ -120,6 +120,7 @@ struct IncidentCard<Action: View>: View {
     }
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     let c1 = Color(hex: "DA291C")
 
@@ -213,3 +214,4 @@ struct IncidentCard<Action: View>: View {
     .background(.bgSecondary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

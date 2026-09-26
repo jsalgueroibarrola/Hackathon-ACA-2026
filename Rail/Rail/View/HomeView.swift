@@ -2,7 +2,7 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
-    @Binding var path: [HomeRoute]
+    @Binding var path: [AppRoute]
     let onShowMap: (String) -> Void
 
     @State private var topInset: CGFloat = 0
@@ -10,7 +10,6 @@ struct HomeView: View {
 
     private static let heroClearance: CGFloat = 80
     private static let heroOverlap: CGFloat = 76
-    private static let maxContentWidth: CGFloat = 640
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -28,10 +27,7 @@ struct HomeView: View {
             .navigationTitle(Self.title)
             .toolbarTitleDisplayMode(.inline)
             .toolbar(removing: .title)
-            .navigationDestination(
-                for: HomeRoute.self,
-                destination: destination
-            )
+            .appRouteDestinations()
             .sheet(isPresented: $isShowingAlerts) {
                 ServiceAlertsSheet()
             }
@@ -47,7 +43,7 @@ struct HomeView: View {
                 .layoutPriority(-1)
         }
         .fitsScrollViewport()
-        .frame(maxWidth: Self.maxContentWidth)
+        .frame(maxWidth: ScreenLayout.maxContentWidth)
         .frame(maxWidth: .infinity)
         .background(alignment: .top) { hero }
     }
@@ -74,60 +70,43 @@ struct HomeView: View {
             Button(ServiceAlertsSheet.title, systemImage: "bell.fill") {
                 isShowingAlerts = true
             }
-            Button(Self.settingsLabel, systemImage: "gearshape.fill") {}
         }
     }
 
-    @ViewBuilder
-    private func destination(for route: HomeRoute) -> some View {
-        switch route {
-        case .favorites:
-            FavoriteStationsView()
-        case .station(let id):
-            StationDestination(stationID: id)
-        }
-    }
-
-    private static let title = LocalizedStringResource(
+    static let title = LocalizedStringResource(
         "Inicio",
         comment: "Título de la pestaña y de la pantalla de inicio."
-    )
-
-    private static let settingsLabel = LocalizedStringResource(
-        "Ajustes",
-        comment:
-            "Inicio: botón de la barra superior que abrirá los ajustes; VoiceOver lo lee."
     )
 }
 
 #if DEBUG
     #Preview("Con favoritas", traits: .favoriteStationsSampleData) {
-        @Previewable @State var path: [HomeRoute] = []
+        @Previewable @State var path: [AppRoute] = []
         HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
     }
 
     #Preview("Sin favoritas", traits: .nextTrainsSampleData) {
-        @Previewable @State var path: [HomeRoute] = []
+        @Previewable @State var path: [AppRoute] = []
         HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
     }
 
     #Preview("Estación guardada", traits: .savedStationSampleData) {
-        @Previewable @State var path: [HomeRoute] = []
+        @Previewable @State var path: [AppRoute] = []
         HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview(authorization: .denied))
     }
 
     #Preview("Modo oscuro", traits: .favoriteStationsSampleData) {
-        @Previewable @State var path: [HomeRoute] = []
+        @Previewable @State var path: [AppRoute] = []
         HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
             .preferredColorScheme(.dark)
     }
 
     #Preview("Dynamic Type", traits: .favoriteStationsSampleData) {
-        @Previewable @State var path: [HomeRoute] = []
+        @Previewable @State var path: [AppRoute] = []
         HomeView(path: $path, onShowMap: { _ in })
             .environment(LocationViewModel.preview())
             .dynamicTypeSize(.accessibility2)

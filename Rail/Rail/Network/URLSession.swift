@@ -1,10 +1,3 @@
-//
-//  URLSession.swift
-//  Rail
-//
-//  Created by jakuru on 19/09/2026.
-//
-
 import Foundation
 
 extension URLSession {
@@ -26,6 +19,8 @@ extension URLSession {
             throw NetworkError.cancelled
         } catch let error as URLError where error.code == .cancelled {
             throw NetworkError.cancelled
+        } catch let error as URLError {
+            throw NetworkError.transport(error)
         } catch {
             throw NetworkError.general(error)
         }

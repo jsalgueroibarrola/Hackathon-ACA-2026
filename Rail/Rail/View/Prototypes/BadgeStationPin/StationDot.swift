@@ -1,10 +1,3 @@
-//
-//  StationDot.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import SwiftUI
 
 struct StationDot: View {
@@ -24,8 +17,7 @@ struct StationDot: View {
     }
 }
 
-// MARK: - Previews
-
+#if DEBUG
 private struct StationDotRow: View {
     let title: String
     let color: Color
@@ -104,3 +96,4 @@ private struct StationDotRow: View {
     .padding(32)
     .preferredColorScheme(.dark)
 }
+#endif

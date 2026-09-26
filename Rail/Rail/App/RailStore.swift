@@ -1,10 +1,3 @@
-//
-//  RailStore.swift
-//  Rail
-//
-//  Created by jakuru on 24/09/2026.
-//
-
 import SwiftData
 
 enum RailStore {

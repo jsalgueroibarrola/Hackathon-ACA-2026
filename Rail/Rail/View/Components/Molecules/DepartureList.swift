@@ -67,6 +67,7 @@ struct DepartureList: View {
     }
 }
 
+#if DEBUG
 #Preview {
     VStack(spacing: Spacing.xxl) {
         DepartureList(
@@ -82,3 +83,4 @@ struct DepartureList: View {
     .padding(ScreenLayout.margin)
     .background(.bgSecondary)
 }
+#endif

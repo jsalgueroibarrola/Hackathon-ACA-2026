@@ -1,10 +1,3 @@
-//
-//  DataUnavailableView.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import SwiftUI
 
 struct DataUnavailableView: View {
@@ -13,16 +6,30 @@ struct DataUnavailableView: View {
 
     var body: some View {
         ContentUnavailableView {
-            Label("No hay horarios disponibles", systemImage: "wifi.exclamationmark")
+            Label(
+                LocalizedStringResource(
+                    "No hay horarios disponibles",
+                    comment: "Título del estado vacío cuando no se ha podido descargar ningún dato y no hay nada guardado."
+                ),
+                systemImage: "wifi.exclamationmark"
+            )
         } description: {
             Text(message)
         } actions: {
-            Button("Reintentar", action: retry)
+            Button(
+                LocalizedStringResource(
+                    "Reintentar",
+                    comment: "Botón para volver a intentar una descarga que ha fallado."
+                ),
+                action: retry
+            )
                 .buttonStyle(.borderedProminent)
         }
     }
 }
 
+#if DEBUG
 #Preview {
-    DataUnavailableView(message: "The Internet connection appears to be offline.") {}
+    DataUnavailableView(message: "No hay conexión a internet. Comprueba la conexión e inténtalo de nuevo.") {}
 }
+#endif

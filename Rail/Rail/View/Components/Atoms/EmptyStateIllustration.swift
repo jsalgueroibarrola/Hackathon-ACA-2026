@@ -36,6 +36,7 @@ extension EmptyStateIllustration.Kind {
     }
 }
 
+#if DEBUG
 private struct EmptyStateIllustrationSamples: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: Spacing.xxl) {
@@ -57,3 +58,4 @@ private struct EmptyStateIllustrationSamples: View {
     EmptyStateIllustrationSamples()
         .preferredColorScheme(.dark)
 }
+#endif

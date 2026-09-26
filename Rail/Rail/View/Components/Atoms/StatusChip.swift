@@ -70,6 +70,7 @@ extension StatusChip.Status {
     }
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     VStack(spacing: Spacing.xxl) {
         HStack(spacing: Spacing.xxxxl) {
@@ -108,3 +109,4 @@ extension StatusChip.Status {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

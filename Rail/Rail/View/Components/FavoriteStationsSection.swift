@@ -2,7 +2,7 @@ import SwiftData
 import SwiftUI
 
 struct FavoriteStationsSection: View {
-    let onNavigate: (HomeRoute) -> Void
+    let onNavigate: (AppRoute) -> Void
 
     @Environment(LocationViewModel.self) private var location
     @Environment(FavoritesViewModel.self) private var favoritesModel

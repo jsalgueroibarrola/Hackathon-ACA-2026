@@ -45,8 +45,10 @@ struct LineFilterBar: View {
     )
 }
 
+#if DEBUG
 #Preview {
     @Previewable @State var selection: String?
     LineFilterBar(["C-1", "C-2"], selection: $selection)
         .background(.bgSecondary)
 }
+#endif

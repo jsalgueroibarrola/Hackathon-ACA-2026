@@ -27,13 +27,3 @@ final class ServiceAlertFeed {
         self.alerts = []
     }
 }
-
-extension ServiceAlertFeed {
-    func isExpired(at date: Date) -> Bool {
-        date >= expiresAt
-    }
-
-    var orderedAlerts: [ServiceAlert] {
-        alerts.sorted { $0.position < $1.position }
-    }
-}

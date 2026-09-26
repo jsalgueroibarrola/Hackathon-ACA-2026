@@ -5,7 +5,6 @@ import UIKit
 struct NextTrainsSection: View {
     let onShowMap: (String) -> Void
 
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.routeEstimates) private var routeEstimates
     @Environment(\.openURL) private var openURL
     @Environment(LocationViewModel.self) private var location
@@ -16,20 +15,6 @@ struct NextTrainsSection: View {
     @State private var schedules: NextTrainsSchedules?
     @State private var walking: WalkingResult?
     @State private var isChoosingStation = false
-
-    private struct ScheduleRequest: Equatable {
-        let stationID: String
-        let timetableKey: String
-        let serviceDay: Date
-    }
-
-    private var network: TransitNetwork? { networks.first }
-
-    private var timetable: Timetable? { timetables.first }
-
-    private var calendar: Calendar { network?.calendar ?? .autoupdatingCurrent }
-
-    private var timeZone: TimeZone { network?.timeZone ?? .autoupdatingCurrent }
 
     private var target: NextTrainsTarget {
         NextTrainsCardStateBuilder.target(
@@ -52,9 +37,10 @@ struct NextTrainsSection: View {
 
     var body: some View {
         TimelineView(.everyMinute) { context in
-            let request = scheduleRequest(at: context.date)
             NextTrainsCard(state(at: context.date), onAction: handle)
-                .task(id: request) { loadSchedules(request) }
+                .loadSchedules(scheduleRequest(at: context.date), into: $schedules) {
+                    try await $0.nextTrains(for: $1)
+                }
         }
         .task(id: walkingRequest) { await loadWalking(walkingRequest) }
         .sheet(isPresented: $isChoosingStation) { stationPicker }
@@ -90,30 +76,16 @@ struct NextTrainsSection: View {
             target: target,
             schedules: schedules,
             walking: walking,
-            now: date,
-            timeZone: timeZone
+            now: date
         )
     }
 
     private func scheduleRequest(at date: Date) -> ScheduleRequest? {
-        guard let station = target.station, let timetable else { return nil }
-        return ScheduleRequest(
-            stationID: station.id,
-            timetableKey: timetable.etag ?? timetable.version,
-            serviceDay: calendar.startOfDay(for: date)
-        )
-    }
-
-    private func loadSchedules(_ request: ScheduleRequest?) {
-        guard let request, let station = target.station, let timetable else {
-            return
-        }
-        schedules = NextTrainsScheduleBuilder.schedules(
-            for: station,
-            timetable: timetable,
-            day: request.serviceDay,
-            calendar: calendar,
-            context: modelContext
+        ScheduleRequest(
+            stationID: target.station?.id,
+            timetable: timetables.first,
+            network: networks.first,
+            at: date
         )
     }
 

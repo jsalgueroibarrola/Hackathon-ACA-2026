@@ -5,24 +5,71 @@ struct StationScheduleSheet: View {
     let station: Station
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var modelContext
     @Query private var networks: [TransitNetwork]
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if let network = networks.first {
+                    StationScheduleContent(station: station, calendar: network.calendar)
+                } else {
+                    Self.noTrains
+                }
+            }
+            .background(.bgPrimary)
+            .navigationTitle(Self.title)
+            .navigationSubtitle(station.name)
+            .toolbarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(role: .close) {
+                        dismiss()
+                    }
+                }
+            }
+        }
+        .presentationDragIndicator(.visible)
+    }
+
+    static var noTrains: some View {
+        CardMessage(
+            LocalizedStringResource(
+                "No hay trenes este día",
+                comment: "Horarios: título cuando la estación no tiene salidas el día elegido."
+            ),
+            message: LocalizedStringResource(
+                "Prueba con otro día o con otro destino.",
+                comment: "Horarios: sugerencia cuando no hay salidas el día elegido."
+            ),
+            icon: .symbol("calendar", tint: .textTertiary)
+        )
+        .padding(ScreenLayout.margin)
+        .frame(maxHeight: .infinity)
+    }
+
+    static let title = LocalizedStringResource(
+        "Horarios",
+        comment: "Horarios: título de la hoja con todas las salidas de una estación; también etiqueta del botón que la abre."
+    )
+}
+
+private struct StationScheduleContent: View {
+    let station: Station
+    let calendar: Calendar
+
     @Query private var timetables: [Timetable]
     @State private var selectedDay: Date?
     @State private var filter: String?
     @State private var showsDeparted = false
     @State private var schedules: [StationLineSchedule] = []
 
-    private struct ScheduleRequest: Equatable {
-        let timetableKey: String
-        let day: Date
-    }
-
     private var timetable: Timetable? { timetables.first }
 
-    private var calendar: Calendar { networks.first?.calendar ?? .autoupdatingCurrent }
+    private var timeZone: TimeZone { calendar.timeZone }
 
-    private var timeZone: TimeZone { networks.first?.timeZone ?? .autoupdatingCurrent }
+    private var activeFilter: String? {
+        filter.flatMap { id in schedules.contains { $0.id == id } ? id : nil }
+    }
 
     private func days(today: Date) -> [Date] {
         timetable.map {
@@ -40,30 +87,19 @@ struct StationScheduleSheet: View {
     }
 
     var body: some View {
-        NavigationStack {
-            TimelineView(.everyMinute) { context in
-                let day = day(today: context.date)
-                content(day: day, now: context.date)
-                    .safeAreaBar(edge: .top) {
-                        filters(days: days(today: context.date), selected: day, today: context.date)
-                    }
-                    .task(id: day.map { ScheduleRequest(timetableKey: timetable?.etag ?? timetable?.version ?? "", day: $0) }) {
-                        load(day)
-                    }
-            }
-            .background(.bgPrimary)
-            .navigationTitle(Self.title)
-            .navigationSubtitle(station.name)
-            .toolbarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(role: .close) {
-                        dismiss()
-                    }
+        TimelineView(.everyMinute) { context in
+            let day = day(today: context.date)
+            content(day: day, now: context.date)
+                .safeAreaBar(edge: .top) {
+                    filters(days: days(today: context.date), selected: day, today: context.date)
                 }
-            }
+                .loadSchedules(
+                    ScheduleRequest(stationID: station.id, timetable: timetable, serviceDay: day),
+                    into: $schedules
+                ) {
+                    try await $0.schedules(for: $1)
+                }
         }
-        .presentationDragIndicator(.visible)
     }
 
     @ViewBuilder
@@ -71,19 +107,19 @@ struct StationScheduleSheet: View {
         if let day {
             let timetable = StationTimetableBuilder.timetable(
                 schedules,
-                filter: filter,
+                filter: activeFilter,
                 serviceDay: day,
                 now: now,
                 calendar: calendar,
                 timeZone: timeZone
             )
             if timetable.isEmpty {
-                noTrains
+                StationScheduleSheet.noTrains
             } else {
                 list(timetable, day: day)
             }
         } else {
-            noTrains
+            StationScheduleSheet.noTrains
         }
     }
 
@@ -198,7 +234,7 @@ struct StationScheduleSheet: View {
 
     private func destinationMenu(_ filters: [StationTimetableFilter]) -> some View {
         Menu {
-            Picker(selection: $filter) {
+            Picker(selection: Binding(get: { activeFilter }, set: { filter = $0 })) {
                 Text(Self.allDestinations).tag(String?.none)
                 ForEach(filters) { option in
                     Text(verbatim: "\(option.lineID) · \(option.destination)").tag(Optional(option.id))
@@ -209,7 +245,7 @@ struct StationScheduleSheet: View {
             .pickerStyle(.inline)
         } label: {
             menuLabel(systemImage: "arrow.triangle.branch") {
-                filters.first { $0.id == filter }
+                filters.first { $0.id == activeFilter }
                     .map { Text(verbatim: "\($0.lineID) · \($0.destination)") }
                     ?? Text(Self.allDestinations)
             }
@@ -224,40 +260,6 @@ struct StationScheduleSheet: View {
             Image(systemName: "chevron.up.chevron.down")
                 .font(.caption2.weight(.semibold))
                 .foregroundStyle(.textTertiary)
-        }
-    }
-
-    private var noTrains: some View {
-        CardMessage(
-            LocalizedStringResource(
-                "No hay trenes este día",
-                comment: "Horarios: título cuando la estación no tiene salidas el día elegido."
-            ),
-            message: LocalizedStringResource(
-                "Prueba con otro día o con otro destino.",
-                comment: "Horarios: sugerencia cuando no hay salidas el día elegido."
-            ),
-            icon: .symbol("calendar", tint: .textTertiary)
-        )
-        .padding(ScreenLayout.margin)
-        .frame(maxHeight: .infinity)
-    }
-
-    private func load(_ day: Date?) {
-        schedules =
-            day.flatMap { day in
-                timetable.map {
-                    StationScheduleBuilder.schedules(
-                        for: station,
-                        timetable: $0,
-                        day: day,
-                        calendar: calendar,
-                        context: modelContext
-                    )
-                }
-            } ?? []
-        if let filter, !schedules.contains(where: { $0.id == filter }) {
-            self.filter = nil
         }
     }
 
@@ -304,11 +306,6 @@ struct StationScheduleSheet: View {
     private static func longDayFormat(_ timeZone: TimeZone) -> Date.FormatStyle {
         Date.FormatStyle(timeZone: timeZone).weekday(.wide).day()
     }
-
-    static let title = LocalizedStringResource(
-        "Horarios",
-        comment: "Horarios: título de la hoja con todas las salidas de una estación; también etiqueta del botón que la abre."
-    )
 
     private static let allDestinations = LocalizedStringResource(
         "Todos los destinos",

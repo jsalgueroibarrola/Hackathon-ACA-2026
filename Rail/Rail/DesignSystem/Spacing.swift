@@ -9,12 +9,11 @@ enum Spacing {
     static let lg: CGFloat = 16
     static let xl: CGFloat = 20
     static let xxl: CGFloat = 24
-    static let xxxl: CGFloat = 32
     static let xxxxl: CGFloat = 40
-    static let xxxxxl: CGFloat = 48
 }
 
 enum ScreenLayout {
     static let margin: CGFloat = 16
     static let gutter: CGFloat = 12
+    static let maxContentWidth: CGFloat = 640
 }

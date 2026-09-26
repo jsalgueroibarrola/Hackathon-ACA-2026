@@ -20,10 +20,14 @@ enum TravelMode: String, Sendable, Hashable, CaseIterable, Identifiable {
 
     var title: LocalizedStringResource {
         switch self {
-        case .walking: "Andando"
-        case .cycling: "En bici"
-        case .automobile: "En coche"
-        case .transit: "Transporte público"
+        case .walking:
+            LocalizedStringResource("Andando", comment: "Cómo llegar: modo de transporte a pie.")
+        case .cycling:
+            LocalizedStringResource("En bici", comment: "Cómo llegar: modo de transporte en bicicleta.")
+        case .automobile:
+            LocalizedStringResource("En coche", comment: "Cómo llegar: modo de transporte en coche.")
+        case .transit:
+            LocalizedStringResource("Transporte público", comment: "Cómo llegar: modo de transporte en transporte público.")
         }
     }
 
@@ -42,12 +46,6 @@ enum TravelMode: String, Sendable, Hashable, CaseIterable, Identifiable {
         case .automobile, .transit: .seconds(120)
         }
     }
-
-    /// Apple Maps only estimates arrival for `.transit`: it never returns a
-    /// geometry or step list, so that mode cannot be drawn on the map.
-    var supportsDirections: Bool {
-        self != .transit
-    }
 }
 
 struct TravelEstimate: Sendable, Hashable {
@@ -60,12 +58,6 @@ struct TravelEstimate: Sendable, Hashable {
 
 extension TravelEstimate {
     var timeLabel: String { travelTime.travelLabel }
-
-    var departureLabel: String? {
-        departure.map {
-            $0.formatted(date: .omitted, time: .shortened)
-        }
-    }
 }
 
 extension Duration {

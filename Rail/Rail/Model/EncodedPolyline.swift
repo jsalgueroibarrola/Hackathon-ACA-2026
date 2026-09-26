@@ -1,10 +1,3 @@
-//
-//  EncodedPolyline.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import CoreLocation
 
 /// Decoder for the Google encoded polyline format that ``Line/shape`` arrives in.

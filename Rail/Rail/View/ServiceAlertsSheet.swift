@@ -25,10 +25,6 @@ struct ServiceAlertsSheet: View {
         PollTrigger(isActive: scenePhase == .active, retryAttempt: retryAttempt)
     }
 
-    private var calendar: Calendar {
-        networks.first?.calendar ?? .autoupdatingCurrent
-    }
-
     var body: some View {
         TimelineView(.everyMinute) { context in
             sheet(items: items(at: context.date))
@@ -80,16 +76,18 @@ struct ServiceAlertsSheet: View {
     }
 
     private func items(at date: Date) -> [ServiceAlertItem] {
-        ServiceAlertItemBuilder.items(
-            alerts: alerts,
-            lines: lines,
-            now: date,
-            calendar: calendar,
-            locale: .autoupdatingCurrent,
-            dateLocale: AlertTimestamp.dateLocale(
-                preferredLanguages: Locale.preferredLanguages
+        networks.first.map {
+            ServiceAlertItemBuilder.items(
+                alerts: alerts,
+                lines: lines,
+                now: date,
+                calendar: $0.calendar,
+                locale: .autoupdatingCurrent,
+                dateLocale: AlertTimestamp.dateLocale(
+                    preferredLanguages: Locale.preferredLanguages
+                )
             )
-        )
+        } ?? []
     }
 
     private func translate(

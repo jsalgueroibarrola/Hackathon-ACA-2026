@@ -29,6 +29,7 @@ struct StationSectionHeader: View {
     }
 }
 
+#if DEBUG
 #Preview {
     List {
         Section {
@@ -39,3 +40,4 @@ struct StationSectionHeader: View {
     }
     .listStyle(.plain)
 }
+#endif

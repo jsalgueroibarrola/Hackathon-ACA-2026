@@ -78,12 +78,7 @@ struct StationsView: View {
             .searchable(text: $query, prompt: Text(Self.searchPrompt))
             .navigationTitle(Self.title)
             .toolbarTitleDisplayMode(.inline)
-            .navigationDestination(for: StationsRoute.self) { route in
-                switch route {
-                case .station(let id):
-                    StationDestination(stationID: id)
-                }
-            }
+            .appRouteDestinations()
         }
     }
 
@@ -123,7 +118,7 @@ struct StationsView: View {
 
     private func rows(_ items: [StationRowItem], favoriteIDs: Set<String>) -> some View {
         ForEach(items) { item in
-            NavigationLink(value: StationsRoute.station(id: item.id)) {
+            NavigationLink(value: AppRoute.station(id: item.id)) {
                 StationRow(
                     item,
                     isFavorite: favoritesModel.binding(
@@ -193,7 +188,7 @@ struct StationsView: View {
         .listRowSeparator(.hidden)
     }
 
-    private static let title = LocalizedStringResource(
+    static let title = LocalizedStringResource(
         "Estaciones",
         comment: "Título de la pestaña y de la pantalla con el listado de estaciones."
     )

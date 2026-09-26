@@ -39,6 +39,7 @@ struct SeverityBadge: View {
 
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     VStack(spacing: Spacing.xxl) {
         ScrollView(.horizontal) {
@@ -101,3 +102,4 @@ struct SeverityBadge: View {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

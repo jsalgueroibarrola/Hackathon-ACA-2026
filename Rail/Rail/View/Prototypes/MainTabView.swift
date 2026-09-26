@@ -1,10 +1,3 @@
-//
-//  MainTabView.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -23,20 +16,26 @@ struct MainTabView: View {
 
     @State private var selectedTab: AppTab = .home
     @State private var mapSelection: String?
-    @State private var homePath: [HomeRoute] = []
+    @State private var homePath: [AppRoute] = []
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            Tab("Inicio", systemImage: "house", value: .home) {
+            Tab(value: .home) {
                 HomeView(path: $homePath, onShowMap: showOnMap)
+            } label: {
+                Label(HomeView.title, systemImage: "house")
             }
 
-            Tab("Mapa", systemImage: "map", value: .map) {
+            Tab(value: .map) {
                 NetworkMapView(selection: $mapSelection)
+            } label: {
+                Label(Self.mapTitle, systemImage: "map")
             }
 
-            Tab("Estaciones", systemImage: "mappin.and.ellipse", value: .stations) {
+            Tab(value: .stations) {
                 StationsView()
+            } label: {
+                Label(StationsView.title, systemImage: "mappin.and.ellipse")
             }
         }
         .task(
@@ -64,6 +63,11 @@ struct MainTabView: View {
         mapSelection = stationID
         selectedTab = .map
     }
+
+    private static let mapTitle = LocalizedStringResource(
+        "Mapa",
+        comment: "Título de la pestaña con el mapa de la red."
+    )
 }
 
 #if DEBUG

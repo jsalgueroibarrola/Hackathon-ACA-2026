@@ -13,6 +13,7 @@ struct HomeHeroImage: View {
     }
 }
 
+#if DEBUG
 private struct HomeHeroImageSamples: View {
     var body: some View {
         VStack(spacing: Spacing.xxl) {
@@ -42,3 +43,4 @@ private struct HomeHeroImageSamples: View {
     .background(.bgSecondary)
     .preferredColorScheme(.dark)
 }
+#endif

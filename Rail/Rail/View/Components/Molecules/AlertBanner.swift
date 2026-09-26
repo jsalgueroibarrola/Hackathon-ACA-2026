@@ -110,6 +110,7 @@ struct AlertBanner: View {
     )
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     VStack(spacing: Spacing.md) {
         ForEach(IncidentSeverity.allCases, id: \.self) { severity in
@@ -192,3 +193,4 @@ struct AlertBanner: View {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

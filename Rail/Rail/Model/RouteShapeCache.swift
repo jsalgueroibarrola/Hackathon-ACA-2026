@@ -1,23 +1,12 @@
-//
-//  RouteShapeCache.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import CoreLocation
 import Synchronization
-
 
 struct RouteShape: Sendable, Hashable {
     let lineID: String
     let encoded: String
 }
 
-
 final class RouteShapeCache: Sendable {
-
-    static let shared = RouteShapeCache()
 
     private struct Entry {
         let encoded: String

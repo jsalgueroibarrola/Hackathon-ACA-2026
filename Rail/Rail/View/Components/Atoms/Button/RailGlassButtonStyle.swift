@@ -93,6 +93,7 @@ extension ButtonStyle where Self == RailGlassButtonStyle {
     }
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     Grid(horizontalSpacing: Spacing.xxl, verticalSpacing: Spacing.lg) {
         ForEach(RailGlassButtonStyle.Variant.allCases, id: \.self) { variant in
@@ -122,3 +123,4 @@ extension ButtonStyle where Self == RailGlassButtonStyle {
     .background(.bgSecondary)
     .preferredColorScheme(.dark)
 }
+#endif

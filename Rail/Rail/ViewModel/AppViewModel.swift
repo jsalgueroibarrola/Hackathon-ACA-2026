@@ -1,12 +1,6 @@
-//
-//  AppViewModel.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import Foundation
 import Observation
+import OSLog
 
 enum AppPhase: Equatable {
     case checking
@@ -43,51 +37,67 @@ final class AppViewModel {
     }
 
     private func evaluate() async {
-        let now = Date()
-
-        let status: SyncStatus
+        let now = Date.now
+        var freshness = DataFreshness.missing
+        let failure: (any Error)?
         do {
-            status = try await syncService.status(now: now)
-        } catch {
-            guard !Task.isCancelled else { return }
-            phase = .failed(error.localizedDescription)
-            return
-        }
-
-        guard !Task.isCancelled else { return }
-
-        let blocking = status.freshness.requiresBlockingDownload
-        lastFetchedAt = status.lastFetchedAt
-        phase = blocking ? .loading : .ready(.refreshing)
-
-        do {
+            let status = try await syncService.status(now: now)
+            try Task.checkCancellation()
+            freshness = status.freshness
+            lastFetchedAt = status.lastFetchedAt
+            phase = freshness.requiresBlockingDownload ? .loading : .ready(.refreshing)
             if try await syncService.sync(now: now) == .updated {
                 WidgetReloader.reloadNextTrains()
             }
-        } catch is CancellationError {
-            guard !Task.isCancelled else { return }
-            phase = blocking
-                ? .failed(
-                    String(
-                        localized: "Se ha interrumpido la descarga de horarios",
-                        comment: "Descripción de error mostrada cuando la sincronización inicial se cancela."
-                    )
-                )
-                : .ready(.idle)
-            return
+            lastFetchedAt = (try? await syncService.status(now: .now))?.lastFetchedAt ?? lastFetchedAt
+            failure = nil
         } catch {
-            guard !Task.isCancelled else { return }
-            phase = blocking
-                ? .failed(error.localizedDescription)
-                : .ready(status.freshness.warnsOnFailedRefresh ? .failed : .idle)
-            return
+            failure = error
         }
-
         guard !Task.isCancelled else { return }
-
-        if let refreshed = try? await syncService.status(now: Date()) {
-            lastFetchedAt = refreshed.lastFetchedAt
+        if let failure, !(failure is CancellationError) {
+            Logger.sync.error("Sync failed: \(String(describing: failure), privacy: .public)")
         }
-        phase = .ready(.idle)
+        phase = Self.phase(for: freshness, failure: failure)
+    }
+
+    static func phase(for freshness: DataFreshness, failure: (any Error)?) -> AppPhase {
+        switch (freshness.requiresBlockingDownload, failure) {
+        case (_, nil):
+            .ready(.idle)
+        case (true, let error?) where error is CancellationError:
+            .failed(
+                String(
+                    localized: "Se ha interrumpido la descarga de horarios",
+                    comment: "Descripción de error mostrada cuando la sincronización inicial se cancela."
+                )
+            )
+        case (true, let error?):
+            .failed(failureMessage(for: error))
+        case (false, let error?) where error is CancellationError:
+            .ready(.idle)
+        case (false, _?):
+            .ready(freshness.warnsOnFailedRefresh ? .failed : .idle)
+        }
+    }
+
+    private static func failureMessage(for error: any Error) -> String {
+        switch error {
+        case NetworkError.transport:
+            String(
+                localized: "No hay conexión a internet. Comprueba la conexión e inténtalo de nuevo.",
+                comment: "Descripción de error cuando la descarga inicial de horarios falla por no tener conexión."
+            )
+        case NetworkError.status, NetworkError.serviceUnavailable:
+            String(
+                localized: "El servidor de horarios no responde. Inténtalo de nuevo más tarde.",
+                comment: "Descripción de error cuando el servidor de horarios devuelve un error en la descarga inicial."
+            )
+        default:
+            String(
+                localized: "No se han podido descargar los horarios. Inténtalo de nuevo.",
+                comment: "Descripción de error genérica cuando falla la descarga inicial de horarios."
+            )
+        }
     }
 }

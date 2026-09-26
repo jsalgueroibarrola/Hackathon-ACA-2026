@@ -154,6 +154,7 @@ extension CardMessage.Prominence {
     }
 }
 
+#if DEBUG
 private struct CardMessageSamples: View {
     var body: some View {
         VStack(spacing: Spacing.xxl) {
@@ -232,3 +233,4 @@ private struct CardMessageSamples: View {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

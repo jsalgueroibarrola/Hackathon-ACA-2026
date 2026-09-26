@@ -89,6 +89,7 @@ extension LineBadge.Scale {
     }
 }
 
+#if DEBUG
 #Preview("Variantes Figma") {
     Grid(horizontalSpacing: Spacing.xxxxl, verticalSpacing: Spacing.xxl) {
         GridRow {
@@ -138,3 +139,4 @@ extension LineBadge.Scale {
     .background(.bgPrimary)
     .dynamicTypeSize(.accessibility2)
 }
+#endif

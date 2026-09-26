@@ -148,6 +148,7 @@ struct TimetableRow: View {
     }
 }
 
+#if DEBUG
 #Preview {
     VStack(spacing: 0) {
         TimetableRow(
@@ -178,3 +179,4 @@ struct TimetableRow: View {
     }
     .background(.bgPrimary)
 }
+#endif

@@ -1,10 +1,3 @@
-//
-//  StationConnection+Presentation.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import SwiftUI
 
 extension StationConnection {
@@ -44,7 +37,6 @@ extension StationConnection {
         }
     }
 }
-
 
 enum StationAccessibilitySymbol {
     static let reducedMobility = "figure.roll"

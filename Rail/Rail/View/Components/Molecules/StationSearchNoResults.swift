@@ -23,7 +23,9 @@ struct StationSearchNoResults: View {
     }
 }
 
+#if DEBUG
 #Preview {
     StationSearchNoResults("Sevilla")
         .background(.bgSecondary)
 }
+#endif

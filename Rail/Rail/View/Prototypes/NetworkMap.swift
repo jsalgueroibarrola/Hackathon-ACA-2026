@@ -1,10 +1,3 @@
-//
-//  NetworkMap.swift
-//  Rail
-//
-//  Created by jakuru on 21/09/2026.
-//
-
 import MapKit
 import SwiftUI
 
@@ -27,14 +20,13 @@ struct NetworkMap: View {
     @State private var zoom: ZoomBucket = .region
     @State private var heading: CLLocationDirection = 0
     @State private var now = Date.now
-    @State private var hasFramed = false
 
     var body: some View {
         Map(
             position: $camera,
             bounds: MapCameraBounds(
-                minimumDistance: 200,
-                maximumDistance: 400_000
+                minimumDistance: Self.minimumCameraDistance,
+                maximumDistance: Self.maximumCameraDistance
             ),
             selection: $selection
         ) {
@@ -90,22 +82,16 @@ struct NetworkMap: View {
         }
         .task(id: TrainClock(isRunning: !trains.isEmpty, reduceMotion: reduceMotion)) {
             guard !trains.isEmpty else { return }
-            let step: Duration = reduceMotion ? .seconds(5) : .seconds(1)
+            let step = reduceMotion ? Self.reducedMotionTick : Self.tick
             now = .now
-            while !Task.isCancelled {
-                do {
-                    try await Task.sleep(for: step)
-                } catch {
-                    return
-                }
-                withAnimation(reduceMotion ? nil : .linear(duration: 1)) {
+            while (try? await Task.sleep(for: step)) != nil {
+                withAnimation(reduceMotion ? nil : .linear(duration: Self.tick / .seconds(1))) {
                     now = .now
                 }
             }
         }
-        .task(id: pins.count) {
-            guard !hasFramed, let boundingRect else { return }
-            hasFramed = true
+        .task(id: boundingRect == nil) {
+            guard let boundingRect else { return }
             camera = .rect(boundingRect)
         }
     }
@@ -121,7 +107,7 @@ struct NetworkMap: View {
                 .stroke(
                     .background.opacity(0.9),
                     style: StrokeStyle(
-                        lineWidth: 9,
+                        lineWidth: Self.casingWidth,
                         lineCap: .round,
                         lineJoin: .round
                     )
@@ -133,7 +119,7 @@ struct NetworkMap: View {
                 .stroke(
                     line.color,
                     style: StrokeStyle(
-                        lineWidth: 5,
+                        lineWidth: Self.lineWidth,
                         lineCap: .round,
                         lineJoin: .round
                     )
@@ -141,6 +127,14 @@ struct NetworkMap: View {
                 .mapOverlayLevel(level: .aboveLabels)
         }
     }
+
+    private static let minimumCameraDistance: CLLocationDistance = 200
+    private static let maximumCameraDistance: CLLocationDistance = 400_000
+    private static let casingWidth: CGFloat = 9
+    private static let lineWidth: CGFloat = 5
+    private static let framingInset = 0.15
+    private static let tick = Duration.seconds(1)
+    private static let reducedMotionTick = Duration.seconds(5)
 
     private var liveTrains: [TrainTrack] {
         trains.filter { !$0.isExpired(at: now) }
@@ -151,19 +145,14 @@ struct NetworkMap: View {
             pins.map { MKMapPoint($0.coordinate) }
             + lines.flatMap { $0.coordinates.map(MKMapPoint.init) }
         guard !points.isEmpty else { return nil }
-
-        var rect = MKMapRect.null
-        for point in points {
-            rect = rect.union(
-                MKMapRect(origin: point, size: MKMapSize(width: 0, height: 0))
-            )
+        let rect = points.reduce(MKMapRect.null) {
+            $0.union(MKMapRect(origin: $1, size: MKMapSize(width: 0, height: 0)))
         }
-        return rect.insetBy(dx: -rect.width * 0.15, dy: -rect.height * 0.15)
+        return rect.insetBy(dx: -rect.width * Self.framingInset, dy: -rect.height * Self.framingInset)
     }
 }
 
-// MARK: - Previews
-
+#if DEBUG
 extension LineOverlay {
     fileprivate static let l1 = LineOverlay(
         id: "L1",
@@ -330,3 +319,4 @@ extension TrainTrack {
 
     NetworkMap(lines: [.l1, .l2], pins: [], selection: $selection)
 }
+#endif

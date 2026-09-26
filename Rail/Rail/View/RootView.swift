@@ -1,10 +1,3 @@
-//
-//  RootView.swift
-//  Rail
-//
-//  Created by jakuru on 20/09/2026.
-//
-
 import SwiftData
 import SwiftUI
 
@@ -64,6 +57,7 @@ struct RootView: View {
     }
 }
 
+#if DEBUG
 private struct PreviewSyncService: SyncService {
     let freshness: DataFreshness
 
@@ -90,3 +84,4 @@ private struct PreviewSyncService: SyncService {
         .environment(FavoritesViewModel.preview())
         .modelContainer(for: RailSchema.models, inMemory: true)
 }
+#endif
