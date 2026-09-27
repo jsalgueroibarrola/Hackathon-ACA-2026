@@ -15,6 +15,24 @@ actor SwiftDataScheduleRepository: ScheduleRepository {
         } ?? []
     }
 
+    func journeys(for request: JourneyRequest) async throws -> [Journey] {
+        guard
+            let network = try modelContext.first(TransitNetwork.self),
+            let timetable = try modelContext.first(Timetable.self)
+        else { return [] }
+
+        return JourneyBuilder.journeys(
+            from: try modelContext.journeySource(
+                connecting: [request.originID, request.destinationID],
+                timetable: timetable,
+                calendar: network.calendar
+            ),
+            originID: request.originID,
+            destinationID: request.destinationID,
+            day: request.serviceDay
+        )
+    }
+
     private func source(stationID: String) throws -> StationScheduleSource? {
         var stationDescriptor = FetchDescriptor<Station>(predicate: #Predicate { $0.id == stationID })
         stationDescriptor.fetchLimit = 1

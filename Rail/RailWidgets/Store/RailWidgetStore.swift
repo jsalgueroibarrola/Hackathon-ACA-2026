@@ -7,21 +7,6 @@ enum RailWidgetStore {
         configurations: [RailStore.configuration(allowsSave: false)]
     )
 
-    static func favoriteStations() -> [StationEntity] {
-        read { context in
-            let favorites = context.fetchAll(
-                FetchDescriptor<FavoriteStation>(sortBy: FavoriteStation.order)
-            )
-            let names = context.stationNames()
-
-            return favorites.compactMap { favorite in
-                names[favorite.stationID].map {
-                    StationEntity(id: favorite.stationID, name: $0)
-                }
-            }
-        } ?? []
-    }
-
     static func allStations() -> [StationEntity] {
         read { context in
             context

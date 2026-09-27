@@ -21,20 +21,20 @@ The tokens in this directory and the color sets in `Assets.xcassets/Colors` are 
 | Componentes · M2 StationRow | `56:183` | Station row molecule (`54:161`) | `View/Components/Molecules/StationRow.swift` |
 | Componentes · M7 AlertBanner | `102:220` | Incident alert banner molecule (`103:188`) | `View/Components/Molecules/AlertBanner.swift` |
 | Componentes · M9 IncidentCard | `104:317` | Incident card molecule (`106:273`) | `View/Components/Molecules/IncidentCard.swift` |
-| Mockups · 01 Inicio | `2:53` | Home screen (`2:54`) and one screen per state of the next trains card | `View/HomeView.swift`, `View/Components/NextTrainsSection.swift` |
+| Mockups · 01 Inicio | `2:53` | Home screen (`2:54`) and one screen per state of the next trains card | `View/Home/HomeView.swift`, `View/Home/NextTrainsSection.swift` |
 | Mockups · 01 Inicio · Card | `2:53` | Next trains card organism (`59:1450` and six more states, see *Next trains card*) | `View/Components/Organisms/NextTrainsCard.swift` |
 | Mockups · 01 Inicio · Station Container | `2:53` | Station name and proximity molecule (`59:1452`) | `View/Components/Molecules/StationHeader.swift` |
 | Mockups · 01 Inicio · Section Header | `2:53` | Section header with icon molecule (`59:1455`) | `View/Components/Molecules/CardSectionHeader.swift` |
 | Mockups · 01 Inicio · Permiso / Sin trenes | `2:53` | Card message molecule, regular (`220:1974`) and compact (`220:3269`) | `View/Components/Molecules/CardMessage.swift` |
 | Mockups · 01 Inicio · trenecito | `2:53` | Train illustration (`60:3377`); the code uses the SVG supplied by the user, not the one from Figma | `View/Components/Atoms/TrainIllustration.swift` |
-| Mockups · 01 Inicio · Favorite Stations Container | `2:53` | Favorite stations section organism (`59:1518`); empty state on the *Home sin favoritas* screen (`220:3329`) | `View/Components/Organisms/FavoriteStationsContainer.swift`, `View/Components/FavoriteStationsSection.swift` |
+| Mockups · 01 Inicio · Favorite Stations Container | `2:53` | Favorite stations section organism (`59:1518`); empty state on the *Home sin favoritas* screen (`220:3329`) | `View/Components/Organisms/FavoriteStationsContainer.swift`, `View/Home/FavoriteStationsSection.swift` |
 | Mockups · 01 Inicio · tarjeta de favorita | `2:53` | Favorite station card molecule (`60:2215`) | `View/Components/Molecules/FavoriteStationCard.swift` |
 | Mockups · 01 Inicio · Favoritos vacíos | `2:53` | Empty state molecule (`220:3525`) | `View/Components/Molecules/EmptyStateCard.swift` |
 | Mockups · 01 Inicio · Imagen de fondo | `2:53` | Header photo (`60:3294`), 393×262 with a *Fill* fill; the original is 786×442 | `Assets.xcassets/Photos/HomeHero.imageset`, `View/Components/Atoms/HomeHeroImage.swift` |
 | Mockups · 01 Inicio · Logo | `2:53` | Top bar logo (`143:5493`), 44×44 | `Assets.xcassets/Illustrations/RailLogo.imageset`, `View/Components/Atoms/RailLogo.swift` |
-| Mockups · Notificaciones | — | Alerts sheet in Spanish (`389:4606`) and for other languages, with a language banner and «Traducir» (`207:11115`) | `View/ServiceAlertsSheet.swift`, `View/Components/Organisms/ServiceAlertsList.swift` |
+| Mockups · Notificaciones | — | Alerts sheet in Spanish (`389:4606`) and for other languages, with a language banner and «Traducir» (`207:11115`) | `View/Sheets/ServiceAlertsSheet.swift`, `View/Components/Organisms/ServiceAlertsList.swift` |
 | Mockups · Favoritos | — | Screen with favorites (`464:8277`) and empty (`464:8524`) | `View/FavoriteStationsView.swift`, `View/Components/Molecules/IllustratedMessage.swift` |
-| Mockups · Elegir estación | — | Station picker sheet (`389:5385`) and no results (`389:5417`) | `View/StationPickerSheet.swift`, `View/Presentation/StationPickerSection.swift` |
+| Mockups · Elegir estación | — | Station picker sheet (`389:5385`) and no results (`389:5417`) | `View/Sheets/StationPickerSheet.swift`, `View/Presentation/StationPickerSection.swift` |
 
 URL of any node: `https://www.figma.com/design/WFoeo57elVOwmgKto1iwfq/?node-id=<id with a hyphen>` (for example `node-id=30-2`).
 
@@ -51,7 +51,7 @@ The *Mockups* rows are not Figma components: they are mockup frames, with no var
 | `layout/margin · gutter` | `ScreenLayout.margin · gutter` (`Layout` already exists in SwiftUI); `ScreenLayout.maxContentWidth` (640) is the project's own, for iPad and landscape |
 | `radius/sm … xl` | `Radius.sm … xl`; `radius/full` is expressed with `.capsule` / `.circle`, not with the number |
 | `size/touch-min · row-min · icon-md · line-badge …` | `Size.touchMin · rowMin · iconMd · lineBadge …` |
-| `border/hairline · thick` | `Border.hairline · thick` |
+| `border/hairline · thin · thick` | `Border.hairline · thin · thick` |
 | Text styles | system styles (`.body`, `.headline`, …) or `Font.bodyEmphasized`, `.timeDeparture`, … |
 | `Elevation/Card · Sheet · Floating` | `.elevation(.card / .sheet / .floating)` |
 
@@ -91,9 +91,8 @@ The base color of each line **is sent by the API** (`Line.colorHex`), so there a
 |---|---|---|
 | `color/line/c1` | #DA291C / #DA291C | `line.tint.base` (API) |
 | `color/line/c1-text` | #FFFFFF | `line.tint.text` |
-| `color/line/c1-subtle` | #FDF3F2 (50) / #62100A (900) | `line.tint.subtle` (mixed with white 92 % / black 55 %) |
 
-If the designer adds `color/line/c3*` in Figma, the project needs nothing more than a check in `TokenGallery` that the derivation looks like their values; if they drift apart, adjust the mix factors in `LineTint.swift`. Badge sizes and radii: `Size.lineBadgeSm` (20) / `Size.lineBadge` (28) with `Radius.sm` / `Radius.md`.
+Figma's `color/line/c1-subtle` has no counterpart in code because no view uses it; if one needs it, derive it in `LineTint.swift` from the base color. If the designer adds `color/line/c3*` in Figma, the project needs nothing more than a check in `TokenGallery`. Badge sizes and radii: `Size.lineBadgeSm` (20) / `Size.lineBadge` (28) with `Radius.sm` / `Radius.md`.
 
 ## Semantic colors (quick reference)
 
@@ -150,6 +149,7 @@ SF Pro throughout the app, Dynamic Type scale (Large size by default). System st
 | Caption 2 | 11/13 · Regular | `.caption2` |
 | Time/Departure | 17/22 · Semibold · tabular figures | `.timeDeparture` |
 | Time/Departure Large | 22/28 · Bold · tabular figures | `.timeDepartureLarge` |
+| Time/Departure Hero | 34/41 · Bold · tabular figures | `.timeDepartureHero` |
 
 Figma rules: times always with `Time/Departure`; Large Title in large navigation and Title 2 for station names in cards; section labels in uppercase `Caption 1 Emphasized` with `textSecondary`; never go below Caption 2; hierarchy within a line through weight, not color.
 
@@ -308,6 +308,15 @@ The two Figma button components are `ButtonStyle`s on a plain `Button`. Figma pr
 - **After midnight.** Trips with minutes ≥ 1440 belong to the same service day: they go at the end, under the «Madrugada del sábado 27» header.
 - **Empty.** `CardMessage` «No hay trenes este día».
 
+## Journeys
+
+`JourneyPlannerView` is the Journeys tab («Trayectos», after Home). Its path is `[AppRoute]`, and `.journey(JourneyQuery)` opens `JourneyResultsView`.
+
+- **Planner.** A `ScrollView` on `bgSecondary` with a `brandPrimarySubtle → bgSecondary` gradient at the top, the heading «¿A dónde quieres ir?» (`title2Emphasized`) and `JourneySearchCard` (`.cardSurface()` + `Elevation/Card`). The card only draws: two `JourneyStationField`s (`.buttonStyle(.stationField)`: `bgSecondary`, `Radius.lg`, height `Size.buttonLg`) that open `StationPickerSheet`, a swap button between them (`.rail(.bordered)`, icon only, turns 180° on every tap), `ServiceDayMenu` (`.rail(.bordered)`) with the downloaded days, and «Buscar trenes» (`.rail(.prominent)`, `.large`). With no choice yet, the origin falls back to the nearest station within `NextTrainsCardStateBuilder.nearbyRadius`.
+- **Recent searches.** `RecentJourney` rows (the `@Model` lives in `SavedStation.swift` because the widget compiles `RailSchema` and that file; the policy is in `RecentJourneyPolicy.swift`) (origin and destination, `lastSearchedAt`) drawn with `RecentJourneyRow` in a `bgPrimary` card; context menu «Eliminar» and «Borrar» in the header. `RecentJourneyPolicy` keeps at most 15 and drops the ones not looked up for 30 days; `RecentJourneyItemBuilder` hides expired ones before the next write prunes them. `JourneyResultsView` records the pair each time it shows it, so opening a recent search moves it to the top.
+- **Results.** Same skeleton as the timetable sheet: `ServiceDayMenu` in `safeAreaBar` (`.railGlass(.clear)`, `.small`), `JourneyRouteHeader` (origin and destination with a connector, swap button, line badges and «N trenes», plural in the catalog) and `JourneyRow`s: departure → arrival in `timeDepartureLarge`, duration, badges with «Directo» or «Con transbordo», for transfers a «Cambio en Victoria Kent · 6 min» line, and «Tren 23104 hacia Fuengirola». Statuses, the «Ver N salidas anteriores» row (`DepartedToggleRow`) and «Madrugada del…» work as in the timetable.
+- **Logic.** `JourneyBuilder` is pure: direct trips on every line that calls at both stations (direction from the stop order), or, when no line does, one transfer at a shared station with at least `minimumTransferMinutes` (3) to change, keeping only journeys that no other one beats on both departure and arrival. `JourneyTimetableBuilder` turns them into rows.
+
 ## Next trains card
 
 `NextTrainsCard(state, onAction:)` reads no data: it draws a `NextTrainsCardState` and reports what the user taps through a `NextTrainsCardAction`. `NextTrainsSection` connects it to location, SwiftData and MapKit through the pure functions of `NextTrainsCardStateBuilder`.
@@ -338,13 +347,25 @@ The two Figma button components are `ButtonStyle`s on a plain `Button`. Figma pr
 - **«Próximos trenes · programados» header:** `CardSectionHeader(detail:)` supports it, but it only appears in the *Modo sin conexión* mockup. The app doesn't detect being offline yet, so the card doesn't use it.
 - **GlassButton inside the card:** used because the mockups draw it that way, even though the component's documentation advises against it on opaque cards.
 
+## Map
+
+`MapScreen` is the Map tab: `TransitMap` with `LineFilterBar` on top and, at the bottom, the nearby stations carousel (`NearbyStations`), the controls (`MapControls`) and the station sheet (`StationSheet`). There is no Figma mockup.
+
+- **Nearby card.** `NearbyStationCard` loads the station's `nextTrains` inside a `TimelineView(.everyMinute)` and `NearbyStationCardContent` only draws: name (`headline`, one line), line badges, `figure.roll` if the station is accessible and the distance on the right, then the next train of up to two destinations (one per destination, soonest first, from the pure `NearbyDeparturesBuilder`). Each row is an arrow in the line color, the destination and the wait («Ahora», «4 min», or the clock time from 60 min on). When the realtime feed has the same train with a delay, the wait includes it and a «+3 min» in `transitDelayedText` sits next to it. The live train also filters the timetable: `NearbyDeparturesBuilder.liveTrains(from:lines:fetchedAt:)` works out the stations it has already left from `stopID`/`nextStopID`, its status and the line order, and a departure at one of those stations is skipped even if the delay would still put it in the future; readings older than `TrainTrack.maximumAge` are ignored, like on the map. There is no «Puntual» chip, since without live data we don't know the train is on time. Two hidden rows reserve the height, so every card is the same size while loading, with one destination or with «No quedan trenes hoy».
+- **Controls.** One glass capsule (`glassEffect(.regular.interactive(), in: .capsule)`) with two icon buttons of `Size.glassControl`, in `.title3` and `glassText`: «Mi ubicación» and «Ver toda la red». It always rests `Spacing.sm` above whatever takes the bottom (the carousel or the sheet), so it rides on the sheet as in the reference project. `glassEffectUnion` over `.buttonStyle(.glass)` was tried and drew both icons over a single circle.
+- **Own sheet.** It is not a system `.sheet`: it is drawn in the tab, floating `Spacing.sm` above the tab bar, with `glassEffect(.regular, in: .rect(cornerRadius: Radius.xl))`, the same radius as the card. It has a single height and no detents: header + content, between the card + `Spacing.xxxxl` and 60 % of the height. It opens at that height from a card, a pin or «Ver en el mapa», and it can't go higher or rest lower. If the content doesn't fit, the body scrolls with the header pinned in `safeAreaBar(edge: .top)`.
+- **Header.** A decorative grabber (36×5, `textTertiary`, hidden from VoiceOver); title `title2Emphasized`, the `.favorite` star and a close `Button(role: .close)` in `.glass`, a circle and `.large`. VoiceOver closes it with the escape gesture.
+- **Gestures.** The sheet is dragged with `onVerticalDrag` (a `DragGesture` in `.global`, locked to the vertical axis). While dragging down, the sheet shrinks toward its card (or slides down if it came from the bottom). On release it closes if the projected translation passes 25 % of its height (`MapSheetLayout.shouldClose`); otherwise it goes back up. The carousel opens the centered card when you pull up on it: it sits inside a vertical `ScrollView` that always bounces, read with `onScrollGeometryChange`. A drag gesture on the cards is not used, because it blocks horizontal scrolling.
+- **Card ↔ sheet.** If the station is in the carousel, the card grows into the sheet and, on closing, shrinks back into it: the rect comes from an `anchorPreference`, and the content crossfades (`NearbyStationCardContent` → the sheet). If it is not in the carousel, the sheet comes up from the bottom. With *Reduce Motion* it only fades.
+- **Full station.** «Ver estación completa» pushes `StationDestination` onto the tab's `NavigationStack`; on return the sheet is still open.
+
 ## Live trains
 
 The Map tab draws the trains from the `/realtime` feed on their lines. There is no Figma mockup: the marker is provisional.
 
-- **Container and content.** `NetworkMapView` reads `@Query` (`LiveTrain`, `RealtimeFeed`), polls `liveFeeds.poll(.realtime)` while the tab is on screen and the app is in the foreground, and builds the `TrainTrack`s with `TrainTrackBuilder`, pure logic in `View/Presentation/TrainTrack.swift`. `NetworkMap` only draws and animates.
+- **Container and content.** `MapScreen` reads `@Query` (`LiveTrain`, `RealtimeFeed`), polls `liveFeeds.poll(.realtime)` while the tab is on screen and the app is in the foreground, and builds the `TrainTrack`s with `TrainTrackBuilder`, pure logic in `View/Presentation/TrainTrack.swift`. `TransitMap` only draws and animates.
 - **Direction.** The feed has no heading. `SwiftDataLiveFeedRepository` takes the direction from the timetable `Trip` with the same `lineID` and train number and stores it in `LiveTrain.directionRaw`; if there is no `Trip`, `TrainTrackBuilder` infers it from the `sequence` of `stopID` → `nextStopID`. It is not inferred from the terminal stations: a train `approaching` the last station may be arriving or waiting to depart in the opposite direction. The arrow follows the route's bearing (`PolylinePath.bearing`) minus the camera heading.
 - **The feed is not continuous.** Each train repeats `at` → `left` → `approaching` at every station, and in `approaching` it arrives with `stop == next` and no `lat/lon`. On top of that, the API drops trains for one or more samples. That is why `mergeRealtime` doesn't replace: `RealtimeMerge` (pure, in `Sync/`) keeps the direction and the last known position (`positionSampledAt`) while the train stays on the same segment, and holds on for up to 120 s to a missing train that hasn't finished its trip (`nextStopID != nil`). Without a previous position, an `approaching` train starts 400 m before the next station.
-- **Movement between refreshes.** From `positionSampledAt` (or `sampledAt`), and at most until 90 s after the last sample, the train advances along the route toward the next station at `TrainTrack.nominalSpeed` (50 km/h), without passing it; with `status == .at` it doesn't move. `NetworkMap` updates the clock every second with `withAnimation(.linear(duration: 1))`, or every 5 s without animation when *Reduce Motion* is on. When a new sample arrives, the train jumps to its real position.
+- **Movement between refreshes.** From `positionSampledAt` (or `sampledAt`), and at most until 90 s after the last sample, the train advances along the route toward the next station at `TrainTrack.nominalSpeed` (50 km/h), without passing it; with `status == .at` it doesn't move. `TransitMap` updates the clock every second with `withAnimation(.linear(duration: 1))`, or every 5 s without animation when *Reduce Motion* is on. When a new sample arrives, the train jumps to its real position.
 - **Age.** After 90 s without a new sample the marker dims; after 5 min it disappears.
 - **Marker.** `TrainMarker`: a scalable `Size.iconMd` circle in the line color (`LineTint`), `tram.fill` in `tint.text`, a `Border.thick` border in the background color, `Elevation/Floating`, and a triangle outlined in the background color so it stands out on top of the line itself. VoiceOver reads «Tren 23501 de la línea C1 hacia Fuengirola, con 3 minutos de retraso»; the delay is a plural variation in `Localizable.xcstrings` (key `con %lld minutos de retraso`).

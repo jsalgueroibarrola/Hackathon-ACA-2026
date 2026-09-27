@@ -12,19 +12,18 @@ struct StationEntity: AppEntity {
         )
     )
 
-    static let defaultQuery = FavoriteStationQuery()
+    static let defaultQuery = StationQuery()
 
     var displayRepresentation: DisplayRepresentation {
         DisplayRepresentation(title: "\(name)")
     }
 }
 
-struct FavoriteStationQuery: EnumerableEntityQuery {
+struct StationQuery: EnumerableEntityQuery {
     typealias Entity = StationEntity
 
     func allEntities() async throws -> [StationEntity] {
-        let favorites = RailWidgetStore.favoriteStations()
-        return favorites.isEmpty ? RailWidgetStore.allStations() : favorites
+        RailWidgetStore.allStations()
     }
 
     func entities(for identifiers: [String]) async throws -> [StationEntity] {

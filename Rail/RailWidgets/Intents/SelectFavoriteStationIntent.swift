@@ -8,7 +8,7 @@ struct SelectFavoriteStationIntent: WidgetConfigurationIntent {
 
     static let description = IntentDescription(
         LocalizedStringResource(
-            "Muestra los próximos trenes de una de tus estaciones favoritas.",
+            "Muestra los próximos trenes de la estación que elijas.",
             comment: "Descripción del intent de configuración del widget"
         )
     )

@@ -28,6 +28,7 @@ struct DepartureRow: View {
     }
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.cardSurfaceStyle) private var cardSurfaceStyle
 
     var body: some View {
         content
@@ -38,7 +39,7 @@ struct DepartureRow: View {
             .overlay(alignment: .bottom) {
                 if showsSeparator {
                     Rectangle()
-                        .fill(.interactiveSeparator)
+                        .fill(cardSurfaceStyle.separator)
                         .frame(height: Border.hairline)
                         .padding(.leading, ScreenLayout.margin)
                 }

@@ -1,24 +1,47 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
-    "Accesible" : {
-      "comment" : "VoiceOver, pin de estación en el mapa: la estación es accesible para movilidad reducida."
-    },
-    "Conexiones: %@" : {
-      "comment" : "VoiceOver, pin de estación en el mapa: otros transportes que conectan con ella, por ejemplo «Conexiones: Metro y Autobús urbano»."
-    },
-    "Líneas %@" : {
-      "comment" : "VoiceOver, pin de estación en el mapa: líneas que paran en ella, por ejemplo «Líneas C1 y C2»."
-    },
     "¡Vaya! Parece que aún no tienes estaciones favoritas…" : {
-      "comment" : "Favoritos: título cuando todavía no hay ninguna estación favorita."
+      "comment" : "Favoritos: título cuando todavía no hay ninguna estación favorita.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Oops! Looks like you don’t have any favorite stations yet…"
+          }
+        }
+      }
+    },
+    "¿A dónde quieres ir?" : {
+      "comment" : "Trayectos: título grande encima del buscador de trenes.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Where do you want to go?"
+          }
+        }
+      }
     },
     "%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "%@ · %@" : {
       "comment" : "Cabecera de sección de una tarjeta: título seguido de un detalle, por ejemplo «Próximos trenes · programados».",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ · %2$@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "new",
@@ -27,13 +50,19 @@
         }
       }
     },
-    "%@, %@, %@, %@" : {
-      "comment" : "Lectura de VoiceOver de una fila de incidencia: gravedad, título, detalle y líneas afectadas",
+    "%@, %@" : {
+      "comment" : "Mapa: lectura de VoiceOver de la espera de un tren seguida de su retraso, por ejemplo «5 min, con 3 minutos de retraso».",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@, %2$@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@, %2$@, %3$@, %4$@"
+            "value" : "%1$@, %2$@"
           }
         }
       }
@@ -41,6 +70,12 @@
     "%@, línea %@ hacia %@" : {
       "comment" : "Horarios: lectura de VoiceOver de una salida; hora, línea y destino.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@, line %2$@ to %3$@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "new",
@@ -50,11 +85,25 @@
       }
     },
     "%@, línea %@ hacia %@. Sale en %lld min" : {
-      "comment" : "Horarios: lectura de VoiceOver de una salida próxima; hora, línea, destino y minutos que faltan."
+      "comment" : "Horarios: lectura de VoiceOver de una salida próxima; hora, línea, destino y minutos que faltan.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@, line %@ to %@. Departs in %lld min"
+          }
+        }
+      }
     },
     "%@, línea %@ hacia %@. Ya ha salido" : {
       "comment" : "Horarios: lectura de VoiceOver de una salida que ya ha pasado; hora, línea y destino.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@, line %2$@ to %3$@. Already departed"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "new",
@@ -64,17 +113,100 @@
       }
     },
     "%lld min" : {
-      "comment" : "Horarios: minutos que faltan para la salida, por ejemplo «5 min»."
+      "comment" : "Horarios: minutos que faltan para la salida, por ejemplo «5 min».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld min"
+          }
+        }
+      }
+    },
+    "%lld trenes" : {
+      "comment" : "Trayectos: cuántos trenes hay entre las dos estaciones el día elegido.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld train"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld trains"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tren"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld trenes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "+%lld min" : {
+      "comment" : "Mapa, carrusel de estaciones cercanas: retraso en tiempo real del próximo tren, junto a los minutos que faltan; por ejemplo «+3 min».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "+%lld min"
+          }
+        }
+      }
     },
     "A %@" : {
-      "comment" : "Distancia desde la ubicación del usuario hasta una estación, por ejemplo «A 1,2 km». Se usa en la tarjeta de próximos trenes y en las filas de estaciones."
-    },
-    "A %@ de ti" : {
-      "comment" : "Mapa: distancia desde el usuario hasta la estación seleccionada, por ejemplo «A 1,2 km de ti»."
+      "comment" : "Distancia desde la ubicación del usuario hasta una estación, por ejemplo «A 1,2 km». Se usa en la tarjeta de próximos trenes y en las filas de estaciones.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ away"
+          }
+        }
+      }
     },
     "A %lld minutos a pie" : {
       "comment" : "Tarjeta de próximos trenes: tiempo andando hasta la estación, por ejemplo «A 15 minutos a pie».",
       "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld minute away on foot"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld minutes away on foot"
+                }
+              }
+            }
+          }
+        },
         "es" : {
           "variations" : {
             "plural" : {
@@ -95,105 +227,473 @@
         }
       }
     },
-    "A 1,2 km" : {
-
+    "Abre la ficha de la estación" : {
+      "comment" : "Mapa, carrusel de estaciones cercanas: pista de VoiceOver de cada tarjeta.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Opens the station details"
+          }
+        }
+      }
     },
-    "A 15 minutos a pie" : {
-
+    "Abre la lista de estaciones." : {
+      "comment" : "Trayectos: indicación de VoiceOver del campo de origen o destino.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Opens the list of stations."
+          }
+        }
+      }
     },
     "Abre la ruta en Mapas" : {
-      "comment" : "Detalle de estación: pista de VoiceOver de cada medio de transporte en «Cómo llegar».\nDetalle de estación: pista de VoiceOver del botón «Cómo llegar»."
+      "comment" : "Detalle de estación: pista de VoiceOver de cada medio de transporte en «Cómo llegar».\nDetalle de estación: pista de VoiceOver del botón «Cómo llegar».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Opens the route in Maps"
+          }
+        }
+      }
     },
     "Abre Rail para actualizar los horarios." : {
-      "comment" : "Widget de próximos trenes: no hay datos del día siguiente y hay que sincronizar."
+      "comment" : "Widget de próximos trenes: no hay datos del día siguiente y hay que sincronizar.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Open Rail to update the timetables."
+          }
+        }
+      }
     },
     "Abre Rail para descargar los horarios." : {
-      "comment" : "Widget de próximos trenes: invita a abrir la app porque el widget no sincroniza."
+      "comment" : "Widget de próximos trenes: invita a abrir la app porque el widget no sincroniza.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Open Rail to download the timetables."
+          }
+        }
+      }
     },
     "Abrir Ajustes" : {
-      "comment" : "Tarjeta de próximos trenes: botón que abre los ajustes de la app para conceder la ubicación."
+      "comment" : "Mapa, carrusel de estaciones: botón que abre los ajustes de la app para conceder la ubicación.\nTarjeta de próximos trenes: botón que abre los ajustes de la app para conceder la ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Open Settings"
+          }
+        }
+      }
     },
     "Abrir en Mapas" : {
-      "comment" : "Detalle de estación: botón que abre la ruta hasta la estación en Apple Maps."
+      "comment" : "Detalle de estación: botón que abre la ruta hasta la estación en Apple Maps.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Open in Maps"
+          }
+        }
+      }
     },
     "Accesibilidad" : {
-      "comment" : "Detalle de estación: cabecera de la tarjeta con las prestaciones de accesibilidad."
+      "comment" : "Detalle de estación: cabecera de la tarjeta con las prestaciones de accesibilidad.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Accessibility"
+          }
+        }
+      }
+    },
+    "Accesible" : {
+      "comment" : "VoiceOver, pin de estación en el mapa: la estación es accesible para movilidad reducida.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Accessible"
+          }
+        }
+      }
     },
     "Activa la ubicación" : {
-      "comment" : "Detalle de estación: título de «Cómo llegar» cuando aún no se ha pedido permiso de ubicación.\nEstaciones: título de la sección «Cerca de ti» cuando aún no se ha pedido permiso de ubicación.\nTarjeta de próximos trenes: título cuando aún no se ha pedido permiso de ubicación."
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando aún no se ha pedido permiso de ubicación.\nEstaciones: título de la sección «Cerca de ti» cuando aún no se ha pedido permiso de ubicación.\nTarjeta de próximos trenes: título cuando aún no se ha pedido permiso de ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Turn on location"
+          }
+        }
+      }
     },
     "Adaptada para movilidad reducida" : {
-      "comment" : "Detalle de estación: la estación es accesible para personas con movilidad reducida."
+      "comment" : "Detalle de estación: la estación es accesible para personas con movilidad reducida.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Accessible for people with reduced mobility"
+          }
+        }
+      }
     },
     "Aeropuerto" : {
-      "comment" : "Tipo de conexión disponible en una estación: el aeropuerto."
+      "comment" : "Tipo de conexión disponible en una estación: el aeropuerto.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Airport"
+          }
+        }
+      }
     },
     "Ahora" : {
-      "comment" : "Horarios: el tren sale en menos de un minuto.\nNotificaciones: hora de un aviso publicado hace menos de un minuto. Va en la esquina de la tarjeta, donde en otros avisos pone «Hace 12 min»."
+      "comment" : "Horarios: el tren sale en menos de un minuto.\nNotificaciones: hora de un aviso publicado hace menos de un minuto. Va en la esquina de la tarjeta, donde en otros avisos pone «Hace 12 min».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Now"
+          }
+        }
+      }
     },
     "Añade una estación" : {
-      "comment" : "Favoritos: botón del estado vacío que abre el selector de estación.\nInicio: botón del estado vacío de favoritas que abre el selector de estación."
+      "comment" : "Favoritos: botón del estado vacío que abre el selector de estación.\nInicio: botón del estado vacío de favoritas que abre el selector de estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Add a station"
+          }
+        }
+      }
     },
     "Añadir a favoritos" : {
-      "comment" : "Acción del botón de favorito cuando la estación todavía no lo es"
+      "comment" : "Acción del botón de favorito cuando la estación todavía no lo es",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Add to favorites"
+          }
+        }
+      }
     },
     "Añadir estación favorita" : {
-      "comment" : "Favoritos: botón «+» de la barra superior que abre el selector de estación; VoiceOver lo lee."
+      "comment" : "Favoritos: botón «+» de la barra superior que abre el selector de estación; VoiceOver lo lee.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Add favorite station"
+          }
+        }
+      }
     },
     "Andando" : {
-      "comment" : "Cómo llegar: modo de transporte a pie."
+      "comment" : "Cómo llegar: modo de transporte a pie.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Walking"
+          }
+        }
+      }
     },
-    "Atenuado" : {
-      "comment" : "Mapa: estilo de mapa con colores apagados y sin puntos de interés."
+    "App no oficial" : {
+      "comment" : "Hoja de información: cabecera de la tarjeta que aclara que la app no es de Renfe.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Unofficial app"
+          }
+        }
+      }
+    },
+    "Aún no hay horarios descargados." : {
+      "comment" : "Trayectos: aviso en lugar del selector de día cuando no hay ningún día con horario.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No timetables downloaded yet."
+          }
+        }
+      }
     },
     "Autobús interurbano" : {
-      "comment" : "Tipo de conexión disponible en una estación: autobús entre municipios."
+      "comment" : "Tipo de conexión disponible en una estación: autobús entre municipios.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Intercity bus"
+          }
+        }
+      }
     },
     "Autobús urbano" : {
-      "comment" : "Tipo de conexión disponible en una estación: autobús municipal."
+      "comment" : "Tipo de conexión disponible en una estación: autobús municipal.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "City bus"
+          }
+        }
+      }
     },
     "AVE" : {
-      "comment" : "Tipo de conexión disponible en una estación: tren de alta velocidad. Marca comercial de Renfe, no traducir."
+      "comment" : "Tipo de conexión disponible en una estación: tren de alta velocidad. Marca comercial de Renfe, no traducir.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "AVE"
+          }
+        }
+      }
     },
     "Aviso" : {
-      "comment" : "Gravedad de una incidencia: aviso informativo"
+      "comment" : "Gravedad de una incidencia: aviso informativo",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Alert"
+          }
+        }
+      }
     },
     "Aviso en la red" : {
-      "comment" : "Notificaciones: título de la tarjeta de un aviso de Renfe sobre una incidencia en curso. Debajo va el texto del aviso."
+      "comment" : "Notificaciones: título de la tarjeta de un aviso de Renfe sobre una incidencia en curso. Debajo va el texto del aviso.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Network alert"
+          }
+        }
+      }
+    },
+    "Aviso legal" : {
+      "comment" : "Hoja de información: cabecera de la tarjeta de exención de responsabilidad.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Disclaimer"
+          }
+        }
+      }
     },
     "Bajar" : {
-      "comment" : "Favoritos: acción de VoiceOver que baja una estación favorita un puesto en la lista."
+      "comment" : "Favoritos: acción de VoiceOver que baja una estación favorita un puesto en la lista.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Move down"
+          }
+        }
+      }
+    },
+    "Borrar" : {
+      "comment" : "Trayectos: botón que elimina todas las búsquedas recientes.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Clear"
+          }
+        }
+      }
     },
     "Buscando tu ubicación…" : {
-      "comment" : "Estaciones: título de la sección «Cerca de ti» mientras se obtiene la ubicación.\nTarjeta de próximos trenes: título mientras se obtiene la ubicación del usuario."
+      "comment" : "Estaciones: título de la sección «Cerca de ti» mientras se obtiene la ubicación.\nMapa, carrusel de estaciones: título de la primera tarjeta mientras se obtiene la ubicación.\nMapa, ficha de estación: texto mientras se obtiene la ubicación del usuario.\nTarjeta de próximos trenes: título mientras se obtiene la ubicación del usuario.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Finding your location…"
+          }
+        }
+      }
     },
     "Buscar estación" : {
-      "comment" : "Estaciones: texto de ayuda del campo de búsqueda.\nSelector de estación: texto de ayuda del campo de búsqueda."
+      "comment" : "Estaciones: texto de ayuda del campo de búsqueda.\nSelector de estación: texto de ayuda del campo de búsqueda.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Search for a station"
+          }
+        }
+      }
+    },
+    "Buscar trenes" : {
+      "comment" : "Trayectos: botón principal que busca los trenes entre las dos estaciones elegidas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Find trains"
+          }
+        }
+      }
+    },
+    "Búsquedas recientes" : {
+      "comment" : "Trayectos: cabecera de la lista con los últimos trayectos consultados.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Recent searches"
+          }
+        }
+      }
     },
     "Calculando tiempos…" : {
-      "comment" : "Detalle de estación: VoiceOver mientras se calculan los tiempos de viaje."
+      "comment" : "Detalle de estación: VoiceOver mientras se calculan los tiempos de viaje.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Calculating travel times…"
+          }
+        }
+      }
     },
     "Cambiar" : {
-      "comment" : "Tarjeta de próximos trenes: botón para cambiar la estación habitual guardada."
+      "comment" : "Tarjeta de próximos trenes: botón para cambiar la estación habitual guardada.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Change"
+          }
+        }
+      }
+    },
+    "Cambio en %@ · %lld min" : {
+      "comment" : "Trayectos: estación donde hay que cambiar de tren y los minutos de espera, por ejemplo «Cambio en Victoria Kent · 6 min».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Transfer at %1$@ · %2$lld min"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cambio en %1$@ · %2$lld min"
+          }
+        }
+      }
     },
     "Cargando próximos trenes" : {
-      "comment" : "Tarjeta de próximos trenes: descripción para VoiceOver mientras se calculan las salidas."
+      "comment" : "Tarjeta de próximos trenes: descripción para VoiceOver mientras se calculan las salidas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Loading next trains"
+          }
+        }
+      }
+    },
+    "Cargando trenes" : {
+      "comment" : "Mapa: aviso en la esquina superior mientras llega por primera vez la posición de los trenes en tiempo real.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Loading trains"
+          }
+        }
+      }
     },
     "Cerca de ti" : {
-      "comment" : "Estaciones: cabecera de la sección con las tres estaciones más cercanas a la ubicación del usuario."
+      "comment" : "Estaciones: cabecera de la sección con las tres estaciones más cercanas a la ubicación del usuario.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Near you"
+          }
+        }
+      }
     },
     "Cerrar" : {
-      "comment" : "Mapa: botón que cierra la ficha de la estación seleccionada."
+      "comment" : "Mapa, ficha de estación: botón que cierra la ficha y vuelve al carrusel.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Close"
+          }
+        }
+      }
     },
     "Cómo llegar" : {
-      "comment" : "Detalle de estación: cabecera de la tarjeta con los tiempos de viaje hasta la estación."
+      "comment" : "Detalle de estación: cabecera de la tarjeta con los tiempos de viaje hasta la estación.\nMapa, ficha de estación: botón que abre la ruta hasta la estación en Apple Maps.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Directions"
+          }
+        }
+      }
     },
     "Comprueba la conexión y vuelve a intentarlo." : {
-      "comment" : "Notificaciones: descripción del estado de error cuando no se han podido descargar los avisos."
+      "comment" : "Notificaciones: descripción del estado de error cuando no se han podido descargar los avisos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Check your connection and try again."
+          }
+        }
+      }
     },
     "con %lld minutos de retraso" : {
       "comment" : "Mapa: retraso de un tren en tiempo real, leído por VoiceOver tras su descripción y una coma, por ejemplo «con 3 minutos de retraso».",
       "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld minute late"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld minutes late"
+                }
+              }
+            }
+          }
+        },
         "es" : {
           "variations" : {
             "plural" : {
@@ -215,110 +715,537 @@
       }
     },
     "Con ascensor" : {
-      "comment" : "Detalle de estación: la estación tiene ascensor."
+      "comment" : "Detalle de estación: la estación tiene ascensor.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Elevator available"
+          }
+        }
+      }
+    },
+    "Con transbordo" : {
+      "comment" : "Trayectos: el viaje necesita cambiar de tren una vez.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "1 transfer"
+          }
+        }
+      }
+    },
+    "Condiciones de uso" : {
+      "comment" : "Hoja de información: enlace a las condiciones legales de reutilización de data.renfe.com/legal.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Terms of use"
+          }
+        }
+      }
     },
     "Conexiones" : {
-      "comment" : "Detalle de estación: cabecera de la tarjeta con los otros transportes con los que enlaza."
+      "comment" : "Detalle de estación: cabecera de la tarjeta con los otros transportes con los que enlaza.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Connections"
+          }
+        }
+      }
+    },
+    "Conexiones: %@" : {
+      "comment" : "VoiceOver, pin de estación en el mapa: otros transportes que conectan con ella, por ejemplo «Conexiones: Metro y Autobús urbano».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Connections: %@"
+          }
+        }
+      }
     },
     "Cuando te acerques a Málaga, aquí verás las estaciones que tengas más cerca. Mientras tanto, puedes buscar cualquier estación." : {
-      "comment" : "Estaciones: mensaje de la sección «Cerca de ti» cuando el usuario está lejos de la red."
+      "comment" : "Estaciones: mensaje de la sección «Cerca de ti» cuando el usuario está lejos de la red.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "When you’re near Málaga, your closest stations appear here. In the meantime, you can search for any station."
+          }
+        }
+      }
+    },
+    "Datos abiertos de Renfe" : {
+      "comment" : "Hoja de información: enlace al portal data.renfe.com.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Renfe open data"
+          }
+        }
+      }
+    },
+    "Datos actualizados el %@" : {
+      "comment" : "Hoja de información: fecha de la última descarga de los datos de Renfe. El argumento es la fecha, por ejemplo «27 de septiembre de 2026».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Data updated on %@"
+          }
+        }
+      }
+    },
+    "De %@ a %@" : {
+      "comment" : "Trayectos: lectura de VoiceOver de una búsqueda reciente; estación de origen y de destino.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "From %1$@ to %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "De %1$@ a %2$@"
+          }
+        }
+      }
     },
     "Descargando horarios" : {
-      "comment" : "Título de la pantalla de carga mientras se descargan los datos de la red."
+      "comment" : "Título de la pantalla de carga mientras se descargan los datos de la red.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Downloading timetables"
+          }
+        }
+      }
     },
     "Descartar aviso" : {
-      "comment" : "Acción del botón que cierra una banda de aviso de incidencia"
+      "comment" : "Acción del botón que cierra una banda de aviso de incidencia",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Dismiss alert"
+          }
+        }
+      }
     },
     "Desde %@" : {
-      "comment" : "Notificaciones: fecha de un aviso publicado hace más de un día, por ejemplo «Desde 21/09». La variable es el día y el mes, y el año si no es el actual."
+      "comment" : "Notificaciones: fecha de un aviso publicado hace más de un día, por ejemplo «Desde 21/09». La variable es el día y el mes, y el año si no es el actual.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Since %@"
+          }
+        }
+      }
+    },
+    "Desliza para explorar la línea %@" : {
+      "comment" : "Mapa, carrusel de estaciones: mensaje de la primera tarjeta cuando no hay estaciones cercanas; el carrusel muestra las estaciones de esa línea, por ejemplo «Desliza para explorar la línea C1».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Swipe to explore line %@"
+          }
+        }
+      }
     },
     "Destino" : {
-      "comment" : "Horarios: título del menú para filtrar las salidas por línea y destino."
+      "comment" : "Horarios: título del menú para filtrar las salidas por línea y destino.\nTrayectos: etiqueta del campo con la estación de llegada.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Destination"
+          }
+        }
+      }
     },
     "Día" : {
-      "comment" : "Horarios: título del menú para elegir el día del horario."
+      "comment" : "Horarios: título del menú para elegir el día del horario.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Day"
+          }
+        }
+      }
+    },
+    "Directo" : {
+      "comment" : "Trayectos: el tren va de origen a destino sin transbordos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Direct"
+          }
+        }
+      }
     },
     "El servidor de horarios no responde. Inténtalo de nuevo más tarde." : {
-      "comment" : "Descripción de error cuando el servidor de horarios devuelve un error en la descarga inicial."
+      "comment" : "Descripción de error cuando el servidor de horarios devuelve un error en la descarga inicial.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "The timetable server isn’t responding. Try again later."
+          }
+        }
+      }
+    },
+    "Elegir" : {
+      "comment" : "Trayectos: texto del campo de origen o destino cuando todavía no se ha elegido estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Choose"
+          }
+        }
+      }
     },
     "Elegir estación" : {
-      "comment" : "Selector de estación: título de la hoja para añadir una favorita o elegir la estación habitual.\nTarjeta de próximos trenes: botón que abre el selector de estación habitual."
+      "comment" : "Selector de estación: título de la hoja para añadir una favorita o elegir la estación habitual.\nTarjeta de próximos trenes: botón que abre el selector de estación habitual.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Choose station"
+          }
+        }
+      }
     },
     "Elige tu estación habitual" : {
-      "comment" : "Tarjeta de próximos trenes: título cuando el usuario ha denegado el permiso de ubicación."
+      "comment" : "Tarjeta de próximos trenes: título cuando el usuario ha denegado el permiso de ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Choose your usual station"
+          }
+        }
+      }
     },
     "Elige una estación" : {
-      "comment" : "Widget de próximos trenes: título cuando nadie ha configurado el widget todavía."
+      "comment" : "Widget de próximos trenes: título cuando nadie ha configurado el widget todavía.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Choose a station"
+          }
+        }
+      }
+    },
+    "Eliminar" : {
+      "comment" : "Trayectos: opción del menú contextual que quita una búsqueda reciente.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Delete"
+          }
+        }
+      }
     },
     "En bici" : {
-      "comment" : "Cómo llegar: modo de transporte en bicicleta."
+      "comment" : "Cómo llegar: modo de transporte en bicicleta.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "By bike"
+          }
+        }
+      }
     },
     "En coche" : {
-      "comment" : "Cómo llegar: modo de transporte en coche."
+      "comment" : "Cómo llegar: modo de transporte en coche.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "By car"
+          }
+        }
+      }
     },
     "Estación" : {
-      "comment" : "Etiqueta del selector de estación en la configuración del widget\nNombre del tipo de dato que se elige en la configuración del widget\nTítulo del intent de configuración del widget"
+      "comment" : "Etiqueta del selector de estación en la configuración del widget\nNombre del tipo de dato que se elige en la configuración del widget\nTítulo del intent de configuración del widget",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Station"
+          }
+        }
+      }
     },
     "Estación de autobuses" : {
-      "comment" : "Tipo de conexión disponible en una estación: estación central de autobuses."
-    },
-    "Estación más cercana" : {
-      "comment" : "Mapa: botón que selecciona la estación más cercana al usuario, o pide permiso de ubicación."
+      "comment" : "Tipo de conexión disponible en una estación: estación central de autobuses.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Bus station"
+          }
+        }
+      }
     },
     "Estación no disponible" : {
-      "comment" : "Detalle de estación: la estación ya no está en los datos descargados.\nWidget de próximos trenes: título cuando la estación configurada ya no está en los datos."
+      "comment" : "Detalle de estación: la estación ya no está en los datos descargados.\nWidget de próximos trenes: título cuando la estación configurada ya no está en los datos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Station unavailable"
+          }
+        }
+      }
     },
     "Estaciones" : {
-      "comment" : "Título de la pestaña y de la pantalla con el listado de estaciones."
+      "comment" : "Título de la pestaña y de la pantalla con el listado de estaciones.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Stations"
+          }
+        }
+      }
+    },
+    "Estaciones cerca de ti" : {
+      "comment" : "Mapa, carrusel de estaciones: título de la primera tarjeta cuando aún no se ha pedido el permiso de ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Stations near you"
+          }
+        }
+      }
+    },
+    "Estaciones cercanas" : {
+      "comment" : "Mapa: etiqueta de VoiceOver del carrusel con las estaciones más cercanas al usuario.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Nearby stations"
+          }
+        }
+      }
     },
     "Estaciones favoritas" : {
-      "comment" : "Cabecera de la sección de favoritas en Inicio."
-    },
-    "Estándar" : {
-      "comment" : "Mapa: estilo de mapa estándar."
+      "comment" : "Cabecera de la sección de favoritas en Inicio.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Favorite stations"
+          }
+        }
+      }
     },
     "Estás a %@ en línea recta. Cuando estés más cerca te diremos cuánto tardas; mientras, Mapas puede guiarte." : {
-      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando el usuario está lejos. El argumento es la distancia en línea recta hasta la estación."
+      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando el usuario está lejos. El argumento es la distancia en línea recta hasta la estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "You’re %@ away as the crow flies. When you’re closer, we’ll tell you how long it takes; in the meantime, Maps can guide you."
+          }
+        }
+      }
     },
     "Estás lejos de Cercanías Málaga" : {
-      "comment" : "Estaciones: título de la sección «Cerca de ti» cuando ninguna estación está a menos de 10 km del usuario."
+      "comment" : "Estaciones: título de la sección «Cerca de ti» cuando ninguna estación está a menos de 10 km del usuario.\nMapa, carrusel de estaciones: título de la primera tarjeta cuando ninguna estación está a menos de 10 km.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "You’re far from Cercanías Málaga"
+          }
+        }
+      }
     },
     "Estás lejos de la estación" : {
-      "comment" : "Detalle de estación: título de «Cómo llegar» cuando la ubicación del usuario está demasiado lejos para calcular tiempos."
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando la ubicación del usuario está demasiado lejos para calcular tiempos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "You’re far from the station"
+          }
+        }
+      }
     },
     "Favoritos" : {
-      "comment" : "Título de la pantalla con todas las estaciones favoritas."
+      "comment" : "Título de la pantalla con todas las estaciones favoritas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Favorites"
+          }
+        }
+      }
     },
-    "Híbrido" : {
-      "comment" : "Mapa: estilo de mapa con satélite y calles."
+    "Hecho por" : {
+      "comment" : "Hoja de información: firma al pie, encima del nombre del estudio «JadeHorizonStudio».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Made by"
+          }
+        }
+      }
     },
     "Horarios" : {
-      "comment" : "Horarios: título de la hoja con todas las salidas de una estación; también etiqueta del botón que la abre."
+      "comment" : "Horarios: título de la hoja con todas las salidas de una estación; también etiqueta del botón que la abre.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Timetable"
+          }
+        }
+      }
+    },
+    "Horarios de Cercanías Málaga, también sin conexión." : {
+      "comment" : "Hoja de información: frase bajo el logotipo que resume qué es la app.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Málaga Cercanías timetables, even offline."
+          }
+        }
+      }
     },
     "Hoy" : {
-      "comment" : "Horarios: chip del día de hoy."
+      "comment" : "Horarios: chip del día de hoy.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Today"
+          }
+        }
+      }
     },
     "Hoy, %@" : {
-      "comment" : "Horarios: opción del menú de días para hoy; por ejemplo «Hoy, jueves 25»."
+      "comment" : "Horarios: opción del menú de días para hoy; por ejemplo «Hoy, jueves 25».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Today, %@"
+          }
+        }
+      }
     },
     "Info" : {
-      "comment" : "Notificaciones: etiqueta del badge de un aviso informativo de Renfe. Abreviatura de «Información»."
+      "comment" : "Notificaciones: etiqueta del badge de un aviso informativo de Renfe. Abreviatura de «Información».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Info"
+          }
+        }
+      }
+    },
+    "Información" : {
+      "comment" : "Título de la hoja «Información» que se abre desde el botón de información de Inicio, y etiqueta de ese botón para VoiceOver.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "About"
+          }
+        }
+      }
     },
     "Información de la red" : {
-      "comment" : "Notificaciones: título de la tarjeta de un aviso informativo de Renfe. Debajo va el texto del aviso."
+      "comment" : "Notificaciones: título de la tarjeta de un aviso informativo de Renfe. Debajo va el texto del aviso.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Network information"
+          }
+        }
+      }
     },
     "Iniciar ruta" : {
-      "comment" : "Detalle de estación: botón principal que abre la ruta hasta la estación en Apple Maps."
+      "comment" : "Detalle de estación: botón principal que abre la ruta hasta la estación en Apple Maps.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Start route"
+          }
+        }
+      }
     },
     "Inicio" : {
-      "comment" : "Título de la pestaña y de la pantalla de inicio."
+      "comment" : "Título de la pestaña y de la pantalla de inicio.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Home"
+          }
+        }
+      }
     },
     "Interrumpido" : {
-      "comment" : "Gravedad de una incidencia: servicio interrumpido"
+      "comment" : "Gravedad de una incidencia: servicio interrumpido",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Interrupted"
+          }
+        }
+      }
+    },
+    "Invertir sentido" : {
+      "comment" : "Trayectos: botón que intercambia la estación de origen y la de destino.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Swap direction"
+          }
+        }
+      }
     },
     "La más próxima, %@, está a %@. Puedes verla en el mapa o elegir tu estación habitual." : {
       "comment" : "Tarjeta de próximos trenes: el primer valor es el nombre de la estación más próxima y el segundo, la distancia, por ejemplo «38 km».",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "The closest one, %1$@, is %2$@ away. You can see it on the map or choose your usual station."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "new",
@@ -327,102 +1254,444 @@
         }
       }
     },
-    "La más próxima, Álora, está a 38 km. Puedes verla en el mapa o elegir tu estación habitual." : {
-
-    },
     "Línea %@" : {
-      "comment" : "Selector de estación y pantalla Estaciones: cabecera de la sección con las estaciones de una línea, por ejemplo «Línea C1»."
+      "comment" : "Selector de estación y pantalla Estaciones: cabecera de la sección con las estaciones de una línea, por ejemplo «Línea C1».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Line %@"
+          }
+        }
+      }
+    },
+    "Línea %@ hacia %@" : {
+      "comment" : "Mapa, carrusel de estaciones cercanas: lectura de VoiceOver del próximo tren de un sentido; línea y destino, por ejemplo «Línea C-1 hacia Fuengirola».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Line %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "Líneas %@" : {
+      "comment" : "VoiceOver, pin de estación en el mapa: líneas que paran en ella, por ejemplo «Líneas C1 y C2».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Lines %@"
+          }
+        }
+      }
     },
     "Los avisos se publican en español" : {
-      "comment" : "Notificaciones: título de la banda que aparece cuando el idioma del dispositivo no es el español."
+      "comment" : "Notificaciones: título de la banda que aparece cuando el idioma del dispositivo no es el español.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Alerts are published in Spanish"
+          }
+        }
+      }
     },
-    "Los próximos trenes en una de tus estaciones favoritas." : {
-      "comment" : "Descripción del widget en la galería de widgets."
+    "Los horarios pueden cambiar o contener errores. Consulta los canales oficiales de Renfe antes de viajar. Renfe no se hace responsable del uso que esta aplicación hace de sus datos." : {
+      "comment" : "Hoja de información: exención de responsabilidad sobre la exactitud de los datos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Timetables may change or contain errors. Check Renfe’s official channels before you travel. Renfe is not responsible for how this app uses its data."
+          }
+        }
+      }
+    },
+    "Los horarios, las estaciones y los avisos proceden de los conjuntos de datos abiertos que Renfe publica en su portal data.renfe.com, y se reutilizan conforme a sus condiciones legales." : {
+      "comment" : "Hoja de información: explicación de que los datos son los oficiales publicados por Renfe como datos abiertos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Timetables, stations and service alerts come from the open datasets Renfe publishes on its data.renfe.com portal, and are reused under its legal terms."
+          }
+        }
+      }
+    },
+    "Los próximos trenes de la estación que elijas." : {
+      "comment" : "Descripción del widget en la galería de widgets.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "The next trains from the station you choose."
+          }
+        }
+      }
+    },
+    "Los trayectos que consultes aparecerán aquí para repetirlos con un toque." : {
+      "comment" : "Trayectos: explicación de la lista de búsquedas recientes cuando está vacía.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Journeys you look up appear here so you can repeat them with a tap."
+          }
+        }
+      }
     },
     "Madrugada del %@" : {
-      "comment" : "Horarios: cabecera de los trenes de después de medianoche, que cuentan como parte del día elegido; por ejemplo «Madrugada del sábado 27»."
+      "comment" : "Horarios: cabecera de los trenes de después de medianoche, que cuentan como parte del día elegido; por ejemplo «Madrugada del sábado 27».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Early hours of %@"
+          }
+        }
+      }
     },
     "Mañana" : {
-      "comment" : "Horarios: chip del día de mañana."
+      "comment" : "Horarios: chip del día de mañana.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tomorrow"
+          }
+        }
+      }
     },
     "Mañana, %@" : {
-      "comment" : "Horarios: opción del menú de días para mañana; por ejemplo «Mañana, viernes 26»."
+      "comment" : "Horarios: opción del menú de días para mañana; por ejemplo «Mañana, viernes 26».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tomorrow, %@"
+          }
+        }
+      }
     },
     "Mantén pulsado y toca «Editar widget»." : {
-      "comment" : "Widget de próximos trenes: cómo elegir la estación desde la pantalla de inicio."
+      "comment" : "Widget de próximos trenes: cómo elegir la estación desde la pantalla de inicio.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Touch and hold, then tap “Edit Widget.”"
+          }
+        }
+      }
     },
     "Mapa" : {
-      "comment" : "Título de la pestaña con el mapa de la red."
+      "comment" : "Título de la pestaña con el mapa de la red.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Map"
+          }
+        }
+      }
     },
     "Mapas te lleva hasta aquí" : {
-      "comment" : "Detalle de estación: título de «Cómo llegar» cuando no hay ubicación del dispositivo."
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando no hay ubicación del dispositivo.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Maps can take you here"
+          }
+        }
+      }
     },
     "Marca tus estaciones habituales" : {
-      "comment" : "Inicio: título de la sección de favoritas cuando todavía no hay ninguna."
+      "comment" : "Inicio: título de la sección de favoritas cuando todavía no hay ninguna.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Star your usual stations"
+          }
+        }
+      }
     },
     "menos de 1 min" : {
-      "comment" : "Tiempo de viaje cuando la estación está a menos de un minuto."
+      "comment" : "Tiempo de viaje cuando la estación está a menos de un minuto.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "less than 1 min"
+          }
+        }
+      }
     },
     "Metro" : {
-      "comment" : "Tipo de conexión disponible en una estación: metro."
+      "comment" : "Tipo de conexión disponible en una estación: metro.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Metro"
+          }
+        }
+      }
     },
-    "Muestra los próximos trenes de una de tus estaciones favoritas." : {
-      "comment" : "Descripción del intent de configuración del widget"
+    "Mi ubicación" : {
+      "comment" : "Mapa: botón flotante que centra el mapa en el usuario, o pide el permiso de ubicación si no lo hay.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "My location"
+          }
+        }
+      }
+    },
+    "Muestra los próximos trenes de la estación que elijas." : {
+      "comment" : "Descripción del intent de configuración del widget",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Shows the next trains from the station you choose."
+          }
+        }
+      }
+    },
+    "Mueve el mapa para explorar la red" : {
+      "comment" : "Mapa, carrusel de estaciones: mensaje de la primera tarjeta cuando no hay estaciones cercanas ni líneas que proponer.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Move the map to explore the network"
+          }
+        }
+      }
     },
     "No disponible" : {
-      "comment" : "Detalle de estación: tiempo de un medio de transporte que Mapas no ha podido calcular."
+      "comment" : "Detalle de estación: tiempo de un medio de transporte que Mapas no ha podido calcular.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Unavailable"
+          }
+        }
+      }
     },
     "No hay conexión a internet. Comprueba la conexión e inténtalo de nuevo." : {
-      "comment" : "Descripción de error cuando la descarga inicial de horarios falla por no tener conexión."
+      "comment" : "Descripción de error cuando la descarga inicial de horarios falla por no tener conexión.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No internet connection. Check your connection and try again."
+          }
+        }
+      }
     },
     "No hay estaciones de Cercanías cerca" : {
-      "comment" : "Tarjeta de próximos trenes: título cuando no hay ninguna estación cerca del usuario."
+      "comment" : "Tarjeta de próximos trenes: título cuando no hay ninguna estación cerca del usuario.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No Cercanías stations nearby"
+          }
+        }
+      }
     },
     "No hay horarios disponibles" : {
-      "comment" : "Título del estado vacío cuando no se ha podido descargar ningún dato y no hay nada guardado."
+      "comment" : "Título del estado vacío cuando no se ha podido descargar ningún dato y no hay nada guardado.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No timetables available"
+          }
+        }
+      }
     },
     "No hay incidencias en la red de Cercanías." : {
-      "comment" : "Notificaciones: descripción del estado vacío cuando Renfe no tiene avisos activos."
+      "comment" : "Notificaciones: descripción del estado vacío cuando Renfe no tiene avisos activos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "There are no disruptions on the Cercanías network."
+          }
+        }
+      }
     },
     "No hay trenes este día" : {
-      "comment" : "Horarios: título cuando la estación no tiene salidas el día elegido."
+      "comment" : "Horarios: título cuando la estación no tiene salidas el día elegido.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No trains on this day"
+          }
+        }
+      }
     },
     "No hemos podido calcular los tiempos" : {
-      "comment" : "Detalle de estación: título de «Cómo llegar» cuando Mapas no devuelve ningún tiempo de viaje."
+      "comment" : "Detalle de estación: título de «Cómo llegar» cuando Mapas no devuelve ningún tiempo de viaje.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Couldn’t calculate travel times"
+          }
+        }
+      }
     },
     "No hemos podido ubicarte" : {
-      "comment" : "Tarjeta de próximos trenes: título cuando el dispositivo no consigue una ubicación."
+      "comment" : "Estaciones: título de la sección «Cerca de ti» cuando el dispositivo no consigue una ubicación.\nMapa, carrusel de estaciones: título de la primera tarjeta cuando el dispositivo no consigue una ubicación.\nTarjeta de próximos trenes: título cuando el dispositivo no consigue una ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Couldn’t find your location"
+          }
+        }
+      }
     },
     "No quedan trenes hoy" : {
-      "comment" : "Tarjeta de próximos trenes: título cuando ya no hay más salidas en el día.\nWidget de próximos trenes: no hay más salidas en el día."
+      "comment" : "Tarjeta de próximos trenes: título cuando ya no hay más salidas en el día.\nWidget de próximos trenes: no hay más salidas en el día.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No more trains today"
+          }
+        }
+      }
     },
     "No se han podido actualizar los horarios" : {
-      "comment" : "Aviso del banner inferior cuando falla la actualización y no se conoce la fecha de la última descarga."
+      "comment" : "Aviso del banner inferior cuando falla la actualización y no se conoce la fecha de la última descarga.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Couldn’t update the timetables"
+          }
+        }
+      }
     },
     "No se han podido cargar los avisos" : {
-      "comment" : "Notificaciones: título del estado de error cuando no hay avisos guardados y la descarga ha fallado."
+      "comment" : "Notificaciones: título del estado de error cuando no hay avisos guardados y la descarga ha fallado.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Couldn’t load alerts"
+          }
+        }
+      }
     },
     "No se han podido descargar los horarios. Inténtalo de nuevo." : {
-      "comment" : "Descripción de error genérica cuando falla la descarga inicial de horarios."
+      "comment" : "Descripción de error genérica cuando falla la descarga inicial de horarios.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Couldn’t download the timetables. Try again."
+          }
+        }
+      }
     },
     "No tenemos permiso para usar tu ubicación. Elige la estación que más usas y la tendrás siempre aquí." : {
-      "comment" : "Tarjeta de próximos trenes: mensaje cuando el permiso de ubicación está denegado."
+      "comment" : "Tarjeta de próximos trenes: mensaje cuando el permiso de ubicación está denegado.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Rail doesn’t have permission to use your location. Choose the station you use most and it’s always here."
+          }
+        }
+      }
     },
     "Notificaciones" : {
-      "comment" : "Título de la hoja de avisos de Renfe que se abre desde la campana de Inicio, y etiqueta de esa campana para VoiceOver."
+      "comment" : "Título de la hoja de avisos de Renfe que se abre desde la campana de Inicio, y etiqueta de esa campana para VoiceOver.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Notifications"
+          }
+        }
+      }
     },
     "Ocultar salidas anteriores" : {
-      "comment" : "Horarios: botón que oculta los trenes que ya han salido hoy."
+      "comment" : "Horarios: botón que oculta los trenes que ya han salido hoy.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Hide earlier departures"
+          }
+        }
+      }
+    },
+    "Origen" : {
+      "comment" : "Trayectos: etiqueta del campo con la estación de salida.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Origin"
+          }
+        }
+      }
+    },
+    "Origen de los datos" : {
+      "comment" : "Hoja de información: cabecera de la tarjeta sobre la procedencia de los datos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Data source"
+          }
+        }
+      }
+    },
+    "Origen de los datos: Renfe Operadora" : {
+      "comment" : "Hoja de información: cita obligatoria de la fuente según las condiciones de reutilización de Renfe. Mantén «Renfe Operadora» sin traducir.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Data source: Renfe Operadora"
+          }
+        }
+      }
     },
     "Permitir ubicación" : {
-      "comment" : "Detalle de estación: botón de «Cómo llegar» que pide el permiso de ubicación.\nEstaciones: botón de la sección «Cerca de ti» que pide el permiso de ubicación.\nTarjeta de próximos trenes: botón que pide el permiso de ubicación."
-    },
-    "Personaliza la pantalla de bloqueo y toca el widget." : {
-      "comment" : "Widget de próximos trenes: cómo elegir la estación desde la pantalla de bloqueo."
+      "comment" : "Detalle de estación: botón de «Cómo llegar» que pide el permiso de ubicación.\nEstaciones: botón de la sección «Cerca de ti» que pide el permiso de ubicación.\nMapa, carrusel de estaciones: botón que pide el permiso de ubicación para mostrar las estaciones cercanas.\nMapa, ficha de estación: botón que pide el permiso de ubicación para mostrar cuánto se tarda a pie.\nTarjeta de próximos trenes: botón que pide el permiso de ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Allow location"
+          }
+        }
+      }
     },
     "Posición %lld de %lld" : {
       "comment" : "Favoritos: VoiceOver lo anuncia tras subir o bajar una favorita, por ejemplo «Posición 2 de 5».",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Position %1$lld of %2$lld"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "new",
@@ -432,122 +1701,471 @@
       }
     },
     "Primera salida mañana a las %@" : {
-      "comment" : "Tarjeta de próximos trenes: hora de la primera salida del día siguiente, por ejemplo «05:40».\nWidget de próximos trenes: hora de la primera salida del día siguiente, por ejemplo «05:40»."
-    },
-    "Primera salida mañana a las 05:40" : {
-
-    },
-    "programados" : {
-
+      "comment" : "Tarjeta de próximos trenes: hora de la primera salida del día siguiente, por ejemplo «05:40».\nWidget de próximos trenes: hora de la primera salida del día siguiente, por ejemplo «05:40».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "First departure tomorrow at %@"
+          }
+        }
+      }
     },
     "Próximos trenes" : {
-      "comment" : "Detalle de estación: cabecera de la tarjeta con las próximas salidas.\nNombre del widget en la galería de widgets.\nTarjeta de próximos trenes: cabecera de la lista de salidas de la estación."
+      "comment" : "Detalle de estación: cabecera de la tarjeta con las próximas salidas.\nNombre del widget en la galería de widgets.\nTarjeta de próximos trenes: cabecera de la lista de salidas de la estación.\nWidget de próximos trenes: cabecera de la lista de salidas de la estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Next trains"
+          }
+        }
+      }
     },
     "Próximos trenes en ${station}" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Next trains at ${station}"
+          }
+        }
+      }
     },
     "Prueba con otro día o con otro destino." : {
-      "comment" : "Horarios: sugerencia cuando no hay salidas el día elegido."
+      "comment" : "Horarios: sugerencia cuando no hay salidas el día elegido.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Try another day or another destination."
+          }
+        }
+      }
+    },
+    "Puede pasar bajo tierra o en interiores. Inténtalo otra vez o busca cualquier estación." : {
+      "comment" : "Estaciones: mensaje de la sección «Cerca de ti» cuando el dispositivo no consigue una ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "This can happen underground or indoors. Try again or search for any station."
+          }
+        }
+      }
     },
     "Puede pasar bajo tierra o en interiores. Inténtalo otra vez o elige tu estación." : {
-      "comment" : "Tarjeta de próximos trenes: mensaje cuando el dispositivo no consigue una ubicación."
+      "comment" : "Tarjeta de próximos trenes: mensaje cuando el dispositivo no consigue una ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "This can happen underground or indoors. Try again or choose your station."
+          }
+        }
+      }
     },
     "Puede ser la conexión. Inténtalo otra vez o abre la ruta directamente en Mapas." : {
-      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando falla el cálculo de tiempos."
+      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando falla el cálculo de tiempos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "It might be your connection. Try again or open the route directly in Maps."
+          }
+        }
+      }
     },
     "Quitar de favoritos" : {
-      "comment" : "Acción del botón de favorito cuando la estación ya es favorita"
+      "comment" : "Acción del botón de favorito cuando la estación ya es favorita",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Remove from favorites"
+          }
+        }
+      }
     },
-    "Red" : {
-      "comment" : "Mapa: título de la pantalla con el mapa de la red de Cercanías."
+    "Rail es una aplicación independiente. No es una aplicación oficial de Renfe y no está vinculada a Renfe Operadora, que no participa, patrocina ni apoya esta aplicación." : {
+      "comment" : "Hoja de información: aviso legal obligatorio de que la app no es oficial ni está respaldada por Renfe.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Rail is an independent app. It is not an official Renfe app and is not affiliated with Renfe Operadora, which does not participate in, sponsor or endorse this app."
+          }
+        }
+      }
     },
     "Regional" : {
-      "comment" : "Tipo de conexión disponible en una estación: tren regional."
+      "comment" : "Tipo de conexión disponible en una estación: tren regional.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Regional"
+          }
+        }
+      }
     },
     "Reintentar" : {
-      "comment" : "Botón para volver a intentar una descarga que ha fallado.\nDetalle de estación: botón para volver a calcular los tiempos de viaje.\nTarjeta de próximos trenes: botón para volver a buscar la ubicación."
+      "comment" : "Botón para volver a intentar una descarga que ha fallado.\nDetalle de estación: botón para volver a calcular los tiempos de viaje.\nEstaciones: botón de la sección «Cerca de ti» que vuelve a intentar obtener la ubicación.\nMapa, carrusel de estaciones: botón que vuelve a intentar obtener la ubicación.\nTarjeta de próximos trenes: botón para volver a buscar la ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Retry"
+          }
+        }
+      }
     },
     "Renfe no informa de la accesibilidad de esta estación" : {
-      "comment" : "Detalle de estación: no hay datos de accesibilidad para la estación."
+      "comment" : "Detalle de estación: no hay datos de accesibilidad para la estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Renfe doesn’t provide accessibility info for this station"
+          }
+        }
+      }
     },
     "Renfe solo ofrece esta información en español. Pulsa Traducir en un aviso para leerlo en %@." : {
-      "comment" : "Notificaciones: texto de la banda de idioma. La variable es el nombre del idioma del dispositivo en minúscula, por ejemplo «inglés». «Traducir» es el botón de cada tarjeta."
+      "comment" : "Notificaciones: texto de la banda de idioma. La variable es el nombre del idioma del dispositivo en minúscula, por ejemplo «inglés». «Traducir» es el botón de cada tarjeta.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Renfe only provides this information in Spanish. Tap Translate on an alert to read it in %@."
+          }
+        }
+      }
     },
     "Resuelto" : {
-      "comment" : "Gravedad de una incidencia: incidencia cerrada"
+      "comment" : "Gravedad de una incidencia: incidencia cerrada",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Resolved"
+          }
+        }
+      }
     },
     "Retrasos" : {
-      "comment" : "Gravedad de una incidencia: hay demoras en el servicio"
+      "comment" : "Gravedad de una incidencia: hay demoras en el servicio",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Delays"
+          }
+        }
+      }
     },
     "Revisa la ortografía o busca por línea." : {
-      "comment" : "Selector de estación y pantalla Estaciones: sugerencia cuando la búsqueda no encuentra ninguna estación."
+      "comment" : "Selector de estación y pantalla Estaciones: sugerencia cuando la búsqueda no encuentra ninguna estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Check the spelling or search by line."
+          }
+        }
+      }
     },
     "Sabrás cuánto tardas en llegar andando, en bici, en coche o en transporte público." : {
-      "comment" : "Detalle de estación: explica para qué se pide la ubicación en «Cómo llegar»."
+      "comment" : "Detalle de estación: explica para qué se pide la ubicación en «Cómo llegar».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See how long it takes you to get there walking, by bike, by car, or by public transit."
+          }
+        }
+      }
     },
-    "Satélite" : {
-      "comment" : "Mapa: estilo de mapa con imágenes de satélite."
+    "Sale a las %@ y llega a las %@, %@, línea %@, directo" : {
+      "comment" : "Trayectos: lectura de VoiceOver de un tren directo; hora de salida, de llegada, duración y línea.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Departs at %1$@, arrives at %2$@, %3$@, line %4$@, direct"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sale a las %1$@ y llega a las %2$@, %3$@, línea %4$@, directo"
+          }
+        }
+      }
+    },
+    "Sale a las %@ y llega a las %@, %@, línea %@. Ya ha salido" : {
+      "comment" : "Trayectos: lectura de VoiceOver de un tren que ya ha salido; hora de salida, de llegada, duración y líneas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Departs at %1$@, arrives at %2$@, %3$@, line %4$@. Already departed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sale a las %1$@ y llega a las %2$@, %3$@, línea %4$@. Ya ha salido"
+          }
+        }
+      }
+    },
+    "Sale a las %@ y llega a las %@, %@, líneas %@ con transbordo en %@" : {
+      "comment" : "Trayectos: lectura de VoiceOver de un viaje con transbordo; hora de salida, de llegada, duración, líneas y estación de cambio.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Departs at %1$@, arrives at %2$@, %3$@, lines %4$@ with a transfer at %5$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sale a las %1$@ y llega a las %2$@, %3$@, líneas %4$@ con transbordo en %5$@"
+          }
+        }
+      }
     },
     "Se ha interrumpido la descarga de horarios" : {
-      "comment" : "Descripción de error mostrada cuando la sincronización inicial se cancela."
+      "comment" : "Descripción de error mostrada cuando la sincronización inicial se cancela.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "The timetable download was interrupted"
+          }
+        }
+      }
     },
     "Sin avisos" : {
-      "comment" : "Notificaciones: título del estado vacío cuando Renfe no tiene avisos activos."
+      "comment" : "Notificaciones: título del estado vacío cuando Renfe no tiene avisos activos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No alerts"
+          }
+        }
+      }
+    },
+    "Sin búsquedas recientes" : {
+      "comment" : "Trayectos: título cuando todavía no se ha buscado ningún trayecto.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No recent searches"
+          }
+        }
+      }
+    },
+    "Sin conexión" : {
+      "comment" : "Mapa: aviso en la esquina superior cuando el dispositivo no tiene internet y no se puede actualizar la posición de los trenes.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Offline"
+          }
+        }
+      }
     },
     "Sin datos de red" : {
-      "comment" : "Mapa: estado vacío cuando no hay líneas guardadas."
+      "comment" : "Mapa: estado vacío cuando no hay líneas guardadas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No network data"
+          }
+        }
+      }
     },
     "Sin horarios" : {
-      "comment" : "Widget de próximos trenes: título cuando no hay datos descargados."
+      "comment" : "Widget de próximos trenes: título cuando no hay datos descargados.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No timetables"
+          }
+        }
+      }
     },
     "Sin resultados para «%@»" : {
-      "comment" : "Selector de estación y pantalla Estaciones: título cuando la búsqueda no encuentra ninguna estación; incluye el texto buscado."
-    },
-    "Sin resultados para «Sevilla»" : {
-
+      "comment" : "Selector de estación y pantalla Estaciones: título cuando la búsqueda no encuentra ninguna estación; incluye el texto buscado.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No results for “%@”"
+          }
+        }
+      }
     },
     "Sin tu ubicación no podemos estimar los tiempos, pero Mapas puede guiarte desde donde estés." : {
-      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando no hay permiso o no se consigue la ubicación."
+      "comment" : "Detalle de estación: mensaje de «Cómo llegar» cuando no hay permiso o no se consigue la ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Without your location, travel times can’t be estimated, but Maps can guide you from wherever you are."
+          }
+        }
+      }
     },
     "Solo ocurre la primera vez o cuando los datos caducan." : {
-      "comment" : "Texto secundario de la pantalla de carga; explica por qué hay que esperar."
+      "comment" : "Texto secundario de la pantalla de carga; explica por qué hay que esperar.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "This only happens the first time or when the data expires."
+          }
+        }
+      }
     },
     "Subir" : {
-      "comment" : "Favoritos: acción de VoiceOver que sube una estación favorita un puesto en la lista."
-    },
-    "Superficie" : {
-      "comment" : "Mapa: menú para elegir el estilo del mapa (estándar, atenuado, híbrido o satélite)."
+      "comment" : "Favoritos: acción de VoiceOver que sube una estación favorita un puesto en la lista.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Move up"
+          }
+        }
+      }
     },
     "Toca la estrella de cualquier estación y la tendrás siempre a mano." : {
-      "comment" : "Favoritos: explica cómo añadir estaciones cuando todavía no hay ninguna favorita."
+      "comment" : "Favoritos: explica cómo añadir estaciones cuando todavía no hay ninguna favorita.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tap the star on any station to keep it close at hand."
+          }
+        }
+      }
     },
     "Toca la estrella de cualquier estación y la tendrás siempre aquí." : {
-      "comment" : "Inicio: explica cómo añadir estaciones favoritas cuando todavía no hay ninguna."
-    },
-    "Toca la estrella de cualquier estación y las tendrás siempre a mano." : {
-
+      "comment" : "Inicio: explica cómo añadir estaciones favoritas cuando todavía no hay ninguna.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tap the star on any station and it’s always here."
+          }
+        }
+      }
     },
     "Todas" : {
-      "comment" : "Selector de estación y pantalla Estaciones: filtro que muestra las estaciones de todas las líneas."
+      "comment" : "Selector de estación y pantalla Estaciones: filtro que muestra las estaciones de todas las líneas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "All"
+          }
+        }
+      }
     },
     "Todos los destinos" : {
-      "comment" : "Horarios: filtro que muestra las salidas hacia todos los destinos."
+      "comment" : "Horarios: filtro que muestra las salidas hacia todos los destinos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "All destinations"
+          }
+        }
+      }
     },
     "Traduciendo…" : {
-      "comment" : "Notificaciones: botón desactivado de una tarjeta mientras se traduce el aviso."
+      "comment" : "Notificaciones: botón desactivado de una tarjeta mientras se traduce el aviso.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Translating…"
+          }
+        }
+      }
     },
     "Traducir" : {
-      "comment" : "Notificaciones: botón de una tarjeta que traduce el aviso de Renfe al idioma del dispositivo."
+      "comment" : "Notificaciones: botón de una tarjeta que traduce el aviso de Renfe al idioma del dispositivo.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Translate"
+          }
+        }
+      }
     },
     "Transporte público" : {
-      "comment" : "Cómo llegar: modo de transporte en transporte público."
+      "comment" : "Cómo llegar: modo de transporte en transporte público.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Public transit"
+          }
+        }
+      }
+    },
+    "Trayecto" : {
+      "comment" : "Trayectos: título de la pantalla con los trenes entre dos estaciones.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Journey"
+          }
+        }
+      }
+    },
+    "Trayectos" : {
+      "comment" : "Título de la pestaña y de la pantalla para buscar trenes entre dos estaciones.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Journeys"
+          }
+        }
+      }
     },
     "Tren %@" : {
-      "comment" : "Horarios: número de tren de Renfe, por ejemplo «Tren 23104»."
+      "comment" : "Horarios: número de tren de Renfe, por ejemplo «Tren 23104».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Train %@"
+          }
+        }
+      }
     },
     "Tren %@ de la línea %@" : {
       "comment" : "Mapa: descripción para VoiceOver de un tren en tiempo real cuyo destino se desconoce.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Train %1$@ on line %2$@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -559,6 +2177,12 @@
     "Tren %@ de la línea %@ hacia %@" : {
       "comment" : "Mapa: descripción para VoiceOver de un tren en tiempo real, con su número, su línea y su destino.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Train %1$@ on line %2$@ to %3$@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -567,21 +2191,110 @@
         }
       }
     },
+    "Tren %@ hacia %@" : {
+      "comment" : "Trayectos: número de tren que hay que coger y el final de su recorrido, por ejemplo «Tren 23104 hacia Fuengirola».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Train %1$@ to %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tren %1$@ hacia %2$@"
+          }
+        }
+      }
+    },
     "Tu estación habitual" : {
-      "comment" : "Tarjeta de próximos trenes: subtítulo cuando la estación es la que el usuario ha guardado."
+      "comment" : "Tarjeta de próximos trenes: subtítulo cuando la estación es la que el usuario ha guardado.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Your usual station"
+          }
+        }
+      }
     },
     "Tus primeras favoritas aparecen en Inicio. Mantén pulsada una para cambiar el orden." : {
-      "comment" : "Favoritos: nota al pie de la lista que explica dónde se usan las favoritas y cómo reordenarlas."
+      "comment" : "Favoritos: nota al pie de la lista que explica dónde se usan las favoritas y cómo reordenarlas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Your top favorites appear on Home. Touch and hold one to reorder."
+          }
+        }
+      }
+    },
+    "Ubicación desactivada" : {
+      "comment" : "Mapa, carrusel de estaciones: título de la primera tarjeta cuando el permiso de ubicación está denegado.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Location off"
+          }
+        }
+      }
     },
     "Última actualización: %@" : {
-      "comment" : "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas»."
+      "comment" : "Banner inferior. La variable es la antigüedad de los datos en formato relativo, por ejemplo «ayer» o «hace 2 horas».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Last updated: %@"
+          }
+        }
+      }
     },
     "Usar mi ubicación" : {
-      "comment" : "Selector de estación habitual: fila que borra la estación guardada y vuelve a usar la ubicación del dispositivo."
+      "comment" : "Selector de estación habitual: fila que borra la estación guardada y vuelve a usar la ubicación del dispositivo.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Use my location"
+          }
+        }
+      }
+    },
+    "Va al principio de esta sección." : {
+      "comment" : "Estaciones: indicación de VoiceOver al tocar la cabecera de una sección, que desplaza la lista hasta el comienzo de esa sección.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Jumps to the top of this section."
+          }
+        }
+      }
     },
     "Ver %lld salidas anteriores" : {
       "comment" : "Horarios: botón que muestra los trenes que ya han salido hoy; el número es cuántos.",
       "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "Show %lld earlier departure"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "Show %lld earlier departures"
+                }
+              }
+            }
+          }
+        },
         "es" : {
           "variations" : {
             "plural" : {
@@ -602,33 +2315,116 @@
         }
       }
     },
-    "Ver detalle" : {
-      "comment" : "Mapa: botón de la ficha de la estación seleccionada que abre su pantalla de detalle."
-    },
     "Ver en el mapa" : {
-      "comment" : "Tarjeta de próximos trenes: botón que muestra en el mapa la estación más próxima."
+      "comment" : "Tarjeta de próximos trenes: botón que muestra en el mapa la estación más próxima.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See on map"
+          }
+        }
+      }
     },
-    "Ver estaciones" : {
-
+    "Ver estación completa" : {
+      "comment" : "Mapa, ficha de estación: enlace que abre la pantalla completa de la estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See full station details"
+          }
+        }
+      }
     },
     "Ver horarios" : {
-      "comment" : "Detalle de estación: botón de la tarjeta de próximos trenes que abre la hoja de horarios."
+      "comment" : "Detalle de estación: botón de la tarjeta de próximos trenes que abre la hoja de horarios.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See timetable"
+          }
+        }
+      }
     },
     "Ver más" : {
-      "comment" : "Inicio: enlace de la cabecera de favoritas que abre la lista completa."
+      "comment" : "Inicio: enlace de la cabecera de favoritas que abre la lista completa.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See more"
+          }
+        }
+      }
     },
     "Ver original" : {
-      "comment" : "Notificaciones: botón de una tarjeta traducida que vuelve a mostrar el aviso en español."
+      "comment" : "Notificaciones: botón de una tarjeta traducida que vuelve a mostrar el aviso en español.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Show original"
+          }
+        }
+      }
+    },
+    "Ver toda la red" : {
+      "comment" : "Mapa, carrusel de estaciones: botón que aleja la cámara para mostrar toda la red cuando el usuario está lejos.\nMapa: botón flotante que aleja la cámara para mostrar toda la red de Cercanías.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See whole network"
+          }
+        }
+      }
     },
     "Ver todas las estaciones favoritas" : {
-      "comment" : "Inicio: etiqueta de VoiceOver del enlace «Ver más» de la sección de favoritas."
+      "comment" : "Inicio: etiqueta de VoiceOver del enlace «Ver más» de la sección de favoritas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See all favorite stations"
+          }
+        }
+      }
+    },
+    "Ver todos los horarios" : {
+      "comment" : "Mapa, ficha de estación: botón de la tarjeta de próximos trenes que abre la hoja con todos los horarios de la estación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See full timetable"
+          }
+        }
+      }
     },
     "Verás qué estaciones tienes más cerca y a qué distancia están." : {
-      "comment" : "Estaciones: explica para qué se pide el permiso de ubicación en la sección «Cerca de ti»."
+      "comment" : "Estaciones: explica para qué se pide el permiso de ubicación en la sección «Cerca de ti».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See which stations are closest to you and how far away they are."
+          }
+        }
+      }
     },
     "Verás tu estación más cercana y sus próximos trenes nada más abrir Rail." : {
-      "comment" : "Tarjeta de próximos trenes: explica para qué se pide el permiso de ubicación."
+      "comment" : "Tarjeta de próximos trenes: explica para qué se pide el permiso de ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See your closest station and its next trains as soon as you open Rail."
+          }
+        }
+      }
     }
   },
-  "version" : "1.0"
+  "version" : "1.3"
 }

@@ -64,16 +64,15 @@
 				DesignSystem/Size.swift,
 				DesignSystem/Spacing.swift,
 				DesignSystem/Typography.swift,
+				Domain/StationSchedule.swift,
 				Localizable.xcstrings,
 				"Model/Calendar+ServiceDay.swift",
-				Model/EncodedPolyline.swift,
 				Model/FavoriteStation.swift,
 				Model/Line.swift,
 				Model/LineStop.swift,
 				Model/LiveTrain.swift,
 				Model/LocalDataState.swift,
 				Model/RealtimeFeed.swift,
-				Model/RouteShapeCache.swift,
 				Model/SavedLocation.swift,
 				Model/SavedStation.swift,
 				Model/ServiceAlert.swift,
@@ -83,11 +82,10 @@
 				Model/TransitNetwork.swift,
 				Model/TravelEstimate.swift,
 				Model/Trip.swift,
-				Model/UserLocation.swift,
 				Repository/StationScheduleLoading.swift,
 				View/Components/Atoms/LineBadge.swift,
 				"View/Components/Color+Hex.swift",
-				View/Presentation/StationSchedule.swift,
+				View/Presentation/DepartureTimeFormat.swift,
 			);
 			target = 43CCC9D53064F14200F09637 /* RailWidgetsExtension */;
 		};
@@ -224,6 +222,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 43A0FC70305EE86100EB7FD9;
 			minimizedProjectReferenceProxies = 1;
@@ -410,7 +409,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Rail usa tu ubicación para situarte en el mapa, mostrarte las estaciones más cercanas y calcular a qué distancia estás de cada una.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
@@ -449,7 +448,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Rail usa tu ubicación para situarte en el mapa, mostrarte las estaciones más cercanas y calcular a qué distancia estás de cada una.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.6;

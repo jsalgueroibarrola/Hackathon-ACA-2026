@@ -25,6 +25,12 @@ struct TrainMarker: View {
                 .foregroundStyle(tint.text)
                 .frame(width: diameter, height: diameter)
                 .background(tint.base, in: .circle)
+                .background {
+                    if !isStale {
+                        PulseRing(Circle())
+                            .tint(tint.base)
+                    }
+                }
                 .overlay {
                     Circle().strokeBorder(.background, lineWidth: Border.thick)
                 }

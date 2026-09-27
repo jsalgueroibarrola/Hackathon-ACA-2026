@@ -46,3 +46,8 @@ extension Line {
         }
     }
 }
+
+struct RouteShape: Sendable, Hashable {
+    let lineID: String
+    let encoded: String
+}

@@ -38,7 +38,7 @@ Before writing a new one, open the most similar one and copy its structure.
 | `View/Components/Molecules/CardMessage.swift` | A message block with icon, title, text and up to two actions (`CardMessage.Action`). Metrics per `Prominence` in an extension with a `switch`. Icon size with `ScaledMetric(wrappedValue:relativeTo:)` in the `init`. |
 | `View/Components/Organisms/NextTrainsCard.swift` | An organism with no data: it takes a state enum and returns actions through a single `onAction` closure. The logic that decides the state lives outside, in pure functions (`NextTrainsCardStateBuilder`). |
 | `View/Components/Molecules/IllustratedMessage.swift` | An empty state with illustration, title, text and optional actions (an `init` without actions using `where Actions == EmptyView`). Typography per `Prominence` in a `fileprivate` extension. |
-| `View/StationPickerSheet.swift` | A generic sheet (`<Header: View>`) with `List(.plain)`, the system `.searchable`, chips in `safeAreaBar(edge: .top)` and sections produced by a pure builder. A generic type can't hold `static let`: use `static var { }`. |
+| `View/Sheets/StationPickerSheet.swift` | A generic sheet (`<Header: View>`) with `List(.plain)`, the system `.searchable`, chips in `safeAreaBar(edge: .top)` and sections produced by a pure builder. A generic type can't hold `static let`: use `static var { }`. |
 
 ## 3. Figma quirks
 

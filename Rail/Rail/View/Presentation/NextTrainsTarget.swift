@@ -23,13 +23,3 @@ enum NextTrainsTarget: Equatable {
         }
     }
 }
-
-struct WalkingRequest: Hashable, Sendable {
-    let origin: LocationCell
-    let stationID: String
-}
-
-struct WalkingResult: Hashable, Sendable {
-    let request: WalkingRequest
-    let estimate: TravelEstimate?
-}

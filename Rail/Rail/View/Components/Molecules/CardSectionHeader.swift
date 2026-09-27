@@ -9,6 +9,8 @@ struct CardSectionHeader<Accessory: View>: View {
     private let detail: LocalizedStringResource?
     private let accessory: Accessory
 
+    @Environment(\.cardSurfaceStyle) private var cardSurfaceStyle
+
     init(
         _ title: LocalizedStringResource,
         systemImage: String? = nil,
@@ -40,7 +42,7 @@ struct CardSectionHeader<Accessory: View>: View {
             text
         }
         .font(.footnote)
-        .foregroundStyle(.textTertiary)
+        .foregroundStyle(cardSurfaceStyle.sectionHeader)
         .accessibilityElement(children: .combine)
     }
 

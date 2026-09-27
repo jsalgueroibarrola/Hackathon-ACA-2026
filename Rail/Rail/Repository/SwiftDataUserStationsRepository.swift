@@ -66,4 +66,48 @@ final class SwiftDataUserStationsRepository: UserStationsRepository {
             try modelContext.deleteAll(SavedStation.self)
         }
     }
+
+    func recordJourney(originID: String, destinationID: String) throws {
+        let now = Date.now
+        try modelContext.commit {
+            let recents = try modelContext.fetch(FetchDescriptor<RecentJourney>())
+            let existing = recents.first {
+                $0.originID == originID && $0.destinationID == destinationID
+            }
+            let journey = existing ?? RecentJourney(
+                originID: originID,
+                destinationID: destinationID,
+                lastSearchedAt: now
+            )
+            if existing == nil {
+                modelContext.insert(journey)
+            }
+            journey.lastSearchedAt = now
+            RecentJourneyPolicy.discarded(
+                existing == nil ? recents + [journey] : recents,
+                lastSearchedAt: \.lastSearchedAt,
+                now: now
+            )
+            .forEach { modelContext.delete($0) }
+        }
+    }
+
+    func removeRecentJourney(originID: String, destinationID: String) throws {
+        try modelContext.commit {
+            try modelContext.fetch(
+                FetchDescriptor<RecentJourney>(
+                    predicate: #Predicate {
+                        $0.originID == originID && $0.destinationID == destinationID
+                    }
+                )
+            )
+            .forEach { modelContext.delete($0) }
+        }
+    }
+
+    func clearRecentJourneys() throws {
+        try modelContext.commit {
+            try modelContext.deleteAll(RecentJourney.self)
+        }
+    }
 }

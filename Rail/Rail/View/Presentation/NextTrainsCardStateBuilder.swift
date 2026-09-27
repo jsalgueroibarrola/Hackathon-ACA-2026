@@ -96,7 +96,7 @@ enum NextTrainsCardStateBuilder {
     static func state(
         target: NextTrainsTarget,
         schedules: NextTrainsSchedules?,
-        walking: WalkingResult?,
+        walking: RouteEstimates?,
         now: Date
     ) -> NextTrainsCardState {
         switch target {
@@ -119,10 +119,7 @@ enum NextTrainsCardStateBuilder {
                     name: station.name,
                     proximity: proximity(
                         source: source,
-                        walking: walking.flatMap {
-                            $0.request.stationID == station.id
-                                ? $0.estimate : nil
-                        }
+                        walking: walking?.estimate(.walking, to: station.id)
                     ),
                     departures: schedules.flatMap {
                         $0.stationID == station.id

@@ -130,11 +130,12 @@
             ("captionEmphasized", .captionEmphasized),
             ("caption2", .caption2), ("timeDeparture", .timeDeparture),
             ("timeDepartureLarge", .timeDepartureLarge),
+            ("timeDepartureHero", .timeDepartureHero),
         ]
 
-        private let lines: [(String, String, String, String)] = [
-            ("C1", "DA291C", "FDF3F2", "62100A"),
-            ("C2", "0057A8", "EEF5FC", "002446"),
+        private let lines: [(String, String)] = [
+            ("C1", "DA291C"),
+            ("C2", "0057A8"),
         ]
 
         var body: some View {
@@ -182,12 +183,6 @@
                                         line.0,
                                         color: tint.base,
                                         scale: .large
-                                    )
-                                    swatchPair(
-                                        "subtle",
-                                        derived: tint.subtle,
-                                        figma: Color(hex: line.2),
-                                        figmaDark: Color(hex: line.3)
                                     )
                                 }
                             }
@@ -322,23 +317,6 @@
             VStack(alignment: .leading, spacing: Spacing.sm) {
                 Text(title).font(.headline)
                 content()
-            }
-        }
-
-        private func swatchPair(
-            _ label: String,
-            derived: Color,
-            figma: Color,
-            figmaDark: Color
-        ) -> some View {
-            HStack(spacing: Spacing.xs) {
-                RoundedRectangle(cornerRadius: Radius.sm, style: .continuous)
-                    .fill(derived).frame(width: 40, height: 28)
-                RoundedRectangle(cornerRadius: Radius.sm, style: .continuous)
-                    .fill(figma).frame(width: 40, height: 28)
-                RoundedRectangle(cornerRadius: Radius.sm, style: .continuous)
-                    .fill(figmaDark).frame(width: 40, height: 28)
-                Text(label).font(.caption2).foregroundStyle(.textSecondary)
             }
         }
 

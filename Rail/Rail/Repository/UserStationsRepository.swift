@@ -7,6 +7,9 @@ protocol UserStationsRepository {
     func reorderFavorites(stationIDs: [String]) throws
     func saveStation(_ location: SavedLocation) throws
     func clearSavedStation() throws
+    func recordJourney(originID: String, destinationID: String) throws
+    func removeRecentJourney(originID: String, destinationID: String) throws
+    func clearRecentJourneys() throws
 }
 
 #if DEBUG
@@ -16,5 +19,8 @@ struct PreviewUserStationsRepository: UserStationsRepository {
     func reorderFavorites(stationIDs: [String]) throws {}
     func saveStation(_ location: SavedLocation) throws {}
     func clearSavedStation() throws {}
+    func recordJourney(originID: String, destinationID: String) throws {}
+    func removeRecentJourney(originID: String, destinationID: String) throws {}
+    func clearRecentJourneys() throws {}
 }
 #endif

@@ -53,7 +53,6 @@ struct StationPin: Identifiable, Hashable {
 
     static let interchangeColor = Color.textPrimary
     static let accessibleTint = Color.statusInfo
-    static let elevatorTint = Color.interactiveIconSubtle
 
     var color: Color {
         switch (isInterchange, colorHexes.first) {
@@ -118,7 +117,6 @@ enum ZoomBucket: Comparable, CaseIterable {
         }
     }
 
-    var showsAccessibility: Bool { self >= .region }
-    var showsChip: Bool { self >= .street }
-    var showsConnections: Bool { self == .detail }
+    var showsChip: Bool { self >= .region }
+    var isCompactChip: Bool { self == .region }
 }

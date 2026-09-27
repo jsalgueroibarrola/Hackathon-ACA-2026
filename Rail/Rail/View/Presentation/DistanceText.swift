@@ -9,3 +9,22 @@ extension LocalizedStringResource {
         )
     }
 }
+
+extension Measurement<UnitLength> {
+    var distanceLabel: String {
+        let meters = converted(to: .meters).value
+        return meters < 1000
+            ? Measurement(value: meters.rounded(), unit: UnitLength.meters)
+                .formatted(
+                    .measurement(width: .abbreviated, usage: .asProvided)
+                )
+            : converted(to: .kilometers)
+                .formatted(
+                    .measurement(
+                        width: .abbreviated,
+                        usage: .asProvided,
+                        numberFormatStyle: .number.precision(.fractionLength(1))
+                    )
+                )
+    }
+}

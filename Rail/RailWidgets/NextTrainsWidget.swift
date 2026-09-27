@@ -18,7 +18,7 @@ struct NextTrainsWidget: Widget {
         )
         .description(
             LocalizedStringResource(
-                "Los próximos trenes en una de tus estaciones favoritas.",
+                "Los próximos trenes de la estación que elijas.",
                 comment: "Descripción del widget en la galería de widgets."
             )
         )
@@ -26,7 +26,6 @@ struct NextTrainsWidget: Widget {
             .systemSmall,
             .systemMedium,
             .systemLarge,
-            .accessoryRectangular,
         ])
     }
 }

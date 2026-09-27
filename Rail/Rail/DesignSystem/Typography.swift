@@ -9,6 +9,7 @@ extension Font {
     static let captionEmphasized: Font = .caption.weight(.semibold)
     static let timeDeparture: Font = .body.weight(.semibold).monospacedDigit()
     static let timeDepartureLarge: Font = .title2.weight(.bold).monospacedDigit()
+    static let timeDepartureHero: Font = .largeTitle.weight(.bold).monospacedDigit()
 }
 
 enum Tracking {

@@ -159,7 +159,7 @@ struct NextTrainsCard: View {
 }
 
 extension NextTrainsProximity {
-    fileprivate var subtitle: LocalizedStringResource {
+    var subtitle: LocalizedStringResource {
         switch self {
         case .walking(let minutes):
             LocalizedStringResource(
@@ -217,113 +217,117 @@ extension NextTrainsCardAction {
 }
 
 #if DEBUG
-extension NextTrainsCardState {
-    fileprivate static func sampleStation(
-        _ proximity: NextTrainsProximity,
-        departures: NextTrainsDepartures
-    ) -> Self {
-        .station(
-            NextTrainsStation(
-                name: "Estación La Colina",
-                proximity: proximity,
-                departures: departures
+    extension NextTrainsCardState {
+        fileprivate static func sampleStation(
+            _ proximity: NextTrainsProximity,
+            departures: NextTrainsDepartures
+        ) -> Self {
+            .station(
+                NextTrainsStation(
+                    name: "Estación La Colina",
+                    proximity: proximity,
+                    departures: departures
+                )
             )
-        )
-    }
+        }
 
-    fileprivate static func sampleDeparture(
-        _ id: String,
-        to destination: String,
-        time: String
-    ) -> NextTrainsDeparture {
-        NextTrainsDeparture(
-            id: id,
-            line: "C-1",
-            colorHex: "DA291C",
-            destination: destination,
-            time: time
-        )
-    }
+        fileprivate static func sampleDeparture(
+            _ id: String,
+            to destination: String,
+            time: String
+        ) -> NextTrainsDeparture {
+            NextTrainsDeparture(
+                id: id,
+                line: "C-1",
+                colorHex: "DA291C",
+                destination: destination,
+                time: time
+            )
+        }
 
-    fileprivate static let walking = sampleStation(
-        .walking(minutes: 15),
-        departures: .upcoming([
-            sampleDeparture("1", to: "Fuengirola", time: "14:06"),
-            sampleDeparture("2", to: "Málaga C. Alameda", time: "14:06"),
-        ])
-    )
-
-    fileprivate static let distance = sampleStation(
-        .distance("1,2 km"),
-        departures: .upcoming([
-            sampleDeparture("1", to: "Fuengirola", time: "14:06"),
-            sampleDeparture("2", to: "Alameda", time: "14:21"),
-        ])
-    )
-
-    fileprivate static let finished = sampleStation(
-        .walking(minutes: 15),
-        departures: .finished(firstTomorrow: "05:40")
-    )
-
-    fileprivate static let figma: [Self] = [
-        walking,
-        distance,
-        .permissionNeeded,
-        .permissionDenied,
-        .locationUnavailable,
-        .noStationNearby(name: "Álora", distance: "38 km"),
-        finished,
-    ]
-
-    fileprivate static let extra: [Self] = [
-        .locating,
-        sampleStation(.walking(minutes: 1), departures: .loading),
-        sampleStation(
-            .saved,
+        fileprivate static let walking = sampleStation(
+            .walking(minutes: 15),
             departures: .upcoming([
                 sampleDeparture("1", to: "Fuengirola", time: "14:06"),
-                sampleDeparture("2", to: "Málaga C. Alameda", time: "14:21"),
+                sampleDeparture("2", to: "Málaga C. Alameda", time: "14:06"),
             ])
-        ),
-        sampleStation(
+        )
+
+        fileprivate static let distance = sampleStation(
             .distance("1,2 km"),
-            departures: .finished(firstTomorrow: nil)
-        ),
-    ]
-}
+            departures: .upcoming([
+                sampleDeparture("1", to: "Fuengirola", time: "14:06"),
+                sampleDeparture("2", to: "Alameda", time: "14:21"),
+            ])
+        )
 
-private struct NextTrainsCardSamples: View {
-    let states: [NextTrainsCardState]
+        fileprivate static let finished = sampleStation(
+            .walking(minutes: 15),
+            departures: .finished(firstTomorrow: "05:40")
+        )
 
-    var body: some View {
-        ScrollView {
-            VStack(spacing: ScreenLayout.gutter) {
-                ForEach(states, id: \.self) { state in
-                    NextTrainsCard(state) { _ in }
-                }
-            }
-            .padding(ScreenLayout.margin)
-        }
-        .background(.bgSecondary)
+        fileprivate static let figma: [Self] = [
+            walking,
+            distance,
+            .permissionNeeded,
+            .permissionDenied,
+            .locationUnavailable,
+            .noStationNearby(name: "Álora", distance: "38 km"),
+            finished,
+        ]
+
+        fileprivate static let extra: [Self] = [
+            .locating,
+            sampleStation(.walking(minutes: 1), departures: .loading),
+            sampleStation(
+                .saved,
+                departures: .upcoming([
+                    sampleDeparture("1", to: "Fuengirola", time: "14:06"),
+                    sampleDeparture(
+                        "2",
+                        to: "Málaga C. Alameda",
+                        time: "14:21"
+                    ),
+                ])
+            ),
+            sampleStation(
+                .distance("1,2 km"),
+                departures: .finished(firstTomorrow: nil)
+            ),
+        ]
     }
-}
 
-#Preview("Variantes Figma") {
-    NextTrainsCardSamples(states: NextTrainsCardState.figma)
-}
+    private struct NextTrainsCardSamples: View {
+        let states: [NextTrainsCardState]
 
-#Preview("Estados extra") {
-    NextTrainsCardSamples(states: NextTrainsCardState.extra)
-}
+        var body: some View {
+            ScrollView {
+                VStack(spacing: ScreenLayout.gutter) {
+                    ForEach(states, id: \.self) { state in
+                        NextTrainsCard(state) { _ in }
+                    }
+                }
+                .padding(ScreenLayout.margin)
+            }
+            .background(.bgSecondary)
+        }
+    }
 
-#Preview("Modo oscuro") {
-    NextTrainsCardSamples(states: [.walking, .permissionNeeded, .finished])
-        .preferredColorScheme(.dark)
-}
+    #Preview("Variantes Figma") {
+        NextTrainsCardSamples(states: NextTrainsCardState.figma)
+    }
 
-#Preview("Dynamic Type") {
-    NextTrainsCardSamples(states: [.walking, .permissionNeeded])
-        .dynamicTypeSize(.accessibility2)
-}
+    #Preview("Estados extra") {
+        NextTrainsCardSamples(states: NextTrainsCardState.extra)
+    }
+
+    #Preview("Modo oscuro") {
+        NextTrainsCardSamples(states: [.walking, .permissionNeeded, .finished])
+            .preferredColorScheme(.dark)
+    }
+
+    #Preview("Dynamic Type") {
+        NextTrainsCardSamples(states: [.walking, .permissionNeeded])
+            .dynamicTypeSize(.accessibility2)
+    }
 #endif

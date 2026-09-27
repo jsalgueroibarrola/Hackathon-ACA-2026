@@ -3,6 +3,7 @@ import SwiftUI
 enum AppRoute: Hashable {
     case favorites
     case station(id: String)
+    case journey(JourneyQuery)
 }
 
 extension View {
@@ -13,6 +14,8 @@ extension View {
                 FavoriteStationsView()
             case .station(let id):
                 StationDestination(stationID: id)
+            case .journey(let query):
+                JourneyResultsView(query: query)
             }
         }
     }

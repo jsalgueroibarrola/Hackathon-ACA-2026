@@ -39,3 +39,19 @@ extension SavedStation {
         return descriptor
     }
 }
+
+@Model
+final class RecentJourney {
+    #Unique<RecentJourney>([\.originID, \.destinationID])
+    #Index<RecentJourney>([\.lastSearchedAt])
+
+    var originID: String
+    var destinationID: String
+    var lastSearchedAt: Date
+
+    init(originID: String, destinationID: String, lastSearchedAt: Date = .now) {
+        self.originID = originID
+        self.destinationID = destinationID
+        self.lastSearchedAt = lastSearchedAt
+    }
+}

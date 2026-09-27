@@ -4,42 +4,74 @@ import WidgetKit
 struct NextTrainsWidgetRowView: View {
     private let row: NextTrainsWidgetRow
     private let timeZone: TimeZone
+    private let showsSeparator: Bool
 
     @Environment(\.widgetFamily) private var family
-    @Environment(\.widgetRenderingMode) private var renderingMode
 
-    init(_ row: NextTrainsWidgetRow, timeZone: TimeZone) {
+    init(_ row: NextTrainsWidgetRow, timeZone: TimeZone, showsSeparator: Bool = false) {
         self.row = row
         self.timeZone = timeZone
+        self.showsSeparator = showsSeparator
     }
 
     var body: some View {
-        content
-            .accessibilityElement(children: .combine)
+        HStack(spacing: Spacing.sm) {
+            NextTrainsWidgetLineMark(row)
+            Text(verbatim: row.destination)
+                .font(destinationFont)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(row.date, format: Date.FormatStyle.departureTime(in: timeZone))
+                .font(timeFont)
+                .lineLimit(1)
+                .fixedSize()
+        }
+        .padding(.vertical, verticalPadding)
+        .overlay(alignment: .bottom) {
+            if showsSeparator {
+                Rectangle()
+                    .fill(.interactiveSeparator)
+                    .frame(height: Border.hairline)
+            }
+        }
+        .accessibilityElement(children: .combine)
     }
 
-    @ViewBuilder
-    private var content: some View {
-        if family == .systemSmall {
-            VStack(alignment: .leading, spacing: Spacing.none) {
-                HStack(spacing: Spacing.sm) {
-                    line
-                    time
-                }
-                destination
-            }
-        } else {
-            HStack(spacing: Spacing.sm) {
-                line
-                destination
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                time
-            }
+    private var destinationFont: Font {
+        switch family {
+        case .systemLarge: .body
+        case .systemMedium: .subheadline
+        default: .caption
         }
     }
 
-    @ViewBuilder
-    private var line: some View {
+    private var timeFont: Font {
+        switch family {
+        case .systemLarge, .systemMedium: .timeDeparture
+        default: .captionEmphasized.monospacedDigit()
+        }
+    }
+
+    private var verticalPadding: CGFloat {
+        switch family {
+        case .systemLarge: Spacing.xs + Spacing.xxs
+        case .systemMedium: Spacing.xs
+        default: Spacing.none
+        }
+    }
+}
+
+struct NextTrainsWidgetLineMark: View {
+    private let row: NextTrainsWidgetRow
+
+    @Environment(\.widgetRenderingMode) private var renderingMode
+
+    init(_ row: NextTrainsWidgetRow) {
+        self.row = row
+    }
+
+    var body: some View {
         if renderingMode == .fullColor {
             LineBadge(row.line, color: Color(hex: row.colorHex))
         } else {
@@ -47,19 +79,5 @@ struct NextTrainsWidgetRowView: View {
                 .font(.captionEmphasized)
                 .widgetAccentable()
         }
-    }
-
-    private var destination: some View {
-        Text(verbatim: row.destination)
-            .font(.caption)
-            .lineLimit(1)
-            .truncationMode(.tail)
-    }
-
-    private var time: some View {
-        Text(row.date, format: Date.FormatStyle.departureTime(in: timeZone))
-            .font(.timeDeparture)
-            .lineLimit(1)
-            .fixedSize()
     }
 }

@@ -31,9 +31,7 @@ struct RootView: View {
     private var content: some View {
         switch viewModel.phase {
         case .checking:
-            ProgressView()
-                .controlSize(.large)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            LaunchScreenView()
 
         case .loading:
             DataLoadingView()

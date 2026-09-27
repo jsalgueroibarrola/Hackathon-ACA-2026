@@ -28,72 +28,66 @@
     #Preview("1 · Con trenes · pequeño", as: .systemSmall) {
         NextTrainsWidget()
     } timeline: {
-        NextTrainsWidgetEntry.sample(at: .now, limit: 2)
+        NextTrainsWidgetEntry.sample(at: .now, limit: 1)
     }
 
     #Preview("2 · Con trenes · mediano", as: .systemMedium) {
         NextTrainsWidget()
     } timeline: {
-        NextTrainsWidgetEntry.sample(at: .now, limit: 3)
+        NextTrainsWidgetEntry.sample(at: .now, limit: 4)
     }
 
     #Preview("3 · Con trenes · grande", as: .systemLarge) {
         NextTrainsWidget()
     } timeline: {
-        NextTrainsWidgetEntry.sample(at: .now, limit: 7)
+        NextTrainsWidgetEntry.sample(at: .now, limit: 12)
     }
 
-    #Preview("4 · Con trenes · bloqueo", as: .accessoryRectangular) {
-        NextTrainsWidget()
-    } timeline: {
-        NextTrainsWidgetEntry.sample(at: .now, limit: 2)
-    }
-
-    #Preview("5 · Sin configurar · mediano", as: .systemMedium) {
+    #Preview("4 · Sin configurar · mediano", as: .systemMedium) {
         NextTrainsWidget()
     } timeline: {
         NextTrainsWidgetEntry.gallery(.unconfigured)
     }
 
-    #Preview("6 · Sin configurar · pequeño", as: .systemSmall) {
+    #Preview("5 · Sin configurar · pequeño", as: .systemSmall) {
         NextTrainsWidget()
     } timeline: {
         NextTrainsWidgetEntry.gallery(.unconfigured)
     }
 
-    #Preview("7 · Sin horarios · mediano", as: .systemMedium) {
+    #Preview("6 · Sin horarios · mediano", as: .systemMedium) {
         NextTrainsWidget()
     } timeline: {
         NextTrainsWidgetEntry.gallery(.dataMissing)
     }
 
-    #Preview("8 · Estación no disponible · mediano", as: .systemMedium) {
+    #Preview("7 · Estación no disponible · mediano", as: .systemMedium) {
         NextTrainsWidget()
     } timeline: {
         NextTrainsWidgetEntry.gallery(.unknownStation)
     }
 
-    #Preview("9 · Fin de servicio · mediano", as: .systemMedium) {
+    #Preview("8 · Fin de servicio · mediano", as: .systemMedium) {
         NextTrainsWidget()
     } timeline: {
         NextTrainsWidgetEntry.endOfService
     }
 
-    #Preview("10 · Fin de servicio · pequeño", as: .systemSmall) {
+    #Preview("9 · Fin de servicio · pequeño", as: .systemSmall) {
         NextTrainsWidget()
     } timeline: {
         NextTrainsWidgetEntry.endOfService
     }
 
-    #Preview("11 · Horarios caducados · mediano", as: .systemMedium) {
+    #Preview("10 · Horarios caducados · mediano", as: .systemMedium) {
         NextTrainsWidget()
     } timeline: {
         NextTrainsWidgetEntry.expired
     }
 
-    #Preview("12 · Marcador de posición · mediano", as: .systemMedium) {
+    #Preview("11 · Marcador de posición · mediano", as: .systemMedium) {
         NextTrainsWidget()
     } timeline: {
-        NextTrainsWidgetEntry.sample(at: .now, limit: 3)
+        NextTrainsWidgetEntry.sample(at: .now, limit: 4)
     }
 #endif

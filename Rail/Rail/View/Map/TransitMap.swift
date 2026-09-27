@@ -1,0 +1,359 @@
+import MapKit
+import SwiftUI
+
+private struct TrainClock: Equatable {
+    let isRunning: Bool
+    let reduceMotion: Bool
+}
+
+struct TransitMap: View {
+    @Binding var camera: MapCameraPosition
+    @Binding var selection: String?
+    var focusedID: String?
+    let lines: [LineOverlay]
+    let pins: [StationPin]
+    var trains: [TrainTrack] = []
+    var trainsHiddenAfter: Date?
+    var showsCasing = true
+    var showsUserLocation = false
+    var scope: Namespace.ID?
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var zoom: ZoomBucket = .region
+    @State private var heading: CLLocationDirection = 0
+    @State private var now = Date.now
+
+    var body: some View {
+        Map(
+            position: $camera,
+            bounds: MapCameraBounds(
+                minimumDistance: Self.minimumCameraDistance,
+                maximumDistance: Self.maximumCameraDistance
+            ),
+            selection: $selection,
+            scope: scope
+        ) {
+            ForEach(lines) { line in
+                polyline(for: line)
+            }
+
+            if showsUserLocation {
+                UserAnnotation()
+            }
+
+            ForEach(liveTrains) { train in
+                let position = train.position(at: now)
+                Annotation(coordinate: position.coordinate) {
+                    TrainMarker(
+                        tint: LineTint(base: Color(hex: train.colorHex)),
+                        rotation: .degrees(position.bearing - heading),
+                        isStale: train.isStale(at: now)
+                    )
+                    .accessibilityLabel(train.accessibilityLabel)
+                } label: {
+                    Text(verbatim: train.train)
+                }
+                .annotationTitles(.hidden)
+            }
+
+            ForEach(pins) { pin in
+                Annotation(coordinate: pin.coordinate) {
+                    BadgedStationPin(
+                        pin: pin,
+                        zoom: zoom,
+                        isSelected: pin.id == (selection ?? focusedID)
+                    )
+                } label: {
+                    Text(pin.name)
+                }
+                .tag(pin.id)
+                .annotationTitles(zoom >= .street ? .visible : .hidden)
+            }
+        }
+        .mapStyle(
+            .standard(
+                elevation: .flat,
+                emphasis: .muted,
+                pointsOfInterest: .excludingAll
+            )
+        )
+        .mapControls {
+            MapScaleView()
+        }
+        .onMapCameraChange(frequency: .continuous) { context in
+            let bucket = zoom.updated(for: context.camera.distance)
+            if bucket != zoom { zoom = bucket }
+            if context.camera.heading != heading {
+                heading = context.camera.heading
+            }
+        }
+        .task(
+            id: TrainClock(
+                isRunning: !trains.isEmpty,
+                reduceMotion: reduceMotion
+            )
+        ) {
+            guard !trains.isEmpty else { return }
+            let step = reduceMotion ? Self.reducedMotionTick : Self.tick
+            now = .now
+            while (try? await Task.sleep(for: step)) != nil {
+                withAnimation(
+                    reduceMotion
+                        ? nil : .linear(duration: Self.tick / .seconds(1))
+                ) {
+                    now = .now
+                }
+            }
+        }
+    }
+
+    @MapContentBuilder
+    private func polyline(for line: LineOverlay) -> some MapContent {
+        if !line.coordinates.isEmpty {
+            if showsCasing {
+                MapPolyline(
+                    coordinates: line.coordinates,
+                    contourStyle: .geodesic
+                )
+                .stroke(
+                    .background.opacity(0.9),
+                    style: StrokeStyle(
+                        lineWidth: Self.casingWidth,
+                        lineCap: .round,
+                        lineJoin: .round
+                    )
+                )
+                .mapOverlayLevel(level: .aboveRoads)
+            }
+
+            MapPolyline(coordinates: line.coordinates, contourStyle: .geodesic)
+                .stroke(
+                    line.color,
+                    style: StrokeStyle(
+                        lineWidth: Self.lineWidth,
+                        lineCap: .round,
+                        lineJoin: .round
+                    )
+                )
+                .mapOverlayLevel(level: .aboveLabels)
+        }
+    }
+
+    private static let minimumCameraDistance: CLLocationDistance = 200
+    private static let maximumCameraDistance: CLLocationDistance = 400_000
+    private static let casingWidth: CGFloat = 9
+    private static let lineWidth: CGFloat = 5
+    private static let tick = Duration.seconds(1)
+    private static let reducedMotionTick = Duration.seconds(5)
+
+    private var liveTrains: [TrainTrack] {
+        guard trainsHiddenAfter.map({ now < $0 }) ?? true else { return [] }
+        return trains.filter { !$0.isExpired(at: now) }
+    }
+}
+
+#if DEBUG
+    extension LineOverlay {
+        fileprivate static let l1 = LineOverlay(
+            id: "L1",
+            name: "Andalucía Tech – Atarazanas",
+            colorHex: "E1251B",
+            coordinates: [
+                CLLocationCoordinate2D(latitude: 36.7196, longitude: -4.4249),
+                CLLocationCoordinate2D(latitude: 36.7203, longitude: -4.4291),
+                CLLocationCoordinate2D(latitude: 36.7139, longitude: -4.4322),
+                CLLocationCoordinate2D(latitude: 36.7114, longitude: -4.4412),
+                CLLocationCoordinate2D(latitude: 36.7091, longitude: -4.4535),
+                CLLocationCoordinate2D(latitude: 36.7060, longitude: -4.4680),
+            ]
+        )
+
+        fileprivate static let l2 = LineOverlay(
+            id: "L2",
+            name: "Palacio de los Deportes – Atarazanas",
+            colorHex: "5C2D91",
+            coordinates: [
+                CLLocationCoordinate2D(latitude: 36.7196, longitude: -4.4249),
+                CLLocationCoordinate2D(latitude: 36.7203, longitude: -4.4291),
+                CLLocationCoordinate2D(latitude: 36.7139, longitude: -4.4322),
+                CLLocationCoordinate2D(latitude: 36.7185, longitude: -4.4620),
+                CLLocationCoordinate2D(latitude: 36.7209, longitude: -4.4735),
+            ]
+        )
+    }
+
+    extension StationPin {
+        fileprivate static let red: [StationPin] = [
+            StationPin(
+                id: "atarazanas",
+                name: "Atarazanas",
+                latitude: 36.7196,
+                longitude: -4.4249,
+                isAccessible: true,
+                hasElevator: true,
+                connections: [.urbanBus],
+                lineIDs: ["L1", "L2"],
+                colorHexes: ["E1251B", "5C2D91"]
+            ),
+            StationPin(
+                id: "guadalmedina",
+                name: "Guadalmedina",
+                latitude: 36.7203,
+                longitude: -4.4291,
+                isAccessible: true,
+                lineIDs: ["L1", "L2"],
+                colorHexes: ["E1251B", "5C2D91"]
+            ),
+            StationPin(
+                id: "el-perchel",
+                name: "El Perchel",
+                latitude: 36.7139,
+                longitude: -4.4322,
+                isAccessible: true,
+                hasElevator: true,
+                connections: [.ave, .regional, .busStation],
+                lineIDs: ["L1", "L2"],
+                colorHexes: ["E1251B", "5C2D91"]
+            ),
+            StationPin(
+                id: "principe-asturias",
+                name: "Príncipe de Asturias",
+                latitude: 36.7114,
+                longitude: -4.4412,
+                lineIDs: ["L1"],
+                colorHexes: ["E1251B"]
+            ),
+            StationPin(
+                id: "portada-alta",
+                name: "Portada Alta",
+                latitude: 36.7185,
+                longitude: -4.4620,
+                isAccessible: true,
+                connections: [.interurbanBus],
+                lineIDs: ["L2"],
+                colorHexes: ["5C2D91"]
+            ),
+        ]
+    }
+
+    #Preview("Red") {
+        @Previewable @State var camera: MapCameraPosition = .automatic
+        @Previewable @State var selection: String?
+
+        TransitMap(
+            camera: $camera,
+            selection: $selection,
+            lines: [.l1, .l2],
+            pins: StationPin.red
+        )
+    }
+
+    #Preview("Seleccionada") {
+        @Previewable @State var camera: MapCameraPosition = .automatic
+        @Previewable @State var selection: String? = "el-perchel"
+
+        TransitMap(
+            camera: $camera,
+            selection: $selection,
+            lines: [.l1, .l2],
+            pins: StationPin.red
+        )
+    }
+
+    #Preview("Enfocada") {
+        @Previewable @State var camera: MapCameraPosition = .automatic
+        @Previewable @State var selection: String?
+
+        TransitMap(
+            camera: $camera,
+            selection: $selection,
+            focusedID: "el-perchel",
+            lines: [.l1, .l2],
+            pins: StationPin.red
+        )
+    }
+
+    #Preview("Sin contorno") {
+        @Previewable @State var camera: MapCameraPosition = .automatic
+        @Previewable @State var selection: String?
+
+        TransitMap(
+            camera: $camera,
+            selection: $selection,
+            lines: [.l1, .l2],
+            pins: StationPin.red,
+            showsCasing: false
+        )
+    }
+
+    extension TrainTrack {
+        fileprivate static func sample(
+            _ train: String,
+            on line: LineOverlay,
+            direction: TripDirection,
+            from start: Double,
+            to end: Double,
+            status: LiveStatus = .left
+        ) -> TrainTrack {
+            let path = PolylinePath(line.coordinates)
+            return TrainTrack(
+                id: "\(line.id)-\(train)",
+                lineID: line.id,
+                colorHex: line.colorHex,
+                train: train,
+                direction: direction,
+                headsign: nil,
+                delaySeconds: nil,
+                status: status,
+                sampledAt: .now,
+                path: path,
+                startDistance: path.length * start,
+                endDistance: path.length * end
+            )
+        }
+
+        fileprivate static let red: [TrainTrack] = [
+            .sample(
+                "23501",
+                on: .l1,
+                direction: .outbound,
+                from: 0.1,
+                to: 0.45
+            ),
+            .sample("23506", on: .l1, direction: .inbound, from: 0.8, to: 0.55),
+            .sample(
+                "26003",
+                on: .l2,
+                direction: .outbound,
+                from: 0.5,
+                to: 0.5,
+                status: .at
+            ),
+        ]
+    }
+
+    #Preview("Trenes en tiempo real") {
+        @Previewable @State var camera: MapCameraPosition = .automatic
+        @Previewable @State var selection: String?
+
+        TransitMap(
+            camera: $camera,
+            selection: $selection,
+            lines: [.l1, .l2],
+            pins: StationPin.red,
+            trains: TrainTrack.red
+        )
+    }
+
+    #Preview("Solo líneas") {
+        @Previewable @State var camera: MapCameraPosition = .automatic
+        @Previewable @State var selection: String?
+
+        TransitMap(
+            camera: $camera,
+            selection: $selection,
+            lines: [.l1, .l2],
+            pins: []
+        )
+    }
+#endif

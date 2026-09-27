@@ -8,10 +8,12 @@ struct AppDependencies {
     let viewModel: AppViewModel
     let locationViewModel: LocationViewModel
     let favoritesViewModel: FavoritesViewModel
+    let recentJourneysViewModel: RecentJourneysViewModel
     let liveFeedService: any LiveFeedService
     let scheduleRepository: any ScheduleRepository
     let routeService: any RouteService
     let routeShapes: RouteShapeCache
+    let connectivity: any ConnectivityService
 
     init() {
         let configuration = RailStore.configuration()
@@ -45,6 +47,7 @@ struct AppDependencies {
             repository: userStations
         )
         favoritesViewModel = FavoritesViewModel(repository: userStations)
+        recentJourneysViewModel = RecentJourneysViewModel(repository: userStations)
         liveFeedService = LiveFeedServiceImpl(
             api: api,
             repository: SwiftDataLiveFeedRepository(modelContainer: container)
@@ -52,5 +55,6 @@ struct AppDependencies {
         scheduleRepository = SwiftDataScheduleRepository(modelContainer: container)
         routeService = RouteServiceImpl()
         routeShapes = RouteShapeCache()
+        connectivity = NetworkConnectivityService()
     }
 }

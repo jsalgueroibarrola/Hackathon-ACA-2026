@@ -7,6 +7,7 @@ enum RailSchema {
             Timetable.self,
             FavoriteStation.self,
             SavedStation.self,
+            RecentJourney.self,
             ServiceAlertFeed.self,
             ServiceAlert.self,
             RealtimeFeed.self,
