@@ -26,7 +26,7 @@ struct StationDetailView: View {
     private var timetable: Timetable? { timetables.first }
 
     private var lines: [Line] {
-        station.lines.sorted { $0.id.localizedStandardCompare($1.id) == .orderedAscending }
+        station.lines.sortedByID
     }
 
     private var distance: LocalizedStringResource? {

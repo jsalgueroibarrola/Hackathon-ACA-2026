@@ -1,6 +1,7 @@
 import SwiftUI
 
 extension Font {
+    static let titleEmphasized: Font = .title.weight(.bold)
     static let title2Emphasized: Font = .title2.weight(.bold)
     static let title3Emphasized: Font = .title3.weight(.semibold)
     static let bodyEmphasized: Font = .body.weight(.semibold)
@@ -13,5 +14,6 @@ extension Font {
 }
 
 enum Tracking {
+    static let tight: CGFloat = -0.4
     static let wide: CGFloat = 0.6
 }

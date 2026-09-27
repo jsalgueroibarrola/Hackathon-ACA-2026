@@ -47,6 +47,12 @@ extension Line {
     }
 }
 
+extension Sequence<Line> {
+    var sortedByID: [Line] {
+        sorted { $0.id.localizedStandardCompare($1.id) == .orderedAscending }
+    }
+}
+
 struct RouteShape: Sendable, Hashable {
     let lineID: String
     let encoded: String

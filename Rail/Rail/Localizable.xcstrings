@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
+    "¡Bienvenido a Rail!" : {
+      "comment" : "Bienvenida, paso 1: título de la primera pantalla.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Welcome to Rail!"
+          }
+        }
+      }
+    },
     "¡Vaya! Parece que aún no tienes estaciones favoritas…" : {
       "comment" : "Favoritos: título cuando todavía no hay ninguna estación favorita.",
       "localizations" : {
@@ -19,6 +30,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Where do you want to go?"
+          }
+        }
+      }
+    },
+    "¿Cuáles son tus estaciones habituales?" : {
+      "comment" : "Bienvenida, paso 4: título de la lista de estaciones para marcar favoritas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Which stations do you use most?"
           }
         }
       }
@@ -370,6 +392,17 @@
         }
       }
     },
+    "Ahora no" : {
+      "comment" : "Bienvenida, paso 3: botón secundario que salta el permiso de ubicación sin pedirlo.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Not now"
+          }
+        }
+      }
+    },
     "Añade una estación" : {
       "comment" : "Favoritos: botón del estado vacío que abre el selector de estación.\nInicio: botón del estado vacío de favoritas que abre el selector de estación.",
       "localizations" : {
@@ -421,6 +454,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Unofficial app"
+          }
+        }
+      }
+    },
+    "Atrás" : {
+      "comment" : "Bienvenida: botón con una flecha que vuelve al paso anterior; VoiceOver lo lee.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Back"
           }
         }
       }
@@ -725,6 +769,17 @@
         }
       }
     },
+    "Con el widget de Rail verás las próximas salidas de tu estación favorita sin abrir la app." : {
+      "comment" : "Bienvenida, paso del widget: explica qué muestra el widget.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "With the Rail widget, you’ll see the next departures from your favorite station without opening the app."
+          }
+        }
+      }
+    },
     "Con transbordo" : {
       "comment" : "Trayectos: el viaje necesita cambiar de tren una vez.",
       "localizations" : {
@@ -732,6 +787,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "1 transfer"
+          }
+        }
+      }
+    },
+    "Con tu ubicación te enseñamos las próximas salidas de la estación en la que estás." : {
+      "comment" : "Bienvenida, paso 3: explica para qué se usa la ubicación antes de que iOS pida el permiso.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "With your location, we show you the next departures from the station you’re at."
           }
         }
       }
@@ -765,6 +831,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Connections: %@"
+          }
+        }
+      }
+    },
+    "Continuar" : {
+      "comment" : "Bienvenida: botón principal que pasa al siguiente paso.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Continue"
           }
         }
       }
@@ -815,6 +892,17 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "De %1$@ a %2$@"
+          }
+        }
+      }
+    },
+    "Descargando estaciones…" : {
+      "comment" : "Bienvenida, paso 4: mensaje mientras se descargan las estaciones por primera vez.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Downloading stations…"
           }
         }
       }
@@ -929,6 +1017,17 @@
         }
       }
     },
+    "Elegir estaciones" : {
+      "comment" : "Selector de estación: título de la hoja en la que se marcan varias favoritas con la estrella, desde la bienvenida.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Choose stations"
+          }
+        }
+      }
+    },
     "Elige tu estación habitual" : {
       "comment" : "Tarjeta de próximos trenes: título cuando el usuario ha denegado el permiso de ubicación.",
       "localizations" : {
@@ -962,6 +1061,28 @@
         }
       }
     },
+    "Empezar" : {
+      "comment" : "Bienvenida: botón principal del primer paso, que empieza la bienvenida, y del último, que la termina y abre la app.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Get started"
+          }
+        }
+      }
+    },
+    "En %lld min" : {
+      "comment" : "Bienvenida, paso del widget: cuenta atrás hasta la próxima salida en el widget pequeño de muestra, por ejemplo «En 4 min».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "In %lld min"
+          }
+        }
+      }
+    },
     "En bici" : {
       "comment" : "Cómo llegar: modo de transporte en bicicleta.",
       "localizations" : {
@@ -980,6 +1101,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "By car"
+          }
+        }
+      }
+    },
+    "Entérate de cada incidencia" : {
+      "comment" : "Bienvenida, paso de avisos: título que presenta la pantalla de avisos de Renfe.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Stay on top of every incident"
           }
         }
       }
@@ -1101,6 +1233,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Favorites"
+          }
+        }
+      }
+    },
+    "Guardado en tu dispositivo" : {
+      "comment" : "Bienvenida, paso 2: etiqueta verde con una marca de verificación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Saved on your device"
           }
         }
       }
@@ -1375,6 +1518,17 @@
         }
       }
     },
+    "Mantén pulsada la pantalla de inicio, toca Editar › Añadir widget y busca Rail." : {
+      "comment" : "Bienvenida, paso del widget: instrucciones para añadir el widget. «Editar» y «Añadir widget» son los botones de iOS; «Rail» es el nombre de la app.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Touch and hold the Home Screen, tap Edit › Add Widget, and search for Rail."
+          }
+        }
+      }
+    },
     "Mantén pulsado y toca «Editar widget»." : {
       "comment" : "Widget de próximos trenes: cómo elegir la estación desde la pantalla de inicio.",
       "localizations" : {
@@ -1415,6 +1569,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Star your usual stations"
+          }
+        }
+      }
+    },
+    "Márcalas como favoritas y las verás nada más abrir Rail." : {
+      "comment" : "Bienvenida, paso 4: explica que las estaciones con estrella aparecen en Inicio.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Mark them as favorites and you’ll see them as soon as you open Rail."
           }
         }
       }
@@ -1562,6 +1727,17 @@
         }
       }
     },
+    "No incluye trenes AVE ni de Media Distancia." : {
+      "comment" : "Bienvenida, paso 1: nota bajo la lista de líneas. Mantén «AVE» y «Media Distancia» sin traducir: son nombres de servicios de Renfe.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "AVE and Media Distancia trains aren’t included."
+          }
+        }
+      }
+    },
     "No quedan trenes hoy" : {
       "comment" : "Tarjeta de próximos trenes: título cuando ya no hay más salidas en el día.\nWidget de próximos trenes: no hay más salidas en el día.",
       "localizations" : {
@@ -1591,6 +1767,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Couldn’t load alerts"
+          }
+        }
+      }
+    },
+    "No se han podido descargar las estaciones" : {
+      "comment" : "Bienvenida, paso 4: título cuando falla la primera descarga de datos.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Couldn’t download the stations"
           }
         }
       }
@@ -1672,13 +1859,35 @@
         }
       }
     },
+    "Paso %lld de %lld" : {
+      "comment" : "Bienvenida: VoiceOver lee el progreso, por ejemplo «Paso 2 de 4».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Step %1$lld of %2$lld"
+          }
+        }
+      }
+    },
     "Permitir ubicación" : {
-      "comment" : "Detalle de estación: botón de «Cómo llegar» que pide el permiso de ubicación.\nEstaciones: botón de la sección «Cerca de ti» que pide el permiso de ubicación.\nMapa, carrusel de estaciones: botón que pide el permiso de ubicación para mostrar las estaciones cercanas.\nMapa, ficha de estación: botón que pide el permiso de ubicación para mostrar cuánto se tarda a pie.\nTarjeta de próximos trenes: botón que pide el permiso de ubicación.",
+      "comment" : "Botón que pide a iOS el permiso de ubicación.\nDetalle de estación: botón de «Cómo llegar» que pide el permiso de ubicación.\nEstaciones: botón de la sección «Cerca de ti» que pide el permiso de ubicación.\nMapa, carrusel de estaciones: botón que pide el permiso de ubicación para mostrar las estaciones cercanas.\nMapa, ficha de estación: botón que pide el permiso de ubicación para mostrar cuánto se tarda a pie.\nTarjeta de próximos trenes: botón que pide el permiso de ubicación.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Allow location"
+          }
+        }
+      }
+    },
+    "Podrás marcar tus favoritas más tarde desde Estaciones." : {
+      "comment" : "Bienvenida, paso 4: explica dónde marcar favoritas cuando la descarga ha fallado. «Estaciones» es el nombre de la pestaña.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "You can mark your favorites later from Stations."
           }
         }
       }
@@ -1712,7 +1921,7 @@
       }
     },
     "Próximos trenes" : {
-      "comment" : "Detalle de estación: cabecera de la tarjeta con las próximas salidas.\nNombre del widget en la galería de widgets.\nTarjeta de próximos trenes: cabecera de la lista de salidas de la estación.\nWidget de próximos trenes: cabecera de la lista de salidas de la estación.",
+      "comment" : "Bienvenida, paso del widget: cabecera del widget de muestra con las próximas salidas.\nDetalle de estación: cabecera de la tarjeta con las próximas salidas.\nNombre del widget en la galería de widgets.\nTarjeta de próximos trenes: cabecera de la lista de salidas de la estación.\nWidget de próximos trenes: cabecera de la lista de salidas de la estación.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1798,6 +2007,17 @@
         }
       }
     },
+    "Rail funciona con los trenes de Cercanías de Málaga." : {
+      "comment" : "Bienvenida, paso 1: subtítulo que explica qué red de trenes cubre la app.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Rail works with Málaga’s Cercanías commuter trains."
+          }
+        }
+      }
+    },
     "Regional" : {
       "comment" : "Tipo de conexión disponible en una estación: tren regional.",
       "localizations" : {
@@ -1827,6 +2047,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Renfe doesn’t provide accessibility info for this station"
+          }
+        }
+      }
+    },
+    "Renfe publica los avisos solo en español. Si usas otro idioma, podrás traducirlos con un toque." : {
+      "comment" : "Bienvenida, paso de avisos: nota al pie sobre el idioma de los avisos y el botón «Traducir».",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Renfe only publishes alerts in Spanish. If you use another language, you can translate them with a tap."
           }
         }
       }
@@ -1937,6 +2168,17 @@
         }
       }
     },
+    "Saltar por ahora" : {
+      "comment" : "Bienvenida, paso 4: botón secundario que termina la bienvenida sin marcar favoritas.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Skip for now"
+          }
+        }
+      }
+    },
     "Se ha interrumpido la descarga de horarios" : {
       "comment" : "Descripción de error mostrada cuando la sincronización inicial se cancela.",
       "localizations" : {
@@ -1944,6 +2186,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "The timetable download was interrupted"
+          }
+        }
+      }
+    },
+    "Si eliminas la app, se borrarán tus favoritas y búsquedas recientes." : {
+      "comment" : "Bienvenida, paso 2: aviso al pie de que desinstalar la app borra los datos guardados.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "If you delete the app, your favorites and recent searches will be erased."
           }
         }
       }
@@ -1977,6 +2230,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Offline"
+          }
+        }
+      }
+    },
+    "Sin cuentas, sin contraseñas" : {
+      "comment" : "Bienvenida, paso 2: título que explica que la app no pide registrarse.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No accounts, no passwords"
           }
         }
       }
@@ -2043,6 +2307,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Move up"
+          }
+        }
+      }
+    },
+    "Toca la campana de Inicio para ver los avisos que publica Renfe: obras, cambios en el servicio o ascensores fuera de servicio." : {
+      "comment" : "Bienvenida, paso de avisos: explica que la campana de Inicio abre los avisos de Renfe y qué tipo de avisos hay.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tap the bell on Home to see the alerts Renfe publishes: engineering works, service changes or elevators out of order."
           }
         }
       }
@@ -2219,6 +2494,28 @@
         }
       }
     },
+    "Tu estación más cercana, siempre a mano" : {
+      "comment" : "Bienvenida, paso 3: título antes de pedir permiso de ubicación.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Your nearest station, always at hand"
+          }
+        }
+      }
+    },
+    "Tus estaciones favoritas y búsquedas recientes se guardan en tu dispositivo. No hay nada que crear ni que recordar." : {
+      "comment" : "Bienvenida, paso 2: explica que los datos del usuario se quedan en el dispositivo.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Your favorite stations and recent searches are saved on your device. There’s nothing to create or remember."
+          }
+        }
+      }
+    },
     "Tus primeras favoritas aparecen en Inicio. Mantén pulsada una para cambiar el orden." : {
       "comment" : "Favoritos: nota al pie de la lista que explica dónde se usan las favoritas y cómo reordenarlas.",
       "localizations" : {
@@ -2226,6 +2523,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Your top favorites appear on Home. Touch and hold one to reorder."
+          }
+        }
+      }
+    },
+    "Tus trenes, en la pantalla de inicio" : {
+      "comment" : "Bienvenida, paso del widget: título que presenta el widget de próximos trenes.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Your trains, on your Home Screen"
           }
         }
       }
@@ -2377,6 +2685,17 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "See whole network"
+          }
+        }
+      }
+    },
+    "Ver todas las estaciones" : {
+      "comment" : "Bienvenida, paso 4: botón bajo las estaciones sugeridas que abre una hoja con todas las estaciones y un buscador.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "See all stations"
           }
         }
       }

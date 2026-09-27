@@ -18,7 +18,7 @@ extension StationPickerSection {
 
 enum StationPickerSectionBuilder {
     static func lineIDs(_ lines: [Line]) -> [String] {
-        sorted(lines).map(\.id)
+        lines.sortedByID.map(\.id)
     }
 
     static func sections(
@@ -27,7 +27,7 @@ enum StationPickerSectionBuilder {
         lineFilter: String?,
         location: UserLocation?
     ) -> [StationPickerSection] {
-        sorted(lines)
+        lines.sortedByID
             .filter { lineFilter == nil || $0.id == lineFilter }
             .map { line in
                 StationPickerSection(
@@ -46,12 +46,6 @@ enum StationPickerSectionBuilder {
         return query.isEmpty
             || station.name.localizedStandardContains(query)
             || station.lines.contains { normalized($0.id) == normalized(query) }
-    }
-
-    private static func sorted(_ lines: [Line]) -> [Line] {
-        lines.sorted {
-            $0.id.localizedStandardCompare($1.id) == .orderedAscending
-        }
     }
 
     private static func normalized(_ text: String) -> String {

@@ -34,8 +34,8 @@ enum StationRowItemBuilder {
             name: station.name,
             subtitle: connectionsSummary(station.connections),
             distance: location.map { $0.distance(to: station.coordinate).distanceLabel },
-            lines: Set(station.lines.map { LineTag(id: $0.id, colorHex: $0.colorHex) })
-                .sorted { $0.id.localizedStandardCompare($1.id) == .orderedAscending }
+            lines: Set(station.lines).sortedByID
+                .map { LineTag(id: $0.id, colorHex: $0.colorHex) }
         )
     }
 

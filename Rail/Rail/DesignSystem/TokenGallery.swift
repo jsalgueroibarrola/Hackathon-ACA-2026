@@ -107,8 +107,8 @@
             ("none", Spacing.none), ("xxs", Spacing.xxs), ("xs", Spacing.xs),
             ("sm", Spacing.sm),
             ("md", Spacing.md), ("lg", Spacing.lg), ("xl", Spacing.xl),
-            ("xxl", Spacing.xxl),
-            ("xxxxl", Spacing.xxxxl),
+            ("xxl", Spacing.xxl), ("xxxl", Spacing.xxxl),
+            ("xxxxl", Spacing.xxxxl), ("xxxxxl", Spacing.xxxxxl),
         ]
 
         private let radii: [(String, CGFloat)] = [
@@ -117,7 +117,8 @@
         ]
 
         private let fonts: [(String, Font)] = [
-            ("largeTitle", .largeTitle), ("title", .title), ("title2", .title2),
+            ("largeTitle", .largeTitle), ("title", .title),
+            ("titleEmphasized", .titleEmphasized), ("title2", .title2),
             ("title2Emphasized", .title2Emphasized),
             ("title3", .title3),
             ("title3Emphasized", .title3Emphasized),

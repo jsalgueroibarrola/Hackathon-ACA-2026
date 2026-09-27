@@ -12,9 +12,7 @@ struct StationSummary: View {
     @State private var isShowingSchedule = false
 
     private var lines: [Line] {
-        station.lines.sorted {
-            $0.id.localizedStandardCompare($1.id) == .orderedAscending
-        }
+        station.lines.sortedByID
     }
 
     var body: some View {

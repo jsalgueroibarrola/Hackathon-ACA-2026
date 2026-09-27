@@ -9,6 +9,7 @@ private struct SyncTrigger: Equatable {
 struct RootView: View {
     @Environment(AppViewModel.self) private var viewModel
     @Environment(\.scenePhase) private var scenePhase
+    @AppStorage(OnboardingView.completionKey) private var hasCompletedOnboarding = false
     @State private var retryAttempt = 0
 
     private var trigger: SyncTrigger {
@@ -18,13 +19,29 @@ struct RootView: View {
         )
     }
 
+    private var hasDownloadFailed: Bool {
+        if case .failed = viewModel.phase { true } else { false }
+    }
+
     var body: some View {
-        content
+        root
             .animation(.smooth, value: viewModel.phase)
+            .animation(.smooth, value: hasCompletedOnboarding)
             .task(id: trigger) {
                 guard !trigger.isBackgrounded else { return }
                 await viewModel.synchronize()
             }
+    }
+
+    @ViewBuilder
+    private var root: some View {
+        if hasCompletedOnboarding {
+            content
+        } else {
+            OnboardingView(hasDownloadFailed: hasDownloadFailed) {
+                hasCompletedOnboarding = true
+            }
+        }
     }
 
     @ViewBuilder

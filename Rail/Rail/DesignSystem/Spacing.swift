@@ -9,7 +9,9 @@ enum Spacing {
     static let lg: CGFloat = 16
     static let xl: CGFloat = 20
     static let xxl: CGFloat = 24
+    static let xxxl: CGFloat = 32
     static let xxxxl: CGFloat = 40
+    static let xxxxxl: CGFloat = 48
 }
 
 enum ScreenLayout {
